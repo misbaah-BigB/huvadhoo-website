@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resorts — Huvadhoo Maldives Travel</title>
+<meta name="description" content="Maldives resort categories from budget-luxury to ultra-luxury private islands, matched to your budget and priorities — with one clear total price.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
+    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Inter',system-ui,-apple-system,sans-serif; --mono:'IBM Plex Mono','SFMono-Regular',monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+  body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand); line-height:1.55;}
+  a{color:inherit;} img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600;}
+  .eyebrow{font-family:var(--body); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700; color:var(--teal);}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
+  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
+  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
+  .logo span{color:var(--teal);}
+  nav.primary{display:none; gap:28px; align-items:center;}
+  nav.primary a{text-decoration:none; font-size:14.5px; font-weight:600; color:var(--text);}
+  nav.primary a.active{color:var(--teal-deep); border-bottom:2px solid var(--gold); padding-bottom:2px;}
+  nav.primary a:hover{color:var(--teal-deep);}
+  .head-actions{display:flex; align-items:center; gap:10px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+  .btn-gold{background:var(--gold); color:var(--ink);}
+  .btn-gold:hover{background:#c99539;}
+  .btn-outline{border-color:var(--sand-dark); color:var(--ink); background:transparent;}
+  .btn-outline:hover{background:var(--sand-dark);}
+  @media(min-width:900px){ nav.primary{display:flex;} }
+  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
+  @media(min-width:900px){ .burger{display:none;} }
+  #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
+  #mobileNav.open{display:flex;}
+  #mobileNav a{padding:12px 4px; text-decoration:none; color:var(--text); font-weight:600; font-size:15px; border-bottom:1px solid var(--sand-dark);}
+
+  /* page hero */
+  .pagehero{background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white); padding:56px 0 64px;}
+  .pagehero h1{color:var(--white); font-size:clamp(28px,4.4vw,42px); max-width:20ch;}
+  .pagehero p{color:#DCEEEA; margin-top:14px; max-width:56ch; font-size:16.5px;}
+  .breadcrumb{font-size:13px; color:#BFDFDA; font-family:var(--mono); margin-bottom:14px;}
+  .breadcrumb a{color:#DCEEEA; text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
+
+  section{padding:64px 0;}
+  .section-head{max-width:640px; margin-bottom:36px;}
+  .section-head h2{font-size:clamp(24px,3.2vw,32px); margin-top:8px;}
+  .section-head p{color:var(--sub); margin-top:10px; font-size:15.5px;}
+
+  /* category cards */
+  .cat-grid{display:grid; grid-template-columns:1fr; gap:20px;}
+  @media(min-width:700px){ .cat-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(min-width:1020px){ .cat-grid{grid-template-columns:repeat(3,1fr);} }
+  .cat-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:10px;}
+  .cat-card .tier{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--teal-deep); background:var(--sand); display:inline-block; padding:4px 10px; border-radius:999px; width:fit-content;}
+  .cat-card h3{font-size:19px; margin-top:4px;}
+  .cat-card p{color:var(--sub); font-size:14.5px; margin:0;}
+  .cat-card .price{font-family:var(--mono); font-weight:600; color:var(--ink); font-size:14.5px; margin-top:auto; padding-top:10px; border-top:1px dashed var(--sand-dark);}
+  .cat-card .best{font-size:13px; color:var(--sub);}
+
+  /* comparison strip */
+  .compare{background:var(--white); border-radius:18px; border:1px solid var(--sand-dark); overflow:hidden;}
+  .compare table{width:100%; border-collapse:collapse; font-size:14px;}
+  .compare th{text-align:left; background:var(--ink); color:var(--white); padding:14px 16px; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.05em;}
+  .compare td{padding:14px 16px; border-top:1px solid var(--sand-dark); color:var(--text);}
+  .compare tr:nth-child(even) td{background:var(--sand);}
+
+  .why-grid{display:grid; grid-template-columns:1fr; gap:24px;}
+  @media(min-width:760px){ .why-grid{grid-template-columns:repeat(3,1fr);} }
+  .why-card{border-left:3px solid var(--teal); padding-left:18px;}
+  .why-card h3{font-size:17px;} .why-card p{font-size:14.5px; color:var(--sub); margin-top:8px;}
+
+  .cta-band{background:linear-gradient(160deg, var(--teal-deep), var(--ink)); color:var(--white); border-radius:24px; padding:40px; text-align:center;}
+  .cta-band h2{color:var(--white); font-size:clamp(22px,3vw,28px);}
+  .cta-band p{color:#CFE3DF; margin-top:10px; font-size:15px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;}
+  .btn-ghost-dark{color:var(--white); border-color:rgba(255,255,255,.35);}
+  .btn-ghost-dark:hover{background:rgba(255,255,255,.12);}
+
+  footer{background:var(--ink); color:#BFDFDA; padding:48px 0 28px;}
+  .foot-grid{display:grid; grid-template-columns:1fr; gap:28px;}
+  @media(min-width:760px){ .foot-grid{grid-template-columns:1.4fr 1fr 1fr;} }
+  footer .logo{color:var(--white);} footer .logo span{color:var(--aqua);}
+  footer p{font-size:13.5px; color:#8FB5AF; margin-top:10px; max-width:36ch;}
+  footer h4{font-family:var(--body); font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--aqua); margin-bottom:14px;}
+  footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
+  .fineprint{border-top:1px solid rgba(255,255,255,.1); margin-top:36px; padding-top:20px; font-size:12.5px; color:#6E938D;}
+
+  .float-wa{position:fixed; bottom:20px; right:20px; z-index:60; background:var(--teal-deep); color:var(--white); border-radius:999px; padding:14px 18px; text-decoration:none; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
+  .float-wa:hover{background:var(--teal);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <nav class="primary">
+      <a href="resorts.html" class="active">Resorts</a>
+      <a href="guesthouses.html">Guesthouses</a>
+      <a href="combo.html">Combo</a>
+      <a href="honeymoon.html">Honeymoon</a>
+      <a href="family.html">Family</a>
+      <a href="diving.html">Diving</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="camping.html">Camping</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileNav">
+    <a href="resorts.html">Resorts</a>
+    <a href="guesthouses.html">Guesthouses</a>
+    <a href="combo.html">Combo</a>
+    <a href="honeymoon.html">Honeymoon</a>
+    <a href="family.html">Family</a>
+      <a href="diving.html">Diving</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="camping.html">Camping</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+  <section class="pagehero" style="padding-top:40px;">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Resorts</div>
+      <p class="eyebrow" style="color:#CFE3DF;">Resorts</p>
+      <h1>Six ways to do a Maldives resort — matched to what you actually want</h1>
+      <p>Every resort occupies its own private island, so the difference between categories isn't just price — it's distance from Male, house reef quality, and what's included. We match you to the category first, then the specific resort.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Categories</p>
+        <h2>Pick a starting point</h2>
+        <p>These are ranges, not fixed prices — your actual quote depends on dates, room type, and availability.</p>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <span class="tier">Budget-luxury</span>
+          <h3>Budget-Luxury Resort</h3>
+          <p>A real private-island resort experience at the lowest resort price point — smaller rooms, simpler dining, but still your own island.</p>
+          <span class="best">Best for: first resort trip, longer stays on a set budget</span>
+          <span class="price">$180 – $350 / night</span>
+        </div>
+        <div class="cat-card">
+          <span class="tier">All-inclusive</span>
+          <h3>All-Inclusive Resort</h3>
+          <p>Meals, drinks, and often excursions bundled into one price — the most predictable total cost of any resort category.</p>
+          <span class="best">Best for: predictable budgeting, families, first-time visitors</span>
+          <span class="price">$350 – $700 / night</span>
+        </div>
+        <div class="cat-card">
+          <span class="tier">Family</span>
+          <h3>Family Resort</h3>
+          <p>Real kids' clubs, shallow lagoons safe for swimming, and family-configured villas — not just a regular resort with a crib added.</p>
+          <span class="best">Best for: children under 12, multi-generation trips</span>
+          <span class="price">$300 – $900 / night</span>
+        </div>
+        <div class="cat-card">
+          <span class="tier">Honeymoon</span>
+          <h3>Honeymoon &amp; Adults-Only Resort</h3>
+          <p>Water villas, private dining, and a resort culture genuinely built around couples — quiet, not family-oriented.</p>
+          <span class="best">Best for: honeymoons, anniversaries, couples-only trips</span>
+          <span class="price">$450 – $1,800 / night</span>
+        </div>
+        <div class="cat-card">
+          <span class="tier">Premium</span>
+          <h3>Premium 5-Star Resort</h3>
+          <p>Top-tier service and dining with a larger footprint — multiple restaurants, spa, watersports center, often a longer transfer.</p>
+          <span class="best">Best for: milestone trips, longer stays, strong reef access</span>
+          <span class="price">$600 – $1,400 / night</span>
+        </div>
+        <div class="cat-card">
+          <span class="tier">Ultra-luxury</span>
+          <h3>Private-Island Ultra-Luxury</h3>
+          <p>Full villa privacy, butler service, and the highest-end dining — the top of the Maldives resort market.</p>
+          <span class="best">Best for: privacy above all, special occasions, no budget ceiling</span>
+          <span class="price">$1,200 – $6,000+ / night</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Before you decide</p>
+        <h2>What actually changes between categories</h2>
+        <p>Price isn't the only variable — these three matter just as much for how your trip actually feels.</p>
+      </div>
+      <div class="compare">
+        <table>
+          <tr><th>Factor</th><th>Budget-luxury / All-inclusive</th><th>Family / Honeymoon</th><th>Premium / Ultra-luxury</th></tr>
+          <tr><td>Distance from Male</td><td>Often closer (shorter, cheaper transfer)</td><td>Mixed — depends on resort</td><td>Often farther (seaplane more likely)</td></tr>
+          <tr><td>Meal plan</td><td>Usually all-inclusive or half-board</td><td>Half-board to all-inclusive</td><td>A la carte or all-inclusive, more restaurant choice</td></tr>
+          <tr><td>Villa type</td><td>Beach villa, some water villas</td><td>Family beach villas, some water villas</td><td>Water villas standard, private pools common</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our approach</p>
+        <h2>Why book the category through us, not direct</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>We check the reef, not just the brochure</h3>
+          <p>Some resorts look identical in photos but have very different house reef quality — the thing that actually matters if snorkeling is part of your trip.</p>
+        </div>
+        <div class="why-card">
+          <h3>Transfer matched to your flight</h3>
+          <p>A premium resort with a seaplane transfer can add real cost and a full afternoon if your flight lands late. We check this before recommending it.</p>
+        </div>
+        <div class="why-card">
+          <h3>One total price, every category</h3>
+          <p>Room, transfer, tax, service charge, and meal plan — shown together, whichever tier you choose.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <p class="eyebrow" style="color:var(--aqua);">Next step</p>
+        <h2>Tell us your budget and dates — we'll shortlist the right resorts</h2>
+        <p>No obligation, and you'll get real options, not a generic list.</p>
+        <div class="cta-row">
+          <a href="https://wa.me/9607444281" class="btn btn-gold">Message us on WhatsApp</a>
+          <a href="index.html#contact" class="btn btn-ghost-dark">Request a written quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+    </div>
+    <div>
+      <h4>Trips</h4>
+      <ul>
+        <li><a href="resorts.html">Resorts</a></li>
+        <li><a href="honeymoon.html">Honeymoon</a></li>
+        <li><a href="family.html">Family</a></li>
+        <li><a href="guesthouses.html">Guesthouses</a></li>
+        <li><a href="combo.html">Resort + Combo</a></li>
+        <li><a href="diving.html">Diving</a></li>
+        <li><a href="fishing.html">Sport Fishing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Guides</h4>
+      <ul>
+        <li><a href="transfer-guide.html">Transfer guide</a></li>
+        <li><a href="cost-guide.html">Cost guide</a></li>
+        <li><a href="local-island-rules.html">Local island rules</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap fineprint">
+    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing.
+  </div>
+</footer>
+
+<a href="https://wa.me/9607444281" class="float-wa" aria-label="Message us on WhatsApp">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+  WhatsApp
+</a>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>

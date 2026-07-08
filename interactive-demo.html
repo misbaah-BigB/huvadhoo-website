@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Ideas Demo — Huvadhoo Maldives Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
+    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Inter',system-ui,-apple-system,sans-serif; --mono:'IBM Plex Mono','SFMono-Regular',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand); line-height:1.55;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 20px;}
+  h1,h2{font-family:var(--display); color:var(--ink); margin:0;}
+  .top{padding:36px 0 20px;}
+  .top .eyebrow{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--teal);}
+  .top h1{font-size:clamp(24px,4vw,32px); margin-top:8px;}
+  .top p{color:var(--sub); margin-top:10px; font-size:15px; max-width:60ch;}
+
+  .demo-section{padding:36px 0; border-top:1px solid var(--sand-dark);}
+  .demo-label{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .demo-num{font-family:var(--mono); font-size:12px; background:var(--ink); color:var(--aqua); padding:3px 9px; border-radius:999px;}
+  .demo-section h2{font-size:20px;}
+  .demo-caption{color:var(--sub); font-size:14px; margin:8px 0 18px; max-width:64ch;}
+
+  /* ===== DEMO 1: animated wave hero ===== */
+  .wave-hero{position:relative; height:280px; border-radius:18px; overflow:hidden; background:linear-gradient(180deg, var(--aqua) 0%, var(--teal) 55%, var(--teal-deep) 100%);}
+  .wave-hero .content{position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;}
+  .wave-hero h3{color:#fff; font-family:var(--display); font-size:clamp(20px,3.2vw,28px); margin:0;}
+  .wave-hero p{color:#DCEEEA; font-size:14px; margin-top:8px;}
+  .wave-hero svg{position:absolute; bottom:0; left:0; width:200%; height:auto;}
+  .wave1{animation:waveMove 9s linear infinite; opacity:.55;}
+  .wave2{animation:waveMove 14s linear infinite reverse; opacity:.4;}
+  @keyframes waveMove{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .bubble{position:absolute; bottom:-10px; border-radius:50%; background:rgba(255,255,255,.35); animation:rise linear infinite;}
+  @keyframes rise{ to{ transform:translateY(-300px); opacity:0; } }
+  @media (prefers-reduced-motion: reduce){ .wave1,.wave2,.bubble{animation:none;} }
+
+  /* ===== DEMO 2: atoll map ===== */
+  .map-demo{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:640px){ .map-demo{grid-template-columns:1.3fr 1fr;} }
+  .map-box{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:16px;}
+  .atoll{cursor:pointer; transition:transform .15s ease, opacity .15s ease;}
+  .atoll:hover, .atoll:focus{ transform:scale(1.06); }
+  .atoll.selected path{ fill:var(--gold) !important; }
+  .info-box{background:var(--ink); color:#fff; border-radius:16px; padding:20px; display:flex; flex-direction:column; justify-content:center; min-height:180px;}
+  .info-box .eyebrow2{font-family:var(--mono); font-size:11px; color:var(--aqua); text-transform:uppercase; letter-spacing:.08em;}
+  .info-box h3{font-size:19px; margin-top:6px; color:#fff; font-family:var(--display);}
+  .info-box p{color:#CFE3DF; font-size:13.5px; margin-top:8px;}
+
+  /* ===== DEMO 3: tilt cards ===== */
+  .tilt-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:640px){ .tilt-grid{grid-template-columns:repeat(3,1fr);} }
+  .tilt-card{perspective:800px;}
+  .tilt-inner{border-radius:16px; padding:22px; height:180px; display:flex; flex-direction:column; justify-content:flex-end; transition:transform .12s ease-out; transform-style:preserve-3d; cursor:pointer; color:#fff;}
+  .tilt-inner h3{font-family:var(--display); font-size:18px; margin:0; color:#fff;}
+  .tilt-inner span{font-family:var(--mono); font-size:12px; color:#DCEEEA; margin-top:4px; display:block;}
+  .tilt-1{background:linear-gradient(135deg,#1F7A6C,#0B2A2E);}
+  .tilt-2{background:linear-gradient(135deg,#5FD3C4,#114C49);}
+  .tilt-3{background:linear-gradient(135deg,#D9A64E,#7a5b1e);}
+
+  .note{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px; margin-top:20px;}
+  .note p{color:var(--sub); font-size:14px; margin:0;}
+  .note strong{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top">
+    <p class="eyebrow">Small-scale demo — not live on the site yet</p>
+    <h1>Three interactive ideas, side by side</h1>
+    <p>Each one below is built to be lightweight — no 3D model files, no slow-loading libraries. On desktop, try hovering. On a phone, try tapping.</p>
+  </div>
+
+  <!-- DEMO 1 -->
+  <div class="demo-section">
+    <div class="demo-label"><span class="demo-num">1</span><h2>Animated lagoon hero background</h2></div>
+    <p class="demo-caption">Pure CSS/SVG animation — two wave layers drifting at different speeds, plus rising bubbles. No images, no video, loads instantly.</p>
+    <div class="wave-hero" id="waveHero">
+      <svg class="wave1" viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
+      <svg class="wave2" viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,120 C300,60 600,160 900,110 C1100,80 1300,140 1440,110 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
+      <div class="content">
+        <h3>Find your island. Know your price.</h3>
+        <p>This exact headline, with motion behind it instead of a flat color.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEMO 2 -->
+  <div class="demo-section">
+    <div class="demo-label"><span class="demo-num">2</span><h2>Clickable atoll map</h2></div>
+    <p class="demo-caption">Tap an atoll shape to see what it's known for — could link straight to filtered resort/guesthouse results on the real site.</p>
+    <div class="map-demo">
+      <div class="map-box">
+        <svg viewBox="0 0 400 300" width="100%" height="auto">
+          <g class="atoll" tabindex="0" data-name="North Male" data-info="Closest to the airport. Widest resort choice, shortest speedboat transfers." onclick="selectAtoll(this)">
+            <path d="M120,40 q30,-10 55,10 q10,25 -15,35 q-35,10 -50,-15 q-10,-20 10,-30 Z" fill="#5FD3C4"/>
+          </g>
+          <g class="atoll" tabindex="0" data-name="South Male" data-info="Guesthouse-heavy — Maafushi and Guraidhoo are both here." onclick="selectAtoll(this)">
+            <path d="M150,110 q25,-8 45,12 q8,20 -12,30 q-28,10 -42,-12 q-8,-16 9,-30 Z" fill="#1F7A6C"/>
+          </g>
+          <g class="atoll" tabindex="0" data-name="Baa Atoll" data-info="Home to Hanifaru Bay — one of the best manta ray snorkeling sites on earth." onclick="selectAtoll(this)">
+            <path d="M60,150 q22,-10 40,8 q10,18 -10,28 q-25,10 -38,-10 q-8,-15 8,-26 Z" fill="#D9A64E"/>
+          </g>
+          <g class="atoll" tabindex="0" data-name="Alifu Dhaalu" data-info="Dhigurah island — long beach, regular whale shark sightings." onclick="selectAtoll(this)">
+            <path d="M210,170 q24,-9 42,10 q9,19 -11,29 q-27,10 -40,-11 q-8,-16 9,-28 Z" fill="#114C49"/>
+          </g>
+          <g class="atoll" tabindex="0" data-name="Vaavu Atoll" data-info="Fulidhoo island — quiet, culture-focused, Bodu Beru drumming nights." onclick="selectAtoll(this)">
+            <path d="M270,220 q22,-9 40,9 q9,18 -10,27 q-25,9 -38,-10 q-8,-15 8,-26 Z" fill="#0B2A2E"/>
+          </g>
+        </svg>
+      </div>
+      <div class="info-box" id="atollInfo">
+        <span class="eyebrow2">Tap an atoll</span>
+        <h3>Explore by region</h3>
+        <p>Select any shaded area to see what that atoll is known for.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEMO 3 -->
+  <div class="demo-section">
+    <div class="demo-label"><span class="demo-num">3</span><h2>3D-tilt hover cards</h2></div>
+    <p class="demo-caption">A CSS trick, not real 3D — the card tilts toward your cursor (or gives a press effect on tap), which reads as "premium" without any heavy rendering.</p>
+    <div class="tilt-grid">
+      <div class="tilt-card"><div class="tilt-inner tilt-1" data-tilt><span>Budget-Luxury</span><h3>Resort</h3></div></div>
+      <div class="tilt-card"><div class="tilt-inner tilt-2" data-tilt><span>Local Island</span><h3>Guesthouse</h3></div></div>
+      <div class="tilt-card"><div class="tilt-inner tilt-3" data-tilt><span>Signature Trip</span><h3>Resort + Combo</h3></div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>Note on real photos:</strong> these card demos use color gradients because the real site has no photography yet. All three effects will look noticeably better once real resort/guesthouse photos sit behind them — worth doing together.</p>
+  </div>
+</div>
+
+<script>
+  // bubbles for wave hero
+  const hero = document.getElementById('waveHero');
+  for (let i = 0; i < 10; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 4 + Math.random() * 8;
+    b.style.width = size + 'px';
+    b.style.height = size + 'px';
+    b.style.left = Math.random() * 100 + '%';
+    b.style.animationDuration = (6 + Math.random() * 6) + 's';
+    b.style.animationDelay = (Math.random() * 6) + 's';
+    hero.appendChild(b);
+  }
+
+  // atoll map
+  function selectAtoll(el) {
+    document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
+    el.classList.add('selected');
+    const box = document.getElementById('atollInfo');
+    box.querySelector('.eyebrow2').textContent = 'Selected';
+    box.querySelector('h3').textContent = el.dataset.name;
+    box.querySelector('p').textContent = el.dataset.info;
+  }
+
+  // tilt cards — mouse for desktop, touch press for mobile
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.03)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    card.addEventListener('touchstart', () => { card.style.transform = 'scale(0.97)'; }, {passive:true});
+    card.addEventListener('touchend', () => { card.style.transform = ''; }, {passive:true});
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resort vs. Guesthouse: Which Is Actually Better For You? — Huvadhoo Maldives Travel</title>
+<meta name="description" content="The honest tradeoffs between a Maldives resort and a local island guesthouse — cost, privacy, culture, and what you give up either way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
+    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Inter',system-ui,-apple-system,sans-serif; --mono:'IBM Plex Mono','SFMono-Regular',monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+  body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand); line-height:1.6;}
+  a{color:var(--teal-deep);} img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600;}
+  .eyebrow{font-family:var(--body); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700; color:var(--teal);}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
+  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
+  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
+  .logo span{color:var(--teal);}
+  nav.primary{display:none; gap:20px; align-items:center;}
+  nav.primary a{text-decoration:none; font-size:13px; font-weight:600; color:var(--text);}
+  nav.primary a:hover{color:var(--teal-deep);}
+  .head-actions{display:flex; align-items:center; gap:10px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none !important; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+  .btn-gold{background:var(--gold); color:var(--ink) !important;}
+  .btn-gold:hover{background:#c99539;}
+  @media(min-width:1000px){ nav.primary{display:flex;} }
+  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
+  @media(min-width:1000px){ .burger{display:none;} }
+  #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
+  #mobileNav.open{display:flex;}
+  #mobileNav a{padding:12px 4px; text-decoration:none; color:var(--text); font-weight:600; font-size:15px; border-bottom:1px solid var(--sand-dark);}
+
+  .breadcrumb{font-size:13px; color:var(--sub); font-family:var(--mono); margin:32px 0 0;}
+  .breadcrumb a{color:var(--sub); text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
+
+  article{max-width:760px; margin:0 auto; padding:0 24px 64px;}
+  .art-head{padding:22px 0 36px; border-bottom:1px solid var(--sand-dark); margin-bottom:36px;}
+  .art-head .cat{display:inline-block; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:999px; background:#E7F0EE; color:var(--teal-deep); margin-bottom:14px;}
+  .art-head h1{font-size:clamp(28px,4.6vw,40px); line-height:1.15;}
+  .art-head .meta{margin-top:16px; font-size:13.5px; color:var(--sub); font-family:var(--mono);}
+
+  article h2{font-size:24px; margin-top:44px; margin-bottom:14px;}
+  article h3{font-size:18px; margin-top:28px; margin-bottom:10px;}
+  article p{font-size:16px; color:var(--text); margin:0 0 18px;}
+  article ul, article ol{margin:0 0 18px; padding-left:22px;}
+  article li{font-size:16px; margin-bottom:8px;}
+
+  .pullquote{background:var(--white); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:20px 24px; margin:28px 0; font-family:var(--display); font-size:19px; color:var(--ink); font-style:italic;}
+
+  .compare{background:var(--white); border-radius:16px; border:1px solid var(--sand-dark); overflow:hidden; overflow-x:auto; margin:24px 0;}
+  .compare table{width:100%; border-collapse:collapse; font-size:14.5px; min-width:520px;}
+  .compare th{text-align:left; background:var(--ink); color:var(--white); padding:13px 16px; font-weight:600; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em;}
+  .compare td{padding:13px 16px; border-top:1px solid var(--sand-dark); color:var(--text);}
+  .compare tr:nth-child(even) td{background:var(--sand);}
+
+  .inline-cta{background:var(--ink); border-radius:16px; padding:26px 28px; color:var(--white); margin:36px 0; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;}
+  .inline-cta p{color:#DCEEEA; margin:0; font-size:15px; max-width:44ch;}
+
+  .related{margin-top:56px; padding-top:36px; border-top:1px solid var(--sand-dark);}
+  .related h3{font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--sub); font-family:var(--body); margin-bottom:16px;}
+  .related-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:640px){ .related-grid{grid-template-columns:repeat(2,1fr);} }
+  .related-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:12px; padding:16px 18px; text-decoration:none;}
+  .related-card span{display:block; font-size:14.5px; font-weight:600; color:var(--ink); font-family:var(--body);}
+
+  footer{background:var(--ink); color:#BFDFDA; padding:48px 0 28px;}
+  .foot-grid{display:grid; grid-template-columns:1fr; gap:28px; max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  @media(min-width:760px){ .foot-grid{grid-template-columns:1.4fr 1fr 1fr;} }
+  footer .logo{color:var(--white); font-family:var(--display); font-weight:700; text-decoration:none;} footer .logo span{color:var(--aqua);}
+  footer p{font-size:13.5px; color:#8FB5AF; margin-top:10px; max-width:36ch;}
+  footer h4{font-family:var(--body); font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--aqua); margin-bottom:14px;}
+  footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
+  .fineprint{max-width:var(--maxw); margin:36px auto 0; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,.1); font-size:12.5px; color:#6E938D;}
+
+  .float-wa{position:fixed; bottom:20px; right:20px; z-index:60; background:var(--teal-deep); color:var(--white) !important; border-radius:999px; padding:14px 18px; text-decoration:none !important; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
+  .float-wa:hover{background:var(--teal);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <nav class="primary">
+      <a href="resorts.html">Resorts</a>
+      <a href="guesthouses.html">Guesthouses</a>
+      <a href="combo.html">Combo</a>
+      <a href="honeymoon.html">Honeymoon</a>
+      <a href="family.html">Family</a>
+      <a href="diving.html">Diving</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="camping.html">Camping</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileNav">
+    <a href="resorts.html">Resorts</a>
+    <a href="guesthouses.html">Guesthouses</a>
+    <a href="combo.html">Combo</a>
+    <a href="honeymoon.html">Honeymoon</a>
+    <a href="family.html">Family</a>
+    <a href="diving.html">Diving</a>
+    <a href="fishing.html">Fishing</a>
+    <a href="camping.html">Camping</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / Resort vs. Guesthouse</div>
+</div>
+
+<article>
+  <div class="art-head">
+    <span class="cat">Planning</span>
+    <h1>Resort vs. Guesthouse: Which Is Actually Better For You?</h1>
+    <div class="meta">7 min read · The Maldives Guide</div>
+  </div>
+
+  <p>This is the first question almost every first-time visitor asks, and it doesn't have a universal answer — it depends what you actually want out of the trip. Here's the honest version, not the marketing version.</p>
+
+  <h2>The core difference isn't price — it's the island itself</h2>
+  <p>A resort occupies its own private island. You won't share it with anyone who isn't also a paying guest, and everything on it — the restaurants, the beach, the staff — exists purely for tourism. A guesthouse sits on an inhabited local island, alongside a real Maldivian community: shops, a mosque, families, school kids walking home. Price follows from that difference, but it isn't the starting point.</p>
+
+  <div class="pullquote">A resort sells you privacy. A guesthouse sells you a place that was never built around you in the first place — and that's exactly its appeal.</div>
+
+  <h2>Where each one actually wins</h2>
+  <h3>Resorts win on:</h3>
+  <ul>
+    <li>Privacy — no one on the island isn't also a guest</li>
+    <li>Water villas and house reefs directly off your room</li>
+    <li>Alcohol availability</li>
+    <li>All-inclusive predictability, if that matters to you</li>
+  </ul>
+  <h3>Guesthouses win on:</h3>
+  <ul>
+    <li>Cost — often a third of a comparable resort</li>
+    <li>Real local food, not resort-restaurant food</li>
+    <li>Genuine culture and conversation, not a curated version of it</li>
+    <li>Flexibility — easy to switch islands mid-trip if you want to</li>
+  </ul>
+
+  <h2>Side by side</h2>
+  <div class="compare">
+    <table>
+      <tr><th>Factor</th><th>Resort</th><th>Guesthouse</th></tr>
+      <tr><td>Typical cost, per night</td><td>$300–$1,800+</td><td>$60–$180</td></tr>
+      <tr><td>Alcohol</td><td>Available</td><td>Not available</td></tr>
+      <tr><td>Swimwear</td><td>Anywhere</td><td>Bikini beach only</td></tr>
+      <tr><td>Local culture</td><td>None</td><td>Genuine, daily</td></tr>
+      <tr><td>Privacy</td><td>Full island privacy</td><td>Shared with the local community</td></tr>
+    </table>
+  </div>
+
+  <h2>The question we'd actually ask you</h2>
+  <p>Not "what's your budget" first — but: <strong>do you want your trip to feel like an escape, or do you want it to feel like you actually visited a place?</strong> Neither answer is wrong. A honeymoon usually leans resort. A first trip to understand what the Maldives is actually like usually leans guesthouse, or both.</p>
+
+  <div class="inline-cta">
+    <p>Can't decide? The Resort + Local Island Combo splits your trip between both — so you don't have to choose.</p>
+    <a href="combo.html" class="btn btn-gold">See how the Combo works</a>
+  </div>
+
+  <h2>If you're still not sure</h2>
+  <p>Tell us what's actually pulling you to the Maldives — privacy, adventure, culture, or just the photos — and we'll recommend a specific island, not just a category. That's genuinely faster than reading five more articles.</p>
+
+  <div class="related">
+    <h3>Related guides</h3>
+    <div class="related-grid">
+      <a class="related-card" href="guesthouses.html"><span>See local island guesthouse options →</span></a>
+      <a class="related-card" href="resorts.html"><span>See resort categories →</span></a>
+      <a class="related-card" href="local-island-rules.html"><span>Local island rules, explained →</span></a>
+      <a class="related-card" href="combo.html"><span>The Resort + Local Island Combo →</span></a>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+    </div>
+    <div>
+      <h4>Trips</h4>
+      <ul>
+        <li><a href="resorts.html">Resorts</a></li>
+        <li><a href="honeymoon.html">Honeymoon</a></li>
+        <li><a href="family.html">Family</a></li>
+        <li><a href="guesthouses.html">Guesthouses</a></li>
+        <li><a href="combo.html">Resort + Combo</a></li>
+        <li><a href="diving.html">Diving</a></li>
+        <li><a href="fishing.html">Sport Fishing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Guides</h4>
+      <ul>
+        <li><a href="transfer-guide.html">Transfer guide</a></li>
+        <li><a href="cost-guide.html">Cost guide</a></li>
+        <li><a href="local-island-rules.html">Local island rules</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fineprint">
+    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing.
+  </div>
+</footer>
+
+<a href="https://wa.me/9607444281" class="float-wa" aria-label="Message us on WhatsApp">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+  WhatsApp
+</a>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>

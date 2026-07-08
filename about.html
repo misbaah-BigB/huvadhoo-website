@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Huvadhoo Maldives Travel</title>
+<meta name="description" content="A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
+    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Inter',system-ui,-apple-system,sans-serif; --mono:'IBM Plex Mono','SFMono-Regular',monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+  body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand); line-height:1.55;}
+  a{color:inherit;} img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600;}
+  .eyebrow{font-family:var(--body); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700; color:var(--teal);}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
+  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
+  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
+  .logo span{color:var(--teal);}
+  nav.primary{display:none; gap:18px; align-items:center;}
+  nav.primary a{text-decoration:none; font-size:12px; font-weight:600; color:var(--text);}
+  nav.primary a.active{color:var(--teal-deep); border-bottom:2px solid var(--gold); padding-bottom:2px;}
+  nav.primary a:hover{color:var(--teal-deep);}
+  .head-actions{display:flex; align-items:center; gap:10px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+  .btn-gold{background:var(--gold); color:var(--ink);}
+  .btn-gold:hover{background:#c99539;}
+  .btn-outline{border-color:var(--sand-dark); color:var(--ink); background:transparent;}
+  .btn-outline:hover{background:var(--sand-dark);}
+  @media(min-width:1140px){ nav.primary{display:flex;} }
+  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
+  @media(min-width:1140px){ .burger{display:none;} }
+  #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
+  #mobileNav.open{display:flex;}
+  #mobileNav a{padding:12px 4px; text-decoration:none; color:var(--text); font-weight:600; font-size:15px; border-bottom:1px solid var(--sand-dark);}
+
+  .pagehero{background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white); padding:56px 0 64px;}
+  .pagehero h1{color:var(--white); font-size:clamp(28px,4.4vw,42px); max-width:24ch;}
+  .pagehero p{color:#DCEEEA; margin-top:14px; max-width:56ch; font-size:16.5px;}
+  .breadcrumb{font-size:13px; color:#BFDFDA; font-family:var(--mono); margin-bottom:14px;}
+  .breadcrumb a{color:#DCEEEA; text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
+
+  section{padding:64px 0;}
+  .section-head{max-width:640px; margin-bottom:36px;}
+  .section-head h2{font-size:clamp(24px,3.2vw,32px); margin-top:8px;}
+  .section-head p{color:var(--sub); margin-top:10px; font-size:15.5px;}
+
+  .story p{font-size:16.5px; color:var(--text); max-width:70ch; margin:0 0 18px;}
+  .pullquote{background:var(--white); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:22px 26px; margin:28px 0; font-family:var(--display); font-size:20px; color:var(--ink); font-style:italic; max-width:70ch;}
+
+  .values-grid{display:grid; grid-template-columns:1fr; gap:20px;}
+  @media(min-width:700px){ .values-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(min-width:1020px){ .values-grid{grid-template-columns:repeat(4,1fr);} }
+  .value-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px;}
+  .value-card .icon{width:36px; height:36px; border-radius:10px; background:var(--sand); display:flex; align-items:center; justify-content:center; font-size:17px; margin-bottom:12px;}
+  .value-card h3{font-size:16px;} .value-card p{color:var(--sub); font-size:13.5px; margin-top:8px;}
+
+  .trust-band{background:var(--ink); border-radius:20px; padding:32px; color:var(--white); display:grid; gap:16px;}
+  @media(min-width:760px){ .trust-band{grid-template-columns:repeat(4,1fr);} }
+  .trust-band .item{border-left:2px solid var(--gold); padding-left:16px;}
+  .trust-band .item strong{display:block; font-size:15px; color:var(--white); margin-bottom:4px;}
+  .trust-band .item span{font-size:13.5px; color:#CFE3DF;}
+
+  .promise-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:700px){ .promise-grid{grid-template-columns:repeat(3,1fr);} }
+  .promise-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px;}
+  .promise-card h3{font-size:16px;} .promise-card p{color:var(--sub); font-size:14px; margin-top:8px;}
+
+  .cta-band{background:linear-gradient(160deg, var(--teal-deep), var(--ink)); color:var(--white); border-radius:24px; padding:40px; text-align:center;}
+  .cta-band h2{color:var(--white); font-size:clamp(22px,3vw,28px);}
+  .cta-band p{color:#CFE3DF; margin-top:10px; font-size:15px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;}
+  .btn-ghost-dark{color:var(--white); border-color:rgba(255,255,255,.35);}
+  .btn-ghost-dark:hover{background:rgba(255,255,255,.12);}
+
+  footer{background:var(--ink); color:#BFDFDA; padding:48px 0 28px;}
+  .foot-grid{display:grid; grid-template-columns:1fr; gap:28px;}
+  @media(min-width:760px){ .foot-grid{grid-template-columns:1.4fr 1fr 1fr;} }
+  footer .logo{color:var(--white);} footer .logo span{color:var(--aqua);}
+  footer p{font-size:13.5px; color:#8FB5AF; margin-top:10px; max-width:36ch;}
+  footer h4{font-family:var(--body); font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--aqua); margin-bottom:14px;}
+  footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
+  .fineprint{border-top:1px solid rgba(255,255,255,.1); margin-top:36px; padding-top:20px; font-size:12.5px; color:#6E938D;}
+
+  .float-wa{position:fixed; bottom:20px; right:20px; z-index:60; background:var(--teal-deep); color:var(--white); border-radius:999px; padding:14px 18px; text-decoration:none; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
+  .float-wa:hover{background:var(--teal);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <nav class="primary">
+      <a href="resorts.html">Resorts</a>
+      <a href="guesthouses.html">Guesthouses</a>
+      <a href="combo.html">Combo</a>
+      <a href="honeymoon.html">Honeymoon</a>
+      <a href="family.html">Family</a>
+      <a href="diving.html">Diving</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="camping.html">Camping</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileNav">
+    <a href="resorts.html">Resorts</a>
+    <a href="guesthouses.html">Guesthouses</a>
+    <a href="combo.html">Combo</a>
+    <a href="honeymoon.html">Honeymoon</a>
+    <a href="family.html">Family</a>
+    <a href="diving.html">Diving</a>
+    <a href="fishing.html">Sport Fishing</a>
+    <a href="camping.html">Island Camping</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+  <section class="pagehero" style="padding-top:40px;">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">Home</a> / About Us</div>
+      <p class="eyebrow" style="color:#CFE3DF;">About us</p>
+      <h1>A Maldives-based travel concierge, not a booking form with a nice photo</h1>
+      <p>We're based here, we've seen what goes wrong when tourists book blind, and we built this agency specifically to fix that — one clear total price, and honest advice on which island actually fits you.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why we exist</p>
+        <h2>We started this because too many trips get booked on guesswork</h2>
+      </div>
+      <div class="story">
+        <p>Most first-time visitors to the Maldives make their biggest decisions — resort or guesthouse, which transfer, which island — based on a handful of photos and a price they don't fully understand yet. That's how people end up with a surprise seaplane bill, a resort that doesn't suit their kids' ages, or a guesthouse booking that turns out to be nothing at all.</p>
+        <p>Huvadhoo Maldives Travel exists to close that gap. We're based in the Maldives, we check every supplier and partner ourselves, and we quote one honest total price before you commit — whether you're booking a $150-a-night guesthouse or a private-island honeymoon suite.</p>
+      </div>
+      <div class="pullquote">We'd rather send you to the right $150 guesthouse than the wrong $800 resort. That's genuinely the whole business model.</div>
+    </div>
+  </section>
+
+  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2>What we actually check before we recommend anything</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card"><span class="icon">📍</span><h3>Local, not remote</h3><p>We're based in the Maldives, not running this from another country off a spreadsheet of resort brochures.</p></div>
+        <div class="value-card"><span class="icon">💰</span><h3>One total price</h3><p>Room, transfer, tax, and meal plan, shown together — before you pay, every time.</p></div>
+        <div class="value-card"><span class="icon">✅</span><h3>Certified partners only</h3><p>Dive centers, fishing charters, and camping operators are checked for licensing ourselves, not taken on trust.</p></div>
+        <div class="value-card"><span class="icon">⚡</span><h3>Fast, honest replies</h3><p>Real answers on WhatsApp, usually within 15 minutes, not a script or a sales pitch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our promise</p>
+        <h2>Three things we won't compromise on</h2>
+      </div>
+      <div class="promise-grid">
+        <div class="promise-card"><h3>Total Price Promise</h3><p>Every quote includes room, transfer, taxes, service charge, and meal plan on one line — no line items added later.</p></div>
+        <div class="promise-card"><h3>No unlicensed operators</h3><p>Diving, fishing, and island camping only ever go through licensed, safety-checked partners — no exceptions, regardless of price.</p></div>
+        <div class="promise-card"><h3>Honest matching over upselling</h3><p>We recommend what actually fits your budget and priorities, even when that's not the most expensive option on our list.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+    <div class="wrap">
+      <div class="trust-band">
+        <div class="item"><strong>Based in the Maldives</strong><span>Local team, local knowledge</span></div>
+        <div class="item"><strong>WhatsApp: +960 744 4281</strong><span>Real replies, not a bot</span></div>
+        <div class="item"><strong>Tourist Agency Operating License</strong><span>Details added on registration</span></div>
+        <div class="item"><strong>Every product line</strong><span>Resorts to guesthouses to island camping</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <p class="eyebrow" style="color:var(--aqua);">Let's talk</p>
+        <h2>Tell us what you're planning — we'll tell you honestly what fits</h2>
+        <p>No pressure, no obligation — just a clear, honest recommendation.</p>
+        <div class="cta-row">
+          <a href="https://wa.me/9607444281" class="btn btn-gold">Message us on WhatsApp</a>
+          <a href="index.html#contact" class="btn btn-ghost-dark">Request a written quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+    </div>
+    <div>
+      <h4>Trips</h4>
+      <ul>
+        <li><a href="resorts.html">Resorts</a></li>
+        <li><a href="honeymoon.html">Honeymoon</a></li>
+        <li><a href="family.html">Family</a></li>
+        <li><a href="guesthouses.html">Guesthouses</a></li>
+        <li><a href="combo.html">Resort + Combo</a></li>
+        <li><a href="diving.html">Diving</a></li>
+        <li><a href="fishing.html">Sport Fishing</a></li>
+        <li><a href="camping.html">Island Camping</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Guides</h4>
+      <ul>
+        <li><a href="transfer-guide.html">Transfer guide</a></li>
+        <li><a href="cost-guide.html">Cost guide</a></li>
+        <li><a href="local-island-rules.html">Local island rules</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap fineprint">
+    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing.
+  </div>
+</footer>
+
+<a href="https://wa.me/9607444281" class="float-wa" aria-label="Message us on WhatsApp">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+  WhatsApp
+</a>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
