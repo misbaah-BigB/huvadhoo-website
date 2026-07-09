@@ -1,84 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="de-DE">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  try {
-    var rawLang = ((navigator.language || navigator.userLanguage || '') + '').toLowerCase();
-    var langParts = rawLang.split('-');
-    var langBase = langParts[0] || '';
-    var langRegion = langParts[1] || '';
-
-    var timeZone = '';
-    try { timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-
-    // Timezone -> best-guess locale. Used only as a tiebreaker when the
-    // browser's language setting doesn't already give a specific match.
-    var TZ_LOCALE = {
-      'Europe/London':'en-gb','Europe/Belfast':'en-gb','Europe/Dublin':'en-gb',
-      'Australia/Sydney':'en-au','Australia/Melbourne':'en-au','Australia/Brisbane':'en-au','Australia/Perth':'en-au','Australia/Adelaide':'en-au','Australia/Hobart':'en-au','Australia/Darwin':'en-au',
-      'Asia/Shanghai':'zh','Asia/Chongqing':'zh','Asia/Urumqi':'zh','Asia/Harbin':'zh',
-      'Europe/Moscow':'ru','Europe/Minsk':'ru','Europe/Kaliningrad':'ru','Europe/Samara':'ru','Asia/Yekaterinburg':'ru','Asia/Novosibirsk':'ru','Asia/Vladivostok':'ru','Asia/Omsk':'ru','Asia/Krasnoyarsk':'ru','Asia/Irkutsk':'ru',
-      'Europe/Berlin':'de','Europe/Vienna':'de','Europe/Zurich':'de',
-      'Asia/Tokyo':'ja',
-      'Asia/Seoul':'ko',
-      'Asia/Dubai':'ar','Asia/Riyadh':'ar','Asia/Qatar':'ar','Asia/Kuwait':'ar','Asia/Baghdad':'ar','Asia/Amman':'ar','Asia/Beirut':'ar','Africa/Cairo':'ar'
-    };
-
-    function specificLocaleFromLanguage(){
-      if (langBase === 'zh') return 'zh';
-      if (langBase === 'ru') return 'ru';
-      if (langBase === 'de') return 'de';
-      if (langBase === 'ja') return 'ja';
-      if (langBase === 'ko') return 'ko';
-      if (langBase === 'ar') return 'ar';
-      if (langBase === 'en') {
-        if (langRegion === 'gb') return 'en-gb';
-        if (langRegion === 'au') return 'en-au';
-        // Any other explicit region (en-US, en-CA, en-IN...) is still a
-        // specific, confident signal — it just means "default English",
-        // so it should NOT fall through to the timezone tiebreaker.
-        if (langRegion) return 'default';
-      }
-      return null; // no recognizable language, or bare "en" with no region at all
-    }
-
-    // Language wins whenever it gives a specific match (e.g. zh-CN, ru, en-GB,
-    // en-US). Timezone is only consulted when the language signal is truly
-    // generic (plain "en" with no region) or unrecognized.
-    var langLocale = specificLocaleFromLanguage();
-    var detectedLocale = (langLocale === 'default') ? null : (langLocale || TZ_LOCALE[timeZone] || null);
-    window.__huvadhooLocale = detectedLocale;
-
-    // Same two signals, applied to the messaging-app recommendation. Kept
-    // independent of the locale-folder map above (e.g. Belarusian has no
-    // dedicated page, but should still recommend Telegram).
-    function specificChannelFromLanguage(){
-      if (langBase === 'zh') return 'wechat';
-      if (langBase === 'ru' || langBase === 'be') return 'telegram';
-      return null;
-    }
-    var TZ_CHANNEL = { 'zh': 'wechat', 'ru': 'telegram' };
-    var langChannel = specificChannelFromLanguage();
-    window.__huvadhooChannel = langChannel || TZ_CHANNEL[TZ_LOCALE[timeZone]] || 'whatsapp';
-
-    // Redirect to a matching language folder, unless the visitor already
-    // picked a language manually via the switcher (that choice always wins).
-    var hasManualChoice = false;
-    try { hasManualChoice = !!localStorage.getItem('preferredLang'); } catch (e) {}
-    if (!hasManualChoice) {
-      var LOCALE_FOLDERS = {'en-gb':1,'en-au':1,'zh':1,'ru':1,'de':1,'ja':1,'ko':1,'ar':1};
-      if (detectedLocale && LOCALE_FOLDERS[detectedLocale]) {
-        window.location.replace(detectedLocale + '/index.html');
-      }
-    }
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huvadhoo Maldives Travel — Local experts for resorts, guesthouses &amp; island experiences</title>
-<meta name="description" content="Huvadhoo Maldives Travel — Maldives-based travel concierge. Resorts, guesthouses, honeymoons, family trips, diving, fishing, and island camping — with clear total pricing before you pay.">
+<title>Huvadhoo Maldives Travel — Lokale Experten für Resorts, Gästehäuser &amp; Inselerlebnisse</title>
+<meta name="description" content="Huvadhoo Maldives Travel — Reise-Concierge-Service auf den Malediven. Resorts, Gästehäuser, Flitterwochen, Familienreisen, Tauchen, Angeln und Inselcamping — mit klarem Gesamtpreis vor der Zahlung.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -271,53 +197,53 @@
 </head>
 <body>
 
-<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Zum Inhalt springen</a>
 
 <header>
   <div class="headbar">
     <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
     <nav class="primary">
-      <a href="resorts.html">Resorts</a>
-      <a href="guesthouses.html">Guesthouses</a>
-      <a href="combo.html">Combo</a>
-      <a href="honeymoon.html">Honeymoon</a>
-      <a href="family.html">Family</a>
-      <a href="diving.html">Diving</a>
-      <a href="fishing.html">Fishing</a>
-      <a href="camping.html">Camping</a>
-      <a href="blog.html">Blog</a>
-      <a href="#contact">Contact</a>
+      <a href="../resorts.html">Resorts</a>
+      <a href="../guesthouses.html">Gästehäuser</a>
+      <a href="../combo.html">Kombi</a>
+      <a href="../honeymoon.html">Flitterwochen</a>
+      <a href="../family.html">Familie</a>
+      <a href="../diving.html">Tauchen</a>
+      <a href="../fishing.html">Angeln</a>
+      <a href="../camping.html">Camping</a>
+      <a href="../blog.html">Blog</a>
+      <a href="#contact">Kontakt</a>
     </nav>
     <div class="head-actions">
       <a href="https://wa.me/9607444281" class="btn btn-outline" style="display:none" id="headWa">WhatsApp</a>
-      <select class="lang-switch" id="langSwitch" aria-label="Choose language" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
-        <option value="en-us" selected>EN (US)</option>
+      <select class="lang-switch" id="langSwitch" aria-label="Sprache wählen" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+        <option value="en-us">EN (US)</option>
         <option value="en-gb">EN (UK)</option>
         <option value="en-au">EN (AU)</option>
         <option value="zh">中文</option>
         <option value="ru">Русский</option>
-        <option value="de">Deutsch</option>
+        <option value="de" selected>Deutsch</option>
         <option value="ja">日本語</option>
         <option value="ko">한국어</option>
         <option value="ar">العربية</option>
       </select>
-      <a href="#contact" class="btn btn-gold">Request a quote</a>
-      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <a href="#contact" class="btn btn-gold">Angebot anfragen</a>
+      <button class="burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
   <div id="mobileNav">
-    <a href="resorts.html">Resorts</a>
-    <a href="guesthouses.html">Guesthouses</a>
-    <a href="combo.html">Combo</a>
-    <a href="honeymoon.html">Honeymoon</a>
-    <a href="family.html">Family</a>
-    <a href="diving.html">Diving</a>
-    <a href="fishing.html">Fishing</a>
-    <a href="camping.html">Camping</a>
-    <a href="blog.html">Blog</a>
-    <a href="#contact">Contact</a>
+    <a href="../resorts.html">Resorts</a>
+    <a href="../guesthouses.html">Gästehäuser</a>
+    <a href="../combo.html">Kombi</a>
+    <a href="../honeymoon.html">Flitterwochen</a>
+    <a href="../family.html">Familie</a>
+    <a href="../diving.html">Tauchen</a>
+    <a href="../fishing.html">Angeln</a>
+    <a href="../camping.html">Camping</a>
+    <a href="../blog.html">Blog</a>
+    <a href="#contact">Kontakt</a>
   </div>
 </header>
 
@@ -328,26 +254,26 @@
     <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <svg class="hero-wave hero-wave-2" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,120 C300,60 600,160 900,110 C1100,80 1300,140 1440,110 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <div class="hero-inner">
-      <p class="eyebrow" style="color:#CFE3DF;">Maldives-based travel concierge</p>
-      <h1>Find your island. Know your price. Before you pay.</h1>
-      <p class="lede">Resorts, local-island guesthouses, honeymoons, family trips, diving, sport fishing, and island camping — matched by someone who actually lives here, with one clear total price, no surprises.</p>
+      <p class="eyebrow" style="color:#CFE3DF;">Reise-Concierge auf den Malediven</p>
+      <h1>Finden Sie Ihre Insel. Kennen Sie den Preis. Vor der Zahlung.</h1>
+      <p class="lede">Resorts, Gästehäuser auf lokalen Inseln, Flitterwochen, Familienreisen, Tauchen, Sportfischen und Inselcamping — vermittelt von jemandem, der wirklich hier lebt, mit einem klaren Gesamtpreis, ganz ohne Überraschungen.</p>
       <div class="cta-row">
-        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
+        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Schreiben Sie uns auf WhatsApp</a>
         <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
         <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-        <a href="#contact" class="btn btn-ghost-dark">Request a free quote</a>
+        <a href="#contact" class="btn btn-ghost-dark">Kostenloses Angebot anfragen</a>
       </div>
-      <p class="microline">Typical reply time: under 15 minutes, 7am–11pm MVT</p>
+      <p class="microline">Typische Antwortzeit: unter 15 Minuten, 7–23 Uhr Malediven-Zeit</p>
     </div>
   </section>
 
   <!-- TRUST STRIP -->
   <div class="trust">
     <div class="wrap trust-grid">
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Maldives-based</strong><span>Not a reseller — we're on the ground, every day.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>One total price</strong><span>Room, transfer, tax, and meal plan — shown together, before you pay.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Certified partners only</strong><span>Dive centers and excursions are licensed — we check.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Fast, honest replies</strong><span>Real answers on WhatsApp, not a script.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>Vor Ort auf den Malediven</strong><span>Kein Weiterverkäufer — wir sind jeden Tag vor Ort.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>Ein Gesamtpreis</strong><span>Zimmer, Transfer, Steuern und Verpflegung — alles zusammen gezeigt, vor der Zahlung.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>Nur zertifizierte Partner</strong><span>Tauchzentren und Ausflüge sind lizenziert — wir prüfen das.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>Schnelle, ehrliche Antworten</strong><span>Echte Antworten auf WhatsApp, kein Textbaustein.</span></div></div>
     </div>
   </div>
 
@@ -355,52 +281,52 @@
   <section id="products">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Where to start</p>
-        <h2>Every kind of Maldives trip, matched honestly</h2>
-        <p>Tell us your budget and what you're after — we'll point you to the right one, not just the one with the biggest commission.</p>
+        <p class="eyebrow">Wo Sie beginnen</p>
+        <h2>Jede Art von Malediven-Reise, ehrlich vermittelt</h2>
+        <p>Nennen Sie uns Ihr Budget und Ihre Wünsche — wir zeigen Ihnen die passende Option, nicht die mit der höchsten Provision.</p>
       </div>
       <div class="products-grid">
-        <a class="product-card" data-tilt href="resorts.html">
-          <span class="tag">All budgets</span>
+        <a class="product-card" data-tilt href="../resorts.html">
+          <span class="tag">Jedes Budget</span>
           <h3>Resorts</h3>
-          <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
-          <span class="see">See resort categories</span>
+          <p>Von preiswertem Luxus bis Ultra-Luxus auf einer Privatinsel — vermittelt nach Hausriff, Entfernung von Malé und Ihren tatsächlichen Wünschen.</p>
+          <span class="see">Resort-Kategorien ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="honeymoon.html">
-          <span class="tag">Couples</span>
-          <h3>Honeymoon Packages</h3>
-          <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
-          <span class="see">See honeymoon options</span>
+        <a class="product-card" data-tilt href="../honeymoon.html">
+          <span class="tag">Paare</span>
+          <h3>Flitterwochen-Pakete</h3>
+          <p>Wasservillen, private Dinner und Resorts, die wirklich wegen ihrer Privatsphäre ausgewählt wurden — nicht irgendein 5-Sterne-Hotel mit Flitterwochen-Flyer.</p>
+          <span class="see">Flitterwochen-Optionen ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="family.html">
-          <span class="tag">Family</span>
-          <h3>Family Resort Packages</h3>
-          <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
-          <span class="see">See family options</span>
+        <a class="product-card" data-tilt href="../family.html">
+          <span class="tag">Familie</span>
+          <h3>Familien-Resortpakete</h3>
+          <p>Echte Kids' Clubs, flache Hausriffe und Zimmer, passend zum Alter Ihrer Kinder.</p>
+          <span class="see">Familienoptionen ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="guesthouses.html">
+        <a class="product-card" data-tilt href="../guesthouses.html">
           <span class="tag">Budget</span>
-          <h3>Local Island Guesthouses</h3>
-          <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
-          <span class="see">See guesthouse options</span>
+          <h3>Gästehäuser auf lokalen Inseln</h3>
+          <p>Saubere, gut bewertete Unterkünfte auf bewohnten Inseln — echte Strände und echtes Essen, zu einem Bruchteil der Resortkosten.</p>
+          <span class="see">Gästehaus-Optionen ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="diving.html">
-          <span class="tag">Diving</span>
-          <h3>Diving &amp; Snorkeling</h3>
-          <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
-          <span class="see">See diving options</span>
+        <a class="product-card" data-tilt href="../diving.html">
+          <span class="tag">Tauchen</span>
+          <h3>Tauchen &amp; Schnorcheln</h3>
+          <p>Hausriffe und Tauchsafaris in der Nähe von Mantastationen, Kanälen und Wracks — ausschließlich mit PADI-/SSI-Zertifizierung.</p>
+          <span class="see">Tauchoptionen ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="fishing.html">
-          <span class="tag">Sport fishing</span>
-          <h3>Sport Fishing Charters</h3>
-          <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
-          <span class="see">See fishing options</span>
+        <a class="product-card" data-tilt href="../fishing.html">
+          <span class="tag">Sportfischen</span>
+          <h3>Sportfischen-Charter</h3>
+          <p>Halbtags-, Ganztags- und Nachtcharter mit lizenzierten Booten, abgestimmt auf die besten Angelzeiten.</p>
+          <span class="see">Angeloptionen ansehen</span>
         </a>
-        <a class="product-card" data-tilt href="camping.html">
-          <span class="tag">Adventure</span>
-          <h3>Uninhabited Island Camping</h3>
-          <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
-          <span class="see">See camping options</span>
+        <a class="product-card" data-tilt href="../camping.html">
+          <span class="tag">Abenteuer</span>
+          <h3>Camping auf unbewohnten Inseln</h3>
+          <p>Genehmigte, geführte Tages- oder Übernachtungstouren — die einzige legale und sichere Art, dies auf den Malediven zu tun.</p>
+          <span class="see">Camping-Optionen ansehen</span>
         </a>
       </div>
     </div>
@@ -410,35 +336,35 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Or explore visually</p>
-        <h2>Pick an atoll, see what it's known for</h2>
-        <p>Tap a shaded region below — each atoll has its own character, from dive sites to guesthouse islands.</p>
+        <p class="eyebrow">Oder visuell entdecken</p>
+        <h2>Wählen Sie ein Atoll und entdecken Sie seine Besonderheiten</h2>
+        <p>Tippen Sie unten auf eine markierte Region — jedes Atoll hat seinen eigenen Charakter, von Tauchplätzen bis zu Gästehausinseln.</p>
       </div>
       <div class="map-demo">
         <div class="map-box">
-          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="Simplified map of Maldives atolls">
-            <g class="atoll" tabindex="0" data-name="North Male Atoll" data-info="Closest to the airport — the widest resort choice and shortest speedboat transfers." onclick="selectAtoll(this)">
+          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="Vereinfachte Karte der Malediven-Atolle">
+            <g class="atoll" tabindex="0" data-name="Nord-Malé-Atoll" data-info="Am nächsten zum Flughafen — die größte Resortauswahl und die kürzesten Speedboot-Transfers." onclick="selectAtoll(this)">
               <path d="M120,40 q30,-10 55,10 q10,25 -15,35 q-35,10 -50,-15 q-10,-20 10,-30 Z" fill="#5FD3C4"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="South Male Atoll" data-info="Guesthouse-heavy — Maafushi and Guraidhoo are both here." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="Süd-Malé-Atoll" data-info="Viele Gästehäuser — Maafushi und Guraidhoo liegen beide hier." onclick="selectAtoll(this)">
               <path d="M150,110 q25,-8 45,12 q8,20 -12,30 q-28,10 -42,-12 q-8,-16 9,-30 Z" fill="#1F7A6C"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Baa Atoll" data-info="Home to Hanifaru Bay — one of the best manta ray snorkeling sites on earth." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="Baa-Atoll" data-info="Heimat der Hanifaru-Bucht — einer der weltbesten Orte zum Schnorcheln mit Mantarochen." onclick="selectAtoll(this)">
               <path d="M60,150 q22,-10 40,8 q10,18 -10,28 q-25,10 -38,-10 q-8,-15 8,-26 Z" fill="#D9A64E"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Alifu Dhaalu Atoll" data-info="Dhigurah island — long beach, regular whale shark sightings nearby." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="Alifu-Dhaalu-Atoll" data-info="Insel Dhigurah — langer Strand, regelmäßige Walhai-Sichtungen in der Nähe." onclick="selectAtoll(this)">
               <path d="M210,170 q24,-9 42,10 q9,19 -11,29 q-27,10 -40,-11 q-8,-16 9,-28 Z" fill="#114C49"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Vaavu Atoll" data-info="Fulidhoo island — quiet, culture-focused, known for Bodu Beru drumming nights." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="Vaavu-Atoll" data-info="Insel Fulidhoo — ruhig, kulturorientiert, bekannt für Bodu-Beru-Trommelabende." onclick="selectAtoll(this)">
               <path d="M270,220 q22,-9 40,9 q9,18 -10,27 q-25,9 -38,-10 q-8,-15 8,-26 Z" fill="#0B2A2E"/>
             </g>
           </svg>
         </div>
         <div class="info-box" id="atollInfo">
-          <span class="eyebrow2">Tap an atoll</span>
-          <h3>Explore by region</h3>
-          <p>Select any shaded area on the left to see what that atoll is known for.</p>
-          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">Ask about this region</a>
+          <span class="eyebrow2">Auf ein Atoll tippen</span>
+          <h3>Nach Region entdecken</h3>
+          <p>Wählen Sie links eine beliebige markierte Fläche, um zu sehen, wofür dieses Atoll bekannt ist.</p>
+          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">Nach dieser Region fragen</a>
         </div>
       </div>
     </div>
@@ -449,18 +375,18 @@
     <div class="wrap">
       <div class="combo">
         <div>
-          <p class="eyebrow">Our signature trip</p>
-          <h2>The Resort + Local Island Combo</h2>
-          <p>Half your trip on a local-island guesthouse, half on a resort. You get a real reef, real culture, and real people — without paying resort rates the whole stay. It's the trip most first-time visitors don't know they can book.</p>
+          <p class="eyebrow">Unsere Signature-Reise</p>
+          <h2>Die Resort + lokale Insel Kombi</h2>
+          <p>Die Hälfte Ihrer Reise in einem Gästehaus auf einer lokalen Insel, die andere Hälfte in einem Resort. Sie erleben ein echtes Riff, echte Kultur und echte Menschen — ohne die ganze Zeit Resortpreise zu zahlen. Es ist die Reise, von der die meisten Erstbesucher nicht wissen, dass man sie buchen kann.</p>
           <div class="cta-row" style="margin-top:22px;">
-            <a href="combo.html" class="btn btn-gold">See how it works</a>
+            <a href="../combo.html" class="btn btn-gold">So funktioniert's</a>
           </div>
         </div>
         <div class="combo-diagram">
-          <div class="row"><span>Nights 1–3</span><span>Local island guesthouse</span></div>
-          <div class="row"><span>Nights 4–6</span><span>Resort, water or beach villa</span></div>
-          <div class="row"><span>Transfers</span><span>Arranged both ways, included in quote</span></div>
-          <div class="row"><span>Typical total</span><span>$180–$500 / night blended</span></div>
+          <div class="row"><span>Nächte 1–3</span><span>Gästehaus auf lokaler Insel</span></div>
+          <div class="row"><span>Nächte 4–6</span><span>Resort, Wasser- oder Strandvilla</span></div>
+          <div class="row"><span>Transfers</span><span>Für Hin- und Rückweg organisiert, im Angebot enthalten</span></div>
+          <div class="row"><span>Typischer Gesamtpreis</span><span>180–500 $ / Nacht im Schnitt</span></div>
         </div>
       </div>
     </div>
@@ -470,15 +396,15 @@
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How it works</p>
-        <h2>From message to boarding pass</h2>
+        <p class="eyebrow">So funktioniert's</p>
+        <h2>Von der ersten Nachricht bis zur Bordkarte</h2>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>You reach out</h3><p>WhatsApp or the form below — tell us dates, people, and budget.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>We send 3 options</h3><p>Budget, best-value, and dream — never a confusing list of twenty.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>One total price</h3><p>Room, transfer, tax, and meal plan together — no line-item surprises later.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>You book</h3><p>We confirm directly with the resort or guesthouse and send your pre-arrival guide.</p></div>
-        <div class="step"><span class="num">05</span><h3>We stay on call</h3><p>WhatsApp support while you're there, start to finish.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>Sie melden sich</h3><p>Per WhatsApp oder über das Formular unten — nennen Sie uns Daten, Personenzahl und Budget.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>Wir senden 3 Optionen</h3><p>Budget, bestes Preis-Leistungs-Verhältnis und Traumreise — nie eine verwirrende Liste mit zwanzig Optionen.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>Ein Gesamtpreis</h3><p>Zimmer, Transfer, Steuern und Verpflegung zusammen — später keine bösen Überraschungen bei Einzelposten.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>Sie buchen</h3><p>Wir bestätigen direkt beim Resort oder Gästehaus und senden Ihnen Ihren Reiseleitfaden vor der Anreise.</p></div>
+        <div class="step"><span class="num">05</span><h3>Wir bleiben erreichbar</h3><p>WhatsApp-Support während Ihres gesamten Aufenthalts, von Anfang bis Ende.</p></div>
       </div>
     </div>
   </section>
@@ -487,21 +413,21 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Why book through us</p>
-        <h2>The things that go wrong when you book blind</h2>
+        <p class="eyebrow">Warum bei uns buchen</p>
+        <h2>Was bei einer Blindbuchung schiefgehen kann</h2>
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <h3>Transfer confusion</h3>
-          <p>Speedboat, seaplane, domestic flight, ferry — the wrong one can waste a full day of your trip. We match transfer to your actual arrival time.</p>
+          <h3>Transfer-Verwirrung</h3>
+          <p>Speedboot, Wasserflugzeug, Inlandsflug, Fähre — die falsche Wahl kann Sie einen ganzen Reisetag kosten. Wir stimmen den Transfer auf Ihre tatsächliche Ankunftszeit ab.</p>
         </div>
         <div class="why-card">
-          <h3>Hidden total cost</h3>
-          <p>Taxes, green tax, service charge, and meal-plan upgrades often aren't in the price you first see. Ours is quoted all-in, up front.</p>
+          <h3>Versteckte Gesamtkosten</h3>
+          <p>Steuern, Umweltabgabe, Servicegebühr und Verpflegungs-Upgrades sind oft nicht im zuerst gezeigten Preis enthalten. Unser Angebot ist von Anfang an alles inklusive.</p>
         </div>
         <div class="why-card">
-          <h3>Local island rules</h3>
-          <p>Alcohol, dress code, and bikini-beach rules differ between resort and guesthouse islands. We tell you before you book, not after you land.</p>
+          <h3>Regeln der lokalen Inseln</h3>
+          <p>Alkohol, Kleiderordnung und Bikinistrand-Regeln unterscheiden sich zwischen Resort- und Gästehausinseln. Wir informieren Sie vor der Buchung, nicht erst nach der Landung.</p>
         </div>
       </div>
     </div>
@@ -511,29 +437,29 @@
   <section id="faq">
     <div class="wrap" style="max-width:820px;">
       <div class="section-head">
-        <p class="eyebrow">Common questions</p>
-        <h2>Before you message us</h2>
+        <p class="eyebrow">Häufige Fragen</p>
+        <h2>Bevor Sie uns schreiben</h2>
       </div>
       <div id="faqList">
         <div class="faq-item">
-          <button class="faq-q"><span>Is the total price you quote really the total price?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Yes — room, transfer, green tax, service charge, and meal plan are shown as one number. If something isn't included (like an optional excursion), we say so clearly rather than adding it silently later.</p></div>
+          <button class="faq-q"><span>Ist der genannte Gesamtpreis wirklich der Endpreis?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>Ja — Zimmer, Transfer, Umweltabgabe, Servicegebühr und Verpflegung werden als eine einzige Summe angezeigt. Wenn etwas nicht enthalten ist (z. B. ein optionaler Ausflug), sagen wir das klar dazu, statt es später stillschweigend hinzuzufügen.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>What's actually different between a resort and a guesthouse?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Resorts occupy a whole private island — more privacy, higher cost. Guesthouses sit on inhabited local islands — lower cost, real local life, some dress-code and alcohol restrictions. We help you pick based on what you actually want, not just budget.</p></div>
+          <button class="faq-q"><span>Was ist der tatsächliche Unterschied zwischen einem Resort und einem Gästehaus?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>Ein Resort belegt eine ganze Privatinsel — mehr Privatsphäre, höhere Kosten. Gästehäuser liegen auf bewohnten lokalen Inseln — geringere Kosten, echtes lokales Leben, mit gewissen Einschränkungen bei Kleidung und Alkohol. Wir helfen Ihnen, basierend auf Ihren tatsächlichen Wünschen zu wählen, nicht nur nach Budget.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Do I need to arrange my own transfer?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>No — we arrange and pre-pay it as part of your quote, so you're never negotiating with someone at the airport.</p></div>
+          <button class="faq-q"><span>Muss ich meinen Transfer selbst organisieren?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>Nein — wir organisieren und bezahlen ihn im Voraus als Teil Ihres Angebots, sodass Sie am Flughafen nie mit jemandem verhandeln müssen.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Is alcohol allowed where I'm staying?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Only on resort islands. Local-island guesthouses are alcohol-free by law, with modest dress expected off the designated bikini beach. We flag this clearly before you book so there's no surprise.</p></div>
+          <button class="faq-q"><span>Ist Alkohol an meinem Unterkunftsort erlaubt?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>Nur auf Resortinseln. Gästehäuser auf lokalen Inseln sind gesetzlich alkoholfrei, und außerhalb des ausgewiesenen Bikinistrands wird zurückhaltende Kleidung erwartet. Wir weisen klar darauf hin, bevor Sie buchen, damit es keine Überraschung gibt.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>How fast will you actually reply?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Typically under 15 minutes during 7am–11pm Maldives time. If you message outside that window, you'll hear from us first thing after.</p></div>
+          <button class="faq-q"><span>Wie schnell antworten Sie wirklich?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>Normalerweise in unter 15 Minuten zwischen 7 und 23 Uhr Malediven-Zeit. Schreiben Sie außerhalb dieses Zeitfensters, melden wir uns als Erstes, sobald es beginnt.</p></div>
         </div>
       </div>
     </div>
@@ -544,11 +470,11 @@
     <div class="wrap">
       <div class="cta-band">
         <div>
-          <p class="eyebrow" style="color:var(--aqua);">Get started</p>
-          <h2>Send your dates and budget for a free quote</h2>
-          <p>Fill in the basics here and we'll follow up on WhatsApp with three real options — usually within 15 minutes during Maldives daytime hours.</p>
+          <p class="eyebrow" style="color:var(--aqua);">Jetzt starten</p>
+          <h2>Senden Sie Ihre Reisedaten und Ihr Budget für ein kostenloses Angebot</h2>
+          <p>Füllen Sie hier die wichtigsten Angaben aus, und wir melden uns auf WhatsApp mit drei echten Optionen — meist innerhalb von 15 Minuten tagsüber auf den Malediven.</p>
           <div class="contact-group" style="margin-top:18px;">
-            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Or message us on WhatsApp →</a>
+            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Oder schreiben Sie uns direkt auf WhatsApp →</a>
             <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
             <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
           </div>
@@ -558,26 +484,26 @@
           <form class="qform" id="quoteForm">
             <div class="row2">
               <div><label for="qName">Name</label><input id="qName" required></div>
-              <div><label for="qWa">WhatsApp number</label><input id="qWa" required></div>
+              <div><label for="qWa">WhatsApp-Nummer</label><input id="qWa" required></div>
             </div>
             <div class="row2">
-              <div><label for="qDates">Travel dates</label><input id="qDates" placeholder="e.g. 10–15 Oct"></div>
-              <div><label for="qBudget">Budget (USD, total)</label><input id="qBudget" placeholder="e.g. 2000"></div>
+              <div><label for="qDates">Reisedaten</label><input id="qDates" placeholder="z. B. 10.–15. Okt."></div>
+              <div><label for="qBudget">Budget (USD, gesamt)</label><input id="qBudget" placeholder="z. B. 2000"></div>
             </div>
-            <label for="qOccasion">This trip is for</label>
+            <label for="qOccasion">Diese Reise ist für</label>
             <select id="qOccasion">
-              <option>Honeymoon</option>
-              <option>Family trip</option>
-              <option>Diving</option>
-              <option>Sport fishing</option>
-              <option>Island camping</option>
-              <option>Just relaxing / not sure yet</option>
+              <option>Flitterwochen</option>
+              <option>Familienreise</option>
+              <option>Tauchen</option>
+              <option>Sportfischen</option>
+              <option>Inselcamping</option>
+              <option>Einfach entspannen / noch unsicher</option>
             </select>
-            <button type="submit">Request my quote</button>
+            <button type="submit">Angebot anfragen</button>
           </form>
           <div class="thankyou" id="thankYou">
-            <h3 style="font-size:20px;">Thank you — got it.</h3>
-            <p>Our Maldives travel advisor will check suitable options and contact you on WhatsApp shortly.</p>
+            <h3 style="font-size:20px;">Danke — angekommen.</h3>
+            <p>Unser Malediven-Reiseberater prüft passende Optionen und meldet sich in Kürze bei Ihnen auf WhatsApp.</p>
           </div>
         </div>
       </div>
@@ -590,8 +516,8 @@
   <div class="wrap foot-grid">
     <div>
       <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <p>Huvadhoo Maldives Travel ist ein Reise-Concierge-Service auf den Malediven, der Reisenden hilft, das richtige Resort, Gästehaus, die richtige Insel, den passenden Transfer und das passende Erlebnis zu finden — mit ehrlicher lokaler Beratung und einem klaren Gesamtpreis.</p>
+      <h4 style="margin-top:24px;">Kontaktieren Sie uns</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
@@ -599,44 +525,44 @@
       </ul>
     </div>
     <div>
-      <h4>Trips</h4>
+      <h4>Reisen</h4>
       <ul>
-        <li><a href="resorts.html">Resorts</a></li>
-        <li><a href="honeymoon.html">Honeymoon</a></li>
-        <li><a href="family.html">Family</a></li>
-        <li><a href="guesthouses.html">Guesthouses</a></li>
-        <li><a href="combo.html">Resort + Combo</a></li>
-        <li><a href="diving.html">Diving</a></li>
-        <li><a href="fishing.html">Sport Fishing</a></li>
-        <li><a href="camping.html">Island Camping</a></li>
+        <li><a href="../resorts.html">Resorts</a></li>
+        <li><a href="../honeymoon.html">Flitterwochen</a></li>
+        <li><a href="../family.html">Familie</a></li>
+        <li><a href="../guesthouses.html">Gästehäuser</a></li>
+        <li><a href="../combo.html">Resort + Kombi</a></li>
+        <li><a href="../diving.html">Tauchen</a></li>
+        <li><a href="../fishing.html">Sportfischen</a></li>
+        <li><a href="../camping.html">Inselcamping</a></li>
       </ul>
     </div>
     <div>
-      <h4>Guides</h4>
+      <h4>Ratgeber</h4>
       <ul>
-        <li><a href="transfer-guide.html">Transfer guide</a></li>
-        <li><a href="cost-guide.html">Cost guide</a></li>
-        <li><a href="local-island-rules.html">Local island rules</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="../transfer-guide.html">Transfer-Ratgeber</a></li>
+        <li><a href="../cost-guide.html">Kosten-Ratgeber</a></li>
+        <li><a href="../local-island-rules.html">Regeln lokaler Inseln</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">Über uns</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap fineprint">
-    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing. Tourist Agency Operating License details to be added once registration is complete.
+    Die auf dieser Website gezeigten Preise sind illustrative Beispiele zur Planung, keine Echtzeit-Angebote — fragen Sie ein Angebot an, um den aktuellen Preis zu erfahren. Angaben zur Reiseveranstalter-Lizenz werden nach Abschluss der Registrierung ergänzt.
   </div>
 </footer>
 
 <div class="float-contact" id="floatContact">
-  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="Message us on WhatsApp">
+  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="Schreiben Sie uns auf WhatsApp">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
     WhatsApp
   </a>
-  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="Message us on Telegram">
+  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="Schreiben Sie uns auf Telegram">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     Telegram
   </a>
-  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="Add us on WeChat, ID WECHAT_ID">
+  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="Fügen Sie uns bei WeChat hinzu, ID WECHAT_ID">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     WeChat: WECHAT_ID
   </a>
@@ -705,33 +631,12 @@
     document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
     el.classList.add('selected');
     const box = document.getElementById('atollInfo');
-    box.querySelector('.eyebrow2').textContent = 'Selected';
+    box.querySelector('.eyebrow2').textContent = 'Ausgewählt';
     box.querySelector('h3').textContent = el.dataset.name;
     box.querySelector('p').textContent = el.dataset.info;
   }
 </script>
 
-<script>
-  // Suggest a preferred contact channel from the browser's language and
-  // timezone (computed above, in the early detection script). No location
-  // permission is requested — Intl.DateTimeFormat().resolvedOptions().timeZone
-  // reads the timezone the device already has set, instantly.
-  (function(){
-    var preferred = window.__huvadhooChannel || 'whatsapp';
-    document.querySelectorAll('[data-channel]').forEach(function(el){
-      var isPreferred = el.getAttribute('data-channel') === preferred;
-      if (el.classList.contains('float-primary') || el.classList.contains('float-secondary')) {
-        el.classList.toggle('float-primary', isPreferred);
-        el.classList.toggle('float-secondary', !isPreferred);
-      } else if (el.classList.contains('footer-contact-link')) {
-        el.classList.toggle('is-primary', isPreferred);
-      } else if (el.classList.contains('btn')) {
-        el.classList.toggle('btn-gold', isPreferred);
-        el.classList.toggle('btn-ghost-dark', !isPreferred);
-        el.classList.toggle('btn-sm', !isPreferred);
-      }
-    });
-  })();
-</script>
+
 </body>
 </html>

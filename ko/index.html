@@ -1,84 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="ko-KR">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  try {
-    var rawLang = ((navigator.language || navigator.userLanguage || '') + '').toLowerCase();
-    var langParts = rawLang.split('-');
-    var langBase = langParts[0] || '';
-    var langRegion = langParts[1] || '';
-
-    var timeZone = '';
-    try { timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-
-    // Timezone -> best-guess locale. Used only as a tiebreaker when the
-    // browser's language setting doesn't already give a specific match.
-    var TZ_LOCALE = {
-      'Europe/London':'en-gb','Europe/Belfast':'en-gb','Europe/Dublin':'en-gb',
-      'Australia/Sydney':'en-au','Australia/Melbourne':'en-au','Australia/Brisbane':'en-au','Australia/Perth':'en-au','Australia/Adelaide':'en-au','Australia/Hobart':'en-au','Australia/Darwin':'en-au',
-      'Asia/Shanghai':'zh','Asia/Chongqing':'zh','Asia/Urumqi':'zh','Asia/Harbin':'zh',
-      'Europe/Moscow':'ru','Europe/Minsk':'ru','Europe/Kaliningrad':'ru','Europe/Samara':'ru','Asia/Yekaterinburg':'ru','Asia/Novosibirsk':'ru','Asia/Vladivostok':'ru','Asia/Omsk':'ru','Asia/Krasnoyarsk':'ru','Asia/Irkutsk':'ru',
-      'Europe/Berlin':'de','Europe/Vienna':'de','Europe/Zurich':'de',
-      'Asia/Tokyo':'ja',
-      'Asia/Seoul':'ko',
-      'Asia/Dubai':'ar','Asia/Riyadh':'ar','Asia/Qatar':'ar','Asia/Kuwait':'ar','Asia/Baghdad':'ar','Asia/Amman':'ar','Asia/Beirut':'ar','Africa/Cairo':'ar'
-    };
-
-    function specificLocaleFromLanguage(){
-      if (langBase === 'zh') return 'zh';
-      if (langBase === 'ru') return 'ru';
-      if (langBase === 'de') return 'de';
-      if (langBase === 'ja') return 'ja';
-      if (langBase === 'ko') return 'ko';
-      if (langBase === 'ar') return 'ar';
-      if (langBase === 'en') {
-        if (langRegion === 'gb') return 'en-gb';
-        if (langRegion === 'au') return 'en-au';
-        // Any other explicit region (en-US, en-CA, en-IN...) is still a
-        // specific, confident signal — it just means "default English",
-        // so it should NOT fall through to the timezone tiebreaker.
-        if (langRegion) return 'default';
-      }
-      return null; // no recognizable language, or bare "en" with no region at all
-    }
-
-    // Language wins whenever it gives a specific match (e.g. zh-CN, ru, en-GB,
-    // en-US). Timezone is only consulted when the language signal is truly
-    // generic (plain "en" with no region) or unrecognized.
-    var langLocale = specificLocaleFromLanguage();
-    var detectedLocale = (langLocale === 'default') ? null : (langLocale || TZ_LOCALE[timeZone] || null);
-    window.__huvadhooLocale = detectedLocale;
-
-    // Same two signals, applied to the messaging-app recommendation. Kept
-    // independent of the locale-folder map above (e.g. Belarusian has no
-    // dedicated page, but should still recommend Telegram).
-    function specificChannelFromLanguage(){
-      if (langBase === 'zh') return 'wechat';
-      if (langBase === 'ru' || langBase === 'be') return 'telegram';
-      return null;
-    }
-    var TZ_CHANNEL = { 'zh': 'wechat', 'ru': 'telegram' };
-    var langChannel = specificChannelFromLanguage();
-    window.__huvadhooChannel = langChannel || TZ_CHANNEL[TZ_LOCALE[timeZone]] || 'whatsapp';
-
-    // Redirect to a matching language folder, unless the visitor already
-    // picked a language manually via the switcher (that choice always wins).
-    var hasManualChoice = false;
-    try { hasManualChoice = !!localStorage.getItem('preferredLang'); } catch (e) {}
-    if (!hasManualChoice) {
-      var LOCALE_FOLDERS = {'en-gb':1,'en-au':1,'zh':1,'ru':1,'de':1,'ja':1,'ko':1,'ar':1};
-      if (detectedLocale && LOCALE_FOLDERS[detectedLocale]) {
-        window.location.replace(detectedLocale + '/index.html');
-      }
-    }
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huvadhoo Maldives Travel — Local experts for resorts, guesthouses &amp; island experiences</title>
-<meta name="description" content="Huvadhoo Maldives Travel — Maldives-based travel concierge. Resorts, guesthouses, honeymoons, family trips, diving, fishing, and island camping — with clear total pricing before you pay.">
+<title>Huvadhoo Maldives Travel — 리조트, 게스트하우스, 아일랜드 체험 현지 전문가</title>
+<meta name="description" content="Huvadhoo Maldives Travel — 몰디브 현지 여행 컨시어지 서비스. 리조트, 게스트하우스, 허니문, 가족 여행, 다이빙, 낚시, 아일랜드 캠핑까지 — 결제 전 명확한 총액을 안내해 드립니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -271,53 +197,53 @@
 </head>
 <body>
 
-<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">본문으로 건너뛰기</a>
 
 <header>
   <div class="headbar">
     <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
     <nav class="primary">
-      <a href="resorts.html">Resorts</a>
-      <a href="guesthouses.html">Guesthouses</a>
-      <a href="combo.html">Combo</a>
-      <a href="honeymoon.html">Honeymoon</a>
-      <a href="family.html">Family</a>
-      <a href="diving.html">Diving</a>
-      <a href="fishing.html">Fishing</a>
-      <a href="camping.html">Camping</a>
-      <a href="blog.html">Blog</a>
-      <a href="#contact">Contact</a>
+      <a href="../resorts.html">리조트</a>
+      <a href="../guesthouses.html">게스트하우스</a>
+      <a href="../combo.html">콤보</a>
+      <a href="../honeymoon.html">허니문</a>
+      <a href="../family.html">가족여행</a>
+      <a href="../diving.html">다이빙</a>
+      <a href="../fishing.html">낚시</a>
+      <a href="../camping.html">캠핑</a>
+      <a href="../blog.html">블로그</a>
+      <a href="#contact">문의하기</a>
     </nav>
     <div class="head-actions">
       <a href="https://wa.me/9607444281" class="btn btn-outline" style="display:none" id="headWa">WhatsApp</a>
-      <select class="lang-switch" id="langSwitch" aria-label="Choose language" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
-        <option value="en-us" selected>EN (US)</option>
+      <select class="lang-switch" id="langSwitch" aria-label="언어 선택" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+        <option value="en-us">EN (US)</option>
         <option value="en-gb">EN (UK)</option>
         <option value="en-au">EN (AU)</option>
         <option value="zh">中文</option>
         <option value="ru">Русский</option>
         <option value="de">Deutsch</option>
         <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
+        <option value="ko" selected>한국어</option>
         <option value="ar">العربية</option>
       </select>
-      <a href="#contact" class="btn btn-gold">Request a quote</a>
-      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <a href="#contact" class="btn btn-gold">견적 요청하기</a>
+      <button class="burger" id="burgerBtn" aria-label="메뉴 열기" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
   <div id="mobileNav">
-    <a href="resorts.html">Resorts</a>
-    <a href="guesthouses.html">Guesthouses</a>
-    <a href="combo.html">Combo</a>
-    <a href="honeymoon.html">Honeymoon</a>
-    <a href="family.html">Family</a>
-    <a href="diving.html">Diving</a>
-    <a href="fishing.html">Fishing</a>
-    <a href="camping.html">Camping</a>
-    <a href="blog.html">Blog</a>
-    <a href="#contact">Contact</a>
+    <a href="../resorts.html">리조트</a>
+    <a href="../guesthouses.html">게스트하우스</a>
+    <a href="../combo.html">콤보</a>
+    <a href="../honeymoon.html">허니문</a>
+    <a href="../family.html">가족여행</a>
+    <a href="../diving.html">다이빙</a>
+    <a href="../fishing.html">낚시</a>
+    <a href="../camping.html">캠핑</a>
+    <a href="../blog.html">블로그</a>
+    <a href="#contact">문의하기</a>
   </div>
 </header>
 
@@ -328,26 +254,26 @@
     <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <svg class="hero-wave hero-wave-2" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,120 C300,60 600,160 900,110 C1100,80 1300,140 1440,110 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <div class="hero-inner">
-      <p class="eyebrow" style="color:#CFE3DF;">Maldives-based travel concierge</p>
-      <h1>Find your island. Know your price. Before you pay.</h1>
-      <p class="lede">Resorts, local-island guesthouses, honeymoons, family trips, diving, sport fishing, and island camping — matched by someone who actually lives here, with one clear total price, no surprises.</p>
+      <p class="eyebrow" style="color:#CFE3DF;">몰디브 현지 여행 컨시어지</p>
+      <h1>나만의 섬을 찾고, 가격을 확인하세요. 결제는 그다음입니다.</h1>
+      <p class="lede">리조트, 로컬 아일랜드 게스트하우스, 허니문, 가족 여행, 다이빙, 스포츠 낚시, 아일랜드 캠핑까지 — 실제로 이곳에 거주하는 전문가가 매칭해 드리며, 숨겨진 비용 없이 명확한 총액을 제공합니다.</p>
       <div class="cta-row">
-        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
+        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">WhatsApp으로 문의하기</a>
         <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
         <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-        <a href="#contact" class="btn btn-ghost-dark">Request a free quote</a>
+        <a href="#contact" class="btn btn-ghost-dark">무료 견적 요청하기</a>
       </div>
-      <p class="microline">Typical reply time: under 15 minutes, 7am–11pm MVT</p>
+      <p class="microline">평균 응답 시간 15분 이내 (몰디브 시간 오전 7시~오후 11시)</p>
     </div>
   </section>
 
   <!-- TRUST STRIP -->
   <div class="trust">
     <div class="wrap trust-grid">
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Maldives-based</strong><span>Not a reseller — we're on the ground, every day.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>One total price</strong><span>Room, transfer, tax, and meal plan — shown together, before you pay.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Certified partners only</strong><span>Dive centers and excursions are licensed — we check.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Fast, honest replies</strong><span>Real answers on WhatsApp, not a script.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>몰디브 현지 기반</strong><span>재판매업체가 아닙니다 — 매일 현지에서 직접 활동합니다.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>명확한 총액 제공</strong><span>숙박비, 이동, 세금, 식사 플랜까지 결제 전 한 번에 확인하실 수 있습니다.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>인증된 파트너만 이용</strong><span>다이브 센터와 액티비티 업체는 모두 정식 인가를 받은 곳입니다 — 저희가 직접 확인합니다.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>빠르고 진솔한 응대</strong><span>WhatsApp에서 정형화된 답변이 아닌, 실제 상담원의 답변을 받으실 수 있습니다.</span></div></div>
     </div>
   </div>
 
@@ -355,52 +281,52 @@
   <section id="products">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Where to start</p>
-        <h2>Every kind of Maldives trip, matched honestly</h2>
-        <p>Tell us your budget and what you're after — we'll point you to the right one, not just the one with the biggest commission.</p>
+        <p class="eyebrow">여기서부터 시작하세요</p>
+        <h2>정직하게 매칭해 드리는 다양한 몰디브 여행</h2>
+        <p>예산과 원하시는 여행 스타일을 알려주세요 — 수수료가 가장 높은 상품이 아닌, 고객님께 맞는 상품을 안내해 드립니다.</p>
       </div>
       <div class="products-grid">
-        <a class="product-card" data-tilt href="resorts.html">
-          <span class="tag">All budgets</span>
-          <h3>Resorts</h3>
-          <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
-          <span class="see">See resort categories</span>
+        <a class="product-card" data-tilt href="../resorts.html">
+          <span class="tag">모든 예산</span>
+          <h3>리조트</h3>
+          <p>합리적인 럭셔리부터 프라이빗 아일랜드의 초호화 리조트까지 — 하우스리프, 말레와의 거리, 실제 원하시는 조건에 맞춰 매칭해 드립니다.</p>
+          <span class="see">리조트 카테고리 보기</span>
         </a>
-        <a class="product-card" data-tilt href="honeymoon.html">
-          <span class="tag">Couples</span>
-          <h3>Honeymoon Packages</h3>
-          <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
-          <span class="see">See honeymoon options</span>
+        <a class="product-card" data-tilt href="../honeymoon.html">
+          <span class="tag">커플</span>
+          <h3>허니문 패키지</h3>
+          <p>수상 빌라, 프라이빗 다이닝, 그리고 프라이버시를 기준으로 엄선한 리조트 — 허니문 전단지만 있는 아무 5성급 호텔이 아닙니다.</p>
+          <span class="see">허니문 옵션 보기</span>
         </a>
-        <a class="product-card" data-tilt href="family.html">
-          <span class="tag">Family</span>
-          <h3>Family Resort Packages</h3>
-          <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
-          <span class="see">See family options</span>
+        <a class="product-card" data-tilt href="../family.html">
+          <span class="tag">가족</span>
+          <h3>패밀리 리조트 패키지</h3>
+          <p>실제로 운영되는 키즈클럽, 얕은 하우스리프, 자녀 연령에 맞춘 객실 구성을 제공합니다.</p>
+          <span class="see">가족 여행 옵션 보기</span>
         </a>
-        <a class="product-card" data-tilt href="guesthouses.html">
-          <span class="tag">Budget</span>
-          <h3>Local Island Guesthouses</h3>
-          <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
-          <span class="see">See guesthouse options</span>
+        <a class="product-card" data-tilt href="../guesthouses.html">
+          <span class="tag">실속형</span>
+          <h3>로컬 아일랜드 게스트하우스</h3>
+          <p>사람이 거주하는 섬의 깨끗하고 평판 좋은 숙소 — 진짜 해변과 음식을, 리조트 비용의 일부만으로 즐길 수 있습니다.</p>
+          <span class="see">게스트하우스 옵션 보기</span>
         </a>
-        <a class="product-card" data-tilt href="diving.html">
-          <span class="tag">Diving</span>
-          <h3>Diving &amp; Snorkeling</h3>
-          <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
-          <span class="see">See diving options</span>
+        <a class="product-card" data-tilt href="../diving.html">
+          <span class="tag">다이빙</span>
+          <h3>다이빙 &amp; 스노클링</h3>
+          <p>만타 관측지, 해협, 난파선 인근의 하우스리프와 리브어보드 — PADI/SSI 인증 업체만 이용합니다.</p>
+          <span class="see">다이빙 옵션 보기</span>
         </a>
-        <a class="product-card" data-tilt href="fishing.html">
-          <span class="tag">Sport fishing</span>
-          <h3>Sport Fishing Charters</h3>
-          <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
-          <span class="see">See fishing options</span>
+        <a class="product-card" data-tilt href="../fishing.html">
+          <span class="tag">스포츠 낚시</span>
+          <h3>스포츠 낚시 차터</h3>
+          <p>인가받은 선박으로 반나절, 종일, 야간 차터를 최적의 낚시 시간대에 맞춰 운영합니다.</p>
+          <span class="see">낚시 옵션 보기</span>
         </a>
-        <a class="product-card" data-tilt href="camping.html">
-          <span class="tag">Adventure</span>
-          <h3>Uninhabited Island Camping</h3>
-          <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
-          <span class="see">See camping options</span>
+        <a class="product-card" data-tilt href="../camping.html">
+          <span class="tag">액티비티</span>
+          <h3>무인도 캠핑</h3>
+          <p>허가받은 가이드 동반 당일 또는 숙박 투어 — 몰디브에서 합법적이고 안전하게 즐길 수 있는 유일한 방법입니다.</p>
+          <span class="see">캠핑 옵션 보기</span>
         </a>
       </div>
     </div>
@@ -410,35 +336,35 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Or explore visually</p>
-        <h2>Pick an atoll, see what it's known for</h2>
-        <p>Tap a shaded region below — each atoll has its own character, from dive sites to guesthouse islands.</p>
+        <p class="eyebrow">지도로 둘러보기</p>
+        <h2>환초를 선택하고 특징을 알아보세요</h2>
+        <p>아래 색칠된 지역을 탭해보세요 — 각 환초마다 다이빙 명소부터 게스트하우스 섬까지 저마다의 특징이 있습니다.</p>
       </div>
       <div class="map-demo">
         <div class="map-box">
-          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="Simplified map of Maldives atolls">
-            <g class="atoll" tabindex="0" data-name="North Male Atoll" data-info="Closest to the airport — the widest resort choice and shortest speedboat transfers." onclick="selectAtoll(this)">
+          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="몰디브 환초 간략 지도">
+            <g class="atoll" tabindex="0" data-name="북말레 환초" data-info="공항에서 가장 가까우며, 리조트 선택지가 가장 다양하고 스피드보트 이동 시간도 가장 짧습니다." onclick="selectAtoll(this)">
               <path d="M120,40 q30,-10 55,10 q10,25 -15,35 q-35,10 -50,-15 q-10,-20 10,-30 Z" fill="#5FD3C4"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="South Male Atoll" data-info="Guesthouse-heavy — Maafushi and Guraidhoo are both here." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="남말레 환초" data-info="게스트하우스가 많은 지역 — 마아푸시와 구라이도가 모두 이곳에 있습니다." onclick="selectAtoll(this)">
               <path d="M150,110 q25,-8 45,12 q8,20 -12,30 q-28,10 -42,-12 q-8,-16 9,-30 Z" fill="#1F7A6C"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Baa Atoll" data-info="Home to Hanifaru Bay — one of the best manta ray snorkeling sites on earth." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="바 환초" data-info="하니파루 만이 있는 곳 — 세계 최고의 만타가오리 스노클링 명소 중 하나입니다." onclick="selectAtoll(this)">
               <path d="M60,150 q22,-10 40,8 q10,18 -10,28 q-25,10 -38,-10 q-8,-15 8,-26 Z" fill="#D9A64E"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Alifu Dhaalu Atoll" data-info="Dhigurah island — long beach, regular whale shark sightings nearby." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="알리푸 달루 환초" data-info="디구라 섬 — 긴 해변이 있으며 인근에서 고래상어가 자주 목격됩니다." onclick="selectAtoll(this)">
               <path d="M210,170 q24,-9 42,10 q9,19 -11,29 q-27,10 -40,-11 q-8,-16 9,-28 Z" fill="#114C49"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Vaavu Atoll" data-info="Fulidhoo island — quiet, culture-focused, known for Bodu Beru drumming nights." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="바아부 환초" data-info="훌리도 섬 — 조용하고 문화 중심적인 분위기로, 전통 보두베루 북 공연의 밤으로 유명합니다." onclick="selectAtoll(this)">
               <path d="M270,220 q22,-9 40,9 q9,18 -10,27 q-25,9 -38,-10 q-8,-15 8,-26 Z" fill="#0B2A2E"/>
             </g>
           </svg>
         </div>
         <div class="info-box" id="atollInfo">
-          <span class="eyebrow2">Tap an atoll</span>
-          <h3>Explore by region</h3>
-          <p>Select any shaded area on the left to see what that atoll is known for.</p>
-          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">Ask about this region</a>
+          <span class="eyebrow2">환초를 탭하세요</span>
+          <h3>지역별로 둘러보기</h3>
+          <p>왼쪽의 색칠된 영역을 선택하면 해당 환초의 특징을 확인할 수 있습니다.</p>
+          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">이 지역에 대해 문의하기</a>
         </div>
       </div>
     </div>
@@ -449,18 +375,18 @@
     <div class="wrap">
       <div class="combo">
         <div>
-          <p class="eyebrow">Our signature trip</p>
-          <h2>The Resort + Local Island Combo</h2>
-          <p>Half your trip on a local-island guesthouse, half on a resort. You get a real reef, real culture, and real people — without paying resort rates the whole stay. It's the trip most first-time visitors don't know they can book.</p>
+          <p class="eyebrow">저희의 시그니처 여행</p>
+          <h2>리조트 + 로컬 아일랜드 콤보</h2>
+          <p>여행 일정의 절반은 로컬 아일랜드 게스트하우스에서, 나머지 절반은 리조트에서 보내는 상품입니다. 전체 일정을 리조트 요금으로 지불하지 않고도 진짜 산호초, 진짜 문화, 진짜 사람들을 만날 수 있습니다. 대부분의 첫 방문객들이 예약할 수 있다는 사실조차 모르는 여행 상품입니다.</p>
           <div class="cta-row" style="margin-top:22px;">
-            <a href="combo.html" class="btn btn-gold">See how it works</a>
+            <a href="../combo.html" class="btn btn-gold">자세히 알아보기</a>
           </div>
         </div>
         <div class="combo-diagram">
-          <div class="row"><span>Nights 1–3</span><span>Local island guesthouse</span></div>
-          <div class="row"><span>Nights 4–6</span><span>Resort, water or beach villa</span></div>
-          <div class="row"><span>Transfers</span><span>Arranged both ways, included in quote</span></div>
-          <div class="row"><span>Typical total</span><span>$180–$500 / night blended</span></div>
+          <div class="row"><span>1~3박</span><span>로컬 아일랜드 게스트하우스</span></div>
+          <div class="row"><span>4~6박</span><span>리조트, 수상 빌라 또는 비치 빌라</span></div>
+          <div class="row"><span>이동편</span><span>왕복 모두 준비되며 견적에 포함됩니다</span></div>
+          <div class="row"><span>평균 총액</span><span>1박당 $180~$500 (평균)</span></div>
         </div>
       </div>
     </div>
@@ -470,15 +396,15 @@
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How it works</p>
-        <h2>From message to boarding pass</h2>
+        <p class="eyebrow">이용 방법</p>
+        <h2>메시지 문의부터 탑승권까지</h2>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>You reach out</h3><p>WhatsApp or the form below — tell us dates, people, and budget.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>We send 3 options</h3><p>Budget, best-value, and dream — never a confusing list of twenty.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>One total price</h3><p>Room, transfer, tax, and meal plan together — no line-item surprises later.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>You book</h3><p>We confirm directly with the resort or guesthouse and send your pre-arrival guide.</p></div>
-        <div class="step"><span class="num">05</span><h3>We stay on call</h3><p>WhatsApp support while you're there, start to finish.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>문의하기</h3><p>WhatsApp 또는 아래 양식으로 날짜, 인원, 예산을 알려주세요.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>3가지 옵션 제안</h3><p>실속형, 가성비형, 드림 여행형까지 — 헷갈리는 20가지 목록은 절대 드리지 않습니다.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>명확한 총액 안내</h3><p>숙박비, 이동, 세금, 식사 플랜을 한 번에 안내해 드려 나중에 추가 비용으로 놀라실 일이 없습니다.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>예약 진행</h3><p>리조트 또는 게스트하우스와 직접 예약을 확정하고 출국 전 가이드를 보내드립니다.</p></div>
+        <div class="step"><span class="num">05</span><h3>현지 체류 중 지속 지원</h3><p>여행 시작부터 끝까지 WhatsApp으로 지원해 드립니다.</p></div>
       </div>
     </div>
   </section>
@@ -487,21 +413,21 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Why book through us</p>
-        <h2>The things that go wrong when you book blind</h2>
+        <p class="eyebrow">저희를 통해 예약해야 하는 이유</p>
+        <h2>직접 예약할 때 흔히 발생하는 문제들</h2>
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <h3>Transfer confusion</h3>
-          <p>Speedboat, seaplane, domestic flight, ferry — the wrong one can waste a full day of your trip. We match transfer to your actual arrival time.</p>
+          <h3>이동편 혼선</h3>
+          <p>스피드보트, 수상비행기, 국내선, 페리 — 잘못 선택하면 여행 하루를 통째로 낭비할 수 있습니다. 저희는 실제 도착 시간에 맞춰 이동편을 매칭해 드립니다.</p>
         </div>
         <div class="why-card">
-          <h3>Hidden total cost</h3>
-          <p>Taxes, green tax, service charge, and meal-plan upgrades often aren't in the price you first see. Ours is quoted all-in, up front.</p>
+          <h3>숨겨진 총비용</h3>
+          <p>세금, 환경세, 서비스 요금, 식사 플랜 업그레이드 비용이 처음 본 가격에 포함되지 않는 경우가 많습니다. 저희는 처음부터 모든 비용을 포함해 견적을 드립니다.</p>
         </div>
         <div class="why-card">
-          <h3>Local island rules</h3>
-          <p>Alcohol, dress code, and bikini-beach rules differ between resort and guesthouse islands. We tell you before you book, not after you land.</p>
+          <h3>로컬 아일랜드 규정</h3>
+          <p>음주, 복장 규정, 비키니 비치 규정은 리조트 섬과 게스트하우스 섬마다 다릅니다. 도착 후가 아닌 예약 전에 명확히 안내해 드립니다.</p>
         </div>
       </div>
     </div>
@@ -511,29 +437,29 @@
   <section id="faq">
     <div class="wrap" style="max-width:820px;">
       <div class="section-head">
-        <p class="eyebrow">Common questions</p>
-        <h2>Before you message us</h2>
+        <p class="eyebrow">자주 묻는 질문</p>
+        <h2>문의하기 전에 확인해 보세요</h2>
       </div>
       <div id="faqList">
         <div class="faq-item">
-          <button class="faq-q"><span>Is the total price you quote really the total price?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Yes — room, transfer, green tax, service charge, and meal plan are shown as one number. If something isn't included (like an optional excursion), we say so clearly rather than adding it silently later.</p></div>
+          <button class="faq-q"><span>안내해 주시는 총액이 정말 최종 금액인가요?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>네 — 숙박비, 이동, 환경세, 서비스 요금, 식사 플랜까지 모두 하나의 금액으로 안내해 드립니다. 포함되지 않은 항목(선택 액티비티 등)이 있다면 나중에 조용히 추가하지 않고 미리 명확히 안내해 드립니다.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>What's actually different between a resort and a guesthouse?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Resorts occupy a whole private island — more privacy, higher cost. Guesthouses sit on inhabited local islands — lower cost, real local life, some dress-code and alcohol restrictions. We help you pick based on what you actually want, not just budget.</p></div>
+          <button class="faq-q"><span>리조트와 게스트하우스는 실제로 어떤 차이가 있나요?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>리조트는 섬 전체를 단독으로 사용하여 프라이버시가 높지만 비용도 더 높습니다. 게스트하우스는 사람이 거주하는 로컬 섬에 위치해 비용이 저렴하고 실제 현지 생활을 경험할 수 있지만, 복장이나 음주에 일부 제한이 있습니다. 단순히 예산뿐 아니라 실제로 원하시는 경험을 기준으로 선택하실 수 있도록 도와드립니다.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Do I need to arrange my own transfer?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>No — we arrange and pre-pay it as part of your quote, so you're never negotiating with someone at the airport.</p></div>
+          <button class="faq-q"><span>이동편은 직접 준비해야 하나요?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>아니요 — 저희가 견적에 포함하여 미리 예약 및 결제해 드리므로, 공항에서 직접 흥정하실 필요가 없습니다.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Is alcohol allowed where I'm staying?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Only on resort islands. Local-island guesthouses are alcohol-free by law, with modest dress expected off the designated bikini beach. We flag this clearly before you book so there's no surprise.</p></div>
+          <button class="faq-q"><span>숙소에서 음주가 가능한가요?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>리조트 섬에서만 가능합니다. 로컬 아일랜드의 게스트하우스는 법적으로 음주가 금지되어 있으며, 지정된 비키니 비치 외 지역에서는 단정한 복장이 요구됩니다. 예약 전에 미리 명확히 안내해 드리므로 당황하실 일이 없습니다.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>How fast will you actually reply?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Typically under 15 minutes during 7am–11pm Maldives time. If you message outside that window, you'll hear from us first thing after.</p></div>
+          <button class="faq-q"><span>실제 응답 속도는 얼마나 빠른가요?</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>몰디브 시간 기준 오전 7시~오후 11시 사이에는 보통 15분 이내에 답변드립니다. 이 시간대 외에 문의하신 경우에도 시간대가 시작되는 즉시 가장 먼저 답변드립니다.</p></div>
         </div>
       </div>
     </div>
@@ -544,11 +470,11 @@
     <div class="wrap">
       <div class="cta-band">
         <div>
-          <p class="eyebrow" style="color:var(--aqua);">Get started</p>
-          <h2>Send your dates and budget for a free quote</h2>
-          <p>Fill in the basics here and we'll follow up on WhatsApp with three real options — usually within 15 minutes during Maldives daytime hours.</p>
+          <p class="eyebrow" style="color:var(--aqua);">지금 시작하기</p>
+          <h2>여행 날짜와 예산을 보내고 무료 견적을 받아보세요</h2>
+          <p>기본 정보를 입력해 주시면 몰디브 현지 시간 기준 낮 시간대에 보통 15분 이내로 WhatsApp을 통해 실제 옵션 세 가지를 안내해 드립니다.</p>
           <div class="contact-group" style="margin-top:18px;">
-            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Or message us on WhatsApp →</a>
+            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">또는 WhatsApp으로 바로 문의하기 →</a>
             <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
             <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
           </div>
@@ -557,27 +483,27 @@
         <div>
           <form class="qform" id="quoteForm">
             <div class="row2">
-              <div><label for="qName">Name</label><input id="qName" required></div>
-              <div><label for="qWa">WhatsApp number</label><input id="qWa" required></div>
+              <div><label for="qName">이름</label><input id="qName" required></div>
+              <div><label for="qWa">WhatsApp 번호</label><input id="qWa" required></div>
             </div>
             <div class="row2">
-              <div><label for="qDates">Travel dates</label><input id="qDates" placeholder="e.g. 10–15 Oct"></div>
-              <div><label for="qBudget">Budget (USD, total)</label><input id="qBudget" placeholder="e.g. 2000"></div>
+              <div><label for="qDates">여행 날짜</label><input id="qDates" placeholder="예: 10월 10~15일"></div>
+              <div><label for="qBudget">예산 (USD, 총액)</label><input id="qBudget" placeholder="예: 2000"></div>
             </div>
-            <label for="qOccasion">This trip is for</label>
+            <label for="qOccasion">이번 여행의 목적</label>
             <select id="qOccasion">
-              <option>Honeymoon</option>
-              <option>Family trip</option>
-              <option>Diving</option>
-              <option>Sport fishing</option>
-              <option>Island camping</option>
-              <option>Just relaxing / not sure yet</option>
+              <option>허니문</option>
+              <option>가족 여행</option>
+              <option>다이빙</option>
+              <option>스포츠 낚시</option>
+              <option>아일랜드 캠핑</option>
+              <option>그냥 휴식 / 아직 미정</option>
             </select>
-            <button type="submit">Request my quote</button>
+            <button type="submit">견적 요청하기</button>
           </form>
           <div class="thankyou" id="thankYou">
-            <h3 style="font-size:20px;">Thank you — got it.</h3>
-            <p>Our Maldives travel advisor will check suitable options and contact you on WhatsApp shortly.</p>
+            <h3 style="font-size:20px;">감사합니다 — 접수되었습니다.</h3>
+            <p>저희 몰디브 여행 어드바이저가 적합한 옵션을 확인한 후 곧 WhatsApp으로 연락드리겠습니다.</p>
           </div>
         </div>
       </div>
@@ -590,8 +516,8 @@
   <div class="wrap foot-grid">
     <div>
       <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <p>Huvadhoo Maldives Travel은 몰디브 현지 여행 컨시어지 서비스로, 여행객들이 알맞은 리조트, 게스트하우스, 섬, 이동편, 액티비티를 찾을 수 있도록 진솔한 현지 조언과 명확한 총액 안내를 제공합니다.</p>
+      <h4 style="margin-top:24px;">문의하기</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
@@ -599,44 +525,44 @@
       </ul>
     </div>
     <div>
-      <h4>Trips</h4>
+      <h4>여행 상품</h4>
       <ul>
-        <li><a href="resorts.html">Resorts</a></li>
-        <li><a href="honeymoon.html">Honeymoon</a></li>
-        <li><a href="family.html">Family</a></li>
-        <li><a href="guesthouses.html">Guesthouses</a></li>
-        <li><a href="combo.html">Resort + Combo</a></li>
-        <li><a href="diving.html">Diving</a></li>
-        <li><a href="fishing.html">Sport Fishing</a></li>
-        <li><a href="camping.html">Island Camping</a></li>
+        <li><a href="../resorts.html">리조트</a></li>
+        <li><a href="../honeymoon.html">허니문</a></li>
+        <li><a href="../family.html">가족여행</a></li>
+        <li><a href="../guesthouses.html">게스트하우스</a></li>
+        <li><a href="../combo.html">리조트+콤보</a></li>
+        <li><a href="../diving.html">다이빙</a></li>
+        <li><a href="../fishing.html">스포츠 낚시</a></li>
+        <li><a href="../camping.html">아일랜드 캠핑</a></li>
       </ul>
     </div>
     <div>
-      <h4>Guides</h4>
+      <h4>가이드</h4>
       <ul>
-        <li><a href="transfer-guide.html">Transfer guide</a></li>
-        <li><a href="cost-guide.html">Cost guide</a></li>
-        <li><a href="local-island-rules.html">Local island rules</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="../transfer-guide.html">이동편 가이드</a></li>
+        <li><a href="../cost-guide.html">비용 가이드</a></li>
+        <li><a href="../local-island-rules.html">로컬 아일랜드 규정</a></li>
+        <li><a href="../blog.html">블로그</a></li>
+        <li><a href="../about.html">회사 소개</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap fineprint">
-    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing. Tourist Agency Operating License details to be added once registration is complete.
+    본 사이트에 표시된 가격은 계획 참고용 예시이며 실시간 견적이 아닙니다 — 오늘 기준 실제 가격은 견적을 요청해 주세요. 여행사 운영 허가 관련 정보는 등록 완료 후 추가될 예정입니다.
   </div>
 </footer>
 
 <div class="float-contact" id="floatContact">
-  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="Message us on WhatsApp">
+  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="WhatsApp으로 문의하기">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
     WhatsApp
   </a>
-  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="Message us on Telegram">
+  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="Telegram으로 문의하기">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     Telegram
   </a>
-  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="Add us on WeChat, ID WECHAT_ID">
+  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="WeChat 추가하기, ID WECHAT_ID">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     WeChat: WECHAT_ID
   </a>
@@ -705,33 +631,12 @@
     document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
     el.classList.add('selected');
     const box = document.getElementById('atollInfo');
-    box.querySelector('.eyebrow2').textContent = 'Selected';
+    box.querySelector('.eyebrow2').textContent = '선택됨';
     box.querySelector('h3').textContent = el.dataset.name;
     box.querySelector('p').textContent = el.dataset.info;
   }
 </script>
 
-<script>
-  // Suggest a preferred contact channel from the browser's language and
-  // timezone (computed above, in the early detection script). No location
-  // permission is requested — Intl.DateTimeFormat().resolvedOptions().timeZone
-  // reads the timezone the device already has set, instantly.
-  (function(){
-    var preferred = window.__huvadhooChannel || 'whatsapp';
-    document.querySelectorAll('[data-channel]').forEach(function(el){
-      var isPreferred = el.getAttribute('data-channel') === preferred;
-      if (el.classList.contains('float-primary') || el.classList.contains('float-secondary')) {
-        el.classList.toggle('float-primary', isPreferred);
-        el.classList.toggle('float-secondary', !isPreferred);
-      } else if (el.classList.contains('footer-contact-link')) {
-        el.classList.toggle('is-primary', isPreferred);
-      } else if (el.classList.contains('btn')) {
-        el.classList.toggle('btn-gold', isPreferred);
-        el.classList.toggle('btn-ghost-dark', !isPreferred);
-        el.classList.toggle('btn-sm', !isPreferred);
-      }
-    });
-  })();
-</script>
+
 </body>
 </html>

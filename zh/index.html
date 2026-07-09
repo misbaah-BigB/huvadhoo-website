@@ -1,84 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  try {
-    var rawLang = ((navigator.language || navigator.userLanguage || '') + '').toLowerCase();
-    var langParts = rawLang.split('-');
-    var langBase = langParts[0] || '';
-    var langRegion = langParts[1] || '';
-
-    var timeZone = '';
-    try { timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-
-    // Timezone -> best-guess locale. Used only as a tiebreaker when the
-    // browser's language setting doesn't already give a specific match.
-    var TZ_LOCALE = {
-      'Europe/London':'en-gb','Europe/Belfast':'en-gb','Europe/Dublin':'en-gb',
-      'Australia/Sydney':'en-au','Australia/Melbourne':'en-au','Australia/Brisbane':'en-au','Australia/Perth':'en-au','Australia/Adelaide':'en-au','Australia/Hobart':'en-au','Australia/Darwin':'en-au',
-      'Asia/Shanghai':'zh','Asia/Chongqing':'zh','Asia/Urumqi':'zh','Asia/Harbin':'zh',
-      'Europe/Moscow':'ru','Europe/Minsk':'ru','Europe/Kaliningrad':'ru','Europe/Samara':'ru','Asia/Yekaterinburg':'ru','Asia/Novosibirsk':'ru','Asia/Vladivostok':'ru','Asia/Omsk':'ru','Asia/Krasnoyarsk':'ru','Asia/Irkutsk':'ru',
-      'Europe/Berlin':'de','Europe/Vienna':'de','Europe/Zurich':'de',
-      'Asia/Tokyo':'ja',
-      'Asia/Seoul':'ko',
-      'Asia/Dubai':'ar','Asia/Riyadh':'ar','Asia/Qatar':'ar','Asia/Kuwait':'ar','Asia/Baghdad':'ar','Asia/Amman':'ar','Asia/Beirut':'ar','Africa/Cairo':'ar'
-    };
-
-    function specificLocaleFromLanguage(){
-      if (langBase === 'zh') return 'zh';
-      if (langBase === 'ru') return 'ru';
-      if (langBase === 'de') return 'de';
-      if (langBase === 'ja') return 'ja';
-      if (langBase === 'ko') return 'ko';
-      if (langBase === 'ar') return 'ar';
-      if (langBase === 'en') {
-        if (langRegion === 'gb') return 'en-gb';
-        if (langRegion === 'au') return 'en-au';
-        // Any other explicit region (en-US, en-CA, en-IN...) is still a
-        // specific, confident signal — it just means "default English",
-        // so it should NOT fall through to the timezone tiebreaker.
-        if (langRegion) return 'default';
-      }
-      return null; // no recognizable language, or bare "en" with no region at all
-    }
-
-    // Language wins whenever it gives a specific match (e.g. zh-CN, ru, en-GB,
-    // en-US). Timezone is only consulted when the language signal is truly
-    // generic (plain "en" with no region) or unrecognized.
-    var langLocale = specificLocaleFromLanguage();
-    var detectedLocale = (langLocale === 'default') ? null : (langLocale || TZ_LOCALE[timeZone] || null);
-    window.__huvadhooLocale = detectedLocale;
-
-    // Same two signals, applied to the messaging-app recommendation. Kept
-    // independent of the locale-folder map above (e.g. Belarusian has no
-    // dedicated page, but should still recommend Telegram).
-    function specificChannelFromLanguage(){
-      if (langBase === 'zh') return 'wechat';
-      if (langBase === 'ru' || langBase === 'be') return 'telegram';
-      return null;
-    }
-    var TZ_CHANNEL = { 'zh': 'wechat', 'ru': 'telegram' };
-    var langChannel = specificChannelFromLanguage();
-    window.__huvadhooChannel = langChannel || TZ_CHANNEL[TZ_LOCALE[timeZone]] || 'whatsapp';
-
-    // Redirect to a matching language folder, unless the visitor already
-    // picked a language manually via the switcher (that choice always wins).
-    var hasManualChoice = false;
-    try { hasManualChoice = !!localStorage.getItem('preferredLang'); } catch (e) {}
-    if (!hasManualChoice) {
-      var LOCALE_FOLDERS = {'en-gb':1,'en-au':1,'zh':1,'ru':1,'de':1,'ja':1,'ko':1,'ar':1};
-      if (detectedLocale && LOCALE_FOLDERS[detectedLocale]) {
-        window.location.replace(detectedLocale + '/index.html');
-      }
-    }
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huvadhoo Maldives Travel — Local experts for resorts, guesthouses &amp; island experiences</title>
-<meta name="description" content="Huvadhoo Maldives Travel — Maldives-based travel concierge. Resorts, guesthouses, honeymoons, family trips, diving, fishing, and island camping — with clear total pricing before you pay.">
+<title>Huvadhoo Maldives Travel — 度假村、民宿与海岛体验的本地专家</title>
+<meta name="description" content="Huvadhoo Maldives Travel — 马尔代夫本地旅游管家服务。度假村、民宿、蜜月游、家庭游、潜水、钓鱼和海岛露营 — 付款前即有清晰总价。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -271,53 +197,53 @@
 </head>
 <body>
 
-<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+<a href="#main" style="position:absolute; left:-999px; top:0; background:var(--ink); color:white; padding:10px; z-index:100;" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">跳转到内容</a>
 
 <header>
   <div class="headbar">
     <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
     <nav class="primary">
-      <a href="resorts.html">Resorts</a>
-      <a href="guesthouses.html">Guesthouses</a>
-      <a href="combo.html">Combo</a>
-      <a href="honeymoon.html">Honeymoon</a>
-      <a href="family.html">Family</a>
-      <a href="diving.html">Diving</a>
-      <a href="fishing.html">Fishing</a>
-      <a href="camping.html">Camping</a>
-      <a href="blog.html">Blog</a>
-      <a href="#contact">Contact</a>
+      <a href="../resorts.html">度假村</a>
+      <a href="../guesthouses.html">民宿</a>
+      <a href="../combo.html">组合套餐</a>
+      <a href="../honeymoon.html">蜜月</a>
+      <a href="../family.html">家庭游</a>
+      <a href="../diving.html">潜水</a>
+      <a href="../fishing.html">钓鱼</a>
+      <a href="../camping.html">露营</a>
+      <a href="../blog.html">博客</a>
+      <a href="#contact">联系我们</a>
     </nav>
     <div class="head-actions">
       <a href="https://wa.me/9607444281" class="btn btn-outline" style="display:none" id="headWa">WhatsApp</a>
-      <select class="lang-switch" id="langSwitch" aria-label="Choose language" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
-        <option value="en-us" selected>EN (US)</option>
+      <select class="lang-switch" id="langSwitch" aria-label="选择语言" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+        <option value="en-us">EN (US)</option>
         <option value="en-gb">EN (UK)</option>
         <option value="en-au">EN (AU)</option>
-        <option value="zh">中文</option>
+        <option value="zh" selected>中文</option>
         <option value="ru">Русский</option>
         <option value="de">Deutsch</option>
         <option value="ja">日本語</option>
         <option value="ko">한국어</option>
         <option value="ar">العربية</option>
       </select>
-      <a href="#contact" class="btn btn-gold">Request a quote</a>
-      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <a href="#contact" class="btn btn-gold">获取报价</a>
+      <button class="burger" id="burgerBtn" aria-label="打开菜单" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
   <div id="mobileNav">
-    <a href="resorts.html">Resorts</a>
-    <a href="guesthouses.html">Guesthouses</a>
-    <a href="combo.html">Combo</a>
-    <a href="honeymoon.html">Honeymoon</a>
-    <a href="family.html">Family</a>
-    <a href="diving.html">Diving</a>
-    <a href="fishing.html">Fishing</a>
-    <a href="camping.html">Camping</a>
-    <a href="blog.html">Blog</a>
-    <a href="#contact">Contact</a>
+    <a href="../resorts.html">度假村</a>
+    <a href="../guesthouses.html">民宿</a>
+    <a href="../combo.html">组合套餐</a>
+    <a href="../honeymoon.html">蜜月</a>
+    <a href="../family.html">家庭游</a>
+    <a href="../diving.html">潜水</a>
+    <a href="../fishing.html">钓鱼</a>
+    <a href="../camping.html">露营</a>
+    <a href="../blog.html">博客</a>
+    <a href="#contact">联系我们</a>
   </div>
 </header>
 
@@ -328,26 +254,26 @@
     <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <svg class="hero-wave hero-wave-2" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,120 C300,60 600,160 900,110 C1100,80 1300,140 1440,110 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
     <div class="hero-inner">
-      <p class="eyebrow" style="color:#CFE3DF;">Maldives-based travel concierge</p>
-      <h1>Find your island. Know your price. Before you pay.</h1>
-      <p class="lede">Resorts, local-island guesthouses, honeymoons, family trips, diving, sport fishing, and island camping — matched by someone who actually lives here, with one clear total price, no surprises.</p>
+      <p class="eyebrow" style="color:#CFE3DF;">马尔代夫本地旅游管家</p>
+      <h1>找到属于你的海岛，价格清清楚楚，付款前全知晓。</h1>
+      <p class="lede">度假村、本地岛屿民宿、蜜月游、家庭游、潜水、海钓和海岛露营 — 由真正生活在这里的人为您匹配，价格公开透明，绝无隐藏消费。</p>
       <div class="cta-row">
-        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
+        <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">通过 WhatsApp 联系我们</a>
         <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
-        <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-        <a href="#contact" class="btn btn-ghost-dark">Request a free quote</a>
+        <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">微信: WECHAT_ID</a>
+        <a href="#contact" class="btn btn-ghost-dark">免费获取报价</a>
       </div>
-      <p class="microline">Typical reply time: under 15 minutes, 7am–11pm MVT</p>
+      <p class="microline">通常 15 分钟内回复，马尔代夫时间早 7 点至晚 11 点</p>
     </div>
   </section>
 
   <!-- TRUST STRIP -->
   <div class="trust">
     <div class="wrap trust-grid">
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Maldives-based</strong><span>Not a reseller — we're on the ground, every day.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>One total price</strong><span>Room, transfer, tax, and meal plan — shown together, before you pay.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Certified partners only</strong><span>Dive centers and excursions are licensed — we check.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Fast, honest replies</strong><span>Real answers on WhatsApp, not a script.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>本地团队</strong><span>不是中介转售 — 我们每天都在当地。</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>统一总价</strong><span>房费、接送、税费和餐食计划 — 一次性列明，付款前全清楚。</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>仅合作认证伙伴</strong><span>潜水中心和活动均持证经营 — 我们会核实。</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>回复迅速、真诚</strong><span>WhatsApp 上的真人解答，不是套话。</span></div></div>
     </div>
   </div>
 
@@ -355,52 +281,52 @@
   <section id="products">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Where to start</p>
-        <h2>Every kind of Maldives trip, matched honestly</h2>
-        <p>Tell us your budget and what you're after — we'll point you to the right one, not just the one with the biggest commission.</p>
+        <p class="eyebrow">从这里开始</p>
+        <h2>各类马尔代夫旅行，诚实匹配</h2>
+        <p>告诉我们您的预算和需求 — 我们会为您推荐最合适的选择，而不是佣金最高的那个。</p>
       </div>
       <div class="products-grid">
-        <a class="product-card" data-tilt href="resorts.html">
-          <span class="tag">All budgets</span>
-          <h3>Resorts</h3>
-          <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
-          <span class="see">See resort categories</span>
+        <a class="product-card" data-tilt href="../resorts.html">
+          <span class="tag">各种预算</span>
+          <h3>度假村</h3>
+          <p>从高性价比到私人海岛顶级奢华 — 按珊瑚礁、离马累距离和您的实际需求匹配。</p>
+          <span class="see">查看度假村分类</span>
         </a>
-        <a class="product-card" data-tilt href="honeymoon.html">
-          <span class="tag">Couples</span>
-          <h3>Honeymoon Packages</h3>
-          <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
-          <span class="see">See honeymoon options</span>
+        <a class="product-card" data-tilt href="../honeymoon.html">
+          <span class="tag">情侣</span>
+          <h3>蜜月套餐</h3>
+          <p>水上别墅、私人晚餐，以及真正为私密体验挑选的度假村 — 不只是随便一家挂着蜜月宣传单的五星酒店。</p>
+          <span class="see">查看蜜月方案</span>
         </a>
-        <a class="product-card" data-tilt href="family.html">
-          <span class="tag">Family</span>
-          <h3>Family Resort Packages</h3>
-          <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
-          <span class="see">See family options</span>
+        <a class="product-card" data-tilt href="../family.html">
+          <span class="tag">家庭</span>
+          <h3>家庭度假套餐</h3>
+          <p>真正的儿童俱乐部、浅水珊瑚礁，以及按孩子年龄匹配的房型。</p>
+          <span class="see">查看家庭游方案</span>
         </a>
-        <a class="product-card" data-tilt href="guesthouses.html">
-          <span class="tag">Budget</span>
-          <h3>Local Island Guesthouses</h3>
-          <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
-          <span class="see">See guesthouse options</span>
+        <a class="product-card" data-tilt href="../guesthouses.html">
+          <span class="tag">经济实惠</span>
+          <h3>本地岛屿民宿</h3>
+          <p>在有人居住的岛屿上，干净、口碑良好的住宿 — 真实的沙滩和美食，价格仅为度假村的一小部分。</p>
+          <span class="see">查看民宿方案</span>
         </a>
-        <a class="product-card" data-tilt href="diving.html">
-          <span class="tag">Diving</span>
-          <h3>Diving &amp; Snorkeling</h3>
-          <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
-          <span class="see">See diving options</span>
+        <a class="product-card" data-tilt href="../diving.html">
+          <span class="tag">潜水</span>
+          <h3>潜水与浮潜</h3>
+          <p>靠近蝠鲼观测点、水道和沉船的珊瑚礁与潜水船宿 — 仅限 PADI / SSI 认证机构。</p>
+          <span class="see">查看潜水方案</span>
         </a>
-        <a class="product-card" data-tilt href="fishing.html">
-          <span class="tag">Sport fishing</span>
-          <h3>Sport Fishing Charters</h3>
-          <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
-          <span class="see">See fishing options</span>
+        <a class="product-card" data-tilt href="../fishing.html">
+          <span class="tag">海钓</span>
+          <h3>海钓包船</h3>
+          <p>半日、全日和夜间包船，持证船只，把握最佳钓鱼时机。</p>
+          <span class="see">查看钓鱼方案</span>
         </a>
-        <a class="product-card" data-tilt href="camping.html">
-          <span class="tag">Adventure</span>
-          <h3>Uninhabited Island Camping</h3>
-          <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
-          <span class="see">See camping options</span>
+        <a class="product-card" data-tilt href="../camping.html">
+          <span class="tag">探险</span>
+          <h3>无人岛露营</h3>
+          <p>持证、有向导的过夜或一日行程 — 在马尔代夫合法安全露营的唯一方式。</p>
+          <span class="see">查看露营方案</span>
         </a>
       </div>
     </div>
@@ -410,35 +336,35 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Or explore visually</p>
-        <h2>Pick an atoll, see what it's known for</h2>
-        <p>Tap a shaded region below — each atoll has its own character, from dive sites to guesthouse islands.</p>
+        <p class="eyebrow">或直观探索</p>
+        <h2>选择一个环礁，了解它的特色</h2>
+        <p>点击下方色块区域 — 每个环礁都有自己的特色，从潜水点到民宿岛屿。</p>
       </div>
       <div class="map-demo">
         <div class="map-box">
-          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="Simplified map of Maldives atolls">
-            <g class="atoll" tabindex="0" data-name="North Male Atoll" data-info="Closest to the airport — the widest resort choice and shortest speedboat transfers." onclick="selectAtoll(this)">
+          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="马尔代夫环礁简图">
+            <g class="atoll" tabindex="0" data-name="北马累环礁" data-info="距机场最近 — 度假村选择最多，快艇接送时间最短。" onclick="selectAtoll(this)">
               <path d="M120,40 q30,-10 55,10 q10,25 -15,35 q-35,10 -50,-15 q-10,-20 10,-30 Z" fill="#5FD3C4"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="South Male Atoll" data-info="Guesthouse-heavy — Maafushi and Guraidhoo are both here." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="南马累环礁" data-info="民宿集中地 — Maafushi 和 Guraidhoo 都在这里。" onclick="selectAtoll(this)">
               <path d="M150,110 q25,-8 45,12 q8,20 -12,30 q-28,10 -42,-12 q-8,-16 9,-30 Z" fill="#1F7A6C"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Baa Atoll" data-info="Home to Hanifaru Bay — one of the best manta ray snorkeling sites on earth." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="巴环礁" data-info="哈尼法鲁湾所在地 — 全球最佳蝠鲼浮潜地点之一。" onclick="selectAtoll(this)">
               <path d="M60,150 q22,-10 40,8 q10,18 -10,28 q-25,10 -38,-10 q-8,-15 8,-26 Z" fill="#D9A64E"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Alifu Dhaalu Atoll" data-info="Dhigurah island — long beach, regular whale shark sightings nearby." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="阿里环礁南部" data-info="Dhigurah 岛 — 长长的沙滩，附近常年可见鲸鲨。" onclick="selectAtoll(this)">
               <path d="M210,170 q24,-9 42,10 q9,19 -11,29 q-27,10 -40,-11 q-8,-16 9,-28 Z" fill="#114C49"/>
             </g>
-            <g class="atoll" tabindex="0" data-name="Vaavu Atoll" data-info="Fulidhoo island — quiet, culture-focused, known for Bodu Beru drumming nights." onclick="selectAtoll(this)">
+            <g class="atoll" tabindex="0" data-name="瓦夫环礁" data-info="Fulidhoo 岛 — 安静、注重文化体验，以传统 Bodu Beru 鼓乐之夜闻名。" onclick="selectAtoll(this)">
               <path d="M270,220 q22,-9 40,9 q9,18 -10,27 q-25,9 -38,-10 q-8,-15 8,-26 Z" fill="#0B2A2E"/>
             </g>
           </svg>
         </div>
         <div class="info-box" id="atollInfo">
-          <span class="eyebrow2">Tap an atoll</span>
-          <h3>Explore by region</h3>
-          <p>Select any shaded area on the left to see what that atoll is known for.</p>
-          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">Ask about this region</a>
+          <span class="eyebrow2">点击环礁查看</span>
+          <h3>按区域探索</h3>
+          <p>点击左侧任意色块区域，了解该环礁的特色。</p>
+          <a href="#contact" class="btn btn-gold" style="margin-top:14px; width:fit-content;">咨询该区域</a>
         </div>
       </div>
     </div>
@@ -449,18 +375,18 @@
     <div class="wrap">
       <div class="combo">
         <div>
-          <p class="eyebrow">Our signature trip</p>
-          <h2>The Resort + Local Island Combo</h2>
-          <p>Half your trip on a local-island guesthouse, half on a resort. You get a real reef, real culture, and real people — without paying resort rates the whole stay. It's the trip most first-time visitors don't know they can book.</p>
+          <p class="eyebrow">我们的招牌行程</p>
+          <h2>度假村 + 本地岛屿组合游</h2>
+          <p>行程一半住本地岛屿民宿，一半住度假村。您能体验到真实的珊瑚礁、真实的当地文化和真实的人情味 — 而不用全程支付度假村价格。这是大多数首次到访者都不知道可以预订的行程。</p>
           <div class="cta-row" style="margin-top:22px;">
-            <a href="combo.html" class="btn btn-gold">See how it works</a>
+            <a href="../combo.html" class="btn btn-gold">了解详情</a>
           </div>
         </div>
         <div class="combo-diagram">
-          <div class="row"><span>Nights 1–3</span><span>Local island guesthouse</span></div>
-          <div class="row"><span>Nights 4–6</span><span>Resort, water or beach villa</span></div>
-          <div class="row"><span>Transfers</span><span>Arranged both ways, included in quote</span></div>
-          <div class="row"><span>Typical total</span><span>$180–$500 / night blended</span></div>
+          <div class="row"><span>第 1–3 晚</span><span>本地岛屿民宿</span></div>
+          <div class="row"><span>第 4–6 晚</span><span>度假村，水上或沙滩别墅</span></div>
+          <div class="row"><span>接送</span><span>往返均已安排，包含在报价中</span></div>
+          <div class="row"><span>平均总价</span><span>每晚 $180–$500（综合均价）</span></div>
         </div>
       </div>
     </div>
@@ -470,15 +396,15 @@
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">How it works</p>
-        <h2>From message to boarding pass</h2>
+        <p class="eyebrow">预订流程</p>
+        <h2>从发消息到登机牌</h2>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>You reach out</h3><p>WhatsApp or the form below — tell us dates, people, and budget.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>We send 3 options</h3><p>Budget, best-value, and dream — never a confusing list of twenty.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>One total price</h3><p>Room, transfer, tax, and meal plan together — no line-item surprises later.</p></div>
-        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>You book</h3><p>We confirm directly with the resort or guesthouse and send your pre-arrival guide.</p></div>
-        <div class="step"><span class="num">05</span><h3>We stay on call</h3><p>WhatsApp support while you're there, start to finish.</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">01</span><h3>联系我们</h3><p>通过 WhatsApp 或下方表单 — 告诉我们日期、人数和预算。</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">02</span><h3>我们提供 3 个方案</h3><p>经济、超值和梦想之选 — 绝不会给您一份让人眼花缭乱的二十项清单。</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">03</span><h3>统一总价</h3><p>房费、接送、税费和餐食计划一次性列明 — 之后不会有零散费用的意外。</p></div>
+        <div class="step"><div class="step-line"></div><span class="num">04</span><h3>确认预订</h3><p>我们直接与度假村或民宿确认，并发送行前指南给您。</p></div>
+        <div class="step"><span class="num">05</span><h3>全程在线支持</h3><p>从出发到结束，全程提供 WhatsApp 支持。</p></div>
       </div>
     </div>
   </section>
@@ -487,21 +413,21 @@
   <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Why book through us</p>
-        <h2>The things that go wrong when you book blind</h2>
+        <p class="eyebrow">为什么通过我们预订</p>
+        <h2>盲目预订容易出现的问题</h2>
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <h3>Transfer confusion</h3>
-          <p>Speedboat, seaplane, domestic flight, ferry — the wrong one can waste a full day of your trip. We match transfer to your actual arrival time.</p>
+          <h3>接送方式混乱</h3>
+          <p>快艇、水上飞机、国内航班、渡轮 — 选错了可能浪费一整天的行程。我们会根据您实际到达时间匹配合适的接送方式。</p>
         </div>
         <div class="why-card">
-          <h3>Hidden total cost</h3>
-          <p>Taxes, green tax, service charge, and meal-plan upgrades often aren't in the price you first see. Ours is quoted all-in, up front.</p>
+          <h3>隐藏总费用</h3>
+          <p>税费、绿色税、服务费和餐食升级费用往往不包含在您最初看到的价格里。我们的报价从一开始就包含所有费用。</p>
         </div>
         <div class="why-card">
-          <h3>Local island rules</h3>
-          <p>Alcohol, dress code, and bikini-beach rules differ between resort and guesthouse islands. We tell you before you book, not after you land.</p>
+          <h3>本地岛屿规定</h3>
+          <p>酒精、着装要求和比基尼海滩规定在度假村岛屿和民宿岛屿之间有所不同。我们会在您预订前告知，而不是等您落地后才说。</p>
         </div>
       </div>
     </div>
@@ -511,29 +437,29 @@
   <section id="faq">
     <div class="wrap" style="max-width:820px;">
       <div class="section-head">
-        <p class="eyebrow">Common questions</p>
-        <h2>Before you message us</h2>
+        <p class="eyebrow">常见问题</p>
+        <h2>联系我们之前</h2>
       </div>
       <div id="faqList">
         <div class="faq-item">
-          <button class="faq-q"><span>Is the total price you quote really the total price?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Yes — room, transfer, green tax, service charge, and meal plan are shown as one number. If something isn't included (like an optional excursion), we say so clearly rather than adding it silently later.</p></div>
+          <button class="faq-q"><span>您报的总价真的是最终总价吗？</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>是的 — 房费、接送、绿色税、服务费和餐食计划都会合并为一个数字展示。如果有未包含的项目（比如可选的出游活动），我们会明确说明，而不是之后悄悄加价。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>What's actually different between a resort and a guesthouse?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Resorts occupy a whole private island — more privacy, higher cost. Guesthouses sit on inhabited local islands — lower cost, real local life, some dress-code and alcohol restrictions. We help you pick based on what you actually want, not just budget.</p></div>
+          <button class="faq-q"><span>度假村和民宿到底有什么区别？</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>度假村独占一整座私人海岛 — 更私密，费用更高。民宿位于有人居住的本地岛屿 — 费用更低，能体验真实的当地生活，但有一些着装和饮酒方面的限制。我们会根据您真正想要的体验来帮您选择，而不只是看预算。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Do I need to arrange my own transfer?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>No — we arrange and pre-pay it as part of your quote, so you're never negotiating with someone at the airport.</p></div>
+          <button class="faq-q"><span>我需要自己安排接送吗？</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>不需要 — 我们会在报价中安排并预付接送费用，您到机场后无需和任何人讨价还价。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>Is alcohol allowed where I'm staying?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Only on resort islands. Local-island guesthouses are alcohol-free by law, with modest dress expected off the designated bikini beach. We flag this clearly before you book so there's no surprise.</p></div>
+          <button class="faq-q"><span>我住的地方可以喝酒吗？</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>只有度假村岛屿可以。根据法律规定，本地岛屿民宿禁止饮酒，在指定比基尼海滩之外也需要保持得体着装。我们会在您预订前清楚告知，不会有意外。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>How fast will you actually reply?</span><span class="plus">+</span></button>
-          <div class="faq-a"><p>Typically under 15 minutes during 7am–11pm Maldives time. If you message outside that window, you'll hear from us first thing after.</p></div>
+          <button class="faq-q"><span>你们实际回复速度有多快？</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>通常在马尔代夫时间早 7 点至晚 11 点之间，15 分钟内回复。如果您在此时间段之外发消息，我们会在时间段开始后第一时间回复您。</p></div>
         </div>
       </div>
     </div>
@@ -544,40 +470,40 @@
     <div class="wrap">
       <div class="cta-band">
         <div>
-          <p class="eyebrow" style="color:var(--aqua);">Get started</p>
-          <h2>Send your dates and budget for a free quote</h2>
-          <p>Fill in the basics here and we'll follow up on WhatsApp with three real options — usually within 15 minutes during Maldives daytime hours.</p>
+          <p class="eyebrow" style="color:var(--aqua);">立即开始</p>
+          <h2>发送您的日期和预算，获取免费报价</h2>
+          <p>在这里填写基本信息，我们会通过 WhatsApp 跟进，提供三个真实可选方案 — 通常在马尔代夫白天时段的 15 分钟内回复。</p>
           <div class="contact-group" style="margin-top:18px;">
-            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Or message us on WhatsApp →</a>
+            <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">或直接通过 WhatsApp 联系我们 →</a>
             <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
-            <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
+            <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">微信: WECHAT_ID</a>
           </div>
         </div>
 
         <div>
           <form class="qform" id="quoteForm">
             <div class="row2">
-              <div><label for="qName">Name</label><input id="qName" required></div>
-              <div><label for="qWa">WhatsApp number</label><input id="qWa" required></div>
+              <div><label for="qName">姓名</label><input id="qName" required></div>
+              <div><label for="qWa">WhatsApp 号码</label><input id="qWa" required></div>
             </div>
             <div class="row2">
-              <div><label for="qDates">Travel dates</label><input id="qDates" placeholder="e.g. 10–15 Oct"></div>
-              <div><label for="qBudget">Budget (USD, total)</label><input id="qBudget" placeholder="e.g. 2000"></div>
+              <div><label for="qDates">旅行日期</label><input id="qDates" placeholder="例如 10 月 10–15 日"></div>
+              <div><label for="qBudget">预算（美元，总额）</label><input id="qBudget" placeholder="例如 2000"></div>
             </div>
-            <label for="qOccasion">This trip is for</label>
+            <label for="qOccasion">本次旅行是为了</label>
             <select id="qOccasion">
-              <option>Honeymoon</option>
-              <option>Family trip</option>
-              <option>Diving</option>
-              <option>Sport fishing</option>
-              <option>Island camping</option>
-              <option>Just relaxing / not sure yet</option>
+              <option>蜜月</option>
+              <option>家庭游</option>
+              <option>潜水</option>
+              <option>海钓</option>
+              <option>海岛露营</option>
+              <option>只是放松 / 还没决定</option>
             </select>
-            <button type="submit">Request my quote</button>
+            <button type="submit">提交报价申请</button>
           </form>
           <div class="thankyou" id="thankYou">
-            <h3 style="font-size:20px;">Thank you — got it.</h3>
-            <p>Our Maldives travel advisor will check suitable options and contact you on WhatsApp shortly.</p>
+            <h3 style="font-size:20px;">谢谢，我们已收到。</h3>
+            <p>我们的马尔代夫旅游顾问会核实合适的方案，并很快通过 WhatsApp 与您联系。</p>
           </div>
         </div>
       </div>
@@ -590,55 +516,55 @@
   <div class="wrap foot-grid">
     <div>
       <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <p>Huvadhoo Maldives Travel 是一家马尔代夫本地旅游管家服务机构，帮助游客找到合适的度假村、民宿、海岛、接送方式和体验项目 — 提供真诚的当地建议和清晰的总价。</p>
+      <h4 style="margin-top:24px;">联系我们</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
-        <li><a href="weixin://" data-channel="wechat" class="footer-contact-link">WeChat: WECHAT_ID</a></li>
+        <li><a href="weixin://" data-channel="wechat" class="footer-contact-link">微信: WECHAT_ID</a></li>
       </ul>
     </div>
     <div>
-      <h4>Trips</h4>
+      <h4>行程</h4>
       <ul>
-        <li><a href="resorts.html">Resorts</a></li>
-        <li><a href="honeymoon.html">Honeymoon</a></li>
-        <li><a href="family.html">Family</a></li>
-        <li><a href="guesthouses.html">Guesthouses</a></li>
-        <li><a href="combo.html">Resort + Combo</a></li>
-        <li><a href="diving.html">Diving</a></li>
-        <li><a href="fishing.html">Sport Fishing</a></li>
-        <li><a href="camping.html">Island Camping</a></li>
+        <li><a href="../resorts.html">度假村</a></li>
+        <li><a href="../honeymoon.html">蜜月</a></li>
+        <li><a href="../family.html">家庭游</a></li>
+        <li><a href="../guesthouses.html">民宿</a></li>
+        <li><a href="../combo.html">度假村+组合游</a></li>
+        <li><a href="../diving.html">潜水</a></li>
+        <li><a href="../fishing.html">海钓</a></li>
+        <li><a href="../camping.html">海岛露营</a></li>
       </ul>
     </div>
     <div>
-      <h4>Guides</h4>
+      <h4>指南</h4>
       <ul>
-        <li><a href="transfer-guide.html">Transfer guide</a></li>
-        <li><a href="cost-guide.html">Cost guide</a></li>
-        <li><a href="local-island-rules.html">Local island rules</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="../transfer-guide.html">接送指南</a></li>
+        <li><a href="../cost-guide.html">费用指南</a></li>
+        <li><a href="../local-island-rules.html">本地岛屿规定</a></li>
+        <li><a href="../blog.html">博客</a></li>
+        <li><a href="../about.html">关于我们</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap fineprint">
-    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing. Tourist Agency Operating License details to be added once registration is complete.
+    本网站所示价格均为规划参考示例，并非实时报价 — 如需了解当前实际价格，请联系我们获取报价。旅行社经营许可证信息将在注册完成后补充。
   </div>
 </footer>
 
 <div class="float-contact" id="floatContact">
-  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="Message us on WhatsApp">
+  <a href="https://wa.me/9607444281" data-channel="whatsapp" class="float-primary" aria-label="通过 WhatsApp 联系我们">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.07-1.32A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.79.8-2.94-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
     WhatsApp
   </a>
-  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="Message us on Telegram">
+  <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="float-secondary" aria-label="通过 Telegram 联系我们">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     Telegram
   </a>
-  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="Add us on WeChat, ID WECHAT_ID">
+  <a href="weixin://" data-channel="wechat" class="float-secondary" aria-label="添加我们的微信，ID WECHAT_ID">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    WeChat: WECHAT_ID
+    微信: WECHAT_ID
   </a>
 </div>
 
@@ -705,33 +631,12 @@
     document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
     el.classList.add('selected');
     const box = document.getElementById('atollInfo');
-    box.querySelector('.eyebrow2').textContent = 'Selected';
+    box.querySelector('.eyebrow2').textContent = '已选择';
     box.querySelector('h3').textContent = el.dataset.name;
     box.querySelector('p').textContent = el.dataset.info;
   }
 </script>
 
-<script>
-  // Suggest a preferred contact channel from the browser's language and
-  // timezone (computed above, in the early detection script). No location
-  // permission is requested — Intl.DateTimeFormat().resolvedOptions().timeZone
-  // reads the timezone the device already has set, instantly.
-  (function(){
-    var preferred = window.__huvadhooChannel || 'whatsapp';
-    document.querySelectorAll('[data-channel]').forEach(function(el){
-      var isPreferred = el.getAttribute('data-channel') === preferred;
-      if (el.classList.contains('float-primary') || el.classList.contains('float-secondary')) {
-        el.classList.toggle('float-primary', isPreferred);
-        el.classList.toggle('float-secondary', !isPreferred);
-      } else if (el.classList.contains('footer-contact-link')) {
-        el.classList.toggle('is-primary', isPreferred);
-      } else if (el.classList.contains('btn')) {
-        el.classList.toggle('btn-gold', isPreferred);
-        el.classList.toggle('btn-ghost-dark', !isPreferred);
-        el.classList.toggle('btn-sm', !isPreferred);
-      }
-    });
-  })();
-</script>
+
 </body>
 </html>
