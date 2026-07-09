@@ -54,6 +54,26 @@
   .btn-sm{padding:8px 14px; font-size:12.5px;}
   @media(min-width:1420px){ nav.primary{display:flex;} }
   .lang-switch{border-radius:999px; border:1px solid var(--sand-dark); background:transparent; color:var(--ink); font-family:var(--body); font-size:13px; font-weight:600; padding:9px 10px; cursor:pointer;}
+  /* below this width there isn't room for the switcher next to the logo,
+     quote button, and menu icon — it moves into the mobile menu instead */
+  @media(max-width:639px){
+    .lang-switch-desktop{display:none;}
+    .headbar{padding:13px 14px; gap:6px;}
+    .head-actions{gap:5px;}
+    .logo{font-size:14px;}
+    .head-actions .btn-gold{padding:8px 12px; font-size:12px;}
+    .burger{padding:7px 9px;}
+  }
+  @media(max-width:374px){
+    .headbar{padding:12px 8px; gap:3px;}
+    .head-actions{gap:3px;}
+    .logo{font-size:11.5px;}
+    .head-actions .btn-gold{padding:7px 8px; font-size:10.5px;}
+    .burger{padding:6px 7px;}
+  }
+  .mobile-lang-row{display:flex; align-items:center; justify-content:space-between; padding:12px 4px; border-bottom:1px solid var(--sand-dark); gap:12px;}
+  .mobile-lang-label{font-size:12px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; white-space:nowrap;}
+  .mobile-lang-row .lang-switch{flex-shrink:0;}
 
   /* hero */
   .hero{position:relative; overflow:hidden; background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white);}
@@ -216,7 +236,7 @@
     </nav>
     <div class="head-actions">
       <a href="https://wa.me/9607444281" class="btn btn-outline" style="display:none" id="headWa">WhatsApp</a>
-      <select class="lang-switch" id="langSwitch" aria-label="Выбрать язык" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+      <select class="lang-switch lang-switch-desktop" id="langSwitch" aria-label="Выбрать язык" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
         <option value="en-us">EN (US)</option>
         <option value="en-gb">EN (UK)</option>
         <option value="en-au">EN (AU)</option>
@@ -234,6 +254,20 @@
     </div>
   </div>
   <div id="mobileNav">
+    <div class="mobile-lang-row">
+      <label for="langSwitchMobile" class="mobile-lang-label">Выбрать язык</label>
+      <select class="lang-switch" id="langSwitchMobile" aria-label="Выбрать язык" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+        <option value="en-us">EN (US)</option>
+        <option value="en-gb">EN (UK)</option>
+        <option value="en-au">EN (AU)</option>
+        <option value="zh">中文</option>
+        <option value="ru" selected>Русский</option>
+        <option value="de">Deutsch</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
     <a href="../resorts.html">Курорты</a>
     <a href="../guesthouses.html">Гестхаусы</a>
     <a href="../combo.html">Комбо</a>
