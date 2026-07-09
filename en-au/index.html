@@ -1,81 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  try {
-    var rawLang = ((navigator.language || navigator.userLanguage || '') + '').toLowerCase();
-    var langParts = rawLang.split('-');
-    var langBase = langParts[0] || '';
-    var langRegion = langParts[1] || '';
-
-    var timeZone = '';
-    try { timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-
-    // Timezone -> best-guess locale. Used only as a tiebreaker when the
-    // browser's language setting doesn't already give a specific match.
-    var TZ_LOCALE = {
-      'Europe/London':'en-gb','Europe/Belfast':'en-gb','Europe/Dublin':'en-gb',
-      'Australia/Sydney':'en-au','Australia/Melbourne':'en-au','Australia/Brisbane':'en-au','Australia/Perth':'en-au','Australia/Adelaide':'en-au','Australia/Hobart':'en-au','Australia/Darwin':'en-au',
-      'Asia/Shanghai':'zh','Asia/Chongqing':'zh','Asia/Urumqi':'zh','Asia/Harbin':'zh',
-      'Europe/Moscow':'ru','Europe/Minsk':'ru','Europe/Kaliningrad':'ru','Europe/Samara':'ru','Asia/Yekaterinburg':'ru','Asia/Novosibirsk':'ru','Asia/Vladivostok':'ru','Asia/Omsk':'ru','Asia/Krasnoyarsk':'ru','Asia/Irkutsk':'ru',
-      'Europe/Berlin':'de','Europe/Vienna':'de','Europe/Zurich':'de',
-      'Asia/Tokyo':'ja',
-      'Asia/Seoul':'ko',
-      'Asia/Dubai':'ar','Asia/Riyadh':'ar','Asia/Qatar':'ar','Asia/Kuwait':'ar','Asia/Baghdad':'ar','Asia/Amman':'ar','Asia/Beirut':'ar','Africa/Cairo':'ar'
-    };
-
-    function specificLocaleFromLanguage(){
-      if (langBase === 'zh') return 'zh';
-      if (langBase === 'ru') return 'ru';
-      if (langBase === 'de') return 'de';
-      if (langBase === 'ja') return 'ja';
-      if (langBase === 'ko') return 'ko';
-      if (langBase === 'ar') return 'ar';
-      if (langBase === 'en') {
-        if (langRegion === 'gb') return 'en-gb';
-        if (langRegion === 'au') return 'en-au';
-        // Any other explicit region (en-US, en-CA, en-IN...) is still a
-        // specific, confident signal — it just means "default English",
-        // so it should NOT fall through to the timezone tiebreaker.
-        if (langRegion) return 'default';
-      }
-      return null; // no recognizable language, or bare "en" with no region at all
-    }
-
-    // Language wins whenever it gives a specific match (e.g. zh-CN, ru, en-GB,
-    // en-US). Timezone is only consulted when the language signal is truly
-    // generic (plain "en" with no region) or unrecognized.
-    var langLocale = specificLocaleFromLanguage();
-    var detectedLocale = (langLocale === 'default') ? null : (langLocale || TZ_LOCALE[timeZone] || null);
-    window.__huvadhooLocale = detectedLocale;
-
-    // Same two signals, applied to the messaging-app recommendation. Kept
-    // independent of the locale-folder map above (e.g. Belarusian has no
-    // dedicated page, but should still recommend Telegram).
-    function specificChannelFromLanguage(){
-      if (langBase === 'zh') return 'wechat';
-      if (langBase === 'ru' || langBase === 'be') return 'telegram';
-      return null;
-    }
-    var TZ_CHANNEL = { 'zh': 'wechat', 'ru': 'telegram' };
-    var langChannel = specificChannelFromLanguage();
-    window.__huvadhooChannel = langChannel || TZ_CHANNEL[TZ_LOCALE[timeZone]] || 'whatsapp';
-
-    // Redirect to a matching language folder, unless the visitor already
-    // picked a language manually via the switcher (that choice always wins).
-    var hasManualChoice = false;
-    try { hasManualChoice = !!localStorage.getItem('preferredLang'); } catch (e) {}
-    if (!hasManualChoice) {
-      var LOCALE_FOLDERS = {'en-gb':1,'en-au':1,'zh':1,'ru':1,'de':1,'ja':1,'ko':1,'ar':1};
-      if (detectedLocale && LOCALE_FOLDERS[detectedLocale]) {
-        window.location.replace(detectedLocale + '/index.html');
-      }
-    }
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Huvadhoo Maldives Travel — Local experts for resorts, guesthouses &amp; island experiences</title>
 <meta name="description" content="Huvadhoo Maldives Travel — Maldives-based travel concierge. Resorts, guesthouses, honeymoons, family trips, diving, fishing, and island camping — with clear total pricing before you pay.">
@@ -277,23 +203,23 @@
   <div class="headbar">
     <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
     <nav class="primary">
-      <a href="resorts.html">Resorts</a>
-      <a href="guesthouses.html">Guesthouses</a>
-      <a href="combo.html">Combo</a>
-      <a href="honeymoon.html">Honeymoon</a>
-      <a href="family.html">Family</a>
-      <a href="diving.html">Diving</a>
-      <a href="fishing.html">Fishing</a>
-      <a href="camping.html">Camping</a>
-      <a href="blog.html">Blog</a>
+      <a href="../resorts.html">Resorts</a>
+      <a href="../guesthouses.html">Guesthouses</a>
+      <a href="../combo.html">Combo</a>
+      <a href="../honeymoon.html">Honeymoon</a>
+      <a href="../family.html">Family</a>
+      <a href="../diving.html">Diving</a>
+      <a href="../fishing.html">Fishing</a>
+      <a href="../camping.html">Camping</a>
+      <a href="../blog.html">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="head-actions">
       <a href="https://wa.me/9607444281" class="btn btn-outline" style="display:none" id="headWa">WhatsApp</a>
-      <select class="lang-switch" id="langSwitch" aria-label="Choose language" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
-        <option value="en-us" selected>EN (US)</option>
+      <select class="lang-switch" id="langSwitch" aria-label="Choose language" onchange="if(this.value){localStorage.setItem('preferredLang', this.value); window.location.href='../' + ({'en-us':'en-us/','en-gb':'en-gb/','en-au':'en-au/','zh':'zh/','ru':'ru/','de':'de/','ja':'ja/','ko':'ko/','ar':'ar/'})[this.value] + 'index.html';}">
+        <option value="en-us">EN (US)</option>
         <option value="en-gb">EN (UK)</option>
-        <option value="en-au">EN (AU)</option>
+        <option value="en-au" selected>EN (AU)</option>
         <option value="zh">中文</option>
         <option value="ru">Русский</option>
         <option value="de">Deutsch</option>
@@ -308,15 +234,15 @@
     </div>
   </div>
   <div id="mobileNav">
-    <a href="resorts.html">Resorts</a>
-    <a href="guesthouses.html">Guesthouses</a>
-    <a href="combo.html">Combo</a>
-    <a href="honeymoon.html">Honeymoon</a>
-    <a href="family.html">Family</a>
-    <a href="diving.html">Diving</a>
-    <a href="fishing.html">Fishing</a>
-    <a href="camping.html">Camping</a>
-    <a href="blog.html">Blog</a>
+    <a href="../resorts.html">Resorts</a>
+    <a href="../guesthouses.html">Guesthouses</a>
+    <a href="../combo.html">Combo</a>
+    <a href="../honeymoon.html">Honeymoon</a>
+    <a href="../family.html">Family</a>
+    <a href="../diving.html">Diving</a>
+    <a href="../fishing.html">Fishing</a>
+    <a href="../camping.html">Camping</a>
+    <a href="../blog.html">Blog</a>
     <a href="#contact">Contact</a>
   </div>
 </header>
@@ -346,7 +272,7 @@
     <div class="wrap trust-grid">
       <div class="trust-item"><span class="trust-dot"></span><div><strong>Maldives-based</strong><span>Not a reseller — we're on the ground, every day.</span></div></div>
       <div class="trust-item"><span class="trust-dot"></span><div><strong>One total price</strong><span>Room, transfer, tax, and meal plan — shown together, before you pay.</span></div></div>
-      <div class="trust-item"><span class="trust-dot"></span><div><strong>Certified partners only</strong><span>Dive centers and excursions are licensed — we check.</span></div></div>
+      <div class="trust-item"><span class="trust-dot"></span><div><strong>Certified partners only</strong><span>Dive centres and excursions are licensed — we check.</span></div></div>
       <div class="trust-item"><span class="trust-dot"></span><div><strong>Fast, honest replies</strong><span>Real answers on WhatsApp, not a script.</span></div></div>
     </div>
   </div>
@@ -360,43 +286,43 @@
         <p>Tell us your budget and what you're after — we'll point you to the right one, not just the one with the biggest commission.</p>
       </div>
       <div class="products-grid">
-        <a class="product-card" data-tilt href="resorts.html">
+        <a class="product-card" data-tilt href="../resorts.html">
           <span class="tag">All budgets</span>
           <h3>Resorts</h3>
           <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
           <span class="see">See resort categories</span>
         </a>
-        <a class="product-card" data-tilt href="honeymoon.html">
+        <a class="product-card" data-tilt href="../honeymoon.html">
           <span class="tag">Couples</span>
           <h3>Honeymoon Packages</h3>
           <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
           <span class="see">See honeymoon options</span>
         </a>
-        <a class="product-card" data-tilt href="family.html">
+        <a class="product-card" data-tilt href="../family.html">
           <span class="tag">Family</span>
           <h3>Family Resort Packages</h3>
           <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
           <span class="see">See family options</span>
         </a>
-        <a class="product-card" data-tilt href="guesthouses.html">
+        <a class="product-card" data-tilt href="../guesthouses.html">
           <span class="tag">Budget</span>
           <h3>Local Island Guesthouses</h3>
           <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
           <span class="see">See guesthouse options</span>
         </a>
-        <a class="product-card" data-tilt href="diving.html">
+        <a class="product-card" data-tilt href="../diving.html">
           <span class="tag">Diving</span>
           <h3>Diving &amp; Snorkeling</h3>
           <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
           <span class="see">See diving options</span>
         </a>
-        <a class="product-card" data-tilt href="fishing.html">
+        <a class="product-card" data-tilt href="../fishing.html">
           <span class="tag">Sport fishing</span>
           <h3>Sport Fishing Charters</h3>
           <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
           <span class="see">See fishing options</span>
         </a>
-        <a class="product-card" data-tilt href="camping.html">
+        <a class="product-card" data-tilt href="../camping.html">
           <span class="tag">Adventure</span>
           <h3>Uninhabited Island Camping</h3>
           <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
@@ -453,7 +379,7 @@
           <h2>The Resort + Local Island Combo</h2>
           <p>Half your trip on a local-island guesthouse, half on a resort. You get a real reef, real culture, and real people — without paying resort rates the whole stay. It's the trip most first-time visitors don't know they can book.</p>
           <div class="cta-row" style="margin-top:22px;">
-            <a href="combo.html" class="btn btn-gold">See how it works</a>
+            <a href="../combo.html" class="btn btn-gold">See how it works</a>
           </div>
         </div>
         <div class="combo-diagram">
@@ -577,7 +503,7 @@
           </form>
           <div class="thankyou" id="thankYou">
             <h3 style="font-size:20px;">Thank you — got it.</h3>
-            <p>Our Maldives travel advisor will check suitable options and contact you on WhatsApp shortly.</p>
+            <p>Our Maldives travel adviser will check suitable options and contact you on WhatsApp shortly.</p>
           </div>
         </div>
       </div>
@@ -601,29 +527,29 @@
     <div>
       <h4>Trips</h4>
       <ul>
-        <li><a href="resorts.html">Resorts</a></li>
-        <li><a href="honeymoon.html">Honeymoon</a></li>
-        <li><a href="family.html">Family</a></li>
-        <li><a href="guesthouses.html">Guesthouses</a></li>
-        <li><a href="combo.html">Resort + Combo</a></li>
-        <li><a href="diving.html">Diving</a></li>
-        <li><a href="fishing.html">Sport Fishing</a></li>
-        <li><a href="camping.html">Island Camping</a></li>
+        <li><a href="../resorts.html">Resorts</a></li>
+        <li><a href="../honeymoon.html">Honeymoon</a></li>
+        <li><a href="../family.html">Family</a></li>
+        <li><a href="../guesthouses.html">Guesthouses</a></li>
+        <li><a href="../combo.html">Resort + Combo</a></li>
+        <li><a href="../diving.html">Diving</a></li>
+        <li><a href="../fishing.html">Sport Fishing</a></li>
+        <li><a href="../camping.html">Island Camping</a></li>
       </ul>
     </div>
     <div>
       <h4>Guides</h4>
       <ul>
-        <li><a href="transfer-guide.html">Transfer guide</a></li>
-        <li><a href="cost-guide.html">Cost guide</a></li>
-        <li><a href="local-island-rules.html">Local island rules</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="../transfer-guide.html">Transfer guide</a></li>
+        <li><a href="../cost-guide.html">Cost guide</a></li>
+        <li><a href="../local-island-rules.html">Local island rules</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../about.html">About us</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap fineprint">
-    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing. Tourist Agency Operating License details to be added once registration is complete.
+    Prices shown throughout this site are illustrative examples for planning purposes, not live quotes — request a quote for today's actual pricing. Tourist Agency Operating Licence details to be added once registration is complete.
   </div>
 </footer>
 
@@ -711,27 +637,6 @@
   }
 </script>
 
-<script>
-  // Suggest a preferred contact channel from the browser's language and
-  // timezone (computed above, in the early detection script). No location
-  // permission is requested — Intl.DateTimeFormat().resolvedOptions().timeZone
-  // reads the timezone the device already has set, instantly.
-  (function(){
-    var preferred = window.__huvadhooChannel || 'whatsapp';
-    document.querySelectorAll('[data-channel]').forEach(function(el){
-      var isPreferred = el.getAttribute('data-channel') === preferred;
-      if (el.classList.contains('float-primary') || el.classList.contains('float-secondary')) {
-        el.classList.toggle('float-primary', isPreferred);
-        el.classList.toggle('float-secondary', !isPreferred);
-      } else if (el.classList.contains('footer-contact-link')) {
-        el.classList.toggle('is-primary', isPreferred);
-      } else if (el.classList.contains('btn')) {
-        el.classList.toggle('btn-gold', isPreferred);
-        el.classList.toggle('btn-ghost-dark', !isPreferred);
-        el.classList.toggle('btn-sm', !isPreferred);
-      }
-    });
-  })();
-</script>
+
 </body>
 </html>
