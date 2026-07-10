@@ -90,6 +90,7 @@
     --sand:#F5EEDF;
     --sand-dark:#E7DCC2;
     --gold:#D9A64E;
+    --gold-deep:#7D591B;
     --text:#16302E;
     --sub:#4C6763;
     --white:#FFFFFF;
@@ -218,7 +219,7 @@
   .steps{display:grid; grid-template-columns:1fr; gap:0; counter-reset:step;}
   @media(min-width:820px){ .steps{grid-template-columns:repeat(5,1fr); gap:0;} }
   .step{position:relative; padding:24px 18px 0 0; counter-increment:step;}
-  .step .num{font-family:var(--mono); font-size:13px; color:var(--gold); font-weight:600;}
+  .step .num{font-family:var(--mono); font-size:13px; color:var(--gold-deep); font-weight:600;}
   .step h3{font-size:16px; margin-top:8px;}
   .step p{font-size:13.5px; color:var(--sub); margin-top:6px;}
   .step-line{height:2px; background:linear-gradient(90deg, var(--aqua), var(--teal-deep)); margin:0 0 18px 0; display:none;}
