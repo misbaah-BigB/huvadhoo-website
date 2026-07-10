@@ -97,6 +97,13 @@ a[class$="-card"] .card-media{overflow:hidden; border-radius:inherit;}
 a[class$="-card"] .card-media img{transition:transform .4s var(--ease-out);}
 a[class$="-card"]:hover .card-media img, a[class$="-card"]:focus-within .card-media img{transform:scale(1.05);}
 
+/* entrance reveal — .reveal is only ever added by JS (see motion.js). If
+   JS fails to load or run for any reason, this class never gets applied
+   and the page renders fully visible by default; the "hidden" state is
+   never baked into static HTML/CSS. */
+.reveal{opacity:0; transform:translateY(20px); transition:opacity var(--dur-entrance) var(--ease-out), transform var(--dur-entrance) var(--ease-out);}
+.reveal.is-visible{opacity:1; transform:translateY(0);}
+
 /* mobile nav shell */
 #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
 #mobileNav.open{display:flex;}

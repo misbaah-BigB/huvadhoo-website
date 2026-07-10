@@ -164,4 +164,39 @@
     }
   });
 
+  // ---- entrance reveal (fade-up, staggered for card groups) ----
+  // Progressive enhancement only: the .reveal class (and the opacity:0
+  // state it carries) is applied here, in JS, and nowhere else — never in
+  // static HTML or a plain CSS rule. If this fails or IntersectionObserver
+  // isn't available, the branch below simply never runs and the page is
+  // fully visible by default, exactly as if this feature didn't exist.
+  if ('IntersectionObserver' in window) {
+    const groups = document.querySelectorAll('[class$="-grid"]:not(.foot-grid), .steps, .timeline, .map-demo');
+    const revealEls = [];
+
+    groups.forEach(group => {
+      Array.from(group.children).forEach((child, i) => {
+        child.classList.add('reveal');
+        child.style.transitionDelay = (Math.min(i, 5) * 70) + 'ms';
+        revealEls.push(child);
+      });
+    });
+
+    document.querySelectorAll('.section-head').forEach(el => {
+      el.classList.add('reveal');
+      revealEls.push(el);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+  }
+
 })();
