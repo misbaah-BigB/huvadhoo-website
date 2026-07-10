@@ -44,14 +44,36 @@
     });
   }
 
-  // quote form (demo only — no backend wired up yet)
+  // quote form (demo only — no backend wired up yet, but the interaction
+  // itself is real: the form has novalidate so we drive validation styling
+  // ourselves instead of relying on inconsistent native tooltips, a brief
+  // loading state on submit instead of an instant swap, then a fade-in
+  // success panel)
   const quoteForm = document.getElementById('quoteForm');
   if (quoteForm) {
     quoteForm.addEventListener('submit', function(e){
       e.preventDefault();
-      this.style.display = 'none';
-      const ty = document.getElementById('thankYou');
-      if (ty) ty.classList.add('show');
+      this.classList.add('was-validated');
+      if (!this.checkValidity()) {
+        const firstInvalid = this.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      const form = this;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.classList.add('is-loading');
+
+      setTimeout(() => {
+        form.style.display = 'none';
+        const ty = document.getElementById('thankYou');
+        if (!ty) return;
+        ty.classList.add('show');
+        // two rAFs so the browser commits the display:block before we
+        // start the opacity/transform transition (otherwise it can skip
+        // straight to the end state with no animation)
+        requestAnimationFrame(() => requestAnimationFrame(() => ty.classList.add('is-visible')));
+      }, 500);
     });
   }
 

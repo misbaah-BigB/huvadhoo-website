@@ -137,16 +137,6 @@
   @media(min-width:900px){ .cta-band{grid-template-columns:1fr 1fr;} }
   .cta-band h2{color:var(--white); font-size:clamp(24px,3vw,30px);}
   .cta-band p{color:#CFE3DF; margin-top:12px; font-size:15px;}
-  .qform{background:var(--white); border-radius:16px; padding:24px; color:var(--text);}
-  .qform .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  .qform label{font-size:12.5px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:6px;}
-  .qform input, .qform select{width:100%; padding:11px 12px; border:1px solid var(--sand-dark); border-radius:10px; font-family:var(--body); font-size:14.5px; margin-bottom:14px; background:var(--sand);}
-  .qform input:focus, .qform select:focus{outline:none; border-color:var(--teal);}
-  .qform button{width:100%; padding:13px; border:none; border-radius:10px; background:var(--gold); color:var(--ink); font-weight:700; font-size:15px; cursor:pointer;}
-  .qform button:hover{background:#c99539;}
-  .thankyou{display:none; text-align:center; padding:30px 10px;}
-  .thankyou.show{display:block;}
-  .thankyou p{color:var(--sub); margin-top:8px; font-size:14.5px;}
 
   /* footer */
 
@@ -459,7 +449,7 @@
         </div>
 
         <div>
-          <form class="qform" id="quoteForm">
+          <form class="qform" id="quoteForm" novalidate>
             <div class="row2">
               <div><label for="qName">이름</label><input id="qName" required></div>
               <div><label for="qWa">WhatsApp 번호</label><input id="qWa" required></div>

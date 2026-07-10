@@ -19,6 +19,15 @@
   --body: 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
   --maxw: 1180px;
+
+  /* motion system — calm, premium, restrained. Every new interaction in
+     this file uses one of these two curves. --ease-out is for reveals
+     (things settling into place); --ease-snap is for direct feedback
+     (hover/press) that needs to feel immediate, not dreamy. */
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --ease-snap: cubic-bezier(.4,0,.2,1);
+  --dur-fast: 150ms;
+  --dur-entrance: 550ms;
 }
 html[dir="rtl"]{
   --display: 'Noto Sans Arabic', 'Fraunces', Georgia, serif;
@@ -39,15 +48,39 @@ h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600
    room for the language switcher, inner pages don't) */
 header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
 
+/* quote form (homepage) */
+.qform{background:var(--white); border-radius:16px; padding:24px; color:var(--text);}
+.qform .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.qform label{font-size:12.5px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:6px;}
+.qform input, .qform select{width:100%; padding:11px 12px; border:1px solid var(--sand-dark); border-radius:10px; font-family:var(--body); font-size:14.5px; margin-bottom:14px; background:var(--sand); transition:border-color var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
+.qform input:focus, .qform select:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(31,122,108,.15);}
+.qform.was-validated input:invalid{border-color:#B3452E; box-shadow:0 0 0 3px rgba(179,69,46,.12);}
+.qform button{width:100%; padding:13px; border:none; border-radius:10px; background:var(--gold); color:var(--ink); font-weight:700; font-size:15px; cursor:pointer; transition:background-color var(--dur-fast) var(--ease-snap), transform var(--dur-fast) var(--ease-snap), opacity var(--dur-fast) var(--ease-snap);}
+.qform button:hover{background:#c99539; transform:translateY(-1px);}
+.qform button:active{transform:translateY(0) scale(.98); transition-duration:80ms;}
+.qform button.is-loading{color:transparent; position:relative; cursor:not-allowed; opacity:.85; pointer-events:none; transform:none !important;}
+.qform button.is-loading::after{content:""; position:absolute; left:50%; top:50%; width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:var(--ink); box-shadow:10px 0 0 var(--ink), -10px 0 0 var(--ink); opacity:.35; animation:dotPulse 1s ease-in-out infinite;}
+@keyframes dotPulse{ 0%,100%{opacity:.35;} 50%{opacity:1;} }
+.thankyou{display:none; text-align:center; padding:30px 10px; opacity:0; transform:translateY(8px) scale(.98); transition:opacity var(--dur-entrance) var(--ease-out), transform var(--dur-entrance) var(--ease-out);}
+.thankyou.show{display:block;}
+.thankyou.is-visible{opacity:1; transform:translateY(0) scale(1);}
+.thankyou h3{color:var(--white);}
+.thankyou p{color:#CFE3DF; margin-top:8px; font-size:14.5px;}
+@media (prefers-reduced-motion: reduce){ .qform button.is-loading::after{animation:none; opacity:.7;} }
+
 /* button system */
-.btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none !important; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+.btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none !important; border:1px solid transparent; cursor:pointer; white-space:nowrap; transition:background-color var(--dur-fast) var(--ease-snap), transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap), opacity var(--dur-fast) var(--ease-snap);}
+.btn:hover{transform:translateY(-1px);}
+.btn:active{transform:translateY(0) scale(.98); transition-duration:80ms;}
 .btn-gold{background:var(--gold); color:var(--ink) !important;}
-.btn-gold:hover{background:#c99539;}
+.btn-gold:hover{background:#c99539; box-shadow:0 6px 16px rgba(217,166,78,.35);}
 .btn-outline{border-color:var(--sand-dark); color:var(--ink); background:transparent;}
-.btn-outline:hover{background:var(--sand-dark);}
+.btn-outline:hover{background:var(--sand-dark); box-shadow:0 4px 12px rgba(11,42,46,.08);}
 .btn-ghost-dark{color:var(--white); border-color:rgba(255,255,255,.35);}
-.btn-ghost-dark:hover{background:rgba(255,255,255,.12);}
+.btn-ghost-dark:hover{background:rgba(255,255,255,.12); box-shadow:0 4px 14px rgba(0,0,0,.18);}
 .btn-sm{padding:8px 14px; font-size:12.5px;}
+.btn[disabled],
+.btn.is-loading{cursor:not-allowed; opacity:.7; transform:none !important; pointer-events:none;}
 
 /* mobile nav shell */
 #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
@@ -70,7 +103,9 @@ footer a:hover{color:var(--white);}
 
 /* floating contact options (WhatsApp / Telegram / WeChat) */
 .float-contact{position:fixed; bottom:20px; right:20px; z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:10px;}
-.float-contact a{text-decoration:none !important; font-weight:700; display:flex; align-items:center; gap:8px;}
+.float-contact a{text-decoration:none !important; font-weight:700; display:flex; align-items:center; gap:8px; transition:background-color var(--dur-fast) var(--ease-snap), transform var(--dur-fast) var(--ease-snap);}
+.float-contact a:hover{transform:translateY(-2px);}
+.float-contact a:active{transform:translateY(0) scale(.97); transition-duration:80ms;}
 .float-contact .float-secondary{order:0; background:var(--teal-deep); color:var(--white) !important; border-radius:999px; padding:9px 14px; font-size:12.5px; box-shadow:0 6px 14px rgba(11,42,46,.24);}
 .float-contact .float-secondary:hover{background:var(--teal);}
 .float-contact .float-primary{order:1; background:var(--gold); color:var(--ink) !important; border-radius:999px; padding:14px 18px; font-size:14px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
