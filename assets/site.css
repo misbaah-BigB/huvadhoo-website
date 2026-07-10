@@ -1,0 +1,85 @@
+/* Huvadhoo Maldives Travel — shared design system
+   Tokens, base resets, header shell, button system, mobile nav shell,
+   footer, and the floating WhatsApp/Telegram/WeChat widget.
+   Page-specific layout (hero, cards, page content) stays inline per page. */
+
+:root{
+  --ink:#0B2A2E;
+  --teal-deep:#114C49;
+  --teal:#1F7A6C;
+  --aqua:#5FD3C4;
+  --sand:#F5EEDF;
+  --sand-dark:#E7DCC2;
+  --gold:#D9A64E;
+  --gold-deep:#7D591B;
+  --text:#16302E;
+  --sub:#4C6763;
+  --white:#FFFFFF;
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --body: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+  --maxw: 1180px;
+}
+html[dir="rtl"]{
+  --display: 'Noto Sans Arabic', 'Fraunces', Georgia, serif;
+  --body: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand); line-height:1.55;}
+a{color:inherit;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600;}
+.eyebrow{font-family:var(--body); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700; color:var(--teal);}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+/* header shell (sizing/spacing stays page-specific — homepage needs extra
+   room for the language switcher, inner pages don't) */
+header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
+
+/* button system */
+.btn{display:inline-flex; align-items:center; gap:8px; border-radius:999px; font-weight:600; font-size:14.5px; padding:11px 20px; text-decoration:none !important; border:1px solid transparent; cursor:pointer; white-space:nowrap;}
+.btn-gold{background:var(--gold); color:var(--ink) !important;}
+.btn-gold:hover{background:#c99539;}
+.btn-outline{border-color:var(--sand-dark); color:var(--ink); background:transparent;}
+.btn-outline:hover{background:var(--sand-dark);}
+.btn-ghost-dark{color:var(--white); border-color:rgba(255,255,255,.35);}
+.btn-ghost-dark:hover{background:rgba(255,255,255,.12);}
+.btn-sm{padding:8px 14px; font-size:12.5px;}
+
+/* mobile nav shell */
+#mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
+#mobileNav.open{display:flex;}
+#mobileNav a{padding:12px 4px; text-decoration:none; color:var(--text); font-weight:600; font-size:15px; border-bottom:1px solid var(--sand-dark);}
+
+/* footer */
+footer{background:var(--ink); color:#BFDFDA; padding:48px 0 28px;}
+.foot-grid{display:grid; grid-template-columns:1fr; gap:28px;}
+@media(min-width:760px){ .foot-grid{grid-template-columns:1.4fr 1fr 1fr;} }
+.fineprint{border-top:1px solid rgba(255,255,255,.1); margin-top:36px; padding-top:20px; font-size:12.5px; color:#6E938D;}
+footer .logo{color:var(--white);}
+footer .logo span{color:var(--aqua);}
+footer p{font-size:13.5px; color:#8FB5AF; margin-top:10px; max-width:36ch;}
+footer h4{font-family:var(--body); font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--aqua); margin-bottom:14px;}
+footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+footer a{text-decoration:none; font-size:14px; color:#DCEEEA;}
+footer a:hover{color:var(--white);}
+.footer-contact-link.is-primary{color:var(--gold); font-weight:700;}
+
+/* floating contact options (WhatsApp / Telegram / WeChat) */
+.float-contact{position:fixed; bottom:20px; right:20px; z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:10px;}
+.float-contact a{text-decoration:none !important; font-weight:700; display:flex; align-items:center; gap:8px;}
+.float-contact .float-secondary{order:0; background:var(--teal-deep); color:var(--white) !important; border-radius:999px; padding:9px 14px; font-size:12.5px; box-shadow:0 6px 14px rgba(11,42,46,.24);}
+.float-contact .float-secondary:hover{background:var(--teal);}
+.float-contact .float-primary{order:1; background:var(--gold); color:var(--ink) !important; border-radius:999px; padding:14px 18px; font-size:14px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
+.float-contact .float-primary:hover{background:#c99539;}
+.contact-group{display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+
+/* RTL layout (Arabic) — inert on every other page */
+[dir="rtl"] .faq-q{text-align:right;}
+[dir="rtl"] .product-card .see::after{content:" \2190";}
+[dir="rtl"] .step{padding:24px 0 0 18px;}
+[dir="rtl"] .float-contact{right:auto; left:20px; align-items:flex-start;}
+[dir="rtl"] .hero-wave{animation:none !important; left:auto; right:0;}
