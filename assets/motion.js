@@ -164,6 +164,65 @@
     }
   });
 
+  // ---- hero parallax (mouse-driven wave depth) ----
+  // Atmospheric only: adds a small amount of depth to the homepage hero
+  // waves as the cursor moves. Uses the standalone `translate` property
+  // (not `transform`) so it layers independently on top of the existing
+  // waveMove transform animation without ever resetting or fighting it —
+  // verified in isolation before writing this. Gated to devices with a
+  // real mouse (hover + fine pointer) and off entirely under
+  // prefers-reduced-motion, so touch visitors and reduced-motion visitors
+  // never pay for or see this at all.
+  (function(){
+    const heroEl = document.getElementById('waveHero');
+    if (!heroEl) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layers = [
+      { el: heroEl.querySelector('.hero-wave-1'), x: 10, y: 6 },
+      { el: heroEl.querySelector('.hero-wave-2'), x: 5, y: 3 }
+    ].filter(l => l.el);
+    if (!layers.length) return;
+
+    let ticking = false;
+    let lastEvent = null;
+
+    function apply() {
+      ticking = false;
+      if (!lastEvent) return;
+      const r = heroEl.getBoundingClientRect();
+      const nx = (lastEvent.clientX - r.left) / r.width - 0.5;
+      const ny = (lastEvent.clientY - r.top) / r.height - 0.5;
+      layers.forEach(l => {
+        l.el.style.translate = (nx * l.x).toFixed(1) + 'px ' + (ny * l.y).toFixed(1) + 'px';
+      });
+    }
+
+    heroEl.addEventListener('mousemove', (e) => {
+      lastEvent = e;
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    });
+    heroEl.addEventListener('mouseleave', () => {
+      layers.forEach(l => { l.el.style.translate = '0px 0px'; });
+    });
+  })();
+
+  // ---- image reveal (fade+scale-in on load, for future photography) ----
+  // No <img> tags exist on the site yet (placeholder gradients only), so
+  // this is a no-op today — but the moment real photos are added inside a
+  // .card-media or .gallery wrapper, they'll fade+scale in on load
+  // instead of popping in abruptly. Progressive enhancement only: the
+  // hidden state is applied here in JS, never in static HTML/CSS.
+  document.querySelectorAll('.card-media img, .gallery img').forEach(img => {
+    img.classList.add('img-reveal');
+    if (img.complete) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+    }
+  });
+
   // ---- entrance reveal (fade-up, staggered for card groups) ----
   // Progressive enhancement only: the .reveal class (and the opacity:0
   // state it carries) is applied here, in JS, and nowhere else — never in

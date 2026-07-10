@@ -94,8 +94,18 @@ header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); ba
 a[class$="-card"]{transition:transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
 a[class$="-card"]:hover, a[class$="-card"]:focus-within{transform:translateY(-4px); box-shadow:0 14px 30px rgba(11,42,46,.14);}
 a[class$="-card"] .card-media{overflow:hidden; border-radius:inherit;}
-a[class$="-card"] .card-media img{transition:transform .4s var(--ease-out);}
+a[class$="-card"] .card-media img{transition:transform .4s var(--ease-out), opacity .5s var(--ease-out);}
 a[class$="-card"]:hover .card-media img, a[class$="-card"]:focus-within .card-media img{transform:scale(1.05);}
+
+/* image reveal — fade+scale-in on load, for real photography (none on
+   the site yet, only placeholder gradients). Applied by JS (motion.js)
+   to any <img> the moment it's added inside .card-media or .gallery, so
+   the reveal is ready the instant real photos replace the gradients;
+   until then this rule matches zero elements. Composes cleanly with the
+   hover-zoom rule above — :hover naturally outranks the base .is-loaded
+   state on the shared transform property. */
+.img-reveal{opacity:0; transform:scale(1.03); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);}
+.img-reveal.is-loaded{opacity:1; transform:scale(1);}
 
 /* entrance reveal — .reveal is only ever added by JS (see motion.js). If
    JS fails to load or run for any reason, this class never gets applied
@@ -133,6 +143,14 @@ footer a:hover{color:var(--white);}
 .float-contact .float-primary{order:1; background:var(--gold); color:var(--ink) !important; border-radius:999px; padding:14px 18px; font-size:14px; box-shadow:0 8px 20px rgba(11,42,46,.28);}
 .float-contact .float-primary:hover{background:#c99539;}
 .contact-group{display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+
+/* hero parallax (homepage wave layers) — mouse-driven depth movement,
+   set via JS using the standalone `translate` property (see motion.js).
+   `translate` composes independently of the existing waveMove transform
+   keyframe animation already running on these elements, so this never
+   fights or resets it. Gated in JS to fine-pointer/hover devices and off
+   entirely under prefers-reduced-motion, so this rule is inert elsewhere. */
+.hero-wave{transition:translate .5s var(--ease-out);}
 
 /* RTL layout (Arabic) — inert on every other page */
 [dir="rtl"] .faq-q{text-align:right;}
