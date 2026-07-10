@@ -88,10 +88,12 @@
   .map-demo{display:grid; grid-template-columns:1fr; gap:20px;}
   @media(min-width:700px){ .map-demo{grid-template-columns:1.3fr 1fr;} }
   .map-box{background:var(--sand); border:1px solid var(--sand-dark); border-radius:16px; padding:16px;}
-  .atoll{cursor:pointer; transition:transform .15s ease;}
+  .atoll{cursor:pointer; transition:transform .15s var(--ease-snap), filter .15s var(--ease-snap);}
   .atoll:hover, .atoll:focus{ transform:scale(1.06); }
   .atoll.selected path{ fill:var(--gold) !important; }
+  .atoll.selected{ transform:scale(1.08); filter:drop-shadow(0 4px 10px rgba(217,166,78,.5)); }
   .info-box{background:var(--ink); color:#fff; border-radius:16px; padding:24px; display:flex; flex-direction:column; justify-content:center; min-height:220px;}
+  .info-box.is-swapping{opacity:.4;}
   .info-box .eyebrow2{font-family:var(--mono); font-size:11px; color:var(--aqua); text-transform:uppercase; letter-spacing:.08em;}
   .info-box h3{font-size:20px; margin-top:8px; color:#fff; font-family:var(--display);}
   .info-box p{color:#CFE3DF; font-size:14px; margin-top:10px;}
