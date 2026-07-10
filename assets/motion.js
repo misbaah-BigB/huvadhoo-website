@@ -106,18 +106,35 @@
     card.addEventListener('touchend', () => { card.style.transform = ''; }, {passive:true});
   });
 
-  // atoll map — global so the inline onclick="selectAtoll(this)" can reach it
+  // atoll map — global so the inline onclick="selectAtoll(this)" can reach it.
+  // The info panel briefly dips in opacity while its text swaps rather than
+  // changing instantly — a short crossfade instead of a jump cut. The dip's
+  // transition is set as an inline style, scoped to just this interaction,
+  // rather than added to the .info-box CSS rule — that rule's element also
+  // carries the entrance-reveal .reveal class, which already owns the
+  // `transition` property for its own fade-up; a second, permanent
+  // transition rule on the same property would silently replace it instead
+  // of combining. Clearing the inline style afterward hands control back to
+  // the reveal system exactly as before. Under prefers-reduced-motion the
+  // sitewide blanket rule strips transitions entirely, so this collapses to
+  // an instant swap with no visible dip, exactly as it should.
   window.selectAtoll = function(el) {
     document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
     el.classList.add('selected');
     const box = document.getElementById('atollInfo');
     if (!box) return;
-    const eyebrow = box.querySelector('.eyebrow2');
-    if (eyebrow) eyebrow.textContent = box.dataset.selectedLabel || eyebrow.textContent;
-    const h3 = box.querySelector('h3');
-    if (h3) h3.textContent = el.dataset.name;
-    const p = box.querySelector('p');
-    if (p) p.textContent = el.dataset.info;
+    box.style.transition = 'opacity .14s var(--ease-snap)';
+    box.classList.add('is-swapping');
+    setTimeout(() => {
+      const eyebrow = box.querySelector('.eyebrow2');
+      if (eyebrow) eyebrow.textContent = box.dataset.selectedLabel || eyebrow.textContent;
+      const h3 = box.querySelector('h3');
+      if (h3) h3.textContent = el.dataset.name;
+      const p = box.querySelector('p');
+      if (p) p.textContent = el.dataset.info;
+      box.classList.remove('is-swapping');
+      setTimeout(() => { box.style.transition = ''; }, 160);
+    }, 140);
   };
 
   // ---- preferred contact channel (WhatsApp / Telegram / WeChat) ----
@@ -205,6 +222,50 @@
     });
     heroEl.addEventListener('mouseleave', () => {
       layers.forEach(l => { l.el.style.translate = '0px 0px'; });
+    });
+  })();
+
+  // ---- custom cursor (subtle accent dot, desktop only) ----
+  // Augments the real cursor, never replaces it — the OS cursor is left
+  // completely alone, so form fields, text selection, and any assistive
+  // tooling keep working exactly as normal. Only created on devices with
+  // a real mouse (hover + fine pointer); on touch devices this whole
+  // block never runs and no element is ever added to the page. Also
+  // skipped entirely under prefers-reduced-motion, since a dot that
+  // continuously trails the pointer is a form of motion some visitors
+  // will have asked to avoid.
+  (function(){
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const dot = document.createElement('div');
+    dot.className = 'custom-cursor';
+    dot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(dot);
+
+    const INTERACTIVE = 'a, button, .btn, [data-tilt], .atoll, [class$="-card"]';
+    const SUPPRESS = 'input, textarea, select, [contenteditable]';
+
+    let ticking = false;
+    let lastEvent = null;
+
+    function apply() {
+      ticking = false;
+      if (!lastEvent) return;
+      dot.classList.add('is-active');
+      dot.style.translate = lastEvent.clientX + 'px ' + lastEvent.clientY + 'px';
+      const overSuppressed = !!lastEvent.target.closest(SUPPRESS);
+      const overInteractive = !!lastEvent.target.closest(INTERACTIVE);
+      dot.classList.toggle('is-hover', overInteractive && !overSuppressed);
+      dot.classList.toggle('is-hidden', overSuppressed);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      lastEvent = e;
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    });
+    document.documentElement.addEventListener('mouseleave', () => {
+      dot.classList.remove('is-active');
     });
   })();
 

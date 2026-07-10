@@ -152,6 +152,21 @@ footer a:hover{color:var(--white);}
    entirely under prefers-reduced-motion, so this rule is inert elsewhere. */
 .hero-wave{transition:translate .5s var(--ease-out);}
 
+/* custom cursor accent — a small dot that follows the pointer and grows
+   over clickable elements. Purely decorative: the real OS cursor stays
+   visible underneath at all times, so nothing about native cursor
+   behavior (text selection, form-field caret, browser accessibility
+   tools) ever changes. pointer-events:none guarantees it can never block
+   a click. Created only on hover+fine-pointer devices and never at all
+   under prefers-reduced-motion — see motion.js. Position is driven by the
+   standalone `translate` property (JS, every mousemove); the `transform`
+   here is a fixed centering offset that composes independently of it,
+   same technique as the hero parallax. */
+.custom-cursor{position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%; background:var(--aqua); opacity:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:translate .1s linear, width .2s var(--ease-snap), height .2s var(--ease-snap), opacity .2s var(--ease-snap), background-color .2s var(--ease-snap);}
+.custom-cursor.is-active{opacity:.55;}
+.custom-cursor.is-hover{width:28px; height:28px; opacity:.22; background:var(--gold);}
+.custom-cursor.is-hidden{opacity:0;}
+
 /* RTL layout (Arabic) — inert on every other page */
 [dir="rtl"] .faq-q{text-align:right;}
 [dir="rtl"] .product-card .see::after{content:" \2190";}
