@@ -82,6 +82,21 @@ header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); ba
 .btn[disabled],
 .btn.is-loading{cursor:not-allowed; opacity:.7; transform:none !important; pointer-events:none;}
 
+/* destination/package card hover — applies to every clickable card whose
+   class name ends in "-card" (product-card, post-card, related-card...),
+   site-wide, via one rule instead of per page. Informational cards that
+   aren't links (why-card, value-card, etc.) are untouched — a hover lift
+   on a non-clickable box would be a false affordance. :focus-within
+   mirrors :hover so keyboard users get the same feedback. Once real
+   photography replaces the placeholder gradients, add a `.card-media`
+   wrapper around the image inside these and it will zoom on the same
+   trigger via the .card-media img rule below. */
+a[class$="-card"]{transition:transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
+a[class$="-card"]:hover, a[class$="-card"]:focus-within{transform:translateY(-4px); box-shadow:0 14px 30px rgba(11,42,46,.14);}
+a[class$="-card"] .card-media{overflow:hidden; border-radius:inherit;}
+a[class$="-card"] .card-media img{transition:transform .4s var(--ease-out);}
+a[class$="-card"]:hover .card-media img, a[class$="-card"]:focus-within .card-media img{transform:scale(1.05);}
+
 /* mobile nav shell */
 #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
 #mobileNav.open{display:flex;}
