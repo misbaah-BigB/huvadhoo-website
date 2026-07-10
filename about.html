@@ -10,7 +10,7 @@
 <style>
   :root{
     --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
-    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --sand:#F5EEDF; --sand-dark:#E7DCC2; --gold:#D9A64E; --gold-deep:#7D591B; --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
     --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Inter',system-ui,-apple-system,sans-serif; --mono:'IBM Plex Mono','SFMono-Regular',monospace;
     --maxw:1180px;
   }
@@ -40,6 +40,20 @@
   .btn-outline:hover{background:var(--sand-dark);}
   @media(min-width:1140px){ nav.primary{display:flex;} }
   .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
+  @media(max-width:639px){
+    .headbar{padding:13px 14px; gap:6px;}
+    .head-actions{gap:6px;}
+    .logo{font-size:14px;}
+    .head-actions .btn-gold{padding:8px 12px; font-size:12px;}
+    .burger{padding:7px 9px;}
+  }
+  @media(max-width:374px){
+    .headbar{padding:12px 8px; gap:3px;}
+    .head-actions{gap:3px;}
+    .logo{font-size:11.5px;}
+    .head-actions .btn-gold{padding:7px 8px; font-size:10.5px;}
+    .burger{padding:6px 7px;}
+  }
   @media(min-width:1140px){ .burger{display:none;} }
   #mobileNav{display:none; flex-direction:column; gap:2px; padding:8px 24px 18px; border-top:1px solid var(--sand-dark);}
   #mobileNav.open{display:flex;}
