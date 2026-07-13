@@ -88,9 +88,10 @@
   .map-demo{display:grid; grid-template-columns:1fr; gap:20px;}
   @media(min-width:700px){ .map-demo{grid-template-columns:1.3fr 1fr;} }
   .map-box{background:var(--sand); border:1px solid var(--sand-dark); border-radius:16px; padding:16px;}
+  .map-box svg{max-width:230px; margin:0 auto; display:block;}
   .atoll{cursor:pointer; transition:transform .15s var(--ease-snap), filter .15s var(--ease-snap);}
   .atoll:hover, .atoll:focus{ transform:scale(1.06); }
-  .atoll.selected path{ fill:var(--gold) !important; }
+  .atoll.selected ellipse{ fill:var(--gold) !important; }
   .atoll.selected{ transform:scale(1.08); filter:drop-shadow(0 4px 10px rgba(217,166,78,.5)); }
   .info-box{background:var(--ink); color:#fff; border-radius:16px; padding:24px; display:flex; flex-direction:column; justify-content:center; min-height:220px;}
   .info-box.is-swapping{opacity:.4;}
@@ -312,21 +313,40 @@
       </div>
       <div class="map-demo">
         <div class="map-box">
-          <svg viewBox="0 0 400 300" width="100%" height="auto" role="img" aria-label="خريطة مبسّطة لأتولات المالديف">
+          <svg viewBox="0 0 300 460" width="100%" height="auto" role="img" aria-label="خريطة مبسّطة لأتولات المالديف">
+            <g aria-hidden="true">
+              <ellipse cx="150" cy="18" rx="16" ry="12" fill="var(--sand-dark)"/>
+              <ellipse cx="158" cy="40" rx="13" ry="10" fill="var(--sand-dark)"/>
+              <ellipse cx="188" cy="48" rx="12" ry="9" fill="var(--sand-dark)"/>
+              <ellipse cx="196" cy="70" rx="10" ry="8" fill="var(--sand-dark)"/>
+              <ellipse cx="148" cy="80" rx="12" ry="16" fill="var(--sand-dark)"/>
+              <ellipse cx="182" cy="92" rx="7" ry="6" fill="var(--sand-dark)"/>
+              <ellipse cx="132" cy="138" rx="9" ry="9" fill="var(--sand-dark)"/>
+              <ellipse cx="145" cy="190" rx="7" ry="7" fill="var(--sand-dark)"/>
+              <ellipse cx="168" cy="198" rx="8" ry="8" fill="var(--sand-dark)"/>
+              <ellipse cx="140" cy="208" rx="8" ry="8" fill="var(--sand-dark)"/>
+              <ellipse cx="152" cy="230" rx="12" ry="16" fill="var(--sand-dark)"/>
+              <ellipse cx="156" cy="260" rx="13" ry="20" fill="var(--sand-dark)"/>
+              <ellipse cx="145" cy="320" rx="16" ry="15" fill="var(--sand-dark)"/>
+              <ellipse cx="172" cy="328" rx="14" ry="13" fill="var(--sand-dark)"/>
+              <ellipse cx="150" cy="395" rx="6" ry="6" fill="var(--sand-dark)"/>
+              <ellipse cx="162" cy="418" rx="9" ry="7" fill="var(--sand-dark)"/>
+              <path d="M0.0,-5.0 L1.18,-1.62 L4.76,-1.55 L1.9,0.62 L2.94,4.05 L0.0,2.0 L-2.94,4.05 L-1.9,0.62 L-4.76,-1.55 L-1.18,-1.62 Z" fill="var(--ink)" transform="translate(180,131)" opacity=".55"/>
+            </g>
             <g class="atoll" tabindex="0" data-name="أتول ماليه الشمالي" data-info="الأقرب إلى المطار — أوسع تشكيلة من المنتجعات وأقصر رحلات نقل بالقارب السريع." onclick="selectAtoll(this)">
-              <path d="M120,40 q30,-10 55,10 q10,25 -15,35 q-35,10 -50,-15 q-10,-20 10,-30 Z" fill="#5FD3C4"/>
+              <ellipse cx="178" cy="115" rx="12" ry="11" fill="#5FD3C4"/>
             </g>
             <g class="atoll" tabindex="0" data-name="أتول ماليه الجنوبي" data-info="يضم عدداً كبيراً من دور الضيافة — جزيرتا مافوشي وغورايدو تقعان هنا." onclick="selectAtoll(this)">
-              <path d="M150,110 q25,-8 45,12 q8,20 -12,30 q-28,10 -42,-12 q-8,-16 9,-30 Z" fill="#1F7A6C"/>
+              <ellipse cx="182" cy="148" rx="12" ry="12" fill="#1F7A6C"/>
             </g>
             <g class="atoll" tabindex="0" data-name="أتول باء" data-info="موطن خليج هانيفارو — واحد من أفضل مواقع السنوركلينغ مع أشعة المانتا في العالم." onclick="selectAtoll(this)">
-              <path d="M60,150 q22,-10 40,8 q10,18 -10,28 q-25,10 -38,-10 q-8,-15 8,-26 Z" fill="#D9A64E"/>
+              <ellipse cx="138" cy="110" rx="16" ry="17" fill="#D9A64E"/>
             </g>
             <g class="atoll" tabindex="0" data-name="أتول أليفو دالو" data-info="جزيرة ديغوراه — شاطئ طويل، ومشاهدات منتظمة لسمك قرش الحوت في المنطقة المجاورة." onclick="selectAtoll(this)">
-              <path d="M210,170 q24,-9 42,10 q9,19 -11,29 q-27,10 -40,-11 q-8,-16 9,-28 Z" fill="#114C49"/>
+              <ellipse cx="126" cy="165" rx="13" ry="20" fill="#114C49"/>
             </g>
             <g class="atoll" tabindex="0" data-name="أتول فافو" data-info="جزيرة فوليدهو — هادئة وتُعنى بالثقافة المحلية، ومعروفة بأمسيات طبول بودو بيرو التقليدية." onclick="selectAtoll(this)">
-              <path d="M270,220 q22,-9 40,9 q9,18 -10,27 q-25,9 -38,-10 q-8,-15 8,-26 Z" fill="#0B2A2E"/>
+              <ellipse cx="172" cy="180" rx="12" ry="14" fill="#0B2A2E"/>
             </g>
           </svg>
         </div>

@@ -137,6 +137,19 @@
     }, 140);
   };
 
+  // Pre-existing gap, fixed here since it's the same component: a <g> with
+  // tabindex="0" is focusable but — unlike <button> or <a> — browsers don't
+  // natively activate it on Enter/Space, so keyboard users could tab to an
+  // atoll but never actually select it. Wiring it up directly.
+  document.querySelectorAll('.atoll').forEach(el => {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectAtoll(el);
+      }
+    });
+  });
+
   // ---- preferred contact channel (WhatsApp / Telegram / WeChat) ----
   // Same two signals as the homepage's language-redirect: navigator.language
   // first, browser timezone as a tiebreaker only when the language is
