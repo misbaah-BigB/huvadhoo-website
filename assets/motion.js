@@ -116,16 +116,32 @@
   // transition rule on the same property would silently replace it instead
   // of combining. Clearing the inline style afterward hands control back to
   // the reveal system exactly as before. Under prefers-reduced-motion the
-  // sitewide blanket rule strips transitions entirely, so this collapses to
-  // an instant swap with no visible dip, exactly as it should.
+  // sitewide blanket rule strips transitions entirely (it's !important, so
+  // it wins over this inline style), so this collapses to an instant swap
+  // with no visible dip, exactly as it should.
+  //
+  // Two timers are tracked and cancelled on every call. Tapping a second
+  // atoll before the first tap's swap finished used to leave two untracked
+  // setTimeout chains running at once — the older chain's "clear the inline
+  // transition" timer could fire in the middle of the newer chain's opacity
+  // animation, cancelling it mid-flight and freezing the panel at whatever
+  // partial opacity it happened to be at (often near-invisible). Clearing
+  // any timers from a previous tap before starting a new one means only the
+  // most recent tap's chain ever runs to completion.
+  let atollSwapTimer = null;
+  let atollTransitionClearTimer = null;
   window.selectAtoll = function(el) {
     document.querySelectorAll('.atoll').forEach(a => a.classList.remove('selected'));
     el.classList.add('selected');
     const box = document.getElementById('atollInfo');
     if (!box) return;
+
+    if (atollSwapTimer) clearTimeout(atollSwapTimer);
+    if (atollTransitionClearTimer) clearTimeout(atollTransitionClearTimer);
+
     box.style.transition = 'opacity .14s var(--ease-snap)';
     box.classList.add('is-swapping');
-    setTimeout(() => {
+    atollSwapTimer = setTimeout(() => {
       const eyebrow = box.querySelector('.eyebrow2');
       if (eyebrow) eyebrow.textContent = box.dataset.selectedLabel || eyebrow.textContent;
       const h3 = box.querySelector('h3');
@@ -133,7 +149,11 @@
       const p = box.querySelector('p');
       if (p) p.textContent = el.dataset.info;
       box.classList.remove('is-swapping');
-      setTimeout(() => { box.style.transition = ''; }, 160);
+      atollSwapTimer = null;
+      atollTransitionClearTimer = setTimeout(() => {
+        box.style.transition = '';
+        atollTransitionClearTimer = null;
+      }, 160);
     }, 140);
   };
 
