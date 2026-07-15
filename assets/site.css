@@ -90,12 +90,30 @@ header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); ba
    mirrors :hover so keyboard users get the same feedback. Once real
    photography replaces the placeholder gradients, add a `.card-media`
    wrapper around the image inside these and it will zoom on the same
-   trigger via the .card-media img rule below. */
-a[class$="-card"]{transition:transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
-a[class$="-card"]:hover, a[class$="-card"]:focus-within{transform:translateY(-4px); box-shadow:0 14px 30px rgba(11,42,46,.14);}
-a[class$="-card"] .card-media{overflow:hidden; border-radius:inherit;}
-a[class$="-card"] .card-media img{transition:transform .4s var(--ease-out), opacity .5s var(--ease-out);}
-a[class$="-card"]:hover .card-media img, a[class$="-card"]:focus-within .card-media img{transform:scale(1.05);}
+   trigger via the .card-media img rule below.
+
+   Each selector below is paired with a second form, [class*="-card "]
+   (note the trailing space) — not just stylistic duplication. Attribute
+   selectors match the raw class STRING, not individual class tokens; the
+   entrance-reveal system (below) appends a "reveal" class to nearly every
+   card shortly after load, turning e.g. class="post-card" into
+   class="post-card reveal" — which no longer ends in "-card", silently
+   breaking the $= form alone. product-card happened to keep working
+   because it has its own leftover local :hover rule masking the gap;
+   post-card and related-card had no such rule and got no hover-lift or
+   image-zoom at all once revealed. Found while wiring up tilt for those
+   same cards. The *="-card " form matches "-card" followed by a space,
+   i.e. followed by any other class, covering every position "reveal" (or
+   any future class) could end up in. */
+a[class$="-card"], a[class*="-card "]{transition:transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
+a[class$="-card"]:hover, a[class*="-card "]:hover, a[class$="-card"]:focus-within, a[class*="-card "]:focus-within{transform:translateY(-4px); box-shadow:0 14px 30px rgba(11,42,46,.14);}
+a[class$="-card"] .card-media, a[class*="-card "] .card-media{overflow:hidden; border-radius:inherit;}
+a[class$="-card"] .card-media img, a[class*="-card "] .card-media img{transition:transform .4s var(--ease-out), opacity .5s var(--ease-out);}
+a[class$="-card"]:hover .card-media img, a[class*="-card "]:hover .card-media img, a[class$="-card"]:focus-within .card-media img, a[class*="-card "]:focus-within .card-media img{transform:scale(1.05);}
+
+/* gives the mouse-only 3D tilt (motion.js) real depth instead of a flat
+   skew; harmless on grids that don't contain a tilting card. */
+[class$="-grid"]{perspective:1200px;}
 
 /* image reveal — fade+scale-in on load, for real photography (none on
    the site yet, only placeholder gradients). Applied by JS (motion.js)
@@ -151,6 +169,38 @@ footer a:hover{color:var(--white);}
    fights or resets it. Gated in JS to fine-pointer/hover devices and off
    entirely under prefers-reduced-motion, so this rule is inert elsewhere. */
 .hero-wave{transition:translate .5s var(--ease-out);}
+
+/* wave decoration, shared — was homepage-only (inline per language file);
+   promoted here so the same signature wave can be reused on inner-page
+   .pagehero sections too, instead of duplicating this block into 13 more
+   files. Base geometry only; each page still sets its own opacity/fill
+   inline where it needs to (homepage keeps its two-layer treatment as-is). */
+.hero-wave{position:absolute; bottom:0; left:0; width:200%; height:auto; z-index:1;}
+.hero-wave-1{opacity:.10; animation:waveMove 11s linear infinite;}
+.hero-wave-2{opacity:.07; animation:waveMove 17s linear infinite reverse;}
+@keyframes waveMove{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@media (prefers-reduced-motion: reduce){ .hero-wave-1,.hero-wave-2{animation:none;} }
+
+/* page-hero wave + floating shapes — the 13 inner-page .pagehero sections
+   previously had no decoration at all (flat gradient only). Extends the
+   homepage's existing wave motif (single layer, lower profile than the
+   homepage's two-layer version, sized for a much shorter section) plus two
+   very subtle floating rings, matching our real palette (aqua/gold), not
+   the reference site's. Purely decorative: aria-hidden, pointer-events:none,
+   no text ever sits on them, and the real content (.wrap) is explicitly
+   stacked above via z-index so none of this can ever obscure or reduce
+   contrast on the heading/breadcrumb text. */
+.pagehero{position:relative; overflow:hidden;}
+.pagehero .wrap{position:relative; z-index:2;}
+.pagehero .hero-wave-1{opacity:.08; height:70px;}
+.pagehero::before, .pagehero::after{content:""; position:absolute; border-radius:50%; pointer-events:none; z-index:0;}
+.pagehero::before{width:130px; height:130px; top:-46px; right:9%; border:1px solid rgba(255,255,255,.14); animation:heroDrift 18s ease-in-out infinite;}
+.pagehero::after{width:64px; height:64px; bottom:-16px; left:7%; border:1px solid rgba(217,166,78,.22); animation:heroDrift 14s ease-in-out infinite reverse;}
+@keyframes heroDrift{ 0%,100%{translate:0 0;} 50%{translate:-8px 10px;} }
+@media (prefers-reduced-motion: reduce){ .pagehero::before, .pagehero::after{animation:none;} }
+[dir="rtl"] .pagehero .hero-wave-1{animation:none !important; left:auto; right:0;}
+[dir="rtl"] .pagehero::before{right:auto; left:9%;}
+[dir="rtl"] .pagehero::after{left:auto; right:7%;}
 
 /* custom cursor accent — a small dot that follows the pointer and grows
    over clickable elements. Purely decorative: the real OS cursor stays
