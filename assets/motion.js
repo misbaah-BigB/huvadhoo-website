@@ -93,18 +93,35 @@
     }
   }
 
-  // tilt cards (product cards)
-  document.querySelectorAll('[data-tilt]').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-3px)`;
+  // tilt cards — was product-card only (via a manually-added data-tilt
+  // attribute); now applies to every clickable card sitewide via the same
+  // card-selector convention the hover-lift/image-zoom CSS uses (see the
+  // comment above that CSS block in site.css for why it's two attribute
+  // selectors, not one — the short version: the reveal class appended
+  // below breaks a plain [class$="-card"] match), so post-card and
+  // related-card get it too without touching their markup. Informational,
+  // non-clickable cards (value-card, why-card, etc.) are untouched — a 3D
+  // tilt on a box that isn't a link would be a false affordance, same
+  // reasoning already applied to the hover-lift rule. JS-set inline
+  // transform intentionally overrides the CSS :hover lift for mouse users
+  // (richer effect); keyboard/touch users still get the CSS-only lift via
+  // :focus-within, untouched by this. Skipped entirely under
+  // prefers-reduced-motion — a continuous mouse-linked 3D rotation is
+  // exactly the kind of motion that preference exists to opt out of,
+  // matching how the hero parallax and custom cursor already gate on it.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('a[class$="-card"], a[class*="-card "]').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-3px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      card.addEventListener('touchstart', () => { card.style.transform = 'scale(0.98)'; }, {passive:true});
+      card.addEventListener('touchend', () => { card.style.transform = ''; }, {passive:true});
     });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    card.addEventListener('touchstart', () => { card.style.transform = 'scale(0.98)'; }, {passive:true});
-    card.addEventListener('touchend', () => { card.style.transform = ''; }, {passive:true});
-  });
+  }
 
   // atoll map — global so the inline onclick="selectAtoll(this)" can reach it.
   // The info panel briefly dips in opacity while its text swaps rather than
@@ -215,48 +232,53 @@
   });
 
   // ---- hero parallax (mouse-driven wave depth) ----
-  // Atmospheric only: adds a small amount of depth to the homepage hero
-  // waves as the cursor moves. Uses the standalone `translate` property
+  // Atmospheric only: adds a small amount of depth to a hero's wave
+  // layer(s) as the cursor moves. Uses the standalone `translate` property
   // (not `transform`) so it layers independently on top of the existing
   // waveMove transform animation without ever resetting or fighting it —
   // verified in isolation before writing this. Gated to devices with a
   // real mouse (hover + fine pointer) and off entirely under
   // prefers-reduced-motion, so touch visitors and reduced-motion visitors
   // never pay for or see this at all.
-  (function(){
-    const heroEl = document.getElementById('waveHero');
-    if (!heroEl) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  //
+  // Originally homepage-only (#waveHero, two layers). Generalized so the
+  // same technique also runs on the 13 inner-page .pagehero sections,
+  // which carry a single, lower-profile wave layer — one function, wired
+  // to whichever hero elements are actually present on a given page.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    function wireHeroParallax(heroEl) {
+      const layers = [
+        { el: heroEl.querySelector('.hero-wave-1'), x: 10, y: 6 },
+        { el: heroEl.querySelector('.hero-wave-2'), x: 5, y: 3 }
+      ].filter(l => l.el);
+      if (!layers.length) return;
 
-    const layers = [
-      { el: heroEl.querySelector('.hero-wave-1'), x: 10, y: 6 },
-      { el: heroEl.querySelector('.hero-wave-2'), x: 5, y: 3 }
-    ].filter(l => l.el);
-    if (!layers.length) return;
+      let ticking = false;
+      let lastEvent = null;
 
-    let ticking = false;
-    let lastEvent = null;
+      function apply() {
+        ticking = false;
+        if (!lastEvent) return;
+        const r = heroEl.getBoundingClientRect();
+        const nx = (lastEvent.clientX - r.left) / r.width - 0.5;
+        const ny = (lastEvent.clientY - r.top) / r.height - 0.5;
+        layers.forEach(l => {
+          l.el.style.translate = (nx * l.x).toFixed(1) + 'px ' + (ny * l.y).toFixed(1) + 'px';
+        });
+      }
 
-    function apply() {
-      ticking = false;
-      if (!lastEvent) return;
-      const r = heroEl.getBoundingClientRect();
-      const nx = (lastEvent.clientX - r.left) / r.width - 0.5;
-      const ny = (lastEvent.clientY - r.top) / r.height - 0.5;
-      layers.forEach(l => {
-        l.el.style.translate = (nx * l.x).toFixed(1) + 'px ' + (ny * l.y).toFixed(1) + 'px';
+      heroEl.addEventListener('mousemove', (e) => {
+        lastEvent = e;
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+      });
+      heroEl.addEventListener('mouseleave', () => {
+        layers.forEach(l => { l.el.style.translate = '0px 0px'; });
       });
     }
 
-    heroEl.addEventListener('mousemove', (e) => {
-      lastEvent = e;
-      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-    });
-    heroEl.addEventListener('mouseleave', () => {
-      layers.forEach(l => { l.el.style.translate = '0px 0px'; });
-    });
-  })();
+    document.querySelectorAll('#waveHero, .pagehero').forEach(wireHeroParallax);
+  }
 
   // ---- custom cursor (subtle accent dot, desktop only) ----
   // Augments the real cursor, never replaces it — the OS cursor is left
@@ -276,7 +298,7 @@
     dot.setAttribute('aria-hidden', 'true');
     document.body.appendChild(dot);
 
-    const INTERACTIVE = 'a, button, .btn, [data-tilt], .atoll, [class$="-card"]';
+    const INTERACTIVE = 'a, button, .btn, [data-tilt], .atoll, [class$="-card"], [class*="-card "]';
     const SUPPRESS = 'input, textarea, select, [contenteditable]';
 
     let ticking = false;

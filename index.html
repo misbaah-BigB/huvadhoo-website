@@ -122,13 +122,9 @@
   .hero p.lede{margin-top:20px; font-size:18px; color:#DCEEEA; max-width:46ch;}
   .hero .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;}
   .hero .microline{margin-top:18px; font-size:13.5px; color:#BFDFDA; font-family:var(--mono);}
-  .hero-wave{position:absolute; bottom:0; left:0; width:200%; height:auto; z-index:1;}
-  .hero-wave-1{opacity:.10; animation:waveMove 11s linear infinite;}
-  .hero-wave-2{opacity:.07; animation:waveMove 17s linear infinite reverse;}
-  @keyframes waveMove{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
   .hero-bubble{position:absolute; bottom:-10px; border-radius:50%; background:rgba(255,255,255,.28); z-index:1; animation:heroRise linear infinite;}
   @keyframes heroRise{ to{ transform:translateY(-260px); opacity:0; } }
-  @media (prefers-reduced-motion: reduce){ .hero-wave-1,.hero-wave-2,.hero-bubble{animation:none;} }
+  @media (prefers-reduced-motion: reduce){ .hero-bubble{animation:none;} }
 
 
   /* trust strip */
