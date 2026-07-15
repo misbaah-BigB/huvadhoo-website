@@ -1,0 +1,190 @@
+<title>Huvadhoo — Two Bolder Directions</title>
+<style>
+  :root{
+    --display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    --maxw: 1180px;
+    --ease-out: cubic-bezier(.22,1,.36,1);
+    --ease-snap: cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ---- Variant A: Deeper Wake — the real brand, turned up ---- */
+  [data-variant="wake"]{
+    --bg:#F5EEDF; --ink:#0B2A2E; --teal-deep:#114C49; --teal:#1F7A6C; --aqua:#5FD3C4;
+    --sand-dark:#E7DCC2; --gold:#D9A64E; --gold-deep:#7D591B;
+    --text:#16302E; --sub:#4C6763; --white:#FFFFFF;
+    --hero-grad: linear-gradient(155deg, var(--aqua) 0%, var(--teal) 38%, var(--teal-deep) 66%, var(--ink) 100%);
+    --card-bg: var(--white); --card-text: var(--text); --card-sub: var(--sub);
+    --card-border: var(--sand-dark);
+    --shape-color: rgba(255,255,255,.5);
+  }
+
+  /* ---- Variant B: Night Reef — moodier, dark, glow-accented ---- */
+  [data-variant="reef"]{
+    --bg:#081C1F; --ink:#040F11; --teal-deep:#0F2B2C; --teal:#123634; --aqua:#6FE8D6;
+    --sand-dark:#193B3A; --gold:#D9A64E; --gold-deep:#F2C468;
+    --text:#EAF5F2; --sub:#9DC4BE; --white:#FFFFFF;
+    --hero-grad: radial-gradient(120% 100% at 50% 0%, #0E3634 0%, #0A2426 45%, #040F11 100%);
+    --card-bg: rgba(111,232,214,.06); --card-text: var(--text); --card-sub: var(--sub);
+    --card-border: rgba(111,232,214,.18);
+    --shape-color: rgba(111,232,214,.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:var(--body); line-height:1.55;}
+  #page{background:var(--bg); color:var(--text); transition:background-color .4s var(--ease-out), color .4s var(--ease-out);}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---- toggle bar ---- */
+  .switcher{position:sticky; top:0; z-index:50; background:#0B1414; color:#fff; padding:14px 20px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; font-family:var(--body); box-shadow:0 4px 18px rgba(0,0,0,.25);}
+  .switcher p{margin:0; font-size:13px; color:#9BB4B0; margin-right:4px;}
+  .switcher button{font-family:var(--body); font-size:13.5px; font-weight:600; padding:9px 18px; border-radius:999px; border:1px solid rgba(255,255,255,.2); background:transparent; color:#fff; cursor:pointer; transition:background-color .15s var(--ease-snap), border-color .15s var(--ease-snap);}
+  .switcher button:hover{border-color:rgba(255,255,255,.5);}
+  .switcher button.active{background:#D9A64E; border-color:#D9A64E; color:#1a1305;}
+  .switcher button:focus-visible{outline:3px solid #D9A64E; outline-offset:2px;}
+
+  /* ---- hero ---- */
+  .hero{position:relative; overflow:hidden; background:var(--hero-grad); color:#fff; min-height:78vh; display:flex; align-items:center; transition:background .4s var(--ease-out);}
+  .hero-inner{position:relative; z-index:3; max-width:var(--maxw); margin:0 auto; padding:80px 24px 100px; width:100%;}
+  .eyebrow{font-family:var(--mono); text-transform:uppercase; letter-spacing:.16em; font-size:12.5px; font-weight:600; color:var(--aqua); display:inline-block; margin-bottom:20px;}
+  [data-variant="reef"] .eyebrow{text-shadow:0 0 14px rgba(111,232,214,.6);}
+  h1{font-family:var(--display); margin:0; font-weight:700; font-size:clamp(38px,7vw,74px); line-height:1.03; letter-spacing:-.01em; text-wrap:balance; max-width:15ch;}
+  h1 em{font-style:italic; color:var(--gold-deep, var(--gold));}
+  [data-variant="reef"] h1 em{color:var(--gold); text-shadow:0 0 22px rgba(217,166,78,.45);}
+  .lede{margin-top:24px; font-size:19px; color:rgba(255,255,255,.82); max-width:46ch; line-height:1.6;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:16px; margin-top:38px;}
+  .btn{display:inline-flex; align-items:center; gap:9px; border-radius:999px; font-weight:700; font-size:15px; padding:15px 28px; text-decoration:none; border:1px solid transparent; cursor:pointer; font-family:var(--body); transition:transform .18s var(--ease-snap), box-shadow .18s var(--ease-snap), background-color .18s var(--ease-snap);}
+  .btn:hover{transform:translateY(-3px) scale(1.02);}
+  .btn-gold{background:var(--gold); color:#1a1305;}
+  .btn-gold:hover{box-shadow:0 14px 32px rgba(217,166,78,.4);}
+  [data-variant="reef"] .btn-gold:hover{box-shadow:0 0 40px rgba(217,166,78,.55);}
+  .btn-ghost{color:#fff; border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.06);}
+  .btn-ghost:hover{background:rgba(255,255,255,.16);}
+  .microline{margin-top:22px; font-family:var(--mono); font-size:13px; color:rgba(255,255,255,.55);}
+
+  /* ---- big bold wave (ambient, not hover-gated — ok to be seen instantly) ---- */
+  .hero-wave{position:absolute; bottom:-2px; left:0; width:220%; height:auto; z-index:1; animation:waveDrift 16s linear infinite;}
+  .hero-wave.w2{opacity:.5; animation-duration:23s; animation-direction:reverse;}
+  @keyframes waveDrift{ from{transform:translateX(0);} to{transform:translateX(-45.45%);} }
+
+  /* ---- floating shapes: bigger, always-drifting, clearly visible ---- */
+  .shape{position:absolute; border-radius:50%; border:2px solid var(--shape-color); pointer-events:none; z-index:2;}
+  [data-variant="reef"] .shape{box-shadow:0 0 30px var(--shape-color);}
+  .shape.fill{border:none; background:var(--shape-color); filter:blur(1px);}
+  .s1{width:220px; height:220px; top:8%; right:6%; animation:driftA 13s ease-in-out infinite;}
+  .s2{width:90px; height:90px; top:58%; right:20%; animation:driftB 9s ease-in-out infinite;}
+  .s3{width:46px; height:46px; top:20%; right:32%; animation:driftA 11s ease-in-out infinite reverse;}
+  .s4{width:130px; height:130px; bottom:-30px; left:4%; animation:driftB 15s ease-in-out infinite;}
+  @keyframes driftA{ 0%,100%{translate:0 0;} 50%{translate:-26px 22px;} }
+  @keyframes driftB{ 0%,100%{translate:0 0;} 50%{translate:20px -18px;} }
+
+  /* ---- product cards ---- */
+  .section{padding:80px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{color:var(--teal, var(--aqua));}
+  [data-variant="reef"] .section-head .eyebrow{color:var(--aqua);}
+  h2{font-family:var(--display); font-weight:700; font-size:clamp(28px,4vw,40px); margin:14px 0 0; color:var(--text); text-wrap:balance;}
+  .products-grid{display:grid; grid-template-columns:1fr; gap:24px; perspective:1400px;}
+  @media(min-width:760px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
+  .product-card{background:var(--card-bg); border:1px solid var(--card-border); border-radius:22px; padding:32px 28px; display:flex; flex-direction:column; gap:14px; text-decoration:none; color:var(--card-text); transition:transform .18s var(--ease-snap), box-shadow .18s var(--ease-snap), border-color .18s var(--ease-snap); backdrop-filter:blur(6px);}
+  [data-variant="reef"] .product-card{box-shadow:0 0 0 rgba(111,232,214,0);}
+  .product-card:hover{border-color:var(--gold); box-shadow:0 26px 54px rgba(11,42,46,.22);}
+  [data-variant="reef"] .product-card:hover{box-shadow:0 0 46px rgba(111,232,214,.22), 0 26px 54px rgba(0,0,0,.4);}
+  .product-card .tag{font-family:var(--mono); font-size:11.5px; color:var(--gold-deep, var(--gold)); text-transform:uppercase; letter-spacing:.1em; font-weight:700;}
+  .product-card h3{font-family:var(--display); font-size:23px; margin:0; font-weight:700;}
+  .product-card p{color:var(--card-sub); font-size:15px; margin:0; flex-grow:1; line-height:1.55;}
+  .product-card .see{font-size:14px; font-weight:700; color:var(--card-text); display:inline-flex; align-items:center; gap:6px;}
+  .product-card .see svg{transition:transform .18s var(--ease-snap);}
+  .product-card:hover .see svg{transform:translateX(5px);}
+
+  footer{padding:40px 0 60px; text-align:center; font-size:13px; color:var(--sub); font-family:var(--mono);}
+</style>
+
+<div class="switcher">
+  <p>Two bolder directions — try both:</p>
+  <button id="btnWake" class="active" onclick="setVariant('wake')">Deeper Wake</button>
+  <button id="btnReef" onclick="setVariant('reef')">Night Reef</button>
+</div>
+
+<div id="page" data-variant="wake">
+
+  <section class="hero" id="heroSection">
+    <svg class="hero-wave w1" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true"><path d="M0,120 C220,180 460,60 720,120 C980,180 1220,60 1440,120 L1440,240 L0,240 Z" fill="#FFFFFF" opacity=".14"/></svg>
+    <svg class="hero-wave w2" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true"><path d="M0,150 C260,80 520,190 800,130 C1040,80 1260,170 1440,130 L1440,240 L0,240 Z" fill="#FFFFFF" opacity=".18"/></svg>
+
+    <div class="shape s1"></div>
+    <div class="shape s2 fill"></div>
+    <div class="shape s3"></div>
+    <div class="shape s4"></div>
+
+    <div class="hero-inner">
+      <span class="eyebrow">Huvadhoo Maldives Travel</span>
+      <h1>Find your island. Know your <em>price</em>. Before you pay.</h1>
+      <p class="lede">Resorts, local-island guesthouses, honeymoons, family trips, diving, sport fishing, and island camping — matched by someone who actually lives here, with one clear total price, no surprises.</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-gold">Request a quote</a>
+        <a href="#" class="btn btn-ghost">See how it works</a>
+      </div>
+      <p class="microline">Typical reply time: under 15 minutes, 7am–11pm MVT</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Where to start</span>
+        <h2>Pick what you're planning</h2>
+      </div>
+      <div class="products-grid" id="cardGrid">
+        <a class="product-card" data-tilt href="#">
+          <span class="tag">All budgets</span>
+          <h3>Resorts</h3>
+          <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
+          <span class="see">See resort categories <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+        <a class="product-card" data-tilt href="#">
+          <span class="tag">Couples</span>
+          <h3>Honeymoon Packages</h3>
+          <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
+          <span class="see">See honeymoon options <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+        <a class="product-card" data-tilt href="#">
+          <span class="tag">Family</span>
+          <h3>Family Resort Packages</h3>
+          <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
+          <span class="see">See family options <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Preview only — not the live site. Real copy, placeholder motion tuned bolder for review.</footer>
+
+</div>
+
+<script>
+  function setVariant(v){
+    document.getElementById('page').setAttribute('data-variant', v);
+    document.getElementById('btnWake').classList.toggle('active', v === 'wake');
+    document.getElementById('btnReef').classList.toggle('active', v === 'reef');
+  }
+
+  // dramatic tilt — bigger angles than the real site, on purpose, for this pitch
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateY(${x * 16}deg) rotateX(${-y * 16}deg) translateY(-8px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      card.addEventListener('touchstart', () => { card.style.transform = 'scale(0.97)'; }, {passive:true});
+      card.addEventListener('touchend', () => { card.style.transform = ''; }, {passive:true});
+    });
+  }
+</script>
