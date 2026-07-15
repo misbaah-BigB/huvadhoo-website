@@ -86,14 +86,14 @@
 
   /* header */
   .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1400px; margin:0 auto; gap:16px;}
-  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
+  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--text); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
   .logo span{color:var(--teal);}
   nav.primary{display:none; gap:16px; align-items:center;}
   nav.primary a{text-decoration:none; font-size:13.5px; font-weight:600; color:var(--text); white-space:nowrap;}
   nav.primary a:hover{color:var(--teal-deep);}
   .head-actions{display:flex; align-items:center; gap:8px; flex-shrink:0;}
   @media(min-width:1420px){ nav.primary{display:flex;} }
-  .lang-switch{border-radius:999px; border:1px solid var(--sand-dark); background:transparent; color:var(--ink); font-family:var(--body); font-size:13px; font-weight:600; padding:9px 10px; cursor:pointer;}
+  .lang-switch{border-radius:999px; border:1px solid var(--sand-dark); background:transparent; color:var(--text); font-family:var(--body); font-size:13px; font-weight:600; padding:9px 10px; cursor:pointer;}
   /* below this width there isn't room for the switcher next to the logo,
      quote button, and menu icon — it moves into the mobile menu instead */
   @media(max-width:639px){
@@ -128,12 +128,12 @@
 
 
   /* trust strip */
-  .trust{background:var(--white); border-bottom:1px solid var(--sand-dark);}
+  .trust{background:var(--surface); border-bottom:1px solid var(--sand-dark);}
   .trust-grid{display:grid; grid-template-columns:1fr; gap:20px; padding:36px 0;}
   @media(min-width:760px){ .trust-grid{grid-template-columns:repeat(4,1fr);} }
   .trust-item{display:flex; gap:12px; align-items:flex-start;}
   .trust-dot{flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--gold); margin-top:8px;}
-  .trust-item strong{display:block; font-size:14.5px; color:var(--ink);}
+  .trust-item strong{display:block; font-size:14.5px; color:var(--text);}
   .trust-item span{font-size:13.5px; color:var(--sub);}
 
   /* section shell */
@@ -146,12 +146,12 @@
   .products-grid{display:grid; grid-template-columns:1fr; gap:18px; perspective:1200px;}
   @media(min-width:700px){ .products-grid{grid-template-columns:repeat(2,1fr);} }
   @media(min-width:1020px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
-  .product-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:10px; text-decoration:none; transition:box-shadow .15s ease, transform .12s ease-out; transform-style:preserve-3d; will-change:transform;}
+  .product-card{background:var(--surface); border:1px solid var(--sand-dark); border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:10px; text-decoration:none; transition:box-shadow .15s ease, transform .12s ease-out; transform-style:preserve-3d; will-change:transform;}
   .product-card:hover{box-shadow:0 10px 24px rgba(11,42,46,.08);}
   .product-card .tag{font-family:var(--mono); font-size:11.5px; color:var(--teal-deep); text-transform:uppercase; letter-spacing:.08em;}
   .product-card h3{font-size:19px; margin-top:2px;}
   .product-card p{color:var(--sub); font-size:14.5px; margin:0; flex-grow:1;}
-  .product-card .see{font-size:13.5px; font-weight:700; color:var(--ink); margin-top:6px;}
+  .product-card .see{font-size:13.5px; font-weight:700; color:var(--text); margin-top:6px;}
   .product-card .see::after{content:" \2192"; }
 
   /* atoll map */
@@ -198,7 +198,7 @@
 
   /* faq */
   .faq-item{border-bottom:1px solid var(--sand-dark);}
-  .faq-q{width:100%; text-align:left; background:none; border:none; padding:20px 4px; font-family:var(--body); font-size:16px; font-weight:600; color:var(--ink); display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .faq-q{width:100%; text-align:left; background:none; border:none; padding:20px 4px; font-family:var(--body); font-size:16px; font-weight:600; color:var(--text); display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
   .faq-q .plus{font-family:var(--mono); color:var(--teal-deep); font-size:18px;}
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
   .faq-a p{padding:0 4px 20px; color:var(--sub); font-size:14.5px; max-width:64ch;}
@@ -220,6 +220,36 @@
   /* mobile nav */
   .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
   @media(min-width:1420px){ .burger{display:none;} }
+
+  /* ---- Night Reef: dark theme, homepage only ----
+     Redefines the shared design tokens for this page only, so every
+     existing var(--token)-based rule above (and in assets/site.css)
+     repaints dark automatically. The other 33 pages are untouched. */
+  body{
+    --sand:#081C1F;
+    --sand-dark:rgba(111,232,214,.16);
+    --surface:#0F2B2C;
+    --ink:#040F11;
+    --text:#EAF5F2;
+    --sub:#9DC4BE;
+    --aqua:#6FE8D6;
+    --teal:#2DA391;
+    --teal-deep:#134240;
+    --gold-deep:#F2C468;
+  }
+  body header{background:rgba(4,15,17,.82);}
+  body .hero{background:radial-gradient(140% 100% at 50% 0%, #123634 0%, #0A2426 42%, #040F11 100%);}
+  body a[class$="-card"]:hover, body a[class*="-card "]:hover{
+    box-shadow:0 0 32px rgba(111,232,214,.18), 0 20px 40px rgba(0,0,0,.5);
+  }
+  body .atoll path[fill="#114C49"]{fill:#2DA391;}
+  body .atoll path[fill="#0B2A2E"]{fill:#6FE8D6;}
+  /* these three were dark-teal-on-white text in the light theme; on the
+     new dark surfaces that combination goes near-invisible, so give them
+     the brighter aqua accent instead */
+  body nav.primary a:hover{color:var(--aqua);}
+  body .product-card .tag{color:var(--aqua);}
+  body .faq-q .plus{color:var(--aqua);}
 </style>
 </head>
 <body>
@@ -256,7 +286,7 @@
       </select>
       <a href="#contact" class="btn btn-gold">Request a quote</a>
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="var(--text)" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
@@ -374,7 +404,7 @@
   </section>
 
   <!-- ATOLL MAP -->
-  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+  <section style="background:var(--surface); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Or explore visually</p>
@@ -447,7 +477,7 @@
             <g class="atoll" tabindex="0" data-name="Seenu Atoll" data-info="The southernmost atoll, partly below the equator — islands linked by a 14km causeway you can cycle across." onclick="selectAtoll(this)">
               <path d="M167.0,426.2 Q170.0,428.0 167.0,429.8 Q164.1,431.5 162.7,433.9 Q161.4,436.4 158.6,434.8 Q155.8,433.3 152.3,433.4 Q148.7,433.4 149.6,430.7 Q150.5,428.0 149.8,425.4 Q149.1,422.8 152.5,422.8 Q155.8,422.7 158.8,420.8 Q161.7,418.9 162.9,421.7 Q164.1,424.5 167.0,426.2 Z" fill="#1F7A6C"/>
             </g>
-            <path d="M0.0,-5.0 L1.18,-1.62 L4.76,-1.55 L1.9,0.62 L2.94,4.05 L0.0,2.0 L-2.94,4.05 L-1.9,0.62 L-4.76,-1.55 L-1.18,-1.62 Z" fill="var(--ink)" transform="translate(180,131)" opacity=".55" aria-hidden="true"/>
+            <path d="M0.0,-5.0 L1.18,-1.62 L4.76,-1.55 L1.9,0.62 L2.94,4.05 L0.0,2.0 L-2.94,4.05 L-1.9,0.62 L-4.76,-1.55 L-1.18,-1.62 Z" fill="var(--gold)" transform="translate(180,131)" opacity=".8" aria-hidden="true"/>
           </svg>
         </div>
         <div class="info-box" id="atollInfo" data-selected-label="Selected">
@@ -500,7 +530,7 @@
   </section>
 
   <!-- WHY US -->
-  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+  <section style="background:var(--surface); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Why book through us</p>

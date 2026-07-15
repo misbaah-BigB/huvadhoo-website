@@ -15,6 +15,13 @@
   --text:#16302E;
   --sub:#4C6763;
   --white:#FFFFFF;
+  /* --white is genuinely "white" — light text sitting on an already-dark
+     section (hero, footer, combo callout). --surface is a separate token
+     for card/form BACKGROUNDS that happen to equal white today; keeping
+     them distinct means a dark theme can redefine --surface to a dark
+     card color without also breaking every white-text-on-dark-bg usage
+     that (confusingly) used the same variable for the opposite role. */
+  --surface:#FFFFFF;
   --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --body: 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
@@ -40,7 +47,7 @@ body{margin:0; font-family:var(--body); color:var(--text); background:var(--sand
 a{color:inherit;}
 img{max-width:100%; display:block;}
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600;}
+h1,h2,h3{font-family:var(--display); margin:0; color:var(--text); font-weight:600;}
 .eyebrow{font-family:var(--body); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700; color:var(--teal);}
 :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
 
@@ -49,7 +56,7 @@ h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); font-weight:600
 header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--sand-dark);}
 
 /* quote form (homepage) */
-.qform{background:var(--white); border-radius:16px; padding:24px; color:var(--text);}
+.qform{background:var(--surface); border-radius:16px; padding:24px; color:var(--text);}
 .qform .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
 .qform label{font-size:12.5px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:6px;}
 .qform input, .qform select{width:100%; padding:11px 12px; border:1px solid var(--sand-dark); border-radius:10px; font-family:var(--body); font-size:14.5px; margin-bottom:14px; background:var(--sand); transition:border-color var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);}
@@ -74,7 +81,7 @@ header{position:sticky; top:0; z-index:50; background:rgba(245,238,223,0.92); ba
 .btn:active{transform:translateY(0) scale(.98); transition-duration:80ms;}
 .btn-gold{background:var(--gold); color:var(--ink) !important;}
 .btn-gold:hover{background:#c99539; box-shadow:0 6px 16px rgba(217,166,78,.35);}
-.btn-outline{border-color:var(--sand-dark); color:var(--ink); background:transparent;}
+.btn-outline{border-color:var(--sand-dark); color:var(--text); background:transparent;}
 .btn-outline:hover{background:var(--sand-dark); box-shadow:0 4px 12px rgba(11,42,46,.08);}
 .btn-ghost-dark{color:var(--white); border-color:rgba(255,255,255,.35);}
 .btn-ghost-dark:hover{background:rgba(255,255,255,.12); box-shadow:0 4px 14px rgba(0,0,0,.18);}
