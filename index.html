@@ -85,8 +85,11 @@
 <style>
   /* homepage-only tweaks */
   .hero-ocean{position:relative; min-height:92vh; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:150px 24px 80px; text-align:center;}
-  .hero-ocean::before{content:''; position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 0%, #0c3852 0%, #0a2035 45%, #050d1a 100%); z-index:0;}
-  .hero-ocean .glow-blob{z-index:0;}
+  .hero-ocean .hero-scrim{position:absolute; inset:0; z-index:1; background:
+    linear-gradient(to bottom, rgba(5,13,26,.35) 0%, rgba(5,13,26,.55) 55%, rgba(5,13,26,.92) 100%),
+    radial-gradient(120% 90% at 50% 0%, rgba(10,32,53,.35) 0%, rgba(5,13,26,.55) 60%, rgba(5,13,26,.85) 100%);}
+  .hero-ocean .glow-blob{z-index:1;}
+  .hero-ocean .float-shape{z-index:1;}
   .hero-ocean .blob-a{top:-140px; left:-100px; background:rgba(14,165,233,.18);}
   .hero-ocean .blob-b{bottom:-180px; right:-120px; background:rgba(45,212,191,.14);}
   .hero-ocean .shape-a{top:14%; left:8%; width:80px; height:80px; border-color:rgba(56,189,248,.2);}
@@ -214,6 +217,8 @@
 
   <!-- HERO -->
   <section class="hero-ocean" id="waveHero">
+    <div class="hero-media" aria-hidden="true"><img src="assets/overwater-villas-aerial.jpg" alt=""></div>
+    <span class="hero-scrim"></span>
     <span class="glow-blob blob-a"></span>
     <span class="glow-blob blob-b"></span>
     <span class="float-shape shape-a float-a"></span>
@@ -256,46 +261,67 @@
       </div>
       <div class="card-grid">
         <a class="prod-card" data-tilt href="resorts.html">
-          <span class="tag">All budgets</span>
-          <h3>Resorts</h3>
-          <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
-          <span class="see">See resort categories →</span>
+          <div class="card-media"><img src="assets/resort-pool-beach-aerial.jpg" alt="Aerial view of a Maldives resort pool and beach loungers"></div>
+          <div class="card-body">
+            <span class="tag">All budgets</span>
+            <h3>Resorts</h3>
+            <p>From budget-luxury to private-island ultra-luxury — matched by house reef, distance from Male, and what you actually want.</p>
+            <span class="see">See resort categories →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="honeymoon.html">
-          <span class="tag">Couples</span>
-          <h3>Honeymoon Packages</h3>
-          <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
-          <span class="see">See honeymoon options →</span>
+          <div class="card-media"><img src="assets/honeymoon-beach-dinner-lights.jpeg" alt="Private candlelit beach dinner under palm trees at dusk"></div>
+          <div class="card-body">
+            <span class="tag">Couples</span>
+            <h3>Honeymoon Packages</h3>
+            <p>Water villas, private dining, and resorts actually chosen for privacy — not just any 5-star with a honeymoon flyer.</p>
+            <span class="see">See honeymoon options →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="family.html">
-          <span class="tag">Family</span>
-          <h3>Family Resort Packages</h3>
-          <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
-          <span class="see">See family options →</span>
+          <div class="card-media"><img src="assets/baby-reef-sharks-shallows.jpeg" alt="Baby reef sharks swimming in shallow water"></div>
+          <div class="card-body">
+            <span class="tag">Family</span>
+            <h3>Family Resort Packages</h3>
+            <p>Real kids' clubs, shallow house reefs, and room configurations matched to your children's ages.</p>
+            <span class="see">See family options →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="guesthouses.html">
-          <span class="tag">Budget</span>
-          <h3>Local Island Guesthouses</h3>
-          <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
-          <span class="see">See guesthouse options →</span>
+          <div class="card-media"><img src="assets/thinadhoo-palm-swing.jpg" alt="Woman on a palm-tree swing on a local island beach"></div>
+          <div class="card-body">
+            <span class="tag">Budget</span>
+            <h3>Local Island Guesthouses</h3>
+            <p>Clean, well-reviewed stays on inhabited islands — real beaches and food, a fraction of resort cost.</p>
+            <span class="see">See guesthouse options →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="diving.html">
-          <span class="tag">Diving</span>
-          <h3>Diving &amp; Snorkeling</h3>
-          <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
-          <span class="see">See diving options →</span>
+          <div class="card-media"><img src="assets/shipwreck-diver-split-shot.jpg" alt="Diver exploring a shipwreck, half-underwater split shot"></div>
+          <div class="card-body">
+            <span class="tag">Diving</span>
+            <h3>Diving &amp; Snorkeling</h3>
+            <p>House reefs and liveaboards near manta stations, channels, and wrecks — PADI/SSI-certified only.</p>
+            <span class="see">See diving options →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="fishing.html">
-          <span class="tag">Sport fishing</span>
-          <h3>Sport Fishing Charters</h3>
-          <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
-          <span class="see">See fishing options →</span>
+          <div class="card-media"><img src="assets/dhoni-boat-sunset.jpeg" alt="Traditional Maldivian dhoni boat at sunset"></div>
+          <div class="card-body">
+            <span class="tag">Sport fishing</span>
+            <h3>Sport Fishing Charters</h3>
+            <p>Half-day, full-day, and night charters with licensed boats, timed to the best fishing windows.</p>
+            <span class="see">See fishing options →</span>
+          </div>
         </a>
         <a class="prod-card" data-tilt href="camping.html">
-          <span class="tag">Adventure</span>
-          <h3>Uninhabited Island Camping</h3>
-          <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
-          <span class="see">See camping options →</span>
+          <div class="card-media"><img src="assets/sandbank-solo-celebration.jpg" alt="Solo traveler celebrating on an empty sandbank"></div>
+          <div class="card-body">
+            <span class="tag">Adventure</span>
+            <h3>Uninhabited Island Camping</h3>
+            <p>Permitted, guided overnight or day trips — the only legal and safe way to do this in the Maldives.</p>
+            <span class="see">See camping options →</span>
+          </div>
         </a>
       </div>
     </div>
