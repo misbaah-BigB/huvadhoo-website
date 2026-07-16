@@ -6,84 +6,19 @@
 <title>The Maldives Guide — Blog | Huvadhoo Maldives Travel</title>
 <meta name="description" content="Plain-language guides on Maldives resorts, guesthouses, transfers, costs, and culture — written to answer the questions tourists actually have.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="assets/site.css">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-
-  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
-  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
-  .logo span{color:var(--teal);}
-  nav.primary{display:none; gap:20px; align-items:center;}
-  nav.primary a{text-decoration:none; font-size:13px; font-weight:600; color:var(--text);}
-  nav.primary a.active{color:var(--teal-deep); border-bottom:2px solid var(--gold); padding-bottom:2px;}
-  nav.primary a:hover{color:var(--teal-deep);}
-  .head-actions{display:flex; align-items:center; gap:10px;}
-  @media(min-width:1000px){ nav.primary{display:flex;} }
-  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
-  @media(max-width:639px){
-    .headbar{padding:13px 14px; gap:6px;}
-    .head-actions{gap:6px;}
-    .logo{font-size:14px;}
-    .head-actions .btn-gold{padding:8px 12px; font-size:12px;}
-    .burger{padding:7px 9px;}
-  }
-  @media(max-width:374px){
-    .headbar{padding:12px 8px; gap:3px;}
-    .head-actions{gap:3px;}
-    .logo{font-size:11.5px;}
-    .head-actions .btn-gold{padding:7px 8px; font-size:10.5px;}
-    .burger{padding:6px 7px;}
-  }
-  @media(min-width:1000px){ .burger{display:none;} }
-
-  .pagehero{background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white); padding:56px 0 60px;}
-  .pagehero h1{color:var(--white); font-size:clamp(28px,4.4vw,42px); max-width:22ch;}
-  .pagehero p{color:#DCEEEA; margin-top:14px; max-width:56ch; font-size:16.5px;}
-  .breadcrumb{font-size:13px; color:#BFDFDA; font-family:var(--mono); margin-bottom:14px;}
-  .breadcrumb a{color:#DCEEEA; text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
-
-  /* filter chips */
-  .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
-  .chip{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.05em; padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.12); color:#DCEEEA; border:1px solid rgba(255,255,255,.24); cursor:pointer;}
-  .chip.active{background:var(--gold); color:var(--ink); border-color:var(--gold);}
-
-  section{padding:56px 0 64px;}
-
-  .post-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-  @media(min-width:700px){ .post-grid{grid-template-columns:repeat(2,1fr);} }
-  @media(min-width:1020px){ .post-grid{grid-template-columns:repeat(3,1fr);} }
-  .post-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease;}
-  .post-card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(11,42,46,.08);}
-  .post-card .cat{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:999px; width:fit-content;}
-  .cat-planning{background:#E7F0EE; color:var(--teal-deep);}
-  .cat-budget{background:#FBF0DC; color:#9A6A17;}
-  .cat-transfers{background:#E4EEF6; color:#2B5C86;}
-  .cat-culture{background:#F3E7EE; color:#8A3F63;}
-  .cat-islands{background:#E9F3E4; color:#3E6B2A;}
-  .post-card h3{font-size:18px; margin-top:2px;}
-  .post-card p{color:var(--sub); font-size:14px; margin:0; flex-grow:1;}
-  .post-card .meta{font-size:12.5px; color:var(--sub); font-family:var(--mono); display:flex; justify-content:space-between; margin-top:6px;}
-  .post-card .read{font-size:13.5px; font-weight:700; color:var(--ink);}
-  .post-card .read::after{content:" \2192";}
-
-  .cta-band{background:linear-gradient(160deg, var(--teal-deep), var(--ink)); color:var(--white); border-radius:24px; padding:40px; text-align:center; margin-top:56px;}
-  .cta-band h2{color:var(--white); font-size:clamp(22px,3vw,28px);}
-  .cta-band p{color:#CFE3DF; margin-top:10px; font-size:15px;}
-  .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;}
-
-  footer .logo{color:var(--white);} footer .logo span{color:var(--aqua);}
-  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
-
-  /* floating contact options (WhatsApp / Telegram / WeChat) */
-
-  /* shared contact button + footer link styles */
-</style>
+<link rel="stylesheet" href="assets/ocean-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="ocean">
 
-<header>
+<a href="#main" class="skip-link" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+
+<header class="site-head">
   <div class="headbar">
-    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">H</span>
+      <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+    </a>
     <nav class="primary">
       <a href="resorts.html">Resorts</a>
       <a href="guesthouses.html">Guesthouses</a>
@@ -97,9 +32,9 @@
       <a href="index.html#contact">Contact</a>
     </nav>
     <div class="head-actions">
-      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <a href="index.html#contact" class="btn btn-primary btn-sm">Request a quote</a>
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
@@ -112,19 +47,18 @@
     <a href="diving.html">Diving</a>
     <a href="fishing.html">Fishing</a>
     <a href="camping.html">Camping</a>
-    <a href="blog.html">Blog</a>
+    <a href="blog.html" class="active">Blog</a>
     <a href="index.html#contact">Contact</a>
   </div>
 </header>
 
-<main>
-  <section class="pagehero" style="padding-top:40px;">
-    <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
+<main id="main">
+  <section class="pagehero">
     <div class="wrap">
       <div class="breadcrumb"><a href="index.html">Home</a> / Blog</div>
-      <p class="eyebrow" style="color:#CFE3DF;">The Maldives Guide</p>
+      <p class="eyebrow">The Maldives Guide</p>
       <h1>Plain answers to the questions tourists actually ask</h1>
-      <p>No fluff, no filler — just clear guides on picking, planning, and paying for a Maldives trip, written by people who live here.</p>
+      <p class="lede">No fluff, no filler — just clear guides on picking, planning, and paying for a Maldives trip, written by people who live here.</p>
       <div class="chip-row" id="chipRow">
         <button class="chip active" data-filter="all">All</button>
         <button class="chip" data-filter="planning">Planning</button>
@@ -145,7 +79,7 @@
           <h3>Resort vs. Guesthouse: Which Is Actually Better For You?</h3>
           <p>The honest tradeoffs — cost, privacy, culture, and what you actually give up either way.</p>
           <div class="meta"><span>7 min read</span><span>Start here</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="maldives-cost-explained.html" data-cat="budget">
@@ -153,7 +87,7 @@
           <h3>How Much Does a Maldives Trip Really Cost?</h3>
           <p>A realistic budget breakdown by trip style, from backpacker guesthouse to private-island luxury.</p>
           <div class="meta"><span>6 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="speedboat-vs-seaplane.html" data-cat="transfers">
@@ -161,7 +95,7 @@
           <h3>Speedboat vs. Seaplane: The Simple Explanation</h3>
           <p>What actually decides which transfer you'll need — and why seaplanes don't fly at night.</p>
           <div class="meta"><span>4 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="budget-islands-maldives.html" data-cat="islands">
@@ -169,7 +103,7 @@
           <h3>Best Maldives Islands for Budget Travelers</h3>
           <p>Six local islands compared — vibe, price, and what each one is actually known for.</p>
           <div class="meta"><span>8 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="alcohol-local-islands.html" data-cat="culture">
@@ -177,7 +111,7 @@
           <h3>Is Alcohol Allowed on Local Islands?</h3>
           <p>The short answer is no — here's why, and what that actually means for your trip.</p>
           <div class="meta"><span>3 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="what-is-a-bikini-beach.html" data-cat="culture">
@@ -185,7 +119,7 @@
           <h3>What Is a Bikini Beach?</h3>
           <p>The one part of a local island where swimwear is fully fine — and why it exists.</p>
           <div class="meta"><span>3 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="best-time-to-visit-maldives.html" data-cat="planning">
@@ -193,7 +127,7 @@
           <h3>Best Time to Visit the Maldives</h3>
           <p>Dry season, wet season, manta season — what each actually means for your trip.</p>
           <div class="meta"><span>6 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="all-inclusive-explained.html" data-cat="budget">
@@ -201,7 +135,7 @@
           <h3>What's Actually Included in an "All-Inclusive" Resort?</h3>
           <p>The fine print resorts don't lead with — premium drinks, excursions, and spa credits.</p>
           <div class="meta"><span>5 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
         <a class="post-card" href="maldives-packing-checklist.html" data-cat="planning">
@@ -209,7 +143,7 @@
           <h3>Maldives Packing Checklist</h3>
           <p>What to actually bring — reef-safe sunscreen, modest cover-ups, and the things people forget.</p>
           <div class="meta"><span>4 min read</span><span>Read now</span></div>
-          <span class="read">Read the guide</span>
+          <span class="read">Read the guide →</span>
         </a>
 
       </div>
@@ -218,15 +152,15 @@
 
   <section style="padding-top:0;">
     <div class="wrap">
-      <div class="cta-band">
-        <p class="eyebrow" style="color:var(--aqua);">Still have questions?</p>
+      <div class="cta-band-center">
+        <p class="eyebrow">Still have questions?</p>
         <h2>Skip the reading — just ask us on WhatsApp</h2>
         <p>A real answer, usually within 15 minutes during Maldives daytime hours.</p>
         <div class="cta-row">
-          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
-          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
-          <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-          <a href="index.html#contact" class="btn btn-ghost-dark">Request a written quote</a>
+          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-primary">Message us on WhatsApp</a>
+          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost btn-sm">Telegram</a>
+          <a href="weixin://" data-channel="wechat" class="btn btn-ghost btn-sm">WeChat: WECHAT_ID</a>
+          <a href="index.html#contact" class="btn btn-ghost">Request a written quote</a>
         </div>
       </div>
     </div>
@@ -236,9 +170,12 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <a href="index.html" class="brand" style="margin-bottom:16px; display:inline-flex;">
+        <span class="brand-mark">H</span>
+        <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+      </a>
+      <p class="tag">A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+      <h4 style="margin-top:26px;">Contact us</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
@@ -286,6 +223,10 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     WeChat: WECHAT_ID
   </a>
+</div>
+
+<div class="back-to-top glass-strong" id="backToTop" aria-label="Back to top">
+  <svg class="icn" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </div>
 
 <script src="assets/motion.js"></script>

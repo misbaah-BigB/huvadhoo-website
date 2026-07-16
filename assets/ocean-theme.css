@@ -309,6 +309,55 @@ body.ocean{
 .ocean .promise-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:16px; padding:22px;}
 .ocean .promise-card h3{font-size:16px; font-weight:500;} .ocean .promise-card p{color:var(--text-dim); font-size:14px; margin-top:8px; font-weight:300;}
 
+/* ---- decision flow (transfer guide) ---- */
+.ocean .flow{display:grid; grid-template-columns:1fr; gap:14px; position:relative; z-index:1;}
+.ocean .flow-step{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:14px; padding:20px 22px; display:flex; gap:16px; align-items:flex-start;}
+.ocean .flow-step .q{font-family:var(--mono); font-size:12px; color:var(--turq-400); font-weight:600; white-space:nowrap; padding-top:2px;}
+.ocean .flow-step .a{color:var(--text-dim); font-size:14.5px; font-weight:300;}
+.ocean .flow-step .a strong{color:var(--text); font-weight:500;}
+
+/* ---- mistake cards (transfer guide) ---- */
+.ocean .mistake-grid{display:grid; grid-template-columns:1fr; gap:18px; position:relative; z-index:1;}
+@media(min-width:760px){ .ocean .mistake-grid{grid-template-columns:repeat(3,1fr);} }
+.ocean .mistake-card{border-left:2px solid var(--coral-400); padding-left:18px;}
+.ocean .mistake-card h3{font-size:16.5px; font-weight:500;} .ocean .mistake-card p{font-size:14px; color:var(--text-dim); margin-top:8px; font-weight:300;}
+
+/* ---- worked-example receipt (cost guide) ---- */
+.ocean .worked{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:20px; padding:32px; position:relative; z-index:1;}
+.ocean .worked h3{font-size:16px; margin-bottom:16px; font-weight:500;}
+.ocean .worked .row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--border); font-size:14.5px; font-family:var(--mono); color:var(--text-dim);}
+.ocean .worked .row.total{border-bottom:none; border-top:2px solid var(--coral-400); margin-top:6px; padding-top:16px; font-weight:600; font-size:17px; color:var(--text);}
+
+/* ---- rule cards with icon (local island rules) ---- */
+.ocean .rules-grid{display:grid; grid-template-columns:1fr; gap:16px; position:relative; z-index:1;}
+@media(min-width:700px){ .ocean .rules-grid{grid-template-columns:repeat(2,1fr);} }
+.ocean .rule-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:16px; padding:22px; display:flex; gap:14px; align-items:flex-start;}
+.ocean .rule-card .icon{width:36px; height:36px; border-radius:10px; background:rgba(45,212,191,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;}
+.ocean .rule-card h3{font-size:16px; font-weight:500;} .ocean .rule-card p{color:var(--text-dim); font-size:14px; margin-top:6px; font-weight:300;}
+
+/* ---- reassurance callout (dark-on-dark panel) ---- */
+.ocean .reassure{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:20px; padding:32px; position:relative; z-index:1;}
+.ocean .reassure p{color:var(--text-dim); margin-top:12px; font-size:15px; max-width:70ch; font-weight:300;}
+
+/* ---- blog filter chips ---- */
+.ocean .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; position:relative; z-index:2;}
+.ocean .chip{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.05em; padding:7px 14px; border-radius:999px; background:var(--glass-bg); color:var(--text-dim); border:1px solid var(--border); cursor:pointer;}
+.ocean .chip.active{background:linear-gradient(90deg,var(--coral-500),var(--coral-400)); color:#fff; border-color:transparent;}
+
+/* ---- blog post cards ---- */
+.ocean .post-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none; color:var(--text); transition:transform .3s var(--ease-out), box-shadow .3s var(--ease-out);}
+.ocean .post-card:hover{box-shadow:0 16px 40px -12px rgba(14,165,233,.25);}
+.ocean .post-card .cat{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:999px; width:fit-content;}
+.ocean .cat-planning{background:rgba(56,189,248,.14); color:var(--ocean-300);}
+.ocean .cat-budget{background:rgba(251,191,36,.14); color:#fbbf24;}
+.ocean .cat-transfers{background:rgba(45,212,191,.14); color:var(--turq-400);}
+.ocean .cat-culture{background:rgba(167,139,250,.14); color:#c4b5fd;}
+.ocean .cat-islands{background:rgba(251,113,133,.14); color:var(--coral-400);}
+.ocean .post-card h3{font-size:18px; margin-top:2px; font-weight:500;}
+.ocean .post-card p{color:var(--text-dim); font-size:14px; margin:0; flex-grow:1; font-weight:300;}
+.ocean .post-card .meta{font-size:12.5px; color:var(--text-faint); font-family:var(--mono); display:flex; justify-content:space-between; margin-top:6px;}
+.ocean .post-card .read{font-size:13.5px; font-weight:500; color:var(--ocean-400);}
+
 /* ---- FAQ ---- */
 .ocean .faq-item{border-bottom:1px solid var(--border);}
 .ocean .faq-q{width:100%; text-align:left; background:none; border:none; padding:22px 4px; font-family:var(--sans); font-size:16px; font-weight:500; color:var(--text); display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:16px;}
