@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huvadhoo Maldives Travel | Discover Paradise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0a1628',950:'#050d1a' },
+                        turq: { 400:'#2dd4bf',500:'#14b8a6',600:'#0d9488' },
+                        sand: { 100:'#fef7ed',200:'#f5e6d3',300:'#f0d9be' },
+                        coral: { 400:'#fb7185',500:'#f43f5e',600:'#e11d48' }
+                    },
+                    fontFamily: { sans:['Inter','sans-serif'], serif:['Playfair Display','serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .preloader{position:fixed;inset:0;z-index:9999;background:#050d1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s ease,visibility .8s ease}
+        .preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .preloader-wave{display:flex;gap:6px;align-items:end;height:40px}
+        .preloader-wave span{display:block;width:4px;background:linear-gradient(to top,#0ea5e9,#2dd4bf);border-radius:2px;animation:wave 1.2s ease-in-out infinite}
+        .preloader-wave span:nth-child(1){height:20px;animation-delay:0s}
+        .preloader-wave span:nth-child(2){height:30px;animation-delay:.1s}
+        .preloader-wave span:nth-child(3){height:40px;animation-delay:.2s}
+        .preloader-wave span:nth-child(4){height:30px;animation-delay:.3s}
+        .preloader-wave span:nth-child(5){height:20px;animation-delay:.4s}
+        @keyframes wave{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+
+        .tilt-card{transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .3s ease}
+        .tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s ease;z-index:10}
+        .tilt-card:hover .tilt-glare{opacity:1}
+
+        .glass{background:rgba(255,255,255,.07);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1)}
+        .glass-strong{background:rgba(5,13,26,.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.08)}
+
+        @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-18px) rotate(1.5deg)}66%{transform:translateY(-8px) rotate(-1deg)}}
+        @keyframes floatR{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(12px) rotate(-1.5deg)}66%{transform:translateY(5px) rotate(1deg)}}
+        .float{animation:float 6s ease-in-out infinite}
+        .float-r{animation:floatR 7s ease-in-out infinite}
+        .float-slow{animation:float 10s ease-in-out infinite}
+
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+        .reveal.active{opacity:1;transform:translateY(0)}
+        .reveal-l{opacity:0;transform:translateX(-60px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+        .reveal-l.active{opacity:1;transform:translateX(0)}
+        .reveal-r{opacity:0;transform:translateX(60px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+        .reveal-r.active{opacity:1;transform:translateX(0)}
+        .reveal-scale{opacity:0;transform:scale(.85);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+        .reveal-scale.active{opacity:1;transform:scale(1)}
+
+        @keyframes slideUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+        .hero-anim{animation:slideUp 1s cubic-bezier(.16,1,.3,1) forwards;opacity:0}
+        .hero-anim:nth-child(1){animation-delay:.6s}
+        .hero-anim:nth-child(2){animation-delay:.8s}
+        .hero-anim:nth-child(3){animation-delay:1s}
+        .hero-anim:nth-child(4){animation-delay:1.2s}
+        .hero-anim:nth-child(5){animation-delay:1.4s}
+
+        .gradient-text{background:linear-gradient(135deg,#0ea5e9,#2dd4bf,#0ea5e9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gShift 4s ease infinite}
+        @keyframes gShift{0%{background-position:0% center}50%{background-position:100% center}100%{background-position:0% center}}
+
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .marquee-track{animation:marquee 35s linear infinite}
+        .marquee-track:hover{animation-play-state:paused}
+
+        .nav-link{position:relative}
+        .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,#0ea5e9,#2dd4bf);transition:width .3s ease;border-radius:1px}
+        .nav-link:hover::after{width:100%}
+
+        .gallery-item{overflow:hidden;border-radius:16px}
+        .gallery-item img{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+        .gallery-item:hover img{transform:scale(1.1)}
+        .gallery-item .g-overlay{opacity:0;transition:opacity .4s ease}
+        .gallery-item:hover .g-overlay{opacity:1}
+
+        .toast{position:fixed;bottom:32px;right:32px;z-index:9000;transform:translateY(120px);opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1)}
+        .toast.show{transform:translateY(0);opacity:1}
+
+        html{scroll-behavior:smooth}
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:#050d1a}
+        ::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#0ea5e9,#2dd4bf);border-radius:3px}
+
+        .stagger>*{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+        .stagger.active>*:nth-child(1){transition-delay:.05s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(2){transition-delay:.12s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(3){transition-delay:.19s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(4){transition-delay:.26s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(5){transition-delay:.33s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(6){transition-delay:.4s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(7){transition-delay:.47s;opacity:1;transform:none}
+        .stagger.active>*:nth-child(8){transition-delay:.54s;opacity:1;transform:none}
+
+        .exp-card{transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s ease}
+        .exp-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px -15px rgba(14,165,233,.25)}
+
+        .form-group{position:relative}
+        .form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 20px;color:#fff;width:100%;font-size:15px;transition:all .3s ease;outline:none;font-family:Inter,sans-serif}
+        .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15);background:rgba(255,255,255,.08)}
+        .form-group label{position:absolute;left:20px;top:16px;color:rgba(255,255,255,.4);font-size:15px;pointer-events:none;transition:all .3s ease;background:transparent;padding:0 4px}
+        .form-group input:focus~label,.form-group input:not(:placeholder-shown)~label,
+        .form-group textarea:focus~label,.form-group textarea:not(:placeholder-shown)~label,
+        .form-group select:focus~label,.form-group select:valid~label{top:-10px;left:16px;font-size:12px;color:#0ea5e9;background:#0a1628}
+
+        @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-10%)}30%{transform:translate(3%,-15%)}50%{transform:translate(12%,9%)}70%{transform:translate(9%,4%)}90%{transform:translate(-1%,7%)}}
+        .grain::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");animation:grain 8s steps(10) infinite;pointer-events:none;z-index:1}
+
+        .back-to-top{position:fixed;bottom:32px;left:32px;z-index:8000;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .4s ease;pointer-events:none}
+        .back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+        .back-to-top:hover{transform:translateY(-4px)}
+    </style>
+</head>
+<body class="bg-ocean-950 text-white font-sans overflow-x-hidden">
+
+<div class="preloader" id="preloader">
+    <div class="preloader-wave"><span></span><span></span><span></span><span></span><span></span></div>
+    <p class="text-sm tracking-[0.3em] uppercase text-ocean-400 font-light">Loading Paradise</p>
+</div>
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean-500 to-turq-400 flex items-center justify-center text-white font-serif font-bold text-lg group-hover:scale-110 transition-transform duration-300">H</div>
+                <div class="hidden sm:block">
+                    <span class="font-serif text-lg font-medium tracking-tight">Huvadhoo</span>
+                    <span class="block text-[10px] tracking-[0.25em] uppercase text-ocean-400 -mt-0.5">Maldives Travel</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#about" class="nav-link text-sm font-medium text-white/70 hover:text-white transition-colors">About</a>
+                <a href="#packages" class="nav-link text-sm font-medium text-white/70 hover:text-white transition-colors">Packages</a>
+                <a href="#experiences" class="nav-link text-sm font-medium text-white/70 hover:text-white transition-colors">Experiences</a>
+                <a href="#gallery" class="nav-link text-sm font-medium text-white/70 hover:text-white transition-colors">Gallery</a>
+                <a href="#testimonials" class="nav-link text-sm font-medium text-white/70 hover:text-white transition-colors">Reviews</a>
+                <a href="#contact" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-ocean-500 to-turq-500 rounded-full text-sm font-medium hover:shadow-lg hover:shadow-ocean-500/25 hover:-translate-y-0.5 transition-all duration-300">Book Now</a>
+            </div>
+            <button id="menuBtn" class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 group" aria-label="Menu">
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 group-[.open]:opacity-0"></span>
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+            </button>
+        </div>
+    </div>
+    <div id="mobileMenu" class="lg:hidden absolute top-full left-0 right-0 glass-strong opacity-0 -translate-y-4 pointer-events-none transition-all duration-300">
+        <div class="px-6 py-8 flex flex-col gap-6">
+            <a href="#about" class="text-lg font-light text-white/80 hover:text-white transition-colors mobile-link">About</a>
+            <a href="#packages" class="text-lg font-light text-white/80 hover:text-white transition-colors mobile-link">Packages</a>
+            <a href="#experiences" class="text-lg font-light text-white/80 hover:text-white transition-colors mobile-link">Experiences</a>
+            <a href="#gallery" class="text-lg font-light text-white/80 hover:text-white transition-colors mobile-link">Gallery</a>
+            <a href="#testimonials" class="text-lg font-light text-white/80 hover:text-white transition-colors mobile-link">Reviews</a>
+            <a href="#contact" class="mt-2 px-6 py-3 bg-gradient-to-r from-ocean-500 to-turq-500 rounded-full text-center font-medium mobile-link">Book Now</a>
+        </div>
+    </div>
+</nav>
+
+<section id="hero" class="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden grain">
+    <div id="heroBg" class="absolute inset-0 transition-transform duration-100 ease-out will-change-transform" style="transform:scale(1.1)">
+        <img src="https://picsum.photos/seed/maldives-atoll-aerial/1920/1080" alt="Huvadhoo Atoll" class="w-full h-full object-cover">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-ocean-950/70 via-ocean-950/40 to-ocean-950/90"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ocean-950/50 to-transparent"></div>
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div id="float1" class="absolute top-[15%] left-[8%] w-20 h-20 border border-ocean-400/20 rounded-full float will-change-transform"></div>
+        <div id="float2" class="absolute top-[25%] right-[12%] w-32 h-32 border border-turq-400/10 rounded-full float-r will-change-transform"></div>
+        <div id="float3" class="absolute bottom-[25%] left-[15%] w-2 h-2 bg-ocean-400/40 rounded-full float-slow will-change-transform"></div>
+        <div id="float4" class="absolute bottom-[30%] right-[20%] w-3 h-3 bg-turq-400/30 rounded-full float will-change-transform"></div>
+        <div id="float5" class="absolute top-[60%] left-[5%] w-16 h-16 border border-white/5 rounded-2xl rotate-45 float-r will-change-transform"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div class="hero-anim">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs tracking-[0.2em] uppercase text-ocean-300 mb-8">
+                <span class="w-1.5 h-1.5 bg-turq-400 rounded-full"></span>
+                Huvadhoo Atoll, Maldives
+            </span>
+        </div>
+        <h1 class="hero-anim font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-[0.95] tracking-tight mb-6">
+            Discover<br>
+            <span class="gradient-text italic">Untouched</span><br>
+            Paradise
+        </h1>
+        <p class="hero-anim text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+            Experience the Maldives as it was meant to be — pristine, personal, and profoundly beautiful. Huvadhoo awaits.
+        </p>
+        <div class="hero-anim flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#packages" class="group px-8 py-4 bg-gradient-to-r from-ocean-500 to-turq-500 rounded-full font-medium text-base hover:shadow-xl hover:shadow-ocean-500/30 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                Explore Packages
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="#about" class="px-8 py-4 rounded-full glass font-medium text-base hover:bg-white/15 transition-all duration-300 flex items-center gap-2">
+                <i data-lucide="play-circle" class="w-4 h-4"></i>
+                Learn More
+            </a>
+        </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 hero-anim">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-white/30">Scroll</span>
+        <div class="w-5 h-8 border border-white/20 rounded-full flex justify-center pt-1.5">
+            <div class="w-1 h-2 bg-white/50 rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<div class="relative py-5 bg-gradient-to-r from-ocean-500 via-turq-500 to-ocean-500 overflow-hidden">
+    <div class="flex marquee-track whitespace-nowrap">
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="waves" class="w-4 h-4"></i> Crystal Clear Waters</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="star" class="w-4 h-4"></i> 5-Star Experiences</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="fish" class="w-4 h-4"></i> World-Class Diving</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="sun" class="w-4 h-4"></i> Year-Round Sunshine</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="heart" class="w-4 h-4"></i> Honeymoon Paradise</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="palmtree" class="w-4 h-4"></i> Private Islands</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="waves" class="w-4 h-4"></i> Crystal Clear Waters</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="star" class="w-4 h-4"></i> 5-Star Experiences</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="fish" class="w-4 h-4"></i> World-Class Diving</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="sun" class="w-4 h-4"></i> Year-Round Sunshine</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="heart" class="w-4 h-4"></i> Honeymoon Paradise</span>
+        <span class="mx-8 text-sm font-medium tracking-widest uppercase flex items-center gap-3"><i data-lucide="palmtree" class="w-4 h-4"></i> Private Islands</span>
+    </div>
+</div>
+
+<section id="about" class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal-l relative">
+                <div class="relative rounded-3xl overflow-hidden aspect-[4/5]">
+                    <img src="https://picsum.photos/seed/maldives-beach-walk/800/1000" alt="Huvadhoo Beach" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/60 to-transparent"></div>
+                </div>
+                <div class="absolute -bottom-6 -right-6 md:right-8 glass rounded-2xl p-6 float">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-ocean-500 to-turq-500 flex items-center justify-center">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-serif font-semibold">Huvadhoo</div>
+                            <div class="text-xs text-white/50 tracking-wider uppercase">One of the Largest Atolls</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-ocean-500/30 rounded-tl-3xl"></div>
+            </div>
+            <div class="reveal-r">
+                <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">About Huvadhoo</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-6 leading-tight">
+                    Where the Ocean<br>Meets <span class="italic text-turq-400">Serenity</span>
+                </h2>
+                <p class="text-white/60 font-light leading-relaxed mb-6 text-lg">
+                    Huvadhoo Atoll, one of the largest and most unspoiled atolls in the Maldives, remains a hidden gem far from the crowded resort islands. Here, time moves at the rhythm of the tides.
+                </p>
+                <p class="text-white/50 font-light leading-relaxed mb-10">
+                    With its vibrant coral reefs, bioluminescent shores, and warm local communities, Huvadhoo offers an authentic Maldivian experience that luxury resorts simply cannot replicate. We are here to guide you through every moment.
+                </p>
+                <div class="grid grid-cols-3 gap-6 stagger" id="statsGrid">
+                    <div class="text-center md:text-left">
+                        <div class="text-3xl md:text-4xl font-serif font-semibold gradient-text counter" data-target="200">0</div>
+                        <div class="text-xs text-white/40 mt-1 tracking-wider uppercase">Islands</div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <div class="text-3xl md:text-4xl font-serif font-semibold gradient-text counter" data-target="50">0</div>
+                        <div class="text-xs text-white/40 mt-1 tracking-wider uppercase">Dive Sites</div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <div class="text-3xl md:text-4xl font-serif font-semibold gradient-text counter" data-target="30">0</div>
+                        <div class="text-xs text-white/40 mt-1 tracking-wider uppercase">°C Water Temp</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="packages" class="relative py-24 md:py-32">
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-turq-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">Our Packages</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-4">
+                Curated <span class="italic text-turq-400">Journeys</span>
+            </h2>
+            <p class="text-white/50 font-light max-w-2xl mx-auto">Each package is thoughtfully designed to showcase the best of Huvadhoo — no crowds, no compromises, just pure Maldivian magic.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="packagesGrid">
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.05s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/tropical-honeymoon-sunset/800/600" alt="Honeymoon Bliss" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute top-4 right-4 px-3 py-1 glass rounded-full text-xs font-medium tracking-wider">POPULAR</div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$2,499</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Honeymoon Bliss</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">7 nights of pure romance — private beach dinners, sunset cruises, and couples spa treatments.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">7 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">All-Inclusive</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Couple</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium hover:bg-ocean-500 hover:border-ocean-500 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.12s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/coral-reef-diving-blue/800/600" alt="Dive Discovery" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$1,899</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Dive Discovery</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">5 nights exploring Huvadhoo's world-class dive sites — manta rays, reef sharks, and vibrant corals.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">5 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">10 Dives</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">PADI</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium hover:bg-ocean-500 hover:border-ocean-500 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.19s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/island-hopping-tropical/800/600" alt="Island Explorer" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$1,299</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Island Explorer</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">4 nights hopping between inhabited islands — local cuisine, culture, and untouched beaches.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">4 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">4 Islands</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Cultural</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium hover:bg-ocean-500 hover:border-ocean-500 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.26s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/beach-family-fun/800/600" alt="Family Paradise" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$1,999</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Family Paradise</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">6 nights of family fun — snorkeling, water sports, sandbank picnics, and kid-friendly adventures.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">6 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Family</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Activities</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium hover:bg-ocean-500 hover:border-ocean-500 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.33s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/ocean-surf-wave/800/600" alt="Surf and Soul" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute top-4 right-4 px-3 py-1 glass rounded-full text-xs font-medium tracking-wider">NEW</div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$1,699</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Surf & Soul</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">5 nights riding Huvadhoo's legendary breaks combined with sunrise yoga and wellness sessions.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">5 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Surfing</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Yoga</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium hover:bg-ocean-500 hover:border-ocean-500 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="tilt-card rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.06] reveal" style="transition-delay:.4s">
+                <div class="tilt-glare rounded-3xl"></div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://picsum.photos/seed/luxury-overwater-villa/800/600" alt="Luxury Escape" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 to-transparent"></div>
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-coral-500 to-coral-400 rounded-full text-xs font-semibold tracking-wider">PREMIUM</div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-3xl font-serif font-semibold">$4,999</span>
+                        <span class="text-white/50 text-sm"> / person</span>
+                    </div>
+                </div>
+                <div class="p-7">
+                    <h3 class="font-serif text-xl font-medium mb-2">Luxury Escape</h3>
+                    <p class="text-white/50 text-sm font-light leading-relaxed mb-5">7 nights of unparalleled luxury — private villa, personal butler, spa, and exclusive excursions.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">7 Nights</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">All-Inclusive</span>
+                        <span class="px-3 py-1 rounded-full bg-ocean-500/10 text-ocean-400 text-xs">Private</span>
+                    </div>
+                    <a href="#contact" class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-ocean-500 to-turq-500 text-sm font-medium hover:shadow-lg hover:shadow-ocean-500/25 transition-all duration-300">
+                        Inquire Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experiences" class="relative py-24 md:py-32">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-ocean-500/3 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">Experiences</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-4">
+                Moments That <span class="italic text-turq-400">Last</span>
+            </h2>
+            <p class="text-white/50 font-light max-w-2xl mx-auto">From the depths of the ocean to the warmth of local culture — every experience is crafted to leave you breathless.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 stagger" id="expGrid">
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-ocean-500/10 flex items-center justify-center group-hover:bg-ocean-500/20 transition-colors">
+                    <i data-lucide="anchor" class="w-6 h-6 text-ocean-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Scuba Diving</h4>
+                <p class="text-white/40 text-xs">Deep reef exploration</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-turq-500/10 flex items-center justify-center group-hover:bg-turq-500/20 transition-colors">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-turq-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Bioluminescent Beach</h4>
+                <p class="text-white/40 text-xs">Glowing shores at night</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-ocean-500/10 flex items-center justify-center group-hover:bg-ocean-500/20 transition-colors">
+                    <i data-lucide="compass" class="w-6 h-6 text-ocean-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Island Hopping</h4>
+                <p class="text-white/40 text-xs">Explore uninhabited islands</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-turq-500/10 flex items-center justify-center group-hover:bg-turq-500/20 transition-colors">
+                    <i data-lucide="sunset" class="w-6 h-6 text-turq-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Sunset Cruise</h4>
+                <p class="text-white/40 text-xs">Dhoni sail at golden hour</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-turq-500/10 flex items-center justify-center group-hover:bg-turq-500/20 transition-colors">
+                    <i data-lucide="fish" class="w-6 h-6 text-turq-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Manta Ray Snorkel</h4>
+                <p class="text-white/40 text-xs">Swim with gentle giants</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-ocean-500/10 flex items-center justify-center group-hover:bg-ocean-500/20 transition-colors">
+                    <i data-lucide="dolphin" class="w-6 h-6 text-ocean-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Dolphin Watching</h4>
+                <p class="text-white/40 text-xs">Spinners at play</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-ocean-500/10 flex items-center justify-center group-hover:bg-ocean-500/20 transition-colors">
+                    <i data-lucide="home" class="w-6 h-6 text-ocean-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Local Island Tour</h4>
+                <p class="text-white/40 text-xs">Authentic Maldivian life</p>
+            </div>
+            <div class="exp-card glass rounded-2xl p-6 text-center cursor-pointer group">
+                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-turq-500/10 flex items-center justify-center group-hover:bg-turq-500/20 transition-colors">
+                    <i data-lucide="sailboat" class="w-6 h-6 text-turq-400"></i>
+                </div>
+                <h4 class="font-medium text-sm mb-1">Water Sports</h4>
+                <p class="text-white/40 text-xs">Jet ski, kayak, paddle</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="relative py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">Gallery</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-4">
+                Glimpses of <span class="italic text-turq-400">Paradise</span>
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[240px]">
+            <div class="gallery-item relative row-span-2 reveal-scale" style="transition-delay:.05s">
+                <img src="https://picsum.photos/seed/maldives-overwater/600/1000" alt="Overwater" class="w-full h-full object-cover">
+                <div class="g-overlay absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-ocean-950/20 to-transparent flex items-end p-5">
+                    <span class="text-sm font-medium">Overwater Serenity</span>
+                </div>
+            </div>
+            <div class="gallery-item relative reveal-scale" style="transition-delay:.12s">
+                <img src="https://picsum.photos/seed/tropical-fish-coral/600/400" alt="Marine Life" class="w-full h-full object-cover">
+                <div class="g-overlay absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-transparent to-transparent flex items-end p-5">
+                    <span class="text-sm font-medium">Marine Life</span>
+                </div>
+            </div>
+            <div class="gallery-item relative reveal-scale" style="transition-delay:.19s">
+                <img src="https://picsum.photos/seed/sandbank-maldives/600/400" alt="Sandbank" class="w-full h-full object-cover">
+                <div class="g-overlay absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-transparent to-transparent flex items-end p-5">
+                    <span class="text-sm font-medium">Private Sandbank</span>
+                </div>
+            </div>
+            <div class="gallery-item relative row-span-2 reveal-scale" style="transition-delay:.26s">
+                <img src="https://picsum.photos/seed/turquoise-lagoon-aerial/600/1000" alt="Lagoon" class="w-full h-full object-cover">
+                <div class="g-overlay absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-ocean-950/20 to-transparent flex items-end p-5">
+                    <span class="text-sm font-medium">Turquoise Lagoon</span>
+                </div>
+            </div>
+            <div class="gallery-item relative col-span-2 reveal-scale" style="transition-delay:.33s">
+                <img src="https://picsum.photos/seed/maldives-sunset-panorama/1200/400" alt="Sunset" class="w-full h-full object-cover">
+                <div class="g-overlay absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-transparent to-transparent flex items-end p-5">
+                    <span class="text-sm font-medium">Golden Hour</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">Testimonials</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-4">
+                What Our <span class="italic text-turq-400">Guests</span> Say
+            </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass rounded-2xl p-8 reveal" style="transition-delay:.05s">
+                <div class="flex gap-1 mb-5">
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                </div>
+                <p class="text-white/70 font-light leading-relaxed mb-6">"Huvadhoo was everything we dreamed of and more. The diving was world-class, and the team made every detail perfect. This is not just a trip — it is a transformation."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-ocean-500 to-turq-500 flex items-center justify-center font-serif font-semibold text-sm">SM</div>
+                    <div>
+                        <div class="font-medium text-sm">Sarah & Mark</div>
+                        <div class="text-white/40 text-xs">Honeymoon Package · UK</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-2xl p-8 reveal" style="transition-delay:.12s">
+                <div class="flex gap-1 mb-5">
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                </div>
+                <p class="text-white/70 font-light leading-relaxed mb-6">"As a solo traveler, I was nervous. But the island hopping experience connected me with incredible people and places. The bioluminescent beach literally made me cry."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-turq-500 to-ocean-500 flex items-center justify-center font-serif font-semibold text-sm">JK</div>
+                    <div>
+                        <div class="font-medium text-sm">Jun Kai</div>
+                        <div class="text-white/40 text-xs">Island Explorer · Singapore</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-2xl p-8 reveal" style="transition-delay:.19s">
+                <div class="flex gap-1 mb-5">
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                </div>
+                <p class="text-white/70 font-light leading-relaxed mb-6">"We have been to Maldives three times before — but Huvadhoo was completely different. No crowds, no tourist traps. Just raw, beautiful nature. Our kids still talk about it."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-ocean-400 to-turq-400 flex items-center justify-center font-serif font-semibold text-sm">AF</div>
+                    <div>
+                        <div class="font-medium text-sm">The Al-Farsi Family</div>
+                        <div class="text-white/40 text-xs">Family Paradise · UAE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="relative py-24 md:py-32">
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-turq-500/5 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16">
+            <div class="reveal-l">
+                <span class="inline-block text-xs tracking-[0.25em] uppercase text-ocean-400 font-medium mb-4">Get In Touch</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-6 leading-tight">
+                    Start Planning Your <span class="italic text-turq-400">Dream</span> Trip
+                </h2>
+                <p class="text-white/50 font-light leading-relaxed mb-10 text-lg">Tell us about your ideal Maldives experience and we will craft a personalized itinerary just for you. No obligations, no pressure — just pure inspiration.</p>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl glass flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="mail" class="w-5 h-5 text-ocean-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-white/40 mb-0.5">Email Us</div>
+                            <div class="font-medium">info@huvadhoomaldives.travel</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl glass flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="phone" class="w-5 h-5 text-ocean-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-white/40 mb-0.5">Call / WhatsApp</div>
+                            <div class="font-medium">+960 700 1234</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl glass flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-ocean-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm text-white/40 mb-0.5">Location</div>
+                            <div class="font-medium">Huvadhoo Atoll, Maldives</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 flex gap-3">
+                    <a href="#" class="w-11 h-11 rounded-xl glass flex items-center justify-center hover:bg-ocean-500/20 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-11 h-11 rounded-xl glass flex items-center justify-center hover:bg-ocean-500/20 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-11 h-11 rounded-xl glass flex items-center justify-center hover:bg-ocean-500/20 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-11 h-11 rounded-xl glass flex items-center justify-center hover:bg-ocean-500/20 transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div class="reveal-r">
+                <form id="contactForm" class="glass rounded-3xl p-8 md:p-10 space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <input type="text" id="fname" placeholder=" " required>
+                            <label for="fname">First Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="lname" placeholder=" " required>
+                            <label for="lname">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder=" ">
+                        <label for="phone">Phone / WhatsApp</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="package" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="honeymoon">Honeymoon Bliss</option>
+                            <option value="diving">Dive Discovery</option>
+                            <option value="island">Island Explorer</option>
+                            <option value="family">Family Paradise</option>
+                            <option value="surf">Surf & Soul</option>
+                            <option value="luxury">Luxury Escape</option>
+                            <option value="custom">Custom / Not Sure</option>
+                        </select>
+                        <label for="package">Interested Package</label>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <input type="date" id="date" placeholder=" ">
+                            <label for="date">Travel Date</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="guests">
+                                <option value="" disabled selected hidden></option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3-4">3-4 Guests</option>
+                                <option value="5+">5+ Guests</option>
+                            </select>
+                            <label for="guests">Number of Guests</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" placeholder=" "></textarea>
+                        <label for="message">Special Requests</label>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-ocean-500 to-turq-500 rounded-xl font-medium text-base hover:shadow-xl hover:shadow-ocean-500/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                        Send Inquiry
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="md:col-span-1">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean-500 to-turq-400 flex items-center justify-center text-white font-serif font-bold text-lg">H</div>
+                    <div>
+                        <span class="font-serif text-lg font-medium tracking-tight">Huvadhoo</span>
+                        <span class="block text-[10px] tracking-[0.25em] uppercase text-ocean-400 -mt-0.5">Maldives Travel</span>
+                    </div>
+                </div>
+                <p class="text-white/40 text-sm font-light leading-relaxed">Your gateway to the most unspoiled atoll in the Maldives. Authentic, personal, unforgettable.</p>
+            </div>
+            <div>
+                <h5 class="font-medium text-sm mb-4 tracking-wider uppercase text-white/60">Packages</h5>
+                <ul class="space-y-3">
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Honeymoon Bliss</a></li>
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Dive Discovery</a></li>
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Island Explorer</a></li>
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Family Paradise</a></li>
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Surf & Soul</a></li>
+                    <li><a href="#packages" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Luxury Escape</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-medium text-sm mb-4 tracking-wider uppercase text-white/60">Company</h5>
+                <ul class="space-y-3">
+                    <li><a href="#about" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">About Us</a></li>
+                    <li><a href="#experiences" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Experiences</a></li>
+                    <li><a href="#gallery" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Gallery</a></li>
+                    <li><a href="#testimonials" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Reviews</a></li>
+                    <li><a href="#" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-medium text-sm mb-4 tracking-wider uppercase text-white/60">Support</h5>
+                <ul class="space-y-3">
+                    <li><a href="#contact" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">FAQs</a></li>
+                    <li><a href="#" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Travel Tips</a></li>
+                    <li><a href="#" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="text-sm text-white/40 hover:text-ocean-400 transition-colors">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-white/30">&copy; 2025 Huvadhoo Maldives Travel. All rights reserved.</p>
+            <p class="text-xs text-white/20">Crafted with love in the Maldives</p>
+        </div>
+    </div>
+</footer>
+
+<div id="toast" class="toast">
+    <div class="glass-strong rounded-2xl px-6 py-4 flex items-center gap-3 shadow-2xl">
+        <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div>
+            <div class="font-medium text-sm">Inquiry Sent!</div>
+            <div class="text-white/50 text-xs">We will get back to you within 24 hours.</div>
+        </div>
+    </div>
+</div>
+
+<div id="backToTop" class="back-to-top glass-strong rounded-full hover:bg-ocean-500/20 cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i data-lucide="chevron-up" class="w-5 h-5 text-white/70"></i>
+</div>
+
+<script>
+lucide.createIcons();
+
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 1500);
+});
+
+var navbar = document.getElementById('navbar');
+var menuBtn = document.getElementById('menuBtn');
+var mobileMenu = document.getElementById('mobileMenu');
+var menuOpen = false;
+
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 80) {
+        navbar.classList.add('glass-strong');
+        navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+    } else {
+        navbar.classList.remove('glass-strong');
+        navbar.style.boxShadow = 'none';
+    }
+    var btt = document.getElementById('backToTop');
+    if (window.scrollY > 600) {
+        btt.classList.add('visible');
+    } else {
+        btt.classList.remove('visible');
+    }
+});
+
+menuBtn.addEventListener('click', function() {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+        menuBtn.classList.add('open');
+        mobileMenu.style.opacity = '1';
+        mobileMenu.style.transform = 'translateY(0)';
+        mobileMenu.style.pointerEvents = 'all';
+    } else {
+        menuBtn.classList.remove('open');
+        mobileMenu.style.opacity = '0';
+        mobileMenu.style.transform = 'translateY(-16px)';
+        mobileMenu.style.pointerEvents = 'none';
+    }
+});
+
+document.querySelectorAll('.mobile-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+        menuOpen = false;
+        menuBtn.classList.remove('open');
+        mobileMenu.style.opacity = '0';
+        mobileMenu.style.transform = 'translateY(-16px)';
+        mobileMenu.style.pointerEvents = 'none';
+    });
+});
+
+var heroBg = document.getElementById('heroBg');
+var floats = [
+    document.getElementById('float1'),
+    document.getElementById('float2'),
+    document.getElementById('float3'),
+    document.getElementById('float4'),
+    document.getElementById('float5')
+];
+var mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
+
+document.addEventListener('mousemove', function(e) {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+function animateParallax() {
+    currentX += (mouseX - currentX) * 0.06;
+    currentY += (mouseY - currentY) * 0.06;
+
+    if (heroBg) {
+        heroBg.style.transform = 'scale(1.1) translate(' + (currentX * -12) + 'px, ' + (currentY * -12) + 'px)';
+    }
+    if (floats[0]) floats[0].style.transform = 'translate(' + (currentX * -25) + 'px, ' + (currentY * -25) + 'px)';
+    if (floats[1]) floats[1].style.transform = 'translate(' + (currentX * -35) + 'px, ' + (currentY * -35) + 'px)';
+    if (floats[2]) floats[2].style.transform = 'translate(' + (currentX * -50) + 'px, ' + (currentY * -50) + 'px)';
+    if (floats[3]) floats[3].style.transform = 'translate(' + (currentX * -45) + 'px, ' + (currentY * -45) + 'px)';
+    if (floats[4]) floats[4].style.transform = 'translate(' + (currentX * -20) + 'px, ' + (currentY * -20) + 'px) rotate(45deg)';
+
+    requestAnimationFrame(animateParallax);
+}
+animateParallax();
+
+if (window.innerWidth > 768) {
+    document.querySelectorAll('.tilt-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var centerX = rect.width / 2;
+            var centerY = rect.height / 2;
+            var rotateX = ((y - centerY) / centerY) * -8;
+            var rotateY = ((x - centerX) / centerX) * 8;
+            card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02,1.02,1.02)';
+            var glare = card.querySelector('.tilt-glare');
+            if (glare) {
+                glare.style.background = 'radial-gradient(circle at ' + x + 'px ' + y + 'px, rgba(255,255,255,0.15), transparent 60%)';
+            }
+        });
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+            var glare = card.querySelector('.tilt-glare');
+            if (glare) glare.style.opacity = '0';
+        });
+        card.addEventListener('mouseenter', function() {
+            var glare = card.querySelector('.tilt-glare');
+            if (glare) glare.style.opacity = '1';
+        });
+    });
+}
+
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-scale, .stagger').forEach(function(el) {
+    revealObserver.observe(el);
+});
+
+var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            var counters = entry.target.querySelectorAll('.counter');
+            counters.forEach(function(counter) {
+                var target = parseInt(counter.getAttribute('data-target'));
+                var duration = 2000;
+                var start = performance.now();
+                function updateCounter(now) {
+                    var elapsed = now - start;
+                    var progress = Math.min(elapsed / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 3);
+                    var suffix = target === 30 ? '\u00B0' : '+';
+                    counter.textContent = Math.round(target * eased) + suffix;
+                    if (progress < 1) requestAnimationFrame(updateCounter);
+                }
+                requestAnimationFrame(updateCounter);
+            });
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+var statsGrid = document.getElementById('statsGrid');
+if (statsGrid) counterObserver.observe(statsGrid);
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(function() { toast.classList.remove('show'); }, 4000);
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            var offset = 80;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+    });
+});
+
+var sections = document.querySelectorAll('section[id]');
+var navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', function() {
+    var current = '';
+    sections.forEach(function(section) {
+        var sectionTop = section.offsetTop - 150;
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+        }
+    });
+    navLinks.forEach(function(link) {
+        link.classList.remove('text-white');
+        link.classList.add('text-white/70');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('text-white');
+            link.classList.remove('text-white/70');
+        }
+    });
+});
+</script>
+</body>
+</html>
