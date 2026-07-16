@@ -6,86 +6,19 @@
 <title>About Us — Huvadhoo Maldives Travel</title>
 <meta name="description" content="A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="assets/site.css">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-
-  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
-  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
-  .logo span{color:var(--teal);}
-  nav.primary{display:none; gap:18px; align-items:center;}
-  nav.primary a{text-decoration:none; font-size:12px; font-weight:600; color:var(--text);}
-  nav.primary a.active{color:var(--teal-deep); border-bottom:2px solid var(--gold); padding-bottom:2px;}
-  nav.primary a:hover{color:var(--teal-deep);}
-  .head-actions{display:flex; align-items:center; gap:10px;}
-  @media(min-width:1140px){ nav.primary{display:flex;} }
-  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
-  @media(max-width:639px){
-    .headbar{padding:13px 14px; gap:6px;}
-    .head-actions{gap:6px;}
-    .logo{font-size:14px;}
-    .head-actions .btn-gold{padding:8px 12px; font-size:12px;}
-    .burger{padding:7px 9px;}
-  }
-  @media(max-width:374px){
-    .headbar{padding:12px 8px; gap:3px;}
-    .head-actions{gap:3px;}
-    .logo{font-size:11.5px;}
-    .head-actions .btn-gold{padding:7px 8px; font-size:10.5px;}
-    .burger{padding:6px 7px;}
-  }
-  @media(min-width:1140px){ .burger{display:none;} }
-
-  .pagehero{background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white); padding:56px 0 64px;}
-  .pagehero h1{color:var(--white); font-size:clamp(28px,4.4vw,42px); max-width:24ch;}
-  .pagehero p{color:#DCEEEA; margin-top:14px; max-width:56ch; font-size:16.5px;}
-  .breadcrumb{font-size:13px; color:#BFDFDA; font-family:var(--mono); margin-bottom:14px;}
-  .breadcrumb a{color:#DCEEEA; text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
-
-  section{padding:64px 0;}
-  .section-head{max-width:640px; margin-bottom:36px;}
-  .section-head h2{font-size:clamp(24px,3.2vw,32px); margin-top:8px;}
-  .section-head p{color:var(--sub); margin-top:10px; font-size:15.5px;}
-
-  .story p{font-size:16.5px; color:var(--text); max-width:70ch; margin:0 0 18px;}
-  .pullquote{background:var(--white); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:22px 26px; margin:28px 0; font-family:var(--display); font-size:20px; color:var(--ink); font-style:italic; max-width:70ch;}
-
-  .values-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-  @media(min-width:700px){ .values-grid{grid-template-columns:repeat(2,1fr);} }
-  @media(min-width:1020px){ .values-grid{grid-template-columns:repeat(4,1fr);} }
-  .value-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px;}
-  .value-card .icon{width:36px; height:36px; border-radius:10px; background:var(--sand); display:flex; align-items:center; justify-content:center; font-size:17px; margin-bottom:12px;}
-  .value-card h3{font-size:16px;} .value-card p{color:var(--sub); font-size:13.5px; margin-top:8px;}
-
-  .trust-band{background:var(--ink); border-radius:20px; padding:32px; color:var(--white); display:grid; gap:16px;}
-  @media(min-width:760px){ .trust-band{grid-template-columns:repeat(4,1fr);} }
-  .trust-band .item{border-left:2px solid var(--gold); padding-left:16px;}
-  .trust-band .item strong{display:block; font-size:15px; color:var(--white); margin-bottom:4px;}
-  .trust-band .item span{font-size:13.5px; color:#CFE3DF;}
-
-  .promise-grid{display:grid; grid-template-columns:1fr; gap:16px;}
-  @media(min-width:700px){ .promise-grid{grid-template-columns:repeat(3,1fr);} }
-  .promise-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px;}
-  .promise-card h3{font-size:16px;} .promise-card p{color:var(--sub); font-size:14px; margin-top:8px;}
-
-  .cta-band{background:linear-gradient(160deg, var(--teal-deep), var(--ink)); color:var(--white); border-radius:24px; padding:40px; text-align:center;}
-  .cta-band h2{color:var(--white); font-size:clamp(22px,3vw,28px);}
-  .cta-band p{color:#CFE3DF; margin-top:10px; font-size:15px;}
-  .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;}
-
-  footer .logo{color:var(--white);} footer .logo span{color:var(--aqua);}
-  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
-
-  /* floating contact options (WhatsApp / Telegram / WeChat) */
-
-  /* shared contact button + footer link styles */
-</style>
+<link rel="stylesheet" href="assets/ocean-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="ocean">
 
-<header>
+<a href="#main" class="skip-link" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+
+<header class="site-head">
   <div class="headbar">
-    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">H</span>
+      <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+    </a>
     <nav class="primary">
       <a href="resorts.html">Resorts</a>
       <a href="guesthouses.html">Guesthouses</a>
@@ -99,9 +32,9 @@
       <a href="index.html#contact">Contact</a>
     </nav>
     <div class="head-actions">
-      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <a href="index.html#contact" class="btn btn-primary btn-sm">Request a quote</a>
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
@@ -115,19 +48,20 @@
     <a href="fishing.html">Sport Fishing</a>
     <a href="camping.html">Island Camping</a>
     <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
+    <a href="about.html" class="active">About</a>
     <a href="index.html#contact">Contact</a>
   </div>
 </header>
 
-<main>
-  <section class="pagehero" style="padding-top:40px;">
-    <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
+<main id="main">
+  <section class="pagehero has-media">
+    <div class="hero-media" aria-hidden="true"><img src="assets/sea-of-stars-glowing-beach-maldives.jpg" alt=""></div>
+    <span class="hero-scrim"></span>
     <div class="wrap">
       <div class="breadcrumb"><a href="index.html">Home</a> / About Us</div>
-      <p class="eyebrow" style="color:#CFE3DF;">About us</p>
+      <p class="eyebrow">About us</p>
       <h1>A Maldives-based travel concierge, not a booking form with a nice photo</h1>
-      <p>We're based here, we've seen what goes wrong when tourists book blind, and we built this agency specifically to fix that — one clear total price, and honest advice on which island actually fits you.</p>
+      <p class="lede">We're based here, we've seen what goes wrong when tourists book blind, and we built this agency specifically to fix that — one clear total price, and honest advice on which island actually fits you.</p>
     </div>
   </section>
 
@@ -145,7 +79,7 @@
     </div>
   </section>
 
-  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">How we work</p>
@@ -174,7 +108,7 @@
     </div>
   </section>
 
-  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+  <section>
     <div class="wrap">
       <div class="trust-band">
         <div class="item"><strong>Based in the Maldives</strong><span>Local team, local knowledge</span></div>
@@ -187,15 +121,15 @@
 
   <section>
     <div class="wrap">
-      <div class="cta-band">
-        <p class="eyebrow" style="color:var(--aqua);">Let's talk</p>
+      <div class="cta-band-center">
+        <p class="eyebrow">Let's talk</p>
         <h2>Tell us what you're planning — we'll tell you honestly what fits</h2>
         <p>No pressure, no obligation — just a clear, honest recommendation.</p>
         <div class="cta-row">
-          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
-          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
-          <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-          <a href="index.html#contact" class="btn btn-ghost-dark">Request a written quote</a>
+          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-primary">Message us on WhatsApp</a>
+          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost btn-sm">Telegram</a>
+          <a href="weixin://" data-channel="wechat" class="btn btn-ghost btn-sm">WeChat: WECHAT_ID</a>
+          <a href="index.html#contact" class="btn btn-ghost">Request a written quote</a>
         </div>
       </div>
     </div>
@@ -205,9 +139,12 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <a href="index.html" class="brand" style="margin-bottom:16px; display:inline-flex;">
+        <span class="brand-mark">H</span>
+        <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+      </a>
+      <p class="tag">A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+      <h4 style="margin-top:26px;">Contact us</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
@@ -256,6 +193,10 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     WeChat: WECHAT_ID
   </a>
+</div>
+
+<div class="back-to-top glass-strong" id="backToTop" aria-label="Back to top">
+  <svg class="icn" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </div>
 
 <script src="assets/motion.js"></script>

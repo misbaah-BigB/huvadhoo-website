@@ -6,95 +6,19 @@
 <title>Uninhabited Island Camping — Huvadhoo Maldives Travel</title>
 <meta name="description" content="Permitted, guided camping on uninhabited Maldives islands — the only legal and safe way to do it, with licensed operators handling every permit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="assets/site.css">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-
-  .headbar{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto;}
-  .logo{font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,21px); color:var(--ink); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
-  .logo span{color:var(--teal);}
-  nav.primary{display:none; gap:18px; align-items:center;}
-  nav.primary a{text-decoration:none; font-size:12px; font-weight:600; color:var(--text);}
-  nav.primary a.active{color:var(--teal-deep); border-bottom:2px solid var(--gold); padding-bottom:2px;}
-  nav.primary a:hover{color:var(--teal-deep);}
-  .head-actions{display:flex; align-items:center; gap:10px;}
-  @media(min-width:1140px){ nav.primary{display:flex;} }
-  .burger{display:inline-flex; background:none; border:1px solid var(--sand-dark); border-radius:10px; padding:9px 11px; cursor:pointer;}
-  @media(max-width:639px){
-    .headbar{padding:13px 14px; gap:6px;}
-    .head-actions{gap:6px;}
-    .logo{font-size:14px;}
-    .head-actions .btn-gold{padding:8px 12px; font-size:12px;}
-    .burger{padding:7px 9px;}
-  }
-  @media(max-width:374px){
-    .headbar{padding:12px 8px; gap:3px;}
-    .head-actions{gap:3px;}
-    .logo{font-size:11.5px;}
-    .head-actions .btn-gold{padding:7px 8px; font-size:10.5px;}
-    .burger{padding:6px 7px;}
-  }
-  @media(min-width:1140px){ .burger{display:none;} }
-
-  .pagehero{background:linear-gradient(160deg, var(--aqua) 0%, var(--teal) 42%, var(--teal-deep) 68%, var(--ink) 100%); color:var(--white); padding:56px 0 64px;}
-  .pagehero h1{color:var(--white); font-size:clamp(28px,4.4vw,42px); max-width:22ch;}
-  .pagehero p{color:#DCEEEA; margin-top:14px; max-width:56ch; font-size:16.5px;}
-  .breadcrumb{font-size:13px; color:#BFDFDA; font-family:var(--mono); margin-bottom:14px;}
-  .breadcrumb a{color:#DCEEEA; text-decoration:none;} .breadcrumb a:hover{text-decoration:underline;}
-
-  .cert-banner{background:var(--ink); color:var(--white); border-radius:16px; padding:22px 26px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;}
-  .cert-banner .badge{font-family:var(--mono); font-size:12px; background:var(--gold); color:var(--ink); padding:6px 12px; border-radius:999px; font-weight:700; white-space:nowrap;}
-  .cert-banner p{color:#CFE3DF; font-size:14.5px; margin:0;}
-
-  section{padding:64px 0;}
-  .section-head{max-width:640px; margin-bottom:36px;}
-  .section-head h2{font-size:clamp(24px,3.2vw,32px); margin-top:8px;}
-  .section-head p{color:var(--sub); margin-top:10px; font-size:15.5px;}
-
-  .cat-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-  @media(min-width:700px){ .cat-grid{grid-template-columns:repeat(3,1fr);} }
-  .cat-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:18px; padding:24px; display:flex; flex-direction:column; gap:10px;}
-  .cat-card .tier{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal-deep); background:var(--sand); display:inline-block; padding:4px 10px; border-radius:999px; width:fit-content;}
-  .cat-card h3{font-size:17.5px; margin-top:4px;}
-  .cat-card p{color:var(--sub); font-size:14px; margin:0;}
-  .cat-card .price{font-family:var(--mono); font-weight:600; color:var(--ink); font-size:14px; margin-top:auto; padding-top:10px; border-top:1px dashed var(--sand-dark);}
-
-  .inc-grid{display:grid; grid-template-columns:1fr; gap:16px;}
-  @media(min-width:700px){ .inc-grid{grid-template-columns:repeat(2,1fr);} }
-  .inc-card{background:var(--white); border:1px solid var(--sand-dark); border-radius:16px; padding:22px;}
-  .inc-card h3{font-size:16.5px;} .inc-card p{color:var(--sub); font-size:14.5px; margin-top:8px;}
-
-  .why-grid{display:grid; grid-template-columns:1fr; gap:24px;}
-  @media(min-width:760px){ .why-grid{grid-template-columns:repeat(3,1fr);} }
-  .why-card{border-left:3px solid var(--teal); padding-left:18px;}
-  .why-card h3{font-size:17px;} .why-card p{font-size:14.5px; color:var(--sub); margin-top:8px;}
-
-  .faq-item{border-bottom:1px solid var(--sand-dark);}
-  .faq-q{width:100%; text-align:left; background:none; border:none; padding:20px 4px; font-family:var(--body); font-size:16px; font-weight:600; color:var(--ink); display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
-  .faq-q .plus{font-family:var(--mono); color:var(--teal-deep); font-size:18px;}
-  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
-  .faq-a p{padding:0 4px 20px; color:var(--sub); font-size:14.5px; max-width:64ch;}
-  .faq-item.open .faq-a{max-height:220px;}
-  .faq-item.open .plus{transform:rotate(45deg);}
-
-  .cta-band{background:linear-gradient(160deg, var(--teal-deep), var(--ink)); color:var(--white); border-radius:24px; padding:40px; text-align:center;}
-  .cta-band h2{color:var(--white); font-size:clamp(22px,3vw,28px);}
-  .cta-band p{color:#CFE3DF; margin-top:10px; font-size:15px;}
-  .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;}
-
-  footer .logo{color:var(--white);} footer .logo span{color:var(--aqua);}
-  footer a{text-decoration:none; font-size:14px; color:#DCEEEA;} footer a:hover{color:var(--white);}
-
-  /* floating contact options (WhatsApp / Telegram / WeChat) */
-
-  /* shared contact button + footer link styles */
-</style>
+<link rel="stylesheet" href="assets/ocean-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="ocean">
 
-<header>
+<a href="#main" class="skip-link" onfocus="this.style.left='10px'" onblur="this.style.left='-999px'">Skip to content</a>
+
+<header class="site-head">
   <div class="headbar">
-    <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
+    <a href="index.html" class="brand">
+      <span class="brand-mark">H</span>
+      <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+    </a>
     <nav class="primary">
       <a href="resorts.html">Resorts</a>
       <a href="guesthouses.html">Guesthouses</a>
@@ -108,9 +32,9 @@
       <a href="index.html#contact">Contact</a>
     </nav>
     <div class="head-actions">
-      <a href="index.html#contact" class="btn btn-gold">Request a quote</a>
+      <a href="index.html#contact" class="btn btn-primary btn-sm">Request a quote</a>
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4H16M2 9H16M2 14H16" stroke="#16302E" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </div>
@@ -122,24 +46,25 @@
     <a href="family.html">Family</a>
     <a href="diving.html">Diving</a>
     <a href="fishing.html">Sport Fishing</a>
-    <a href="camping.html">Island Camping</a>
+    <a href="camping.html" class="active">Island Camping</a>
     <a href="blog.html">Blog</a>
     <a href="index.html#contact">Contact</a>
   </div>
 </header>
 
-<main>
-  <section class="pagehero" style="padding-top:40px;">
-    <svg class="hero-wave hero-wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 C240,150 480,50 720,100 C960,150 1200,50 1440,100 L1440,200 L0,200 Z" fill="#FFFFFF"/></svg>
+<main id="main">
+  <section class="pagehero has-media">
+    <div class="hero-media" aria-hidden="true"><img src="assets/sandbank-solo-celebration.jpg" alt=""></div>
+    <span class="hero-scrim"></span>
     <div class="wrap">
       <div class="breadcrumb"><a href="index.html">Home</a> / Island Camping</div>
-      <p class="eyebrow" style="color:#CFE3DF;">Island camping</p>
+      <p class="eyebrow">Island camping</p>
       <h1>Sleep on an uninhabited island — done legally, safely, and properly permitted</h1>
-      <p>Camping on an uninhabited Maldives island is a genuinely special experience — but it requires official permission and a licensed operator. We handle every permit and never arrange unauthorized "wild camping."</p>
+      <p class="lede">Camping on an uninhabited Maldives island is a genuinely special experience — but it requires official permission and a licensed operator. We handle every permit and never arrange unauthorized "wild camping."</p>
     </div>
   </section>
 
-  <section style="padding-top:40px; padding-bottom:0;">
+  <section style="padding-bottom:0;">
     <div class="wrap">
       <div class="cert-banner">
         <span class="badge">Permitted trips only</span>
@@ -177,17 +102,17 @@
     </div>
   </section>
 
-  <section style="background:var(--white); border-top:1px solid var(--sand-dark); border-bottom:1px solid var(--sand-dark);">
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">What's included</p>
         <h2>What a permitted trip actually provides</h2>
       </div>
       <div class="inc-grid">
-        <div class="inc-card"><h3>Permits, handled for you</h3><p>We arrange the required permission to visit and camp on the specific island — not something you need to sort out yourself.</p></div>
-        <div class="inc-card"><h3>Gear</h3><p>Tents, sleeping equipment, and basic camp setup are provided by the operator — you don't need to bring your own camping gear.</p></div>
-        <div class="inc-card"><h3>Food and water</h3><p>Meals and drinking water are typically included and prepared on-site or brought over — confirmed in your quote before you go.</p></div>
-        <div class="inc-card"><h3>Safety and transfer</h3><p>A licensed boat handles transfer to and from the island, with safety equipment and a guide who knows the specific island's conditions.</p></div>
+        <div class="info-card"><h3>Permits, handled for you</h3><p>We arrange the required permission to visit and camp on the specific island — not something you need to sort out yourself.</p></div>
+        <div class="info-card"><h3>Gear</h3><p>Tents, sleeping equipment, and basic camp setup are provided by the operator — you don't need to bring your own camping gear.</p></div>
+        <div class="info-card"><h3>Food and water</h3><p>Meals and drinking water are typically included and prepared on-site or brought over — confirmed in your quote before you go.</p></div>
+        <div class="info-card"><h3>Safety and transfer</h3><p>A licensed boat handles transfer to and from the island, with safety equipment and a guide who knows the specific island's conditions.</p></div>
       </div>
     </div>
   </section>
@@ -244,15 +169,15 @@
 
   <section>
     <div class="wrap">
-      <div class="cta-band">
-        <p class="eyebrow" style="color:var(--aqua);">Next step</p>
+      <div class="cta-band-center">
+        <p class="eyebrow">Next step</p>
         <h2>Tell us your dates and group size — we'll arrange the right permitted trip</h2>
         <p>No pressure, no obligation — just a clear, honest recommendation.</p>
         <div class="cta-row">
-          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-gold">Message us on WhatsApp</a>
-          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost-dark btn-sm">Telegram</a>
-          <a href="weixin://" data-channel="wechat" class="btn btn-ghost-dark btn-sm">WeChat: WECHAT_ID</a>
-          <a href="index.html#contact" class="btn btn-ghost-dark">Request a written quote</a>
+          <a href="https://wa.me/9607444281" data-channel="whatsapp" class="btn btn-primary">Message us on WhatsApp</a>
+          <a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="btn btn-ghost btn-sm">Telegram</a>
+          <a href="weixin://" data-channel="wechat" class="btn btn-ghost btn-sm">WeChat: WECHAT_ID</a>
+          <a href="index.html#contact" class="btn btn-ghost">Request a written quote</a>
         </div>
       </div>
     </div>
@@ -262,9 +187,12 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <a href="index.html" class="logo">Huvadhoo <span>Maldives Travel</span></a>
-      <p>A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
-      <h4 style="margin-top:24px;">Contact us</h4>
+      <a href="index.html" class="brand" style="margin-bottom:16px; display:inline-flex;">
+        <span class="brand-mark">H</span>
+        <span class="brand-text"><span class="b1">Huvadhoo</span><span class="b2">Maldives Travel</span></span>
+      </a>
+      <p class="tag">A Maldives-based travel concierge helping tourists find the right resort, guesthouse, island, transfer, and experience — with honest local advice and one clear total price.</p>
+      <h4 style="margin-top:26px;">Contact us</h4>
       <ul>
         <li><a href="https://wa.me/9607444281" data-channel="whatsapp" class="footer-contact-link">WhatsApp</a></li>
         <li><a href="https://t.me/TELEGRAM_USERNAME" data-channel="telegram" class="footer-contact-link">Telegram</a></li>
@@ -313,6 +241,10 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
     WeChat: WECHAT_ID
   </a>
+</div>
+
+<div class="back-to-top glass-strong" id="backToTop" aria-label="Back to top">
+  <svg class="icn" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
 </div>
 
 <script src="assets/motion.js"></script>

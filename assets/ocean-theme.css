@@ -282,6 +282,33 @@ body.ocean{
 .ocean .cta-band-center p{color:var(--text-dim); margin-top:12px; font-size:15px; font-weight:300;}
 .ocean .cta-band-center .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:24px;}
 
+/* ---- certified/licensed-partner banner (diving, fishing, camping) ---- */
+.ocean .cert-banner{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:16px; padding:22px 26px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; position:relative; z-index:1;}
+.ocean .cert-banner .badge{font-family:var(--mono); font-size:12px; background:linear-gradient(90deg,var(--coral-500),var(--coral-400)); color:#fff; padding:6px 12px; border-radius:999px; font-weight:600; white-space:nowrap;}
+.ocean .cert-banner p{color:var(--text-dim); font-size:14.5px; margin:0; font-weight:300;}
+
+/* ---- about page: story, pullquote, values, trust band, promise ---- */
+.ocean .story p{font-size:16.5px; color:var(--text); max-width:70ch; margin:0 0 18px; font-weight:300;}
+.ocean .pullquote{background:var(--glass-bg); backdrop-filter:blur(16px); border-left:2px solid var(--coral-400); border-radius:0 16px 16px 0; padding:22px 26px; margin:28px 0; font-family:var(--serif); font-size:20px; color:var(--text); font-style:italic; max-width:70ch; position:relative; z-index:1;}
+
+.ocean .values-grid{display:grid; grid-template-columns:1fr; gap:20px; position:relative; z-index:1;}
+@media(min-width:700px){ .ocean .values-grid{grid-template-columns:repeat(2,1fr);} }
+@media(min-width:1020px){ .ocean .values-grid{grid-template-columns:repeat(4,1fr);} }
+.ocean .value-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:16px; padding:22px;}
+.ocean .value-card .icon{width:36px; height:36px; border-radius:10px; background:rgba(45,212,191,.12); display:flex; align-items:center; justify-content:center; font-size:17px; margin-bottom:12px;}
+.ocean .value-card h3{font-size:16px; font-weight:500;} .ocean .value-card p{color:var(--text-dim); font-size:13.5px; margin-top:8px; font-weight:300;}
+
+.ocean .trust-band{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:20px; padding:32px; display:grid; gap:16px; position:relative; z-index:1;}
+@media(min-width:760px){ .ocean .trust-band{grid-template-columns:repeat(4,1fr);} }
+.ocean .trust-band .item{border-left:2px solid var(--coral-400); padding-left:16px;}
+.ocean .trust-band .item strong{display:block; font-size:15px; color:var(--text); margin-bottom:4px; font-weight:500;}
+.ocean .trust-band .item span{font-size:13.5px; color:var(--text-dim); font-weight:300;}
+
+.ocean .promise-grid{display:grid; grid-template-columns:1fr; gap:16px; position:relative; z-index:1;}
+@media(min-width:700px){ .ocean .promise-grid{grid-template-columns:repeat(3,1fr);} }
+.ocean .promise-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:16px; padding:22px;}
+.ocean .promise-card h3{font-size:16px; font-weight:500;} .ocean .promise-card p{color:var(--text-dim); font-size:14px; margin-top:8px; font-weight:300;}
+
 /* ---- FAQ ---- */
 .ocean .faq-item{border-bottom:1px solid var(--border);}
 .ocean .faq-q{width:100%; text-align:left; background:none; border:none; padding:22px 4px; font-family:var(--sans); font-size:16px; font-weight:500; color:var(--text); display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:16px;}
