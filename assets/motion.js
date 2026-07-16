@@ -385,4 +385,20 @@
     });
   }
 
+  // floating WhatsApp/Telegram/WeChat widget — stay hidden until the hero has scrolled past,
+  // so it doesn't sit on top of the hero's own contact buttons
+  const floatContact = document.getElementById('floatContact');
+  if (floatContact) {
+    const heroSection = document.querySelector('#waveHero, .pagehero');
+    if (heroSection) {
+      const toggleFloatContact = () => {
+        floatContact.classList.toggle('visible', heroSection.getBoundingClientRect().bottom <= 0);
+      };
+      toggleFloatContact();
+      window.addEventListener('scroll', toggleFloatContact, { passive: true });
+    } else {
+      floatContact.classList.add('visible');
+    }
+  }
+
 })();
