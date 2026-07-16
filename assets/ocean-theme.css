@@ -185,6 +185,11 @@ body.ocean{
 .ocean .hero-media{position:absolute; inset:0; z-index:0; overflow:hidden;}
 .ocean .hero-media img{width:100%; height:100%; object-fit:cover; display:block;}
 
+/* ---- hero rising bubbles (injected by motion.js) ---- */
+.ocean .hero-bubble{position:absolute; bottom:-10px; border-radius:50%; background:rgba(255,255,255,.28); z-index:1; pointer-events:none; animation:heroRise linear infinite;}
+@keyframes heroRise{ to{ transform:translateY(-260px); opacity:0; } }
+@media (prefers-reduced-motion: reduce){ .ocean .hero-bubble{animation:none;} }
+
 /* ---- generic content card (why-us, steps, info) ---- */
 .ocean .info-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:18px; padding:26px;}
 
