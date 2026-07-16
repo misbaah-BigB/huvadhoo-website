@@ -1,2 +1,11 @@
 [build]
   publish = "admin"
+  edge_functions = "admin/netlify/edge-functions"
+
+[[edge_functions]]
+  path = "/admin"
+  function = "admin-gate"
+
+[[edge_functions]]
+  path = "/admin/*"
+  function = "admin-gate"

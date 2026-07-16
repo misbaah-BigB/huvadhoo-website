@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Login — Huvadhoo Maldives Travel</title>
+<title>Admin — Huvadhoo Maldives Travel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
   :root{
     --sand:#F5EEDF;
@@ -36,66 +35,29 @@
   }
   p.lede{
     margin:0 0 28px;
-    font-size:15.5px;
-    color:var(--ink);
-    opacity:.75;
-  }
-  #loginBtn{
-    font-family:'Inter', sans-serif;
-    font-weight:600;
-    font-size:15.5px;
-    color:#fff;
-    background:var(--teal);
-    border:none;
-    border-radius:999px;
-    padding:14px 34px;
-    cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  #loginBtn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(31,122,108,.3);
-  }
-  #welcomeMsg{
-    display:none;
     font-family:'Fraunces', serif;
     font-weight:500;
-    font-size:clamp(20px,3.4vw,26px);
+    font-size:clamp(18px,2.6vw,22px);
     color:var(--teal);
   }
+  .logout-link{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+    opacity:.7;
+    text-decoration:underline;
+  }
+  .logout-link:hover{opacity:1;}
 </style>
 </head>
 <body>
 
 <div class="admin-box">
   <h1>Huvadhoo Admin</h1>
-  <p class="lede">Please log in to access the admin dashboard.</p>
-  <button id="loginBtn">Log In</button>
-  <p id="welcomeMsg">Login successful — welcome to the Huvadhoo Admin Dashboard</p>
+  <p class="lede">Login successful — welcome to the Huvadhoo Admin Dashboard</p>
+  <a class="logout-link" href="/admin/logout">Log out</a>
 </div>
-
-<script>
-  const loginBtn = document.getElementById('loginBtn');
-  const welcomeMsg = document.getElementById('welcomeMsg');
-
-  loginBtn.addEventListener('click', () => {
-    netlifyIdentity.open('login');
-  });
-
-  netlifyIdentity.on('login', () => {
-    loginBtn.style.display = 'none';
-    welcomeMsg.style.display = 'block';
-  });
-
-  netlifyIdentity.on('init', (user) => {
-    if (user) {
-      loginBtn.style.display = 'none';
-      welcomeMsg.style.display = 'block';
-    }
-  });
-
-  netlifyIdentity.init();
-</script>
 
 </body>
 </html>
