@@ -282,6 +282,31 @@ body.ocean{
 .ocean .cta-band-center p{color:var(--text-dim); margin-top:12px; font-size:15px; font-weight:300;}
 .ocean .cta-band-center .cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:24px;}
 
+/* ---- blog article (long-form post pages) ---- */
+.ocean article{max-width:760px; margin:0 auto; padding:56px 24px 64px; position:relative; z-index:1;}
+.ocean .article-breadcrumb-wrap{padding-top:36px;}
+.ocean .art-head{padding:0 0 36px; border-bottom:1px solid var(--border); margin-bottom:36px;}
+.ocean .art-head .cat{display:inline-block; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:999px; margin-bottom:14px;}
+.ocean .art-head h1{font-size:clamp(28px,4.6vw,40px); line-height:1.15;}
+.ocean .art-head .meta{margin-top:16px; font-size:13.5px; color:var(--text-faint); font-family:var(--mono);}
+.ocean article h2{font-size:24px; margin-top:44px; margin-bottom:14px;}
+.ocean article h3{font-size:18px; margin-top:28px; margin-bottom:10px; font-weight:500;}
+.ocean article p{font-size:16px; color:var(--text-dim); margin:0 0 18px; font-weight:300;}
+.ocean article ul, .ocean article ol{margin:0 0 18px; padding-left:22px;}
+.ocean article li{font-size:16px; margin-bottom:8px; color:var(--text-dim); font-weight:300;}
+.ocean article li strong{color:var(--text); font-weight:500;}
+.ocean article p strong{color:var(--text); font-weight:500;}
+
+.ocean .inline-cta{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:16px; padding:26px 28px; margin:36px 0; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;}
+.ocean .inline-cta p{color:var(--text-dim); margin:0; font-size:15px; max-width:44ch; font-weight:300;}
+
+.ocean .related{margin-top:56px; padding-top:36px; border-top:1px solid var(--border);}
+.ocean .related h3{font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); font-family:var(--sans); margin-bottom:16px; font-weight:600;}
+.ocean .related-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+@media(min-width:640px){ .ocean .related-grid{grid-template-columns:repeat(2,1fr);} }
+.ocean .related-card{background:var(--glass-bg); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:12px; padding:16px 18px; text-decoration:none; color:var(--text);}
+.ocean .related-card span{display:block; font-size:14.5px; font-weight:500; color:var(--text); font-family:var(--sans);}
+
 /* ---- certified/licensed-partner banner (diving, fishing, camping) ---- */
 .ocean .cert-banner{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:16px; padding:22px 26px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; position:relative; z-index:1;}
 .ocean .cert-banner .badge{font-family:var(--mono); font-size:12px; background:linear-gradient(90deg,var(--coral-500),var(--coral-400)); color:#fff; padding:6px 12px; border-radius:999px; font-weight:600; white-space:nowrap;}
