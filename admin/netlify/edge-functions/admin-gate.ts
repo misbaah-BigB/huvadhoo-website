@@ -67,7 +67,7 @@ function passwordFormHtml(showError: boolean): string {
     `<h1>Huvadhoo Admin</h1>
 <p class="lede">Enter the admin password to continue.</p>
 ${showError ? '<p class="error">Incorrect password. Please try again.</p>' : ""}
-<form method="POST" action="/admin">
+<form method="POST" action="/">
   <input type="password" name="password" placeholder="Password" required autofocus>
   <button type="submit">Log In</button>
 </form>`
@@ -140,7 +140,7 @@ function getCookie(request: Request, name: string): string | null {
 }
 
 function sessionCookieHeader(value: string, maxAgeSeconds: number): string {
-  return `${COOKIE_NAME}=${value}; Path=/admin; Max-Age=${maxAgeSeconds}; HttpOnly; Secure; SameSite=Strict`;
+  return `${COOKIE_NAME}=${value}; Path=/; Max-Age=${maxAgeSeconds}; HttpOnly; Secure; SameSite=Strict`;
 }
 
 export default async (request: Request, context: Context) => {
@@ -155,11 +155,11 @@ export default async (request: Request, context: Context) => {
 
   const url = new URL(request.url);
 
-  if (url.pathname === "/admin/logout") {
+  if (url.pathname === "/logout") {
     return new Response(null, {
       status: 302,
       headers: {
-        "location": "/admin",
+        "location": "/",
         "set-cookie": sessionCookieHeader("", 0),
       },
     });
@@ -181,7 +181,7 @@ export default async (request: Request, context: Context) => {
     return new Response(null, {
       status: 302,
       headers: {
-        "location": "/admin",
+        "location": "/",
         "set-cookie": sessionCookieHeader(cookieValue, SESSION_TTL_MS / 1000),
       },
     });
