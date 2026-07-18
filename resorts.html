@@ -240,6 +240,25 @@
 </div>
 
 <script src="assets/motion.js"></script>
+<script>
+  // Page banner content (image/headline/subtext) is stored in content/resorts.json
+  // so it can be edited without touching this file. The current values are also
+  // present in the HTML below as a fallback, so the banner still looks correct
+  // even if this fetch fails or JavaScript is unavailable.
+  fetch('content/resorts.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var heroImg = document.querySelector('.pagehero .hero-media img');
+      var heroHeadline = document.querySelector('.pagehero h1');
+      var heroSubtext = document.querySelector('.pagehero p.lede');
+      if (heroImg && data.bannerImage) heroImg.src = data.bannerImage;
+      if (heroHeadline && data.bannerHeadline) heroHeadline.innerHTML = data.bannerHeadline;
+      if (heroSubtext && data.bannerSubtext) heroSubtext.textContent = data.bannerSubtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load page banner content:', err);
+    });
+</script>
 
 </body>
 </html>

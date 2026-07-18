@@ -71,7 +71,8 @@
     margin-top:5px;
   }
   .field input[type="text"],
-  .field textarea{
+  .field textarea,
+  .field select{
     width:100%;
     font-family:'Inter', sans-serif;
     font-size:14.5px;
@@ -82,9 +83,16 @@
     color:var(--ink);
     resize:vertical;
   }
+  .field select{cursor:pointer;}
+  .page-select-field{
+    padding-bottom:18px;
+    margin-bottom:18px;
+    border-bottom:1px dashed rgba(11,42,46,.15);
+  }
   .field textarea{min-height:90px;}
   .field input[type="text"]:disabled,
-  .field textarea:disabled{opacity:.6;}
+  .field textarea:disabled,
+  .field select:disabled{opacity:.6;}
   .save-btn{
     display:block;
     width:100%;
@@ -130,7 +138,22 @@
   <p class="lede">Login successful — welcome to the Huvadhoo Admin Dashboard</p>
 
   <form class="banner-form" id="bannerForm">
-    <h2>Homepage banner</h2>
+    <h2 id="formTitle">Homepage banner</h2>
+
+    <div class="field page-select-field">
+      <label for="pageSelect">Select page to edit</label>
+      <select id="pageSelect" name="page">
+        <option value="homepage">Homepage</option>
+        <option value="resorts">Resorts</option>
+        <option value="guesthouses">Guesthouses</option>
+        <option value="combo">Combo</option>
+        <option value="honeymoon">Honeymoon</option>
+        <option value="family">Family</option>
+        <option value="diving">Diving</option>
+        <option value="fishing">Fishing</option>
+        <option value="camping">Camping</option>
+      </select>
+    </div>
 
     <div class="field">
       <label for="bannerHeadline">Headline</label>
@@ -159,8 +182,21 @@
 <script>
 (function () {
   var ENDPOINT = '/.netlify/functions/save-homepage';
+  var PAGE_LABELS = {
+    homepage: 'Homepage',
+    resorts: 'Resorts',
+    guesthouses: 'Guesthouses',
+    combo: 'Combo',
+    honeymoon: 'Honeymoon',
+    family: 'Family',
+    diving: 'Diving',
+    fishing: 'Fishing',
+    camping: 'Camping',
+  };
 
   var form = document.getElementById('bannerForm');
+  var formTitle = document.getElementById('formTitle');
+  var pageSelect = document.getElementById('pageSelect');
   var headlineInput = document.getElementById('bannerHeadline');
   var subtextInput = document.getElementById('bannerSubtext');
   var imageInput = document.getElementById('bannerImage');
@@ -173,6 +209,7 @@
   }
 
   function setFieldsDisabled(disabled) {
+    pageSelect.disabled = disabled;
     headlineInput.disabled = disabled;
     subtextInput.disabled = disabled;
     imageInput.disabled = disabled;
@@ -186,9 +223,11 @@
   }
 
   function loadCurrentValues() {
+    var page = pageSelect.value;
+    formTitle.textContent = (PAGE_LABELS[page] || page) + ' banner';
     setFieldsDisabled(true);
     setStatus('Loading current values…', '');
-    fetch(ENDPOINT, { credentials: 'same-origin' })
+    fetch(ENDPOINT + '?page=' + encodeURIComponent(page), { credentials: 'same-origin' })
       .then(function (res) {
         return res.json().then(function (data) {
           if (!res.ok) throw new Error(data.error || ('Could not load current values (status ' + res.status + ').'));
@@ -207,6 +246,8 @@
       });
   }
 
+  pageSelect.addEventListener('change', loadCurrentValues);
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     setFieldsDisabled(true);
@@ -217,6 +258,7 @@
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        page: pageSelect.value,
         bannerHeadline: headlineInput.value,
         bannerSubtext: subtextInput.value,
         bannerImage: imageInput.value,

@@ -1,18 +1,33 @@
-// Reads and updates content/homepage.json in the misbaah-BigB/huvadhoo-website
-// repo via the GitHub API, gated behind the same admin_session cookie the
-// password-gate edge function (admin/netlify/edge-functions/admin-gate.ts)
-// issues on login. This function can't literally share code with that Deno
-// edge function, so the session-cookie verification below is a from-scratch
-// reimplementation of the *same* signing scheme (HMAC-SHA256, keyed on a
-// SHA-256 hash of ADMIN_PASSWORD, over "<expiry-ms>") using Node's built-in
-// crypto module — it must stay in sync if that scheme ever changes.
+// Reads and updates a page's content/<page>.json file in the
+// misbaah-BigB/huvadhoo-website repo via the GitHub API, gated behind the
+// same admin_session cookie the password-gate edge function
+// (admin/netlify/edge-functions/admin-gate.ts) issues on login. This
+// function can't literally share code with that Deno edge function, so the
+// session-cookie verification below is a from-scratch reimplementation of
+// the *same* signing scheme (HMAC-SHA256, keyed on a SHA-256 hash of
+// ADMIN_PASSWORD, over "<expiry-ms>") using Node's built-in crypto module —
+// it must stay in sync if that scheme ever changes.
 const crypto = require("crypto");
 
 const COOKIE_NAME = "admin_session";
 const REPO_OWNER = "misbaah-BigB";
 const REPO_NAME = "huvadhoo-website";
-const FILE_PATH = "content/homepage.json";
 const TARGET_BRANCH = "main";
+
+// Whitelist of editable pages — the GitHub API call is built from this, so a
+// request can never be used to read/write any file outside content/*.json.
+const PAGES = {
+  homepage: { file: "content/homepage.json", label: "Homepage" },
+  resorts: { file: "content/resorts.json", label: "Resorts" },
+  guesthouses: { file: "content/guesthouses.json", label: "Guesthouses" },
+  combo: { file: "content/combo.json", label: "Combo" },
+  honeymoon: { file: "content/honeymoon.json", label: "Honeymoon" },
+  family: { file: "content/family.json", label: "Family" },
+  diving: { file: "content/diving.json", label: "Diving" },
+  fishing: { file: "content/fishing.json", label: "Fishing" },
+  camping: { file: "content/camping.json", label: "Camping" },
+};
+const DEFAULT_PAGE = "homepage";
 
 function signSession(expiry, secret) {
   const key = crypto.createHash("sha256").update(secret).digest();
@@ -72,7 +87,6 @@ exports.handler = async (event) => {
     return jsonResponse(500, { error: "Saving isn't configured yet. The site owner needs to set the GITHUB_TOKEN environment variable." });
   }
 
-  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
   const githubHeaders = {
     Authorization: `Bearer ${githubToken}`,
     Accept: "application/vnd.github+json",
@@ -80,11 +94,30 @@ exports.handler = async (event) => {
   };
 
   if (event.httpMethod === "GET") {
+    const pageKey = (event.queryStringParameters && event.queryStringParameters.page) || DEFAULT_PAGE;
+    const page = PAGES[pageKey];
+    if (!page) {
+      return jsonResponse(400, { error: `Unknown page "${pageKey}".` });
+    }
+    const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${page.file}`;
     return readCurrentContent(apiUrl, githubHeaders);
   }
 
   if (event.httpMethod === "POST") {
-    return saveNewContent(apiUrl, githubHeaders, event.body);
+    let payload;
+    try {
+      payload = JSON.parse(event.body || "{}");
+    } catch (err) {
+      return jsonResponse(400, { error: "Invalid request — could not read the submitted form data." });
+    }
+
+    const pageKey = typeof payload.page === "string" ? payload.page : DEFAULT_PAGE;
+    const page = PAGES[pageKey];
+    if (!page) {
+      return jsonResponse(400, { error: `Unknown page "${pageKey}".` });
+    }
+    const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${page.file}`;
+    return saveNewContent(apiUrl, githubHeaders, page.label, payload);
   }
 
   return jsonResponse(405, { error: "Method not allowed." });
@@ -114,7 +147,7 @@ async function readCurrentContent(apiUrl, githubHeaders) {
     const raw = Buffer.from(file.content, "base64").toString("utf-8");
     parsed = JSON.parse(raw);
   } catch (err) {
-    return jsonResponse(502, { error: "The current content/homepage.json file could not be read as valid JSON." });
+    return jsonResponse(502, { error: "The current content file could not be read as valid JSON." });
   }
 
   return jsonResponse(200, {
@@ -124,14 +157,7 @@ async function readCurrentContent(apiUrl, githubHeaders) {
   });
 }
 
-async function saveNewContent(apiUrl, githubHeaders, rawBody) {
-  let payload;
-  try {
-    payload = JSON.parse(rawBody || "{}");
-  } catch (err) {
-    return jsonResponse(400, { error: "Invalid request — could not read the submitted form data." });
-  }
-
+async function saveNewContent(apiUrl, githubHeaders, pageLabel, payload) {
   const bannerHeadline = typeof payload.bannerHeadline === "string" ? payload.bannerHeadline : "";
   const bannerSubtext = typeof payload.bannerSubtext === "string" ? payload.bannerSubtext : "";
   const bannerImage = typeof payload.bannerImage === "string" ? payload.bannerImage : "";
@@ -175,7 +201,7 @@ async function saveNewContent(apiUrl, githubHeaders, rawBody) {
       method: "PUT",
       headers: { ...githubHeaders, "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: "Update homepage banner via admin dashboard",
+        message: `Update ${pageLabel} banner via admin dashboard`,
         content: contentBase64,
         sha,
         branch: TARGET_BRANCH,
