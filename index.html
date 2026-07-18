@@ -104,16 +104,23 @@
   .hero-ocean .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; justify-content:center; align-items:center;}
   .hero-ocean .cta-secondary{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center;}
   .hero-ocean .microline{margin-top:22px; font-size:13px; color:var(--text-faint); font-family:var(--mono);}
+  .scroll-cue{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .scroll-cue span{font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--text-ghost);}
+  .scroll-cue .stem{width:1px; height:36px; background:linear-gradient(to bottom, var(--ocean-400), transparent);}
   @media(max-width:640px){
     .hero-ocean h1 .hero-break{display:none;}
     .hero-ocean .cta-row{flex-direction:column; align-items:stretch; gap:10px; margin-top:28px;}
     .hero-ocean .cta-row > .btn{width:100%; font-size:14px; padding:13px 20px;}
     .hero-ocean .cta-secondary{width:100%; gap:8px; flex-wrap:nowrap; align-items:stretch;}
     .hero-ocean .cta-secondary .btn{flex:1 1 0; min-width:0; width:auto; padding:9px 6px; font-size:11.5px; line-height:1.25; white-space:normal; text-align:center;}
+    /* On short viewports the hero's height (min-height:92vh) can be shorter
+       than the stacked content above, so pinning the scroll cue to a fixed
+       distance from the hero's bottom edge made it collide with the
+       microline text. Letting it flow normally after the content instead
+       guarantees spacing regardless of viewport height. */
+    .hero-ocean{flex-direction:column;}
+    .scroll-cue{position:static; transform:none; margin-top:28px;}
   }
-  .scroll-cue{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:10px;}
-  .scroll-cue span{font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--text-ghost);}
-  .scroll-cue .stem{width:1px; height:36px; background:linear-gradient(to bottom, var(--ocean-400), transparent);}
 
   .trust{position:relative; padding:56px 0; z-index:1;}
   .trust-grid{display:grid; grid-template-columns:1fr; gap:16px;}
