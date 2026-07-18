@@ -8,4 +8,5 @@
 
 [[edge_functions]]
   path = "/*"
+  excludedPath = "/.netlify/functions/*"
   function = "admin-gate"

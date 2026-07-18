@@ -178,7 +178,7 @@ export default async (request: Request, context: Context) => {
     });
   }
 
-  if (request.method === "POST") {
+  if (request.method === "POST" && url.pathname === "/") {
     const form = await request.formData();
     const submitted = String(form.get("password") ?? "");
     const isMatch = await passwordsMatch(submitted, adminPassword);

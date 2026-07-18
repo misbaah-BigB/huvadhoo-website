@@ -23,10 +23,9 @@
     background:var(--sand);
     color:var(--ink);
     font-family:'Inter', sans-serif;
-    text-align:center;
     padding:24px;
   }
-  .admin-box{max-width:440px;}
+  .admin-box{max-width:560px; width:100%; text-align:center;}
   h1{
     font-family:'Fraunces', serif;
     font-weight:600;
@@ -40,6 +39,79 @@
     font-size:clamp(18px,2.6vw,22px);
     color:var(--teal);
   }
+  .banner-form{
+    text-align:left;
+    background:#fff;
+    border:1px solid rgba(11,42,46,.12);
+    border-radius:14px;
+    padding:28px;
+    margin:0 0 24px;
+  }
+  .banner-form h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0 0 20px;
+    text-align:center;
+  }
+  .field{margin:0 0 18px;}
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+  .field .hint{
+    display:block;
+    font-size:12px;
+    font-weight:400;
+    color:var(--ink);
+    opacity:.6;
+    margin-top:5px;
+  }
+  .field input[type="text"],
+  .field textarea{
+    width:100%;
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    padding:11px 13px;
+    border:1px solid rgba(11,42,46,.25);
+    border-radius:8px;
+    background:var(--sand);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .field textarea{min-height:90px;}
+  .field input[type="text"]:disabled,
+  .field textarea:disabled{opacity:.6;}
+  .save-btn{
+    display:block;
+    width:100%;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:#fff;
+    background:var(--teal);
+    border:none;
+    border-radius:999px;
+    padding:14px 20px;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .save-btn:hover:not(:disabled){transform:translateY(-2px); box-shadow:0 10px 24px rgba(31,122,108,.3);}
+  .save-btn:disabled{opacity:.6; cursor:not-allowed;}
+  .save-status{
+    margin:14px 0 0;
+    font-size:13.5px;
+    font-weight:600;
+    text-align:center;
+    min-height:1.2em;
+    color:var(--ink);
+    opacity:.7;
+  }
+  .save-status.success{color:var(--teal); opacity:1;}
+  .save-status.error{color:#b23b3b; opacity:1;}
   .logout-link{
     font-family:'Inter', sans-serif;
     font-size:14px;
@@ -56,8 +128,123 @@
 <div class="admin-box">
   <h1>Huvadhoo Admin</h1>
   <p class="lede">Login successful — welcome to the Huvadhoo Admin Dashboard</p>
+
+  <form class="banner-form" id="bannerForm">
+    <h2>Homepage banner</h2>
+
+    <div class="field">
+      <label for="bannerHeadline">Headline</label>
+      <input type="text" id="bannerHeadline" name="bannerHeadline">
+      <span class="hint">You can include a &lt;br&gt; tag to force a line break on larger screens — leave it as-is if you're not sure.</span>
+    </div>
+
+    <div class="field">
+      <label for="bannerSubtext">Subtext</label>
+      <textarea id="bannerSubtext" name="bannerSubtext"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="bannerImage">Image path</label>
+      <input type="text" id="bannerImage" name="bannerImage">
+      <span class="hint">The file path to the banner image, e.g. assets/overwater-villas-aerial.jpg</span>
+    </div>
+
+    <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
+    <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
+  </form>
+
   <a class="logout-link" href="/logout">Log out</a>
 </div>
+
+<script>
+(function () {
+  var ENDPOINT = '/.netlify/functions/save-homepage';
+
+  var form = document.getElementById('bannerForm');
+  var headlineInput = document.getElementById('bannerHeadline');
+  var subtextInput = document.getElementById('bannerSubtext');
+  var imageInput = document.getElementById('bannerImage');
+  var saveBtn = document.getElementById('saveBtn');
+  var statusEl = document.getElementById('saveStatus');
+
+  function setStatus(message, kind) {
+    statusEl.textContent = message;
+    statusEl.className = 'save-status' + (kind ? ' ' + kind : '');
+  }
+
+  function setFieldsDisabled(disabled) {
+    headlineInput.disabled = disabled;
+    subtextInput.disabled = disabled;
+    imageInput.disabled = disabled;
+    saveBtn.disabled = disabled;
+  }
+
+  function applyValues(data) {
+    headlineInput.value = data.bannerHeadline || '';
+    subtextInput.value = data.bannerSubtext || '';
+    imageInput.value = data.bannerImage || '';
+  }
+
+  function loadCurrentValues() {
+    setFieldsDisabled(true);
+    setStatus('Loading current values…', '');
+    fetch(ENDPOINT, { credentials: 'same-origin' })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || ('Could not load current values (status ' + res.status + ').'));
+          return data;
+        });
+      })
+      .then(function (data) {
+        applyValues(data);
+        setStatus('', '');
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Could not load the current banner content.', 'error');
+      })
+      .finally(function () {
+        setFieldsDisabled(false);
+      });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    setFieldsDisabled(true);
+    setStatus('Saving...', '');
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bannerHeadline: headlineInput.value,
+        bannerSubtext: subtextInput.value,
+        bannerImage: imageInput.value,
+      }),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || ('Save failed (status ' + res.status + ').'));
+          return data;
+        });
+      })
+      .then(function (data) {
+        // Refresh the fields from what the server confirmed it saved, without
+        // re-triggering the "Loading..." status and clobbering this message.
+        applyValues(data);
+        setStatus('Saved successfully!', 'success');
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong while saving.', 'error');
+      })
+      .finally(function () {
+        setFieldsDisabled(false);
+      });
+  });
+
+  loadCurrentValues();
+})();
+</script>
 
 </body>
 </html>
