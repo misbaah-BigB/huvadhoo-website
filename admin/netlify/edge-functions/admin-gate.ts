@@ -143,13 +143,26 @@ function sessionCookieHeader(value: string, maxAgeSeconds: number): string {
   return `${COOKIE_NAME}=${value}; Path=/; Max-Age=${maxAgeSeconds}; HttpOnly; Secure; SameSite=Strict`;
 }
 
+// Every response below is specific to one visitor's auth state (the gate
+// itself, or their freshly-unlocked dashboard) and must never be reused for
+// a different visitor by a shared cache — so every response, including the
+// pass-through to the real dashboard, gets these headers explicitly rather
+// than trusting whatever a static asset's own default caching headers are.
+function noStoreHeaders(extra?: Record<string, string>): Headers {
+  const headers = new Headers({ "cache-control": "no-store, private" });
+  if (extra) {
+    for (const [key, value] of Object.entries(extra)) headers.set(key, value);
+  }
+  return headers;
+}
+
 export default async (request: Request, context: Context) => {
   const adminPassword = Deno.env.get("ADMIN_PASSWORD");
 
   if (!adminPassword) {
     return new Response(notConfiguredHtml(), {
       status: 503,
-      headers: { "content-type": "text/html; charset=utf-8" },
+      headers: noStoreHeaders({ "content-type": "text/html; charset=utf-8" }),
     });
   }
 
@@ -158,10 +171,10 @@ export default async (request: Request, context: Context) => {
   if (url.pathname === "/logout") {
     return new Response(null, {
       status: 302,
-      headers: {
+      headers: noStoreHeaders({
         "location": "/",
         "set-cookie": sessionCookieHeader("", 0),
-      },
+      }),
     });
   }
 
@@ -173,17 +186,17 @@ export default async (request: Request, context: Context) => {
     if (!isMatch) {
       return new Response(passwordFormHtml(true), {
         status: 401,
-        headers: { "content-type": "text/html; charset=utf-8" },
+        headers: noStoreHeaders({ "content-type": "text/html; charset=utf-8" }),
       });
     }
 
     const cookieValue = await createSessionCookieValue(adminPassword);
     return new Response(null, {
       status: 302,
-      headers: {
+      headers: noStoreHeaders({
         "location": "/",
         "set-cookie": sessionCookieHeader(cookieValue, SESSION_TTL_MS / 1000),
-      },
+      }),
     });
   }
 
@@ -193,11 +206,18 @@ export default async (request: Request, context: Context) => {
     : false;
 
   if (authenticated) {
-    return context.next();
+    const dashboardResponse = await context.next();
+    const headers = new Headers(dashboardResponse.headers);
+    headers.set("cache-control", "no-store, private");
+    return new Response(dashboardResponse.body, {
+      status: dashboardResponse.status,
+      statusText: dashboardResponse.statusText,
+      headers,
+    });
   }
 
   return new Response(passwordFormHtml(false), {
     status: 401,
-    headers: { "content-type": "text/html; charset=utf-8" },
+    headers: noStoreHeaders({ "content-type": "text/html; charset=utf-8" }),
   });
 };
