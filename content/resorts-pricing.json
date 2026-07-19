@@ -1,0 +1,49 @@
+{
+  "eyebrow": "Categories",
+  "heading": "Pick a starting point",
+  "intro": "These are ranges, not fixed prices — your actual quote depends on dates, room type, and availability.",
+  "categories": [
+    {
+      "tier": "Budget-luxury",
+      "name": "Budget-Luxury Resort",
+      "description": "A real private-island resort experience at the lowest resort price point — smaller rooms, simpler dining, but still your own island.",
+      "bestFor": "Best for: first resort trip, longer stays on a set budget",
+      "price": "$180 – $350 / night"
+    },
+    {
+      "tier": "All-inclusive",
+      "name": "All-Inclusive Resort",
+      "description": "Meals, drinks, and often excursions bundled into one price — the most predictable total cost of any resort category.",
+      "bestFor": "Best for: predictable budgeting, families, first-time visitors",
+      "price": "$350 – $700 / night"
+    },
+    {
+      "tier": "Family",
+      "name": "Family Resort",
+      "description": "Real kids' clubs, shallow lagoons safe for swimming, and family-configured villas — not just a regular resort with a crib added.",
+      "bestFor": "Best for: children under 12, multi-generation trips",
+      "price": "$300 – $900 / night"
+    },
+    {
+      "tier": "Honeymoon",
+      "name": "Honeymoon & Adults-Only Resort",
+      "description": "Water villas, private dining, and a resort culture genuinely built around couples — quiet, not family-oriented.",
+      "bestFor": "Best for: honeymoons, anniversaries, couples-only trips",
+      "price": "$450 – $1,800 / night"
+    },
+    {
+      "tier": "Premium",
+      "name": "Premium 5-Star Resort",
+      "description": "Top-tier service and dining with a larger footprint — multiple restaurants, spa, watersports center, often a longer transfer.",
+      "bestFor": "Best for: milestone trips, longer stays, strong reef access",
+      "price": "$600 – $1,400 / night"
+    },
+    {
+      "tier": "Ultra-luxury",
+      "name": "Private-Island Ultra-Luxury",
+      "description": "Full villa privacy, butler service, and the highest-end dining — the top of the Maldives resort market.",
+      "bestFor": "Best for: privacy above all, special occasions, no budget ceiling",
+      "price": "$1,200 – $6,000+ / night"
+    }
+  ]
+}

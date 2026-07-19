@@ -259,6 +259,48 @@
       console.error('Could not load page banner content:', err);
     });
 </script>
+<script>
+  // Resort category pricing grid content ("Pick a starting point") is stored
+  // in content/resorts-pricing.json so it can be edited without touching this
+  // file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/resorts-pricing.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.cat-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var cards = grid.querySelectorAll('.cat-card');
+      (data.categories || []).forEach(function (cat, i) {
+        var card = cards[i];
+        if (!card) return;
+        var tierEl = card.querySelector('.tier');
+        var nameEl = card.querySelector('h3');
+        var descEl = card.querySelector('p');
+        var bestEl = card.querySelector('.best');
+        var priceEl = card.querySelector('.price');
+        if (tierEl && cat.tier) tierEl.textContent = cat.tier;
+        if (nameEl && cat.name) nameEl.textContent = cat.name;
+        if (descEl && cat.description) descEl.textContent = cat.description;
+        if (bestEl && cat.bestFor) bestEl.textContent = cat.bestFor;
+        if (priceEl && cat.price) priceEl.textContent = cat.price;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load resort pricing content:', err);
+    });
+</script>
 
 </body>
 </html>

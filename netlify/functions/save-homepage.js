@@ -14,20 +14,71 @@ const REPO_OWNER = "misbaah-BigB";
 const REPO_NAME = "huvadhoo-website";
 const TARGET_BRANCH = "main";
 
-// Whitelist of editable pages — the GitHub API call is built from this, so a
-// request can never be used to read/write any file outside content/*.json.
+// Each editable page/section maps to exactly one file and one "prepare"
+// function that both validates the submitted content and rebuilds it field
+// by field (rather than writing the raw request body) so a save can never
+// smuggle in unexpected keys. The GitHub API call is always built from this
+// whitelist, so a request can never be used to read/write any file outside
+// content/*.json.
 const PAGES = {
-  homepage: { file: "content/homepage.json", label: "Homepage" },
-  resorts: { file: "content/resorts.json", label: "Resorts" },
-  guesthouses: { file: "content/guesthouses.json", label: "Guesthouses" },
-  combo: { file: "content/combo.json", label: "Combo" },
-  honeymoon: { file: "content/honeymoon.json", label: "Honeymoon" },
-  family: { file: "content/family.json", label: "Family" },
-  diving: { file: "content/diving.json", label: "Diving" },
-  fishing: { file: "content/fishing.json", label: "Fishing" },
-  camping: { file: "content/camping.json", label: "Camping" },
+  homepage: { file: "content/homepage.json", prepare: prepareBannerContent, commitMessage: "Update Homepage banner via admin dashboard" },
+  resorts: { file: "content/resorts.json", prepare: prepareBannerContent, commitMessage: "Update Resorts banner via admin dashboard" },
+  guesthouses: { file: "content/guesthouses.json", prepare: prepareBannerContent, commitMessage: "Update Guesthouses banner via admin dashboard" },
+  combo: { file: "content/combo.json", prepare: prepareBannerContent, commitMessage: "Update Combo banner via admin dashboard" },
+  honeymoon: { file: "content/honeymoon.json", prepare: prepareBannerContent, commitMessage: "Update Honeymoon banner via admin dashboard" },
+  family: { file: "content/family.json", prepare: prepareBannerContent, commitMessage: "Update Family banner via admin dashboard" },
+  diving: { file: "content/diving.json", prepare: prepareBannerContent, commitMessage: "Update Diving banner via admin dashboard" },
+  fishing: { file: "content/fishing.json", prepare: prepareBannerContent, commitMessage: "Update Fishing banner via admin dashboard" },
+  camping: { file: "content/camping.json", prepare: prepareBannerContent, commitMessage: "Update Camping banner via admin dashboard" },
+  "resorts-pricing": { file: "content/resorts-pricing.json", prepare: prepareResortsPricingContent, commitMessage: "Update Resorts Pricing via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
+
+function str(value) {
+  return typeof value === "string" ? value : "";
+}
+
+function prepareBannerContent(payload) {
+  const bannerHeadline = str(payload.bannerHeadline);
+  const bannerSubtext = str(payload.bannerSubtext);
+  const bannerImage = str(payload.bannerImage);
+  if (!bannerHeadline.trim() || !bannerImage.trim()) {
+    return { error: "Headline and image path can't be empty." };
+  }
+  return { content: { bannerImage, bannerHeadline, bannerSubtext } };
+}
+
+function prepareResortsPricingContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    const price = str(cat.price);
+    if (!name.trim() || !price.trim()) {
+      return { error: "Each category needs at least a name and a price." };
+    }
+    categories.push({
+      tier: str(cat.tier),
+      name,
+      description: str(cat.description),
+      bestFor: str(cat.bestFor),
+      price,
+    });
+  }
+
+  return { content: { eyebrow, heading, intro, categories } };
+}
 
 function signSession(expiry, secret) {
   const key = crypto.createHash("sha256").update(secret).digest();
@@ -117,7 +168,7 @@ exports.handler = async (event) => {
       return jsonResponse(400, { error: `Unknown page "${pageKey}".` });
     }
     const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${page.file}`;
-    return saveNewContent(apiUrl, githubHeaders, page.label, payload);
+    return saveNewContent(apiUrl, githubHeaders, page, payload);
   }
 
   return jsonResponse(405, { error: "Method not allowed." });
@@ -128,11 +179,11 @@ async function readCurrentContent(apiUrl, githubHeaders) {
   try {
     getRes = await fetch(`${apiUrl}?ref=${TARGET_BRANCH}`, { headers: githubHeaders });
   } catch (err) {
-    return jsonResponse(502, { error: "Could not reach GitHub to load the current banner content." });
+    return jsonResponse(502, { error: "Could not reach GitHub to load the current content." });
   }
 
   if (!getRes.ok) {
-    return jsonResponse(502, { error: `Could not load the current banner content from GitHub (status ${getRes.status}).` });
+    return jsonResponse(502, { error: `Could not load the current content from GitHub (status ${getRes.status}).` });
   }
 
   let file;
@@ -150,21 +201,15 @@ async function readCurrentContent(apiUrl, githubHeaders) {
     return jsonResponse(502, { error: "The current content file could not be read as valid JSON." });
   }
 
-  return jsonResponse(200, {
-    bannerImage: parsed.bannerImage || "",
-    bannerHeadline: parsed.bannerHeadline || "",
-    bannerSubtext: parsed.bannerSubtext || "",
-  });
+  return jsonResponse(200, parsed);
 }
 
-async function saveNewContent(apiUrl, githubHeaders, pageLabel, payload) {
-  const bannerHeadline = typeof payload.bannerHeadline === "string" ? payload.bannerHeadline : "";
-  const bannerSubtext = typeof payload.bannerSubtext === "string" ? payload.bannerSubtext : "";
-  const bannerImage = typeof payload.bannerImage === "string" ? payload.bannerImage : "";
-
-  if (!bannerHeadline.trim() || !bannerImage.trim()) {
-    return jsonResponse(400, { error: "Headline and image path can't be empty." });
+async function saveNewContent(apiUrl, githubHeaders, page, payload) {
+  const prepared = page.prepare(payload);
+  if (prepared.error) {
+    return jsonResponse(400, { error: prepared.error });
   }
+  const content = prepared.content;
 
   // 1. Fetch the current file to get its sha — the GitHub API requires this
   // to prove we're updating the version we think we're updating.
@@ -192,7 +237,7 @@ async function saveNewContent(apiUrl, githubHeaders, pageLabel, payload) {
   }
 
   // 2. Write the update.
-  const newContent = JSON.stringify({ bannerImage, bannerHeadline, bannerSubtext }, null, 2) + "\n";
+  const newContent = JSON.stringify(content, null, 2) + "\n";
   const contentBase64 = Buffer.from(newContent, "utf-8").toString("base64");
 
   let putRes;
@@ -201,7 +246,7 @@ async function saveNewContent(apiUrl, githubHeaders, pageLabel, payload) {
       method: "PUT",
       headers: { ...githubHeaders, "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: `Update ${pageLabel} banner via admin dashboard`,
+        message: page.commitMessage,
         content: contentBase64,
         sha,
         branch: TARGET_BRANCH,
@@ -226,5 +271,5 @@ async function saveNewContent(apiUrl, githubHeaders, pageLabel, payload) {
     return jsonResponse(502, { error: `Could not save the update to GitHub (status ${putRes.status})${suffix}` });
   }
 
-  return jsonResponse(200, { success: true, bannerImage, bannerHeadline, bannerSubtext });
+  return jsonResponse(200, Object.assign({ success: true }, content));
 }

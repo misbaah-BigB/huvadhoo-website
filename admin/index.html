@@ -25,7 +25,7 @@
     font-family:'Inter', sans-serif;
     padding:24px;
   }
-  .admin-box{max-width:560px; width:100%; text-align:center;}
+  .admin-box{max-width:640px; width:100%; text-align:center;}
   h1{
     font-family:'Fraunces', serif;
     font-weight:600;
@@ -93,6 +93,22 @@
   .field input[type="text"]:disabled,
   .field textarea:disabled,
   .field select:disabled{opacity:.6;}
+  .category-group{
+    border:1px solid rgba(11,42,46,.12);
+    border-radius:10px;
+    padding:16px 16px 2px;
+    margin:0 0 16px;
+    background:var(--sand);
+  }
+  .category-group-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:14.5px;
+    margin:0 0 14px;
+  }
+  .category-group .field input[type="text"],
+  .category-group .field textarea{background:#fff;}
+  .category-group .field textarea{min-height:64px;}
   .save-btn{
     display:block;
     width:100%;
@@ -152,24 +168,95 @@
         <option value="diving">Diving</option>
         <option value="fishing">Fishing</option>
         <option value="camping">Camping</option>
+        <option value="resorts-pricing">Resorts — Pricing Grid</option>
       </select>
     </div>
 
-    <div class="field">
-      <label for="bannerHeadline">Headline</label>
-      <input type="text" id="bannerHeadline" name="bannerHeadline">
-      <span class="hint">You can include a &lt;br&gt; tag to force a line break on larger screens — leave it as-is if you're not sure.</span>
+    <div id="bannerFields">
+      <div class="field">
+        <label for="bannerHeadline">Headline</label>
+        <input type="text" id="bannerHeadline" name="bannerHeadline">
+        <span class="hint">You can include a &lt;br&gt; tag to force a line break on larger screens — leave it as-is if you're not sure.</span>
+      </div>
+
+      <div class="field">
+        <label for="bannerSubtext">Subtext</label>
+        <textarea id="bannerSubtext" name="bannerSubtext"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="bannerImage">Image path</label>
+        <input type="text" id="bannerImage" name="bannerImage">
+        <span class="hint">The file path to the banner image, e.g. assets/overwater-villas-aerial.jpg</span>
+      </div>
     </div>
 
-    <div class="field">
-      <label for="bannerSubtext">Subtext</label>
-      <textarea id="bannerSubtext" name="bannerSubtext"></textarea>
-    </div>
+    <div id="pricingFields" style="display:none;">
+      <div class="field">
+        <label for="pricingEyebrow">Eyebrow</label>
+        <input type="text" id="pricingEyebrow" name="pricingEyebrow">
+      </div>
 
-    <div class="field">
-      <label for="bannerImage">Image path</label>
-      <input type="text" id="bannerImage" name="bannerImage">
-      <span class="hint">The file path to the banner image, e.g. assets/overwater-villas-aerial.jpg</span>
+      <div class="field">
+        <label for="pricingHeading">Heading</label>
+        <input type="text" id="pricingHeading" name="pricingHeading">
+      </div>
+
+      <div class="field">
+        <label for="pricingIntro">Intro sentence</label>
+        <textarea id="pricingIntro" name="pricingIntro"></textarea>
+      </div>
+
+      <div id="categoryList">
+        <div class="category-group">
+          <h3 class="category-group-title">Category 1</h3>
+          <div class="field"><label for="cat0Tier">Tier label</label><input type="text" id="cat0Tier"></div>
+          <div class="field"><label for="cat0Name">Category name</label><input type="text" id="cat0Name"></div>
+          <div class="field"><label for="cat0Description">Description</label><textarea id="cat0Description"></textarea></div>
+          <div class="field"><label for="cat0BestFor">Best for</label><input type="text" id="cat0BestFor"></div>
+          <div class="field"><label for="cat0Price">Price range</label><input type="text" id="cat0Price"></div>
+        </div>
+        <div class="category-group">
+          <h3 class="category-group-title">Category 2</h3>
+          <div class="field"><label for="cat1Tier">Tier label</label><input type="text" id="cat1Tier"></div>
+          <div class="field"><label for="cat1Name">Category name</label><input type="text" id="cat1Name"></div>
+          <div class="field"><label for="cat1Description">Description</label><textarea id="cat1Description"></textarea></div>
+          <div class="field"><label for="cat1BestFor">Best for</label><input type="text" id="cat1BestFor"></div>
+          <div class="field"><label for="cat1Price">Price range</label><input type="text" id="cat1Price"></div>
+        </div>
+        <div class="category-group">
+          <h3 class="category-group-title">Category 3</h3>
+          <div class="field"><label for="cat2Tier">Tier label</label><input type="text" id="cat2Tier"></div>
+          <div class="field"><label for="cat2Name">Category name</label><input type="text" id="cat2Name"></div>
+          <div class="field"><label for="cat2Description">Description</label><textarea id="cat2Description"></textarea></div>
+          <div class="field"><label for="cat2BestFor">Best for</label><input type="text" id="cat2BestFor"></div>
+          <div class="field"><label for="cat2Price">Price range</label><input type="text" id="cat2Price"></div>
+        </div>
+        <div class="category-group">
+          <h3 class="category-group-title">Category 4</h3>
+          <div class="field"><label for="cat3Tier">Tier label</label><input type="text" id="cat3Tier"></div>
+          <div class="field"><label for="cat3Name">Category name</label><input type="text" id="cat3Name"></div>
+          <div class="field"><label for="cat3Description">Description</label><textarea id="cat3Description"></textarea></div>
+          <div class="field"><label for="cat3BestFor">Best for</label><input type="text" id="cat3BestFor"></div>
+          <div class="field"><label for="cat3Price">Price range</label><input type="text" id="cat3Price"></div>
+        </div>
+        <div class="category-group">
+          <h3 class="category-group-title">Category 5</h3>
+          <div class="field"><label for="cat4Tier">Tier label</label><input type="text" id="cat4Tier"></div>
+          <div class="field"><label for="cat4Name">Category name</label><input type="text" id="cat4Name"></div>
+          <div class="field"><label for="cat4Description">Description</label><textarea id="cat4Description"></textarea></div>
+          <div class="field"><label for="cat4BestFor">Best for</label><input type="text" id="cat4BestFor"></div>
+          <div class="field"><label for="cat4Price">Price range</label><input type="text" id="cat4Price"></div>
+        </div>
+        <div class="category-group">
+          <h3 class="category-group-title">Category 6</h3>
+          <div class="field"><label for="cat5Tier">Tier label</label><input type="text" id="cat5Tier"></div>
+          <div class="field"><label for="cat5Name">Category name</label><input type="text" id="cat5Name"></div>
+          <div class="field"><label for="cat5Description">Description</label><textarea id="cat5Description"></textarea></div>
+          <div class="field"><label for="cat5BestFor">Best for</label><input type="text" id="cat5BestFor"></div>
+          <div class="field"><label for="cat5Price">Price range</label><input type="text" id="cat5Price"></div>
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
@@ -182,6 +269,8 @@
 <script>
 (function () {
   var ENDPOINT = '/.netlify/functions/save-homepage';
+  var PRICING_PAGE = 'resorts-pricing';
+  var NUM_CATEGORIES = 6;
   var PAGE_LABELS = {
     homepage: 'Homepage',
     resorts: 'Resorts',
@@ -192,16 +281,39 @@
     diving: 'Diving',
     fishing: 'Fishing',
     camping: 'Camping',
+    'resorts-pricing': 'Resorts — Pricing Grid',
   };
 
   var form = document.getElementById('bannerForm');
   var formTitle = document.getElementById('formTitle');
   var pageSelect = document.getElementById('pageSelect');
+  var saveBtn = document.getElementById('saveBtn');
+  var statusEl = document.getElementById('saveStatus');
+
+  var bannerFieldsEl = document.getElementById('bannerFields');
   var headlineInput = document.getElementById('bannerHeadline');
   var subtextInput = document.getElementById('bannerSubtext');
   var imageInput = document.getElementById('bannerImage');
-  var saveBtn = document.getElementById('saveBtn');
-  var statusEl = document.getElementById('saveStatus');
+
+  var pricingFieldsEl = document.getElementById('pricingFields');
+  var pricingEyebrowInput = document.getElementById('pricingEyebrow');
+  var pricingHeadingInput = document.getElementById('pricingHeading');
+  var pricingIntroInput = document.getElementById('pricingIntro');
+
+  var categoryInputs = [];
+  for (var i = 0; i < NUM_CATEGORIES; i++) {
+    categoryInputs.push({
+      tier: document.getElementById('cat' + i + 'Tier'),
+      name: document.getElementById('cat' + i + 'Name'),
+      description: document.getElementById('cat' + i + 'Description'),
+      bestFor: document.getElementById('cat' + i + 'BestFor'),
+      price: document.getElementById('cat' + i + 'Price'),
+    });
+  }
+
+  function isPricingPage(page) {
+    return page === PRICING_PAGE;
+  }
 
   function setStatus(message, kind) {
     statusEl.textContent = message;
@@ -210,21 +322,80 @@
 
   function setFieldsDisabled(disabled) {
     pageSelect.disabled = disabled;
+    saveBtn.disabled = disabled;
     headlineInput.disabled = disabled;
     subtextInput.disabled = disabled;
     imageInput.disabled = disabled;
-    saveBtn.disabled = disabled;
+    pricingEyebrowInput.disabled = disabled;
+    pricingHeadingInput.disabled = disabled;
+    pricingIntroInput.disabled = disabled;
+    categoryInputs.forEach(function (c) {
+      c.tier.disabled = disabled;
+      c.name.disabled = disabled;
+      c.description.disabled = disabled;
+      c.bestFor.disabled = disabled;
+      c.price.disabled = disabled;
+    });
   }
 
-  function applyValues(data) {
-    headlineInput.value = data.bannerHeadline || '';
-    subtextInput.value = data.bannerSubtext || '';
-    imageInput.value = data.bannerImage || '';
+  function updateFieldVisibility(page) {
+    var pricing = isPricingPage(page);
+    bannerFieldsEl.style.display = pricing ? 'none' : '';
+    pricingFieldsEl.style.display = pricing ? '' : 'none';
+  }
+
+  function applyValues(page, data) {
+    if (isPricingPage(page)) {
+      pricingEyebrowInput.value = data.eyebrow || '';
+      pricingHeadingInput.value = data.heading || '';
+      pricingIntroInput.value = data.intro || '';
+      var cats = data.categories || [];
+      categoryInputs.forEach(function (c, i) {
+        var cat = cats[i] || {};
+        c.tier.value = cat.tier || '';
+        c.name.value = cat.name || '';
+        c.description.value = cat.description || '';
+        c.bestFor.value = cat.bestFor || '';
+        c.price.value = cat.price || '';
+      });
+    } else {
+      headlineInput.value = data.bannerHeadline || '';
+      subtextInput.value = data.bannerSubtext || '';
+      imageInput.value = data.bannerImage || '';
+    }
+  }
+
+  function buildSavePayload(page) {
+    if (isPricingPage(page)) {
+      return {
+        page: page,
+        eyebrow: pricingEyebrowInput.value,
+        heading: pricingHeadingInput.value,
+        intro: pricingIntroInput.value,
+        categories: categoryInputs.map(function (c) {
+          return {
+            tier: c.tier.value,
+            name: c.name.value,
+            description: c.description.value,
+            bestFor: c.bestFor.value,
+            price: c.price.value,
+          };
+        }),
+      };
+    }
+    return {
+      page: page,
+      bannerHeadline: headlineInput.value,
+      bannerSubtext: subtextInput.value,
+      bannerImage: imageInput.value,
+    };
   }
 
   function loadCurrentValues() {
     var page = pageSelect.value;
-    formTitle.textContent = (PAGE_LABELS[page] || page) + ' banner';
+    var label = PAGE_LABELS[page] || page;
+    formTitle.textContent = isPricingPage(page) ? label : label + ' banner';
+    updateFieldVisibility(page);
     setFieldsDisabled(true);
     setStatus('Loading current values…', '');
     fetch(ENDPOINT + '?page=' + encodeURIComponent(page), { credentials: 'same-origin' })
@@ -235,11 +406,11 @@
         });
       })
       .then(function (data) {
-        applyValues(data);
+        applyValues(page, data);
         setStatus('', '');
       })
       .catch(function (err) {
-        setStatus(err.message || 'Could not load the current banner content.', 'error');
+        setStatus(err.message || 'Could not load the current content.', 'error');
       })
       .finally(function () {
         setFieldsDisabled(false);
@@ -250,6 +421,7 @@
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    var page = pageSelect.value;
     setFieldsDisabled(true);
     setStatus('Saving...', '');
 
@@ -257,12 +429,7 @@
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        page: pageSelect.value,
-        bannerHeadline: headlineInput.value,
-        bannerSubtext: subtextInput.value,
-        bannerImage: imageInput.value,
-      }),
+      body: JSON.stringify(buildSavePayload(page)),
     })
       .then(function (res) {
         return res.json().then(function (data) {
@@ -273,7 +440,7 @@
       .then(function (data) {
         // Refresh the fields from what the server confirmed it saved, without
         // re-triggering the "Loading..." status and clobbering this message.
-        applyValues(data);
+        applyValues(page, data);
         setStatus('Saved successfully!', 'success');
       })
       .catch(function (err) {
