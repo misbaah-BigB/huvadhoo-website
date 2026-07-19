@@ -301,6 +301,106 @@
       console.error('Could not load resort pricing content:', err);
     });
 </script>
+<script>
+  // "What actually changes between categories" comparison table content is
+  // stored in content/resorts-comparison.json so it can be edited without
+  // touching this file. The current values are also present in the HTML
+  // below as a fallback, so the section still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/resorts-comparison.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var table = document.querySelector('.compare table');
+      if (!table) return;
+
+      var sectionHead = table.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var rows = table.querySelectorAll('tr');
+      var headerCells = rows[0] ? rows[0].querySelectorAll('th') : [];
+      if (headerCells[0] && data.factorLabel) headerCells[0].textContent = data.factorLabel;
+      (data.columns || []).forEach(function (col, i) {
+        if (headerCells[i + 1] && col) headerCells[i + 1].textContent = col;
+      });
+
+      (data.rows || []).forEach(function (rowData, i) {
+        var tr = rows[i + 1];
+        if (!tr) return;
+        var cells = tr.querySelectorAll('td');
+        if (cells[0] && rowData.factor) cells[0].textContent = rowData.factor;
+        (rowData.values || []).forEach(function (val, j) {
+          if (cells[j + 1] && val) cells[j + 1].textContent = val;
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load comparison table content:', err);
+    });
+</script>
+<script>
+  // "Why book the category through us" content is stored in
+  // content/resorts-why-us.json so it can be edited without touching this
+  // file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/resorts-why-us.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.why-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.why-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "why us" content:', err);
+    });
+</script>
+<script>
+  // Bottom CTA band text (eyebrow/heading/subtext) is stored in
+  // content/resorts-cta.json so it can be edited without touching this file.
+  // The contact buttons themselves are shared site-wide and stay hardcoded.
+  // The current values are also present in the HTML below as a fallback, so
+  // the section still looks correct even if this fetch fails or JavaScript
+  // is unavailable.
+  fetch('content/resorts-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
 
 </body>
 </html>

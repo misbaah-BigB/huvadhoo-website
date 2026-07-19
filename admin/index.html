@@ -93,22 +93,22 @@
   .field input[type="text"]:disabled,
   .field textarea:disabled,
   .field select:disabled{opacity:.6;}
-  .category-group{
+  .item-group{
     border:1px solid rgba(11,42,46,.12);
     border-radius:10px;
     padding:16px 16px 2px;
     margin:0 0 16px;
     background:var(--sand);
   }
-  .category-group-title{
+  .item-group-title{
     font-family:'Fraunces', serif;
     font-weight:600;
     font-size:14.5px;
     margin:0 0 14px;
   }
-  .category-group .field input[type="text"],
-  .category-group .field textarea{background:#fff;}
-  .category-group .field textarea{min-height:64px;}
+  .item-group .field input[type="text"],
+  .item-group .field textarea{background:#fff;}
+  .item-group .field textarea{min-height:64px;}
   .save-btn{
     display:block;
     width:100%;
@@ -169,6 +169,9 @@
         <option value="fishing">Fishing</option>
         <option value="camping">Camping</option>
         <option value="resorts-pricing">Resorts — Pricing Grid</option>
+        <option value="resorts-comparison">Resorts — Comparison Table</option>
+        <option value="resorts-why-us">Resorts — Why Book With Us</option>
+        <option value="resorts-cta">Resorts — CTA Band</option>
       </select>
     </div>
 
@@ -194,68 +197,137 @@
     <div id="pricingFields" style="display:none;">
       <div class="field">
         <label for="pricingEyebrow">Eyebrow</label>
-        <input type="text" id="pricingEyebrow" name="pricingEyebrow">
+        <input type="text" id="pricingEyebrow">
       </div>
-
       <div class="field">
         <label for="pricingHeading">Heading</label>
-        <input type="text" id="pricingHeading" name="pricingHeading">
+        <input type="text" id="pricingHeading">
       </div>
-
       <div class="field">
         <label for="pricingIntro">Intro sentence</label>
-        <textarea id="pricingIntro" name="pricingIntro"></textarea>
+        <textarea id="pricingIntro"></textarea>
       </div>
 
       <div id="categoryList">
-        <div class="category-group">
-          <h3 class="category-group-title">Category 1</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 1</h3>
           <div class="field"><label for="cat0Tier">Tier label</label><input type="text" id="cat0Tier"></div>
           <div class="field"><label for="cat0Name">Category name</label><input type="text" id="cat0Name"></div>
           <div class="field"><label for="cat0Description">Description</label><textarea id="cat0Description"></textarea></div>
           <div class="field"><label for="cat0BestFor">Best for</label><input type="text" id="cat0BestFor"></div>
           <div class="field"><label for="cat0Price">Price range</label><input type="text" id="cat0Price"></div>
         </div>
-        <div class="category-group">
-          <h3 class="category-group-title">Category 2</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 2</h3>
           <div class="field"><label for="cat1Tier">Tier label</label><input type="text" id="cat1Tier"></div>
           <div class="field"><label for="cat1Name">Category name</label><input type="text" id="cat1Name"></div>
           <div class="field"><label for="cat1Description">Description</label><textarea id="cat1Description"></textarea></div>
           <div class="field"><label for="cat1BestFor">Best for</label><input type="text" id="cat1BestFor"></div>
           <div class="field"><label for="cat1Price">Price range</label><input type="text" id="cat1Price"></div>
         </div>
-        <div class="category-group">
-          <h3 class="category-group-title">Category 3</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 3</h3>
           <div class="field"><label for="cat2Tier">Tier label</label><input type="text" id="cat2Tier"></div>
           <div class="field"><label for="cat2Name">Category name</label><input type="text" id="cat2Name"></div>
           <div class="field"><label for="cat2Description">Description</label><textarea id="cat2Description"></textarea></div>
           <div class="field"><label for="cat2BestFor">Best for</label><input type="text" id="cat2BestFor"></div>
           <div class="field"><label for="cat2Price">Price range</label><input type="text" id="cat2Price"></div>
         </div>
-        <div class="category-group">
-          <h3 class="category-group-title">Category 4</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 4</h3>
           <div class="field"><label for="cat3Tier">Tier label</label><input type="text" id="cat3Tier"></div>
           <div class="field"><label for="cat3Name">Category name</label><input type="text" id="cat3Name"></div>
           <div class="field"><label for="cat3Description">Description</label><textarea id="cat3Description"></textarea></div>
           <div class="field"><label for="cat3BestFor">Best for</label><input type="text" id="cat3BestFor"></div>
           <div class="field"><label for="cat3Price">Price range</label><input type="text" id="cat3Price"></div>
         </div>
-        <div class="category-group">
-          <h3 class="category-group-title">Category 5</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 5</h3>
           <div class="field"><label for="cat4Tier">Tier label</label><input type="text" id="cat4Tier"></div>
           <div class="field"><label for="cat4Name">Category name</label><input type="text" id="cat4Name"></div>
           <div class="field"><label for="cat4Description">Description</label><textarea id="cat4Description"></textarea></div>
           <div class="field"><label for="cat4BestFor">Best for</label><input type="text" id="cat4BestFor"></div>
           <div class="field"><label for="cat4Price">Price range</label><input type="text" id="cat4Price"></div>
         </div>
-        <div class="category-group">
-          <h3 class="category-group-title">Category 6</h3>
+        <div class="item-group">
+          <h3 class="item-group-title">Category 6</h3>
           <div class="field"><label for="cat5Tier">Tier label</label><input type="text" id="cat5Tier"></div>
           <div class="field"><label for="cat5Name">Category name</label><input type="text" id="cat5Name"></div>
           <div class="field"><label for="cat5Description">Description</label><textarea id="cat5Description"></textarea></div>
           <div class="field"><label for="cat5BestFor">Best for</label><input type="text" id="cat5BestFor"></div>
           <div class="field"><label for="cat5Price">Price range</label><input type="text" id="cat5Price"></div>
         </div>
+      </div>
+    </div>
+
+    <div id="comparisonFields" style="display:none;">
+      <div class="field"><label for="cmpEyebrow">Eyebrow</label><input type="text" id="cmpEyebrow"></div>
+      <div class="field"><label for="cmpHeading">Heading</label><input type="text" id="cmpHeading"></div>
+      <div class="field"><label for="cmpIntro">Intro sentence</label><textarea id="cmpIntro"></textarea></div>
+      <div class="field">
+        <label for="cmpFactorLabel">"Factor" column header</label>
+        <input type="text" id="cmpFactorLabel">
+        <span class="hint">The label above the left-hand column, e.g. "Factor".</span>
+      </div>
+
+      <div class="item-group">
+        <h3 class="item-group-title">Column headers</h3>
+        <div class="field"><label for="cmpCol0">Column 1 header</label><input type="text" id="cmpCol0"></div>
+        <div class="field"><label for="cmpCol1">Column 2 header</label><input type="text" id="cmpCol1"></div>
+        <div class="field"><label for="cmpCol2">Column 3 header</label><input type="text" id="cmpCol2"></div>
+      </div>
+
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="cmpRow0Factor">Factor label</label><input type="text" id="cmpRow0Factor"></div>
+        <div class="field"><label for="cmpRow0Val0">Value for column 1</label><input type="text" id="cmpRow0Val0"></div>
+        <div class="field"><label for="cmpRow0Val1">Value for column 2</label><input type="text" id="cmpRow0Val1"></div>
+        <div class="field"><label for="cmpRow0Val2">Value for column 3</label><input type="text" id="cmpRow0Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="cmpRow1Factor">Factor label</label><input type="text" id="cmpRow1Factor"></div>
+        <div class="field"><label for="cmpRow1Val0">Value for column 1</label><input type="text" id="cmpRow1Val0"></div>
+        <div class="field"><label for="cmpRow1Val1">Value for column 2</label><input type="text" id="cmpRow1Val1"></div>
+        <div class="field"><label for="cmpRow1Val2">Value for column 3</label><input type="text" id="cmpRow1Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 3</h3>
+        <div class="field"><label for="cmpRow2Factor">Factor label</label><input type="text" id="cmpRow2Factor"></div>
+        <div class="field"><label for="cmpRow2Val0">Value for column 1</label><input type="text" id="cmpRow2Val0"></div>
+        <div class="field"><label for="cmpRow2Val1">Value for column 2</label><input type="text" id="cmpRow2Val1"></div>
+        <div class="field"><label for="cmpRow2Val2">Value for column 3</label><input type="text" id="cmpRow2Val2"></div>
+      </div>
+    </div>
+
+    <div id="whyUsFields" style="display:none;">
+      <div class="field"><label for="whyEyebrow">Eyebrow</label><input type="text" id="whyEyebrow"></div>
+      <div class="field"><label for="whyHeading">Heading</label><input type="text" id="whyHeading"></div>
+
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="why0Title">Title</label><input type="text" id="why0Title"></div>
+        <div class="field"><label for="why0Text">Text</label><textarea id="why0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="why1Title">Title</label><input type="text" id="why1Title"></div>
+        <div class="field"><label for="why1Text">Text</label><textarea id="why1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="why2Title">Title</label><input type="text" id="why2Title"></div>
+        <div class="field"><label for="why2Text">Text</label><textarea id="why2Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="ctaFields" style="display:none;">
+      <div class="field"><label for="ctaEyebrow">Eyebrow</label><input type="text" id="ctaEyebrow"></div>
+      <div class="field"><label for="ctaHeading">Heading</label><input type="text" id="ctaHeading"></div>
+      <div class="field">
+        <label for="ctaSubtext">Subtext</label>
+        <textarea id="ctaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
       </div>
     </div>
 
@@ -269,8 +341,6 @@
 <script>
 (function () {
   var ENDPOINT = '/.netlify/functions/save-homepage';
-  var PRICING_PAGE = 'resorts-pricing';
-  var NUM_CATEGORIES = 6;
   var PAGE_LABELS = {
     homepage: 'Homepage',
     resorts: 'Resorts',
@@ -282,7 +352,20 @@
     fishing: 'Fishing',
     camping: 'Camping',
     'resorts-pricing': 'Resorts — Pricing Grid',
+    'resorts-comparison': 'Resorts — Comparison Table',
+    'resorts-why-us': 'Resorts — Why Book With Us',
+    'resorts-cta': 'Resorts — CTA Band',
   };
+  var BANNER_PAGES = { homepage: 1, resorts: 1, guesthouses: 1, combo: 1, honeymoon: 1, family: 1, diving: 1, fishing: 1, camping: 1 };
+
+  function groupKeyFor(page) {
+    if (BANNER_PAGES[page]) return 'banner';
+    if (page === 'resorts-pricing') return 'pricing';
+    if (page === 'resorts-comparison') return 'comparison';
+    if (page === 'resorts-why-us') return 'whyUs';
+    if (page === 'resorts-cta') return 'cta';
+    return 'banner';
+  }
 
   var form = document.getElementById('bannerForm');
   var formTitle = document.getElementById('formTitle');
@@ -290,18 +373,17 @@
   var saveBtn = document.getElementById('saveBtn');
   var statusEl = document.getElementById('saveStatus');
 
-  var bannerFieldsEl = document.getElementById('bannerFields');
+  // ---- banner group ----
   var headlineInput = document.getElementById('bannerHeadline');
   var subtextInput = document.getElementById('bannerSubtext');
   var imageInput = document.getElementById('bannerImage');
 
-  var pricingFieldsEl = document.getElementById('pricingFields');
+  // ---- pricing group ----
   var pricingEyebrowInput = document.getElementById('pricingEyebrow');
   var pricingHeadingInput = document.getElementById('pricingHeading');
   var pricingIntroInput = document.getElementById('pricingIntro');
-
   var categoryInputs = [];
-  for (var i = 0; i < NUM_CATEGORIES; i++) {
+  for (var i = 0; i < 6; i++) {
     categoryInputs.push({
       tier: document.getElementById('cat' + i + 'Tier'),
       name: document.getElementById('cat' + i + 'Name'),
@@ -311,9 +393,152 @@
     });
   }
 
-  function isPricingPage(page) {
-    return page === PRICING_PAGE;
+  // ---- comparison table group ----
+  var cmpEyebrowInput = document.getElementById('cmpEyebrow');
+  var cmpHeadingInput = document.getElementById('cmpHeading');
+  var cmpIntroInput = document.getElementById('cmpIntro');
+  var cmpFactorLabelInput = document.getElementById('cmpFactorLabel');
+  var cmpColInputs = [document.getElementById('cmpCol0'), document.getElementById('cmpCol1'), document.getElementById('cmpCol2')];
+  var cmpRowInputs = [];
+  for (var r = 0; r < 3; r++) {
+    cmpRowInputs.push({
+      factor: document.getElementById('cmpRow' + r + 'Factor'),
+      values: [
+        document.getElementById('cmpRow' + r + 'Val0'),
+        document.getElementById('cmpRow' + r + 'Val1'),
+        document.getElementById('cmpRow' + r + 'Val2'),
+      ],
+    });
   }
+
+  // ---- why-us group ----
+  var whyEyebrowInput = document.getElementById('whyEyebrow');
+  var whyHeadingInput = document.getElementById('whyHeading');
+  var whyCardInputs = [];
+  for (var w = 0; w < 3; w++) {
+    whyCardInputs.push({
+      title: document.getElementById('why' + w + 'Title'),
+      text: document.getElementById('why' + w + 'Text'),
+    });
+  }
+
+  // ---- cta band group ----
+  var ctaEyebrowInput = document.getElementById('ctaEyebrow');
+  var ctaHeadingInput = document.getElementById('ctaHeading');
+  var ctaSubtextInput = document.getElementById('ctaSubtext');
+
+  var groups = {
+    banner: {
+      el: document.getElementById('bannerFields'),
+      inputs: [headlineInput, subtextInput, imageInput],
+      apply: function (data) {
+        headlineInput.value = data.bannerHeadline || '';
+        subtextInput.value = data.bannerSubtext || '';
+        imageInput.value = data.bannerImage || '';
+      },
+      build: function () {
+        return { bannerHeadline: headlineInput.value, bannerSubtext: subtextInput.value, bannerImage: imageInput.value };
+      },
+    },
+    pricing: {
+      el: document.getElementById('pricingFields'),
+      inputs: [pricingEyebrowInput, pricingHeadingInput, pricingIntroInput].concat(
+        categoryInputs.reduce(function (acc, c) { return acc.concat([c.tier, c.name, c.description, c.bestFor, c.price]); }, [])
+      ),
+      apply: function (data) {
+        pricingEyebrowInput.value = data.eyebrow || '';
+        pricingHeadingInput.value = data.heading || '';
+        pricingIntroInput.value = data.intro || '';
+        var cats = data.categories || [];
+        categoryInputs.forEach(function (c, idx) {
+          var cat = cats[idx] || {};
+          c.tier.value = cat.tier || '';
+          c.name.value = cat.name || '';
+          c.description.value = cat.description || '';
+          c.bestFor.value = cat.bestFor || '';
+          c.price.value = cat.price || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: pricingEyebrowInput.value,
+          heading: pricingHeadingInput.value,
+          intro: pricingIntroInput.value,
+          categories: categoryInputs.map(function (c) {
+            return { tier: c.tier.value, name: c.name.value, description: c.description.value, bestFor: c.bestFor.value, price: c.price.value };
+          }),
+        };
+      },
+    },
+    comparison: {
+      el: document.getElementById('comparisonFields'),
+      inputs: [cmpEyebrowInput, cmpHeadingInput, cmpIntroInput, cmpFactorLabelInput].concat(cmpColInputs).concat(
+        cmpRowInputs.reduce(function (acc, row) { return acc.concat([row.factor]).concat(row.values); }, [])
+      ),
+      apply: function (data) {
+        cmpEyebrowInput.value = data.eyebrow || '';
+        cmpHeadingInput.value = data.heading || '';
+        cmpIntroInput.value = data.intro || '';
+        cmpFactorLabelInput.value = data.factorLabel || '';
+        var cols = data.columns || [];
+        cmpColInputs.forEach(function (input, idx) { input.value = cols[idx] || ''; });
+        var rows = data.rows || [];
+        cmpRowInputs.forEach(function (row, idx) {
+          var rowData = rows[idx] || {};
+          row.factor.value = rowData.factor || '';
+          var vals = rowData.values || [];
+          row.values.forEach(function (input, j) { input.value = vals[j] || ''; });
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: cmpEyebrowInput.value,
+          heading: cmpHeadingInput.value,
+          intro: cmpIntroInput.value,
+          factorLabel: cmpFactorLabelInput.value,
+          columns: cmpColInputs.map(function (input) { return input.value; }),
+          rows: cmpRowInputs.map(function (row) {
+            return { factor: row.factor.value, values: row.values.map(function (input) { return input.value; }) };
+          }),
+        };
+      },
+    },
+    whyUs: {
+      el: document.getElementById('whyUsFields'),
+      inputs: [whyEyebrowInput, whyHeadingInput].concat(
+        whyCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        whyEyebrowInput.value = data.eyebrow || '';
+        whyHeadingInput.value = data.heading || '';
+        var cards = data.cards || [];
+        whyCardInputs.forEach(function (c, idx) {
+          var card = cards[idx] || {};
+          c.title.value = card.title || '';
+          c.text.value = card.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: whyEyebrowInput.value,
+          heading: whyHeadingInput.value,
+          cards: whyCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    cta: {
+      el: document.getElementById('ctaFields'),
+      inputs: [ctaEyebrowInput, ctaHeadingInput, ctaSubtextInput],
+      apply: function (data) {
+        ctaEyebrowInput.value = data.eyebrow || '';
+        ctaHeadingInput.value = data.heading || '';
+        ctaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: ctaEyebrowInput.value, heading: ctaHeadingInput.value, subtext: ctaSubtextInput.value };
+      },
+    },
+  };
 
   function setStatus(message, kind) {
     statusEl.textContent = message;
@@ -323,78 +548,22 @@
   function setFieldsDisabled(disabled) {
     pageSelect.disabled = disabled;
     saveBtn.disabled = disabled;
-    headlineInput.disabled = disabled;
-    subtextInput.disabled = disabled;
-    imageInput.disabled = disabled;
-    pricingEyebrowInput.disabled = disabled;
-    pricingHeadingInput.disabled = disabled;
-    pricingIntroInput.disabled = disabled;
-    categoryInputs.forEach(function (c) {
-      c.tier.disabled = disabled;
-      c.name.disabled = disabled;
-      c.description.disabled = disabled;
-      c.bestFor.disabled = disabled;
-      c.price.disabled = disabled;
+    Object.keys(groups).forEach(function (key) {
+      groups[key].inputs.forEach(function (input) { input.disabled = disabled; });
     });
   }
 
   function updateFieldVisibility(page) {
-    var pricing = isPricingPage(page);
-    bannerFieldsEl.style.display = pricing ? 'none' : '';
-    pricingFieldsEl.style.display = pricing ? '' : 'none';
-  }
-
-  function applyValues(page, data) {
-    if (isPricingPage(page)) {
-      pricingEyebrowInput.value = data.eyebrow || '';
-      pricingHeadingInput.value = data.heading || '';
-      pricingIntroInput.value = data.intro || '';
-      var cats = data.categories || [];
-      categoryInputs.forEach(function (c, i) {
-        var cat = cats[i] || {};
-        c.tier.value = cat.tier || '';
-        c.name.value = cat.name || '';
-        c.description.value = cat.description || '';
-        c.bestFor.value = cat.bestFor || '';
-        c.price.value = cat.price || '';
-      });
-    } else {
-      headlineInput.value = data.bannerHeadline || '';
-      subtextInput.value = data.bannerSubtext || '';
-      imageInput.value = data.bannerImage || '';
-    }
-  }
-
-  function buildSavePayload(page) {
-    if (isPricingPage(page)) {
-      return {
-        page: page,
-        eyebrow: pricingEyebrowInput.value,
-        heading: pricingHeadingInput.value,
-        intro: pricingIntroInput.value,
-        categories: categoryInputs.map(function (c) {
-          return {
-            tier: c.tier.value,
-            name: c.name.value,
-            description: c.description.value,
-            bestFor: c.bestFor.value,
-            price: c.price.value,
-          };
-        }),
-      };
-    }
-    return {
-      page: page,
-      bannerHeadline: headlineInput.value,
-      bannerSubtext: subtextInput.value,
-      bannerImage: imageInput.value,
-    };
+    var active = groupKeyFor(page);
+    Object.keys(groups).forEach(function (key) {
+      groups[key].el.style.display = key === active ? '' : 'none';
+    });
   }
 
   function loadCurrentValues() {
     var page = pageSelect.value;
-    var label = PAGE_LABELS[page] || page;
-    formTitle.textContent = isPricingPage(page) ? label : label + ' banner';
+    var group = groups[groupKeyFor(page)];
+    formTitle.textContent = groupKeyFor(page) === 'banner' ? (PAGE_LABELS[page] || page) + ' banner' : (PAGE_LABELS[page] || page);
     updateFieldVisibility(page);
     setFieldsDisabled(true);
     setStatus('Loading current values…', '');
@@ -406,7 +575,7 @@
         });
       })
       .then(function (data) {
-        applyValues(page, data);
+        group.apply(data);
         setStatus('', '');
       })
       .catch(function (err) {
@@ -422,14 +591,18 @@
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     var page = pageSelect.value;
+    var group = groups[groupKeyFor(page)];
     setFieldsDisabled(true);
     setStatus('Saving...', '');
+
+    var payload = group.build();
+    payload.page = page;
 
     fetch(ENDPOINT, {
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(buildSavePayload(page)),
+      body: JSON.stringify(payload),
     })
       .then(function (res) {
         return res.json().then(function (data) {
@@ -440,7 +613,7 @@
       .then(function (data) {
         // Refresh the fields from what the server confirmed it saved, without
         // re-triggering the "Loading..." status and clobbering this message.
-        applyValues(page, data);
+        group.apply(data);
         setStatus('Saved successfully!', 'success');
       })
       .catch(function (err) {

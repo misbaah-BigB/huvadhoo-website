@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Before you decide",
+  "heading": "What actually changes between categories",
+  "intro": "Price isn't the only variable — these three matter just as much for how your trip actually feels.",
+  "factorLabel": "Factor",
+  "columns": [
+    "Budget-luxury / All-inclusive",
+    "Family / Honeymoon",
+    "Premium / Ultra-luxury"
+  ],
+  "rows": [
+    {
+      "factor": "Distance from Male",
+      "values": [
+        "Often closer (shorter, cheaper transfer)",
+        "Mixed — depends on resort",
+        "Often farther (seaplane more likely)"
+      ]
+    },
+    {
+      "factor": "Meal plan",
+      "values": [
+        "Usually all-inclusive or half-board",
+        "Half-board to all-inclusive",
+        "A la carte or all-inclusive, more restaurant choice"
+      ]
+    },
+    {
+      "factor": "Villa type",
+      "values": [
+        "Beach villa, some water villas",
+        "Family beach villas, some water villas",
+        "Water villas standard, private pools common"
+      ]
+    }
+  ]
+}

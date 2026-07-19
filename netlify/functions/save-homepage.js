@@ -31,6 +31,9 @@ const PAGES = {
   fishing: { file: "content/fishing.json", prepare: prepareBannerContent, commitMessage: "Update Fishing banner via admin dashboard" },
   camping: { file: "content/camping.json", prepare: prepareBannerContent, commitMessage: "Update Camping banner via admin dashboard" },
   "resorts-pricing": { file: "content/resorts-pricing.json", prepare: prepareResortsPricingContent, commitMessage: "Update Resorts Pricing via admin dashboard" },
+  "resorts-comparison": { file: "content/resorts-comparison.json", prepare: prepareResortsComparisonContent, commitMessage: "Update Resorts Comparison Table via admin dashboard" },
+  "resorts-why-us": { file: "content/resorts-why-us.json", prepare: prepareResortsWhyUsContent, commitMessage: "Update Resorts Why Us section via admin dashboard" },
+  "resorts-cta": { file: "content/resorts-cta.json", prepare: prepareResortsCtaContent, commitMessage: "Update Resorts CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -78,6 +81,79 @@ function prepareResortsPricingContent(payload) {
   }
 
   return { content: { eyebrow, heading, intro, categories } };
+}
+
+function prepareResortsComparisonContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+  const factorLabel = str(payload.factorLabel);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const factor = str(row.factor);
+    if (!factor.trim()) {
+      return { error: "Each row needs a factor label." };
+    }
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ factor, values });
+  }
+
+  return { content: { eyebrow, heading, intro, factorLabel, columns, rows } };
+}
+
+function prepareResortsWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareResortsCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
 }
 
 function signSession(expiry, secret) {
