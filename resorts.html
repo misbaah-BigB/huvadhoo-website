@@ -118,6 +118,45 @@
     </div>
   </section>
 
+  <section id="propertyListings">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Browse properties</p>
+        <h2>Featured Resorts</h2>
+        <p>A first look at real listings — photos and details below are placeholders for now.</p>
+      </div>
+      <div class="card-grid" id="propertyGrid">
+        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-one">
+          <div class="card-media"><img src="assets/properties/placeholder-1.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="card-body">
+            <span class="tag">Resort</span>
+            <h3>Sample Resort One</h3>
+            <p>This is placeholder text for testing — replace with real content later. Sample Resort One is a dummy entry used to build and test the Property Listings feature.</p>
+            <span class="see">View details →</span>
+          </div>
+        </a>
+        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-two">
+          <div class="card-media"><img src="assets/properties/placeholder-4.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="card-body">
+            <span class="tag">Resort</span>
+            <h3>Sample Resort Two</h3>
+            <p>This is placeholder text for testing — replace with real content later. Sample Resort Two exists only to confirm the listings grid handles more than one card correctly.</p>
+            <span class="see">View details →</span>
+          </div>
+        </a>
+        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-three">
+          <div class="card-media"><img src="assets/properties/placeholder-6.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="card-body">
+            <span class="tag">Resort</span>
+            <h3>Sample Resort Three</h3>
+            <p>This is placeholder text for testing — replace with real content later. Sample Resort Three is dummy data, not a real property, and should be swapped out before launch.</p>
+            <span class="see">View details →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="section-head">
@@ -399,6 +438,65 @@
     })
     .catch(function (err) {
       console.error('Could not load CTA band content:', err);
+    });
+</script>
+<script>
+  // Featured Resorts / property listings grid content is stored in
+  // content/properties.json so the number and content of cards can change
+  // without touching this file. The 3 cards in the HTML below are a
+  // fallback (shown as-is if this fetch fails or JavaScript is
+  // unavailable); on success this rebuilds the grid entirely from the JSON
+  // so it stays correct even if properties are added or removed later.
+  fetch('content/properties.json')
+    .then(function (res) { return res.json(); })
+    .then(function (properties) {
+      var grid = document.getElementById('propertyGrid');
+      if (!grid || !Array.isArray(properties)) return;
+
+      grid.innerHTML = '';
+      properties.forEach(function (prop) {
+        var card = document.createElement('a');
+        card.className = 'prod-card';
+        card.setAttribute('data-tilt', '');
+        card.href = 'property-detail.html?id=' + encodeURIComponent(prop.id || '');
+
+        var media = document.createElement('div');
+        media.className = 'card-media';
+        var img = document.createElement('img');
+        img.src = (prop.photos && prop.photos[0]) || '';
+        img.alt = '';
+        img.onerror = function () { img.style.display = 'none'; };
+        media.appendChild(img);
+
+        var body = document.createElement('div');
+        body.className = 'card-body';
+
+        var tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = prop.category === 'resort' ? 'Resort' : (prop.category || '');
+
+        var h3 = document.createElement('h3');
+        h3.textContent = prop.name || '';
+
+        var p = document.createElement('p');
+        p.textContent = prop.shortIntro || '';
+
+        var see = document.createElement('span');
+        see.className = 'see';
+        see.textContent = 'View details →';
+
+        body.appendChild(tag);
+        body.appendChild(h3);
+        body.appendChild(p);
+        body.appendChild(see);
+
+        card.appendChild(media);
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load property listings:', err);
     });
 </script>
 
