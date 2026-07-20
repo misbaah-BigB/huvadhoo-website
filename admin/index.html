@@ -145,6 +145,107 @@
     text-decoration:underline;
   }
   .logout-link:hover{opacity:1;}
+
+  .property-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    border:1px solid rgba(11,42,46,.12);
+    border-radius:10px;
+    padding:12px 14px;
+    margin:0 0 12px;
+    background:var(--sand);
+  }
+  .property-row-thumb{
+    width:56px;
+    height:56px;
+    border-radius:8px;
+    object-fit:cover;
+    flex-shrink:0;
+    display:block;
+    background:linear-gradient(160deg, rgba(31,122,108,.18), rgba(217,166,78,.15));
+  }
+  .property-row-info{flex-grow:1; min-width:0;}
+  .property-row-info strong{display:block; font-size:14.5px; margin-bottom:2px;}
+  .property-row-info span{display:block; font-size:11.5px; color:var(--ink); opacity:.6; text-transform:uppercase; letter-spacing:.05em;}
+  .property-row-actions{display:flex; gap:8px; flex-shrink:0;}
+  .property-row-actions button{
+    font-family:'Inter', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 12px;
+    border-radius:999px;
+    cursor:pointer;
+    border:1px solid rgba(11,42,46,.2);
+    background:#fff;
+    color:var(--ink);
+  }
+  .property-row-actions button:hover{opacity:.75;}
+  .property-row-actions button.delete-btn{color:#b23b3b; border-color:rgba(178,59,59,.3);}
+  .empty-properties-msg{font-size:14px; color:var(--ink); opacity:.65; margin:0 0 16px;}
+
+  .dynamic-row{display:flex; gap:8px; margin:0 0 8px;}
+  .dynamic-row input{flex-grow:1;}
+  .dynamic-row-remove{
+    flex-shrink:0;
+    width:38px;
+    border-radius:8px;
+    border:1px solid rgba(178,59,59,.3);
+    background:#fff;
+    color:#b23b3b;
+    cursor:pointer;
+    font-size:14px;
+  }
+  .dynamic-row-remove:hover{background:rgba(178,59,59,.08);}
+  .add-row-btn{
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    color:var(--teal);
+    background:transparent;
+    border:1px dashed var(--teal);
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+    width:100%;
+    margin-top:2px;
+  }
+  .add-row-btn:hover{background:rgba(31,122,108,.08);}
+  .add-property-btn{
+    background:transparent;
+    color:var(--teal);
+    border:2px dashed var(--teal);
+  }
+  .add-property-btn:hover{background:rgba(31,122,108,.08);}
+  .back-link-btn{
+    background:none;
+    border:none;
+    color:var(--ink);
+    opacity:.7;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    padding:0;
+    margin-bottom:18px;
+    text-decoration:underline;
+  }
+  .back-link-btn:hover{opacity:1;}
+  .delete-property-btn{
+    display:block;
+    width:100%;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:#b23b3b;
+    background:#fff;
+    border:1px solid rgba(178,59,59,.3);
+    border-radius:999px;
+    padding:12px 20px;
+    cursor:pointer;
+    margin-top:10px;
+  }
+  .delete-property-btn:hover{background:rgba(178,59,59,.06);}
 </style>
 </head>
 <body>
@@ -172,6 +273,7 @@
         <option value="resorts-comparison">Resorts — Comparison Table</option>
         <option value="resorts-why-us">Resorts — Why Book With Us</option>
         <option value="resorts-cta">Resorts — CTA Band</option>
+        <option value="properties">Properties</option>
       </select>
     </div>
 
@@ -332,8 +434,51 @@
     </div>
 
     <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
-    <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
   </form>
+
+  <div id="propertiesManager" style="display:none;">
+    <div id="propertiesListView">
+      <div id="propertiesList"></div>
+      <button type="button" class="add-row-btn add-property-btn" id="addPropertyBtn">+ Add new property</button>
+    </div>
+
+    <div id="propertyFormView" style="display:none;">
+      <button type="button" class="back-link-btn" id="backToListBtn">&larr; Back to list</button>
+      <h3 class="item-group-title" id="propertyFormTitle" style="font-size:16px;">Add new property</h3>
+
+      <div class="field">
+        <label for="propCategory">Category</label>
+        <select id="propCategory">
+          <option value="resort">Resort</option>
+          <option value="guesthouse">Guesthouse</option>
+          <option value="city-hotel">City Hotel</option>
+          <option value="dive-centre">Dive Centre</option>
+          <option value="fishing-charter">Fishing Charter</option>
+        </select>
+      </div>
+      <div class="field"><label for="propName">Name</label><input type="text" id="propName"></div>
+      <div class="field"><label for="propLocation">Location</label><input type="text" id="propLocation"></div>
+      <div class="field"><label for="propIntro">Short intro</label><textarea id="propIntro"></textarea></div>
+
+      <div class="field">
+        <label>Highlight tags</label>
+        <div id="propHighlightsList"></div>
+        <button type="button" class="add-row-btn" id="addHighlightBtn">+ Add tag</button>
+      </div>
+
+      <div class="field">
+        <label>Photos</label>
+        <span class="hint" style="margin-top:0; margin-bottom:8px; display:block;">File paths, same as banner images — not an upload, e.g. assets/properties/placeholder-1.jpg</span>
+        <div id="propPhotosList"></div>
+        <button type="button" class="add-row-btn" id="addPhotoBtn">+ Add photo</button>
+      </div>
+
+      <button type="button" class="save-btn" id="savePropertyBtn">Save property</button>
+      <button type="button" class="delete-property-btn" id="deletePropertyBtn" style="display:none;">Delete this property</button>
+    </div>
+  </div>
+
+  <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
 
   <a class="logout-link" href="/logout">Log out</a>
 </div>
@@ -355,10 +500,19 @@
     'resorts-comparison': 'Resorts — Comparison Table',
     'resorts-why-us': 'Resorts — Why Book With Us',
     'resorts-cta': 'Resorts — CTA Band',
+    properties: 'Properties',
+  };
+  var CATEGORY_LABELS = {
+    resort: 'Resort',
+    guesthouse: 'Guesthouse',
+    'city-hotel': 'City Hotel',
+    'dive-centre': 'Dive Centre',
+    'fishing-charter': 'Fishing Charter',
   };
   var BANNER_PAGES = { homepage: 1, resorts: 1, guesthouses: 1, combo: 1, honeymoon: 1, family: 1, diving: 1, fishing: 1, camping: 1 };
 
   function groupKeyFor(page) {
+    if (page === 'properties') return 'properties';
     if (BANNER_PAGES[page]) return 'banner';
     if (page === 'resorts-pricing') return 'pricing';
     if (page === 'resorts-comparison') return 'comparison';
@@ -426,6 +580,28 @@
   var ctaEyebrowInput = document.getElementById('ctaEyebrow');
   var ctaHeadingInput = document.getElementById('ctaHeading');
   var ctaSubtextInput = document.getElementById('ctaSubtext');
+
+  // ---- properties manager ----
+  var propertiesManager = document.getElementById('propertiesManager');
+  var propertiesListView = document.getElementById('propertiesListView');
+  var propertiesListEl = document.getElementById('propertiesList');
+  var addPropertyBtn = document.getElementById('addPropertyBtn');
+  var propertyFormView = document.getElementById('propertyFormView');
+  var backToListBtn = document.getElementById('backToListBtn');
+  var propertyFormTitle = document.getElementById('propertyFormTitle');
+  var propCategoryInput = document.getElementById('propCategory');
+  var propNameInput = document.getElementById('propName');
+  var propLocationInput = document.getElementById('propLocation');
+  var propIntroInput = document.getElementById('propIntro');
+  var propHighlightsList = document.getElementById('propHighlightsList');
+  var addHighlightBtn = document.getElementById('addHighlightBtn');
+  var propPhotosList = document.getElementById('propPhotosList');
+  var addPhotoBtn = document.getElementById('addPhotoBtn');
+  var savePropertyBtn = document.getElementById('savePropertyBtn');
+  var deletePropertyBtn = document.getElementById('deletePropertyBtn');
+
+  var propertiesData = [];
+  var editingIndex = null; // null = adding a new property, else index into propertiesData being edited
 
   var groups = {
     banner: {
@@ -555,16 +731,25 @@
 
   function updateFieldVisibility(page) {
     var active = groupKeyFor(page);
+    var isProperties = page === 'properties';
     Object.keys(groups).forEach(function (key) {
       groups[key].el.style.display = key === active ? '' : 'none';
     });
+    saveBtn.style.display = isProperties ? 'none' : '';
+    propertiesManager.style.display = isProperties ? '' : 'none';
   }
 
   function loadCurrentValues() {
     var page = pageSelect.value;
-    var group = groups[groupKeyFor(page)];
     formTitle.textContent = groupKeyFor(page) === 'banner' ? (PAGE_LABELS[page] || page) + ' banner' : (PAGE_LABELS[page] || page);
     updateFieldVisibility(page);
+
+    if (page === 'properties') {
+      loadPropertiesList();
+      return;
+    }
+
+    var group = groups[groupKeyFor(page)];
     setFieldsDisabled(true);
     setStatus('Loading current values…', '');
     fetch(ENDPOINT + '?page=' + encodeURIComponent(page), { credentials: 'same-origin' })
@@ -585,6 +770,274 @@
         setFieldsDisabled(false);
       });
   }
+
+  // ---- properties manager logic ----
+  // Unlike the flat-form groups above, "properties" is a variable-length list
+  // with per-item add/edit/delete, so it gets its own list-view/form-view UI
+  // instead of fitting into the shared bannerForm. It still saves through the
+  // same generalized endpoint — the client just always sends the complete
+  // intended array back (see save-homepage.js's preparePropertiesContent).
+
+  function slugify(value) {
+    return String(value || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function generateUniqueId(name) {
+    var base = slugify(name) || 'property';
+    var id = base;
+    var n = 2;
+    var taken = {};
+    propertiesData.forEach(function (p, idx) {
+      if (idx !== editingIndex) taken[p.id] = true;
+    });
+    while (taken[id]) {
+      id = base + '-' + n;
+      n++;
+    }
+    return id;
+  }
+
+  function addDynamicRow(container, value, placeholder) {
+    var row = document.createElement('div');
+    row.className = 'dynamic-row';
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.value = value || '';
+    if (placeholder) input.placeholder = placeholder;
+    row.appendChild(input);
+
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'dynamic-row-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.addEventListener('click', function () { row.remove(); });
+    row.appendChild(removeBtn);
+
+    container.appendChild(row);
+  }
+
+  function renderDynamicList(container, values, placeholder) {
+    container.innerHTML = '';
+    (values || []).forEach(function (value) { addDynamicRow(container, value, placeholder); });
+  }
+
+  function collectDynamicListValues(container) {
+    var values = [];
+    container.querySelectorAll('input').forEach(function (input) {
+      var v = input.value.trim();
+      if (v) values.push(v);
+    });
+    return values;
+  }
+
+  function showPropertiesListView() {
+    propertiesListView.style.display = '';
+    propertyFormView.style.display = 'none';
+  }
+
+  function showPropertyFormView() {
+    propertiesListView.style.display = 'none';
+    propertyFormView.style.display = '';
+  }
+
+  function renderPropertiesList() {
+    propertiesListEl.innerHTML = '';
+    if (!propertiesData.length) {
+      var empty = document.createElement('p');
+      empty.className = 'empty-properties-msg';
+      empty.textContent = 'No properties yet — click "Add new property" to create one.';
+      propertiesListEl.appendChild(empty);
+      return;
+    }
+    propertiesData.forEach(function (prop, idx) {
+      var row = document.createElement('div');
+      row.className = 'property-row';
+
+      var thumb = document.createElement('img');
+      thumb.className = 'property-row-thumb';
+      thumb.src = (prop.photos && prop.photos[0]) || '';
+      thumb.alt = '';
+      thumb.onerror = function () { thumb.removeAttribute('src'); };
+      row.appendChild(thumb);
+
+      var info = document.createElement('div');
+      info.className = 'property-row-info';
+      var nameEl = document.createElement('strong');
+      nameEl.textContent = prop.name || '(unnamed)';
+      var catEl = document.createElement('span');
+      catEl.textContent = CATEGORY_LABELS[prop.category] || prop.category || '';
+      info.appendChild(nameEl);
+      info.appendChild(catEl);
+      row.appendChild(info);
+
+      var actions = document.createElement('div');
+      actions.className = 'property-row-actions';
+
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.textContent = 'Edit';
+      editBtn.addEventListener('click', function () { openPropertyForm(idx); });
+      actions.appendChild(editBtn);
+
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', function () { deletePropertyAt(idx); });
+      actions.appendChild(deleteBtn);
+
+      row.appendChild(actions);
+      propertiesListEl.appendChild(row);
+    });
+  }
+
+  function openPropertyForm(idx) {
+    editingIndex = (typeof idx === 'number') ? idx : null;
+    var prop = editingIndex !== null ? propertiesData[editingIndex] : null;
+
+    propertyFormTitle.textContent = prop ? 'Edit property' : 'Add new property';
+    propCategoryInput.value = prop ? prop.category : 'resort';
+    propNameInput.value = prop ? prop.name || '' : '';
+    propLocationInput.value = prop ? prop.location || '' : '';
+    propIntroInput.value = prop ? prop.shortIntro || '' : '';
+    renderDynamicList(propHighlightsList, prop ? prop.highlights : [], 'e.g. Overwater villas');
+    renderDynamicList(propPhotosList, prop ? prop.photos : [], 'e.g. assets/properties/placeholder-1.jpg');
+    deletePropertyBtn.style.display = prop ? '' : 'none';
+
+    setStatus('', '');
+    showPropertyFormView();
+  }
+
+  function setPropertyFieldsDisabled(disabled) {
+    pageSelect.disabled = disabled;
+    addPropertyBtn.disabled = disabled;
+    propCategoryInput.disabled = disabled;
+    propNameInput.disabled = disabled;
+    propLocationInput.disabled = disabled;
+    propIntroInput.disabled = disabled;
+    addHighlightBtn.disabled = disabled;
+    addPhotoBtn.disabled = disabled;
+    savePropertyBtn.disabled = disabled;
+    deletePropertyBtn.disabled = disabled;
+    backToListBtn.disabled = disabled;
+    propHighlightsList.querySelectorAll('input, button').forEach(function (el) { el.disabled = disabled; });
+    propPhotosList.querySelectorAll('input, button').forEach(function (el) { el.disabled = disabled; });
+    propertiesListEl.querySelectorAll('button').forEach(function (el) { el.disabled = disabled; });
+  }
+
+  function loadPropertiesList() {
+    showPropertiesListView();
+    setPropertyFieldsDisabled(true);
+    setStatus('Loading current values…', '');
+    fetch(ENDPOINT + '?page=properties', { credentials: 'same-origin' })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || ('Could not load current values (status ' + res.status + ').'));
+          return data;
+        });
+      })
+      .then(function (data) {
+        propertiesData = data.properties || [];
+        renderPropertiesList();
+        setStatus('', '');
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Could not load the current content.', 'error');
+      })
+      .finally(function () {
+        setPropertyFieldsDisabled(false);
+      });
+  }
+
+  function savePropertiesArray(newArray, successMessage) {
+    setPropertyFieldsDisabled(true);
+    setStatus('Saving...', '');
+    fetch(ENDPOINT, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ page: 'properties', properties: newArray }),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || ('Save failed (status ' + res.status + ').'));
+          return data;
+        });
+      })
+      .then(function (data) {
+        propertiesData = data.properties || newArray;
+        renderPropertiesList();
+        showPropertiesListView();
+        setStatus(successMessage || 'Saved successfully!', 'success');
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong while saving.', 'error');
+      })
+      .finally(function () {
+        setPropertyFieldsDisabled(false);
+      });
+  }
+
+  function deletePropertyAt(idx) {
+    var prop = propertiesData[idx];
+    if (!prop) return;
+    if (!window.confirm('Are you sure you want to delete ' + prop.name + '? This cannot be undone.')) return;
+    var newArray = propertiesData.slice();
+    newArray.splice(idx, 1);
+    savePropertiesArray(newArray, 'Property deleted.');
+  }
+
+  addPropertyBtn.addEventListener('click', function () { openPropertyForm(null); });
+
+  backToListBtn.addEventListener('click', function () {
+    showPropertiesListView();
+    setStatus('', '');
+  });
+
+  addHighlightBtn.addEventListener('click', function () {
+    addDynamicRow(propHighlightsList, '', 'e.g. Overwater villas');
+  });
+
+  addPhotoBtn.addEventListener('click', function () {
+    addDynamicRow(propPhotosList, '', 'e.g. assets/properties/placeholder-1.jpg');
+  });
+
+  savePropertyBtn.addEventListener('click', function () {
+    var name = propNameInput.value.trim();
+    if (!name) {
+      setStatus('Please enter a name for this property.', 'error');
+      return;
+    }
+
+    var prop = {
+      id: editingIndex !== null ? propertiesData[editingIndex].id : generateUniqueId(name),
+      category: propCategoryInput.value,
+      name: name,
+      location: propLocationInput.value.trim(),
+      shortIntro: propIntroInput.value.trim(),
+      highlights: collectDynamicListValues(propHighlightsList),
+      photos: collectDynamicListValues(propPhotosList),
+    };
+
+    var newArray = propertiesData.slice();
+    if (editingIndex !== null) {
+      newArray[editingIndex] = prop;
+    } else {
+      newArray.push(prop);
+    }
+
+    savePropertiesArray(newArray, editingIndex !== null ? 'Property updated!' : 'Property added!');
+  });
+
+  deletePropertyBtn.addEventListener('click', function () {
+    if (editingIndex === null) return;
+    deletePropertyAt(editingIndex);
+  });
 
   pageSelect.addEventListener('change', loadCurrentValues);
 
