@@ -88,6 +88,18 @@
     </div>
   </section>
 
+  <section id="propertyListings">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Browse properties</p>
+        <h2>Dive Centre Listings</h2>
+        <p>Real listings, added as they're confirmed — message us any time for options today.</p>
+      </div>
+      <div class="card-grid" id="propertyGrid" style="display:none;"></div>
+      <p id="propertyGridEmpty" style="color:var(--text-dim); font-weight:300; font-size:15px;">Dive centre listings are coming soon — message us on WhatsApp and we'll help you find the right one today.</p>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="section-head">
@@ -254,6 +266,72 @@
     })
     .catch(function (err) {
       console.error('Could not load page banner content:', err);
+    });
+</script>
+<script>
+  // "Dive Centre Listings" grid shows only category === 'dive-centre' entries
+  // from content/properties.json (the same file the admin Properties manager
+  // and the Resorts page's listings read from). No dive centre listings
+  // exist yet, so by default this section shows a "coming soon" message;
+  // it's replaced automatically with real cards once matching properties
+  // exist.
+  fetch('content/properties.json')
+    .then(function (res) { return res.json(); })
+    .then(function (properties) {
+      var grid = document.getElementById('propertyGrid');
+      var emptyMsg = document.getElementById('propertyGridEmpty');
+      if (!grid || !Array.isArray(properties)) return;
+
+      var matches = properties.filter(function (p) { return p.category === 'dive-centre'; });
+      if (!matches.length) return;
+
+      grid.innerHTML = '';
+      matches.forEach(function (prop) {
+        var card = document.createElement('a');
+        card.className = 'prod-card';
+        card.setAttribute('data-tilt', '');
+        card.href = 'property-detail.html?id=' + encodeURIComponent(prop.id || '');
+
+        var media = document.createElement('div');
+        media.className = 'card-media';
+        var img = document.createElement('img');
+        img.src = (prop.photos && prop.photos[0]) || '';
+        img.alt = '';
+        img.onerror = function () { img.style.display = 'none'; };
+        media.appendChild(img);
+
+        var body = document.createElement('div');
+        body.className = 'card-body';
+
+        var tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = 'Dive Centre';
+
+        var h3 = document.createElement('h3');
+        h3.textContent = prop.name || '';
+
+        var p = document.createElement('p');
+        p.textContent = prop.shortIntro || '';
+
+        var see = document.createElement('span');
+        see.className = 'see';
+        see.textContent = 'View details →';
+
+        body.appendChild(tag);
+        body.appendChild(h3);
+        body.appendChild(p);
+        body.appendChild(see);
+
+        card.appendChild(media);
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+
+      grid.style.display = '';
+      if (emptyMsg) emptyMsg.style.display = 'none';
+    })
+    .catch(function (err) {
+      console.error('Could not load property listings:', err);
     });
 </script>
 
