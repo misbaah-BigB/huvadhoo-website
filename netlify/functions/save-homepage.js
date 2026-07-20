@@ -34,6 +34,7 @@ const PAGES = {
   "resorts-comparison": { file: "content/resorts-comparison.json", prepare: prepareResortsComparisonContent, commitMessage: "Update Resorts Comparison Table via admin dashboard" },
   "resorts-why-us": { file: "content/resorts-why-us.json", prepare: prepareResortsWhyUsContent, commitMessage: "Update Resorts Why Us section via admin dashboard" },
   "resorts-cta": { file: "content/resorts-cta.json", prepare: prepareResortsCtaContent, commitMessage: "Update Resorts CTA band via admin dashboard" },
+  properties: { file: "content/properties.json", prepare: preparePropertiesContent, commitMessage: "Update Properties via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -154,6 +155,65 @@ function prepareResortsCtaContent(payload) {
   }
 
   return { content: { eyebrow, heading, subtext } };
+}
+
+const PROPERTY_CATEGORIES = ["resort", "guesthouse", "city-hotel", "dive-centre", "fishing-charter"];
+const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+// Unlike every other page here, content/properties.json is a variable-length
+// list: entries get added, edited, and deleted from the admin dashboard. The
+// client always sends the *entire* intended array back (its own local copy,
+// mutated for whichever add/edit/delete just happened) rather than a single
+// entry — so this still fits the same "replace the whole file with this
+// validated content" shape as every other prepare function, it just
+// validates a list instead of a fixed set of fields.
+function preparePropertiesContent(payload) {
+  if (!Array.isArray(payload.properties)) {
+    return { error: "Properties must be a list." };
+  }
+
+  const seenIds = new Set();
+  const properties = [];
+  for (const raw of payload.properties) {
+    const prop = raw && typeof raw === "object" ? raw : {};
+    const id = str(prop.id).trim();
+    const name = str(prop.name).trim();
+    const category = str(prop.category).trim();
+
+    if (!id || !SLUG_PATTERN.test(id)) {
+      return { error: `Each property needs a valid URL-safe id (got "${id || "(empty)"}").` };
+    }
+    if (seenIds.has(id)) {
+      return { error: `Duplicate property id "${id}" — ids must be unique.` };
+    }
+    seenIds.add(id);
+
+    if (!name) {
+      return { error: "Each property needs a name." };
+    }
+    if (!PROPERTY_CATEGORIES.includes(category)) {
+      return { error: `Unknown category "${category}".` };
+    }
+
+    const photos = Array.isArray(prop.photos)
+      ? prop.photos.map(str).map((s) => s.trim()).filter(Boolean)
+      : [];
+    const highlights = Array.isArray(prop.highlights)
+      ? prop.highlights.map(str).map((s) => s.trim()).filter(Boolean)
+      : [];
+
+    properties.push({
+      id,
+      category,
+      name,
+      location: str(prop.location),
+      shortIntro: str(prop.shortIntro),
+      photos,
+      highlights,
+    });
+  }
+
+  return { content: properties };
 }
 
 function signSession(expiry, secret) {
@@ -277,7 +337,11 @@ async function readCurrentContent(apiUrl, githubHeaders) {
     return jsonResponse(502, { error: "The current content file could not be read as valid JSON." });
   }
 
-  return jsonResponse(200, parsed);
+  // Keep this consistent with the POST success response below: an
+  // array-shaped file (content/properties.json) is always returned wrapped
+  // as { properties: [...] }, never as a bare top-level array, so the client
+  // doesn't need two different code paths depending on request method.
+  return jsonResponse(200, Array.isArray(parsed) ? { properties: parsed } : parsed);
 }
 
 async function saveNewContent(apiUrl, githubHeaders, page, payload) {
@@ -347,5 +411,12 @@ async function saveNewContent(apiUrl, githubHeaders, page, payload) {
     return jsonResponse(502, { error: `Could not save the update to GitHub (status ${putRes.status})${suffix}` });
   }
 
-  return jsonResponse(200, Object.assign({ success: true }, content));
+  // content/properties.json's content is an array (unlike every other page's
+  // object), so it can't just be spread onto { success: true } the way the
+  // others are — that would scatter it across numeric keys instead of
+  // returning a usable list. Wrap it under a "properties" key instead.
+  const responseBody = Array.isArray(content)
+    ? { success: true, properties: content }
+    : Object.assign({ success: true }, content);
+  return jsonResponse(200, responseBody);
 }
