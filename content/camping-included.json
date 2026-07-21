@@ -1,0 +1,22 @@
+{
+  "eyebrow": "What's included",
+  "heading": "What a permitted trip actually provides",
+  "cards": [
+    {
+      "title": "Permits, handled for you",
+      "text": "We arrange the required permission to visit and camp on the specific island — not something you need to sort out yourself."
+    },
+    {
+      "title": "Gear",
+      "text": "Tents, sleeping equipment, and basic camp setup are provided by the operator — you don't need to bring your own camping gear."
+    },
+    {
+      "title": "Food and water",
+      "text": "Meals and drinking water are typically included and prepared on-site or brought over — confirmed in your quote before you go."
+    },
+    {
+      "title": "Safety and transfer",
+      "text": "A licensed boat handles transfer to and from the island, with safety equipment and a guide who knows the specific island's conditions."
+    }
+  ]
+}

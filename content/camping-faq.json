@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Common questions",
+  "heading": "Before you book",
+  "items": [
+    {
+      "question": "Can I just camp on an empty island myself, without a permit?",
+      "answer": "No — uninhabited islands require official permission to visit and stay overnight. Unauthorized camping is a real legal risk, which is exactly why we only arrange permitted trips through licensed operators."
+    },
+    {
+      "question": "What amenities are actually available?",
+      "answer": "Basic camping amenities — tents, simple toilet facilities, and prepared meals. This is a genuine camping experience, not a resort with a tent theme, so expect it to be simple by design."
+    },
+    {
+      "question": "Is this suitable for beginners with no camping experience?",
+      "answer": "Yes — guided trips are designed for exactly this. The operator handles setup, cooking, and safety, so no camping experience is required for a one-night trip."
+    },
+    {
+      "question": "What happens if the weather turns bad?",
+      "answer": "Licensed operators monitor conditions and will reschedule or adjust the trip if weather makes it unsafe — safety takes priority over sticking to the original plan."
+    }
+  ]
+}

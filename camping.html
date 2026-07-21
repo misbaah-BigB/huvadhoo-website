@@ -267,6 +267,190 @@
       console.error('Could not load page banner content:', err);
     });
 </script>
+<script>
+  // "Permitted trips only" badge banner text is stored in
+  // content/camping-cert-banner.json so it can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/camping-cert-banner.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var banner = document.querySelector('.cert-banner');
+      if (!banner) return;
+      var badgeEl = banner.querySelector('.badge');
+      var textEl = banner.querySelector('p');
+      if (badgeEl && data.badge) badgeEl.textContent = data.badge;
+      if (textEl && data.text) textEl.textContent = data.text;
+    })
+    .catch(function (err) {
+      console.error('Could not load cert banner content:', err);
+    });
+</script>
+<script>
+  // "Three ways to do it" trip-type cards are stored in
+  // content/camping-trip-types.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/camping-trip-types.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.cat-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.cat-card');
+      (data.categories || []).forEach(function (cat, i) {
+        var card = cards[i];
+        if (!card) return;
+        var tierEl = card.querySelector('.tier');
+        var nameEl = card.querySelector('h3');
+        var descEl = card.querySelector('p');
+        var priceEl = card.querySelector('.price');
+        if (tierEl && cat.tier) tierEl.textContent = cat.tier;
+        if (nameEl && cat.name) nameEl.textContent = cat.name;
+        if (descEl && cat.description) descEl.textContent = cat.description;
+        if (priceEl && cat.price) priceEl.textContent = cat.price;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load trip types content:', err);
+    });
+</script>
+<script>
+  // "What a permitted trip actually provides" info cards are stored in
+  // content/camping-included.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/camping-included.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.inc-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.info-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "what\'s included" content:', err);
+    });
+</script>
+<script>
+  // "Why book this through us, specifically" cards are stored in
+  // content/camping-why-us.json so they can be edited without touching this
+  // file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/camping-why-us.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.why-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.why-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "why us" content:', err);
+    });
+</script>
+<script>
+  // FAQ questions/answers ("Before you book") are stored in
+  // content/camping-faq.json so they can be edited without touching this
+  // file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/camping-faq.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var list = document.getElementById('faqList');
+      if (!list) return;
+
+      var section = list.closest('section');
+      var sectionHead = section ? section.querySelector('.section-head') : null;
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var items = list.querySelectorAll('.faq-item');
+      (data.items || []).forEach(function (itemData, i) {
+        var item = items[i];
+        if (!item) return;
+        var qSpans = item.querySelectorAll('.faq-q span');
+        var answerEl = item.querySelector('.faq-a p');
+        if (qSpans[0] && itemData.question) qSpans[0].textContent = itemData.question;
+        if (answerEl && itemData.answer) answerEl.textContent = itemData.answer;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load FAQ content:', err);
+    });
+</script>
+<script>
+  // Bottom CTA band text (eyebrow/heading/subtext) is stored in
+  // content/camping-cta.json so it can be edited without touching this file.
+  // The contact buttons themselves are shared site-wide and stay hardcoded.
+  // The current values are also present in the HTML below as a fallback, so
+  // the section still looks correct even if this fetch fails or JavaScript
+  // is unavailable.
+  fetch('content/camping-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
 
 </body>
 </html>
