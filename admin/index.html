@@ -338,6 +338,31 @@
         <option value="combo-combinations">Combo — Popular Combinations</option>
         <option value="combo-faq">Combo — FAQ</option>
         <option value="combo-cta">Combo — CTA Band</option>
+        <option value="transfer-guide">Transfer Guide — Banner</option>
+        <option value="transfer-guide-comparison">Transfer Guide — Comparison Table</option>
+        <option value="transfer-guide-flow">Transfer Guide — Quick Logic</option>
+        <option value="transfer-guide-mistakes">Transfer Guide — Common Mistakes</option>
+        <option value="transfer-guide-faq">Transfer Guide — FAQ</option>
+        <option value="transfer-guide-cta">Transfer Guide — CTA Band</option>
+        <option value="cost-guide">Cost Guide — Banner</option>
+        <option value="cost-guide-example">Cost Guide — Worked Example</option>
+        <option value="cost-guide-line-by-line">Cost Guide — Line By Line</option>
+        <option value="cost-guide-meal-plans">Cost Guide — Meal Plans Table</option>
+        <option value="cost-guide-watch-for">Cost Guide — Watch For These</option>
+        <option value="cost-guide-faq">Cost Guide — FAQ</option>
+        <option value="cost-guide-cta">Cost Guide — CTA Band</option>
+        <option value="local-island-rules">Local Island Rules — Banner</option>
+        <option value="local-island-rules-essentials">Local Island Rules — Essentials</option>
+        <option value="local-island-rules-comparison">Local Island Rules — Comparison Table</option>
+        <option value="local-island-rules-reassurance">Local Island Rules — Reassurance</option>
+        <option value="local-island-rules-faq">Local Island Rules — FAQ</option>
+        <option value="local-island-rules-cta">Local Island Rules — CTA Band</option>
+        <option value="about">About — Banner</option>
+        <option value="about-story">About — Story</option>
+        <option value="about-values">About — Values</option>
+        <option value="about-promise">About — Promise</option>
+        <option value="about-trust">About — Trust Band</option>
+        <option value="about-cta">About — CTA Band</option>
         <option value="properties">Properties</option>
       </select>
     </div>
@@ -1444,6 +1469,544 @@
       </div>
     </div>
 
+    <div id="textBannerFields" style="display:none;">
+      <div class="field"><label for="tbHeadline">Headline</label><input type="text" id="tbHeadline"></div>
+      <div class="field">
+        <label for="tbSubtext">Subtext</label>
+        <textarea id="tbSubtext"></textarea>
+      </div>
+      <span class="hint" style="display:block; margin-top:-8px;">This page's banner has no background photo, unlike most other pages — just a headline and subtext.</span>
+    </div>
+
+    <div id="tgComparisonFields" style="display:none;">
+      <div class="field"><label for="tgCmpEyebrow">Eyebrow</label><input type="text" id="tgCmpEyebrow"></div>
+      <div class="field"><label for="tgCmpHeading">Heading</label><input type="text" id="tgCmpHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Column headers</h3>
+        <div class="field"><label for="tgCmpCol0">Column 1 header</label><input type="text" id="tgCmpCol0"></div>
+        <div class="field"><label for="tgCmpCol1">Column 2 header</label><input type="text" id="tgCmpCol1"></div>
+        <div class="field"><label for="tgCmpCol2">Column 3 header</label><input type="text" id="tgCmpCol2"></div>
+        <div class="field"><label for="tgCmpCol3">Column 4 header</label><input type="text" id="tgCmpCol3"></div>
+        <div class="field"><label for="tgCmpCol4">Column 5 header</label><input type="text" id="tgCmpCol4"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="tgCmpRow0Val0">Value for column 1</label><input type="text" id="tgCmpRow0Val0"></div>
+        <div class="field"><label for="tgCmpRow0Val1">Value for column 2</label><input type="text" id="tgCmpRow0Val1"></div>
+        <div class="field"><label for="tgCmpRow0Val2">Value for column 3</label><input type="text" id="tgCmpRow0Val2"></div>
+        <div class="field"><label for="tgCmpRow0Val3">Value for column 4</label><input type="text" id="tgCmpRow0Val3"></div>
+        <div class="field"><label for="tgCmpRow0Val4">Value for column 5</label><input type="text" id="tgCmpRow0Val4"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="tgCmpRow1Val0">Value for column 1</label><input type="text" id="tgCmpRow1Val0"></div>
+        <div class="field"><label for="tgCmpRow1Val1">Value for column 2</label><input type="text" id="tgCmpRow1Val1"></div>
+        <div class="field"><label for="tgCmpRow1Val2">Value for column 3</label><input type="text" id="tgCmpRow1Val2"></div>
+        <div class="field"><label for="tgCmpRow1Val3">Value for column 4</label><input type="text" id="tgCmpRow1Val3"></div>
+        <div class="field"><label for="tgCmpRow1Val4">Value for column 5</label><input type="text" id="tgCmpRow1Val4"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 3</h3>
+        <div class="field"><label for="tgCmpRow2Val0">Value for column 1</label><input type="text" id="tgCmpRow2Val0"></div>
+        <div class="field"><label for="tgCmpRow2Val1">Value for column 2</label><input type="text" id="tgCmpRow2Val1"></div>
+        <div class="field"><label for="tgCmpRow2Val2">Value for column 3</label><input type="text" id="tgCmpRow2Val2"></div>
+        <div class="field"><label for="tgCmpRow2Val3">Value for column 4</label><input type="text" id="tgCmpRow2Val3"></div>
+        <div class="field"><label for="tgCmpRow2Val4">Value for column 5</label><input type="text" id="tgCmpRow2Val4"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 4</h3>
+        <div class="field"><label for="tgCmpRow3Val0">Value for column 1</label><input type="text" id="tgCmpRow3Val0"></div>
+        <div class="field"><label for="tgCmpRow3Val1">Value for column 2</label><input type="text" id="tgCmpRow3Val1"></div>
+        <div class="field"><label for="tgCmpRow3Val2">Value for column 3</label><input type="text" id="tgCmpRow3Val2"></div>
+        <div class="field"><label for="tgCmpRow3Val3">Value for column 4</label><input type="text" id="tgCmpRow3Val3"></div>
+        <div class="field"><label for="tgCmpRow3Val4">Value for column 5</label><input type="text" id="tgCmpRow3Val4"></div>
+      </div>
+    </div>
+
+    <div id="tgFlowFields" style="display:none;">
+      <div class="field"><label for="tgFlowEyebrow">Eyebrow</label><input type="text" id="tgFlowEyebrow"></div>
+      <div class="field"><label for="tgFlowHeading">Heading</label><input type="text" id="tgFlowHeading"></div>
+      <span class="hint" style="display:block; margin-top:-8px;">Each step reads as "IF [condition] → [then]" on the page — the "IF" label and arrow are fixed and aren't editable here.</span>
+      <div class="item-group">
+        <h3 class="item-group-title">Step 1</h3>
+        <div class="field"><label for="tgFlow0Condition">Condition (after "IF")</label><input type="text" id="tgFlow0Condition"></div>
+        <div class="field"><label for="tgFlow0Then">Then (after the arrow)</label><textarea id="tgFlow0Then"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Step 2</h3>
+        <div class="field"><label for="tgFlow1Condition">Condition (after "IF")</label><input type="text" id="tgFlow1Condition"></div>
+        <div class="field"><label for="tgFlow1Then">Then (after the arrow)</label><textarea id="tgFlow1Then"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Step 3</h3>
+        <div class="field"><label for="tgFlow2Condition">Condition (after "IF")</label><input type="text" id="tgFlow2Condition"></div>
+        <div class="field"><label for="tgFlow2Then">Then (after the arrow)</label><textarea id="tgFlow2Then"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Step 4</h3>
+        <div class="field"><label for="tgFlow3Condition">Condition (after "IF")</label><input type="text" id="tgFlow3Condition"></div>
+        <div class="field"><label for="tgFlow3Then">Then (after the arrow)</label><textarea id="tgFlow3Then"></textarea></div>
+      </div>
+    </div>
+
+    <div id="tgMistakesFields" style="display:none;">
+      <div class="field"><label for="tgMisEyebrow">Eyebrow</label><input type="text" id="tgMisEyebrow"></div>
+      <div class="field"><label for="tgMisHeading">Heading</label><input type="text" id="tgMisHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="tgMis0Title">Title</label><input type="text" id="tgMis0Title"></div>
+        <div class="field"><label for="tgMis0Text">Text</label><textarea id="tgMis0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="tgMis1Title">Title</label><input type="text" id="tgMis1Title"></div>
+        <div class="field"><label for="tgMis1Text">Text</label><textarea id="tgMis1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="tgMis2Title">Title</label><input type="text" id="tgMis2Title"></div>
+        <div class="field"><label for="tgMis2Text">Text</label><textarea id="tgMis2Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="tgFaqFields" style="display:none;">
+      <div class="field"><label for="tgFaqEyebrow">Eyebrow</label><input type="text" id="tgFaqEyebrow"></div>
+      <div class="field"><label for="tgFaqHeading">Heading</label><input type="text" id="tgFaqHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 1</h3>
+        <div class="field"><label for="tgFaq0Question">Question</label><input type="text" id="tgFaq0Question"></div>
+        <div class="field"><label for="tgFaq0Answer">Answer</label><textarea id="tgFaq0Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 2</h3>
+        <div class="field"><label for="tgFaq1Question">Question</label><input type="text" id="tgFaq1Question"></div>
+        <div class="field"><label for="tgFaq1Answer">Answer</label><textarea id="tgFaq1Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 3</h3>
+        <div class="field"><label for="tgFaq2Question">Question</label><input type="text" id="tgFaq2Question"></div>
+        <div class="field"><label for="tgFaq2Answer">Answer</label><textarea id="tgFaq2Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 4</h3>
+        <div class="field"><label for="tgFaq3Question">Question</label><input type="text" id="tgFaq3Question"></div>
+        <div class="field"><label for="tgFaq3Answer">Answer</label><textarea id="tgFaq3Answer"></textarea></div>
+      </div>
+    </div>
+
+    <div id="tgCtaFields" style="display:none;">
+      <div class="field"><label for="tgCtaEyebrow">Eyebrow</label><input type="text" id="tgCtaEyebrow"></div>
+      <div class="field"><label for="tgCtaHeading">Heading</label><input type="text" id="tgCtaHeading"></div>
+      <div class="field">
+        <label for="tgCtaSubtext">Subtext</label>
+        <textarea id="tgCtaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
+      </div>
+    </div>
+
+    <div id="cgExampleFields" style="display:none;">
+      <div class="field"><label for="cgExEyebrow">Eyebrow</label><input type="text" id="cgExEyebrow"></div>
+      <div class="field"><label for="cgExHeading">Heading</label><input type="text" id="cgExHeading"></div>
+      <div class="field"><label for="cgExIntro">Intro sentence</label><textarea id="cgExIntro"></textarea></div>
+      <div class="field"><label for="cgExTitle">Example box title</label><input type="text" id="cgExTitle"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="cgExRow0Label">Label</label><input type="text" id="cgExRow0Label"></div>
+        <div class="field"><label for="cgExRow0Value">Value</label><input type="text" id="cgExRow0Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="cgExRow1Label">Label</label><input type="text" id="cgExRow1Label"></div>
+        <div class="field"><label for="cgExRow1Value">Value</label><input type="text" id="cgExRow1Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 3</h3>
+        <div class="field"><label for="cgExRow2Label">Label</label><input type="text" id="cgExRow2Label"></div>
+        <div class="field"><label for="cgExRow2Value">Value</label><input type="text" id="cgExRow2Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 4</h3>
+        <div class="field"><label for="cgExRow3Label">Label</label><input type="text" id="cgExRow3Label"></div>
+        <div class="field"><label for="cgExRow3Value">Value</label><input type="text" id="cgExRow3Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 5</h3>
+        <div class="field"><label for="cgExRow4Label">Label</label><input type="text" id="cgExRow4Label"></div>
+        <div class="field"><label for="cgExRow4Value">Value</label><input type="text" id="cgExRow4Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 6</h3>
+        <div class="field"><label for="cgExRow5Label">Label</label><input type="text" id="cgExRow5Label"></div>
+        <div class="field"><label for="cgExRow5Value">Value</label><input type="text" id="cgExRow5Value"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Total row</h3>
+        <div class="field"><label for="cgExTotalLabel">Label</label><input type="text" id="cgExTotalLabel"></div>
+        <div class="field"><label for="cgExTotalValue">Value</label><input type="text" id="cgExTotalValue"></div>
+        <span class="hint">The total row's bold styling is fixed in the page design and isn't affected by editing this text.</span>
+      </div>
+    </div>
+
+    <div id="cgLineByLineFields" style="display:none;">
+      <div class="field"><label for="cgLblEyebrow">Eyebrow</label><input type="text" id="cgLblEyebrow"></div>
+      <div class="field"><label for="cgLblHeading">Heading</label><input type="text" id="cgLblHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="cgLbl0Title">Title</label><input type="text" id="cgLbl0Title"></div>
+        <div class="field"><label for="cgLbl0Text">Text</label><textarea id="cgLbl0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="cgLbl1Title">Title</label><input type="text" id="cgLbl1Title"></div>
+        <div class="field"><label for="cgLbl1Text">Text</label><textarea id="cgLbl1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="cgLbl2Title">Title</label><input type="text" id="cgLbl2Title"></div>
+        <div class="field"><label for="cgLbl2Text">Text</label><textarea id="cgLbl2Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 4</h3>
+        <div class="field"><label for="cgLbl3Title">Title</label><input type="text" id="cgLbl3Title"></div>
+        <div class="field"><label for="cgLbl3Text">Text</label><textarea id="cgLbl3Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="cgMealPlansFields" style="display:none;">
+      <div class="field"><label for="cgMpEyebrow">Eyebrow</label><input type="text" id="cgMpEyebrow"></div>
+      <div class="field"><label for="cgMpHeading">Heading</label><input type="text" id="cgMpHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Column headers</h3>
+        <div class="field"><label for="cgMpCol0">Column 1 header</label><input type="text" id="cgMpCol0"></div>
+        <div class="field"><label for="cgMpCol1">Column 2 header</label><input type="text" id="cgMpCol1"></div>
+        <div class="field"><label for="cgMpCol2">Column 3 header</label><input type="text" id="cgMpCol2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="cgMpRow0Val0">Value for column 1</label><input type="text" id="cgMpRow0Val0"></div>
+        <div class="field"><label for="cgMpRow0Val1">Value for column 2</label><input type="text" id="cgMpRow0Val1"></div>
+        <div class="field"><label for="cgMpRow0Val2">Value for column 3</label><input type="text" id="cgMpRow0Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="cgMpRow1Val0">Value for column 1</label><input type="text" id="cgMpRow1Val0"></div>
+        <div class="field"><label for="cgMpRow1Val1">Value for column 2</label><input type="text" id="cgMpRow1Val1"></div>
+        <div class="field"><label for="cgMpRow1Val2">Value for column 3</label><input type="text" id="cgMpRow1Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 3</h3>
+        <div class="field"><label for="cgMpRow2Val0">Value for column 1</label><input type="text" id="cgMpRow2Val0"></div>
+        <div class="field"><label for="cgMpRow2Val1">Value for column 2</label><input type="text" id="cgMpRow2Val1"></div>
+        <div class="field"><label for="cgMpRow2Val2">Value for column 3</label><input type="text" id="cgMpRow2Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 4</h3>
+        <div class="field"><label for="cgMpRow3Val0">Value for column 1</label><input type="text" id="cgMpRow3Val0"></div>
+        <div class="field"><label for="cgMpRow3Val1">Value for column 2</label><input type="text" id="cgMpRow3Val1"></div>
+        <div class="field"><label for="cgMpRow3Val2">Value for column 3</label><input type="text" id="cgMpRow3Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 5</h3>
+        <div class="field"><label for="cgMpRow4Val0">Value for column 1</label><input type="text" id="cgMpRow4Val0"></div>
+        <div class="field"><label for="cgMpRow4Val1">Value for column 2</label><input type="text" id="cgMpRow4Val1"></div>
+        <div class="field"><label for="cgMpRow4Val2">Value for column 3</label><input type="text" id="cgMpRow4Val2"></div>
+      </div>
+    </div>
+
+    <div id="cgWatchForFields" style="display:none;">
+      <div class="field"><label for="cgWfEyebrow">Eyebrow</label><input type="text" id="cgWfEyebrow"></div>
+      <div class="field"><label for="cgWfHeading">Heading</label><input type="text" id="cgWfHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="cgWf0Title">Title</label><input type="text" id="cgWf0Title"></div>
+        <div class="field"><label for="cgWf0Text">Text</label><textarea id="cgWf0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="cgWf1Title">Title</label><input type="text" id="cgWf1Title"></div>
+        <div class="field"><label for="cgWf1Text">Text</label><textarea id="cgWf1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="cgWf2Title">Title</label><input type="text" id="cgWf2Title"></div>
+        <div class="field"><label for="cgWf2Text">Text</label><textarea id="cgWf2Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 4</h3>
+        <div class="field"><label for="cgWf3Title">Title</label><input type="text" id="cgWf3Title"></div>
+        <div class="field"><label for="cgWf3Text">Text</label><textarea id="cgWf3Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="cgFaqFields" style="display:none;">
+      <div class="field"><label for="cgFaqEyebrow">Eyebrow</label><input type="text" id="cgFaqEyebrow"></div>
+      <div class="field"><label for="cgFaqHeading">Heading</label><input type="text" id="cgFaqHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 1</h3>
+        <div class="field"><label for="cgFaq0Question">Question</label><input type="text" id="cgFaq0Question"></div>
+        <div class="field"><label for="cgFaq0Answer">Answer</label><textarea id="cgFaq0Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 2</h3>
+        <div class="field"><label for="cgFaq1Question">Question</label><input type="text" id="cgFaq1Question"></div>
+        <div class="field"><label for="cgFaq1Answer">Answer</label><textarea id="cgFaq1Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 3</h3>
+        <div class="field"><label for="cgFaq2Question">Question</label><input type="text" id="cgFaq2Question"></div>
+        <div class="field"><label for="cgFaq2Answer">Answer</label><textarea id="cgFaq2Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 4</h3>
+        <div class="field"><label for="cgFaq3Question">Question</label><input type="text" id="cgFaq3Question"></div>
+        <div class="field"><label for="cgFaq3Answer">Answer</label><textarea id="cgFaq3Answer"></textarea></div>
+      </div>
+    </div>
+
+    <div id="cgCtaFields" style="display:none;">
+      <div class="field"><label for="cgCtaEyebrow">Eyebrow</label><input type="text" id="cgCtaEyebrow"></div>
+      <div class="field"><label for="cgCtaHeading">Heading</label><input type="text" id="cgCtaHeading"></div>
+      <div class="field">
+        <label for="cgCtaSubtext">Subtext</label>
+        <textarea id="cgCtaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
+      </div>
+    </div>
+
+    <div id="lirEssentialsFields" style="display:none;">
+      <div class="field"><label for="lirEsEyebrow">Eyebrow</label><input type="text" id="lirEsEyebrow"></div>
+      <div class="field"><label for="lirEsHeading">Heading</label><input type="text" id="lirEsHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="lirEs0Icon">Icon (single emoji)</label><input type="text" id="lirEs0Icon"></div>
+        <div class="field"><label for="lirEs0Title">Title</label><input type="text" id="lirEs0Title"></div>
+        <div class="field"><label for="lirEs0Text">Text</label><textarea id="lirEs0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="lirEs1Icon">Icon (single emoji)</label><input type="text" id="lirEs1Icon"></div>
+        <div class="field"><label for="lirEs1Title">Title</label><input type="text" id="lirEs1Title"></div>
+        <div class="field"><label for="lirEs1Text">Text</label><textarea id="lirEs1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="lirEs2Icon">Icon (single emoji)</label><input type="text" id="lirEs2Icon"></div>
+        <div class="field"><label for="lirEs2Title">Title</label><input type="text" id="lirEs2Title"></div>
+        <div class="field"><label for="lirEs2Text">Text</label><textarea id="lirEs2Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 4</h3>
+        <div class="field"><label for="lirEs3Icon">Icon (single emoji)</label><input type="text" id="lirEs3Icon"></div>
+        <div class="field"><label for="lirEs3Title">Title</label><input type="text" id="lirEs3Title"></div>
+        <div class="field"><label for="lirEs3Text">Text</label><textarea id="lirEs3Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 5</h3>
+        <div class="field"><label for="lirEs4Icon">Icon (single emoji)</label><input type="text" id="lirEs4Icon"></div>
+        <div class="field"><label for="lirEs4Title">Title</label><input type="text" id="lirEs4Title"></div>
+        <div class="field"><label for="lirEs4Text">Text</label><textarea id="lirEs4Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 6</h3>
+        <div class="field"><label for="lirEs5Icon">Icon (single emoji)</label><input type="text" id="lirEs5Icon"></div>
+        <div class="field"><label for="lirEs5Title">Title</label><input type="text" id="lirEs5Title"></div>
+        <div class="field"><label for="lirEs5Text">Text</label><textarea id="lirEs5Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="lirComparisonFields" style="display:none;">
+      <div class="field"><label for="lirCmpEyebrow">Eyebrow</label><input type="text" id="lirCmpEyebrow"></div>
+      <div class="field"><label for="lirCmpHeading">Heading</label><input type="text" id="lirCmpHeading"></div>
+      <div class="field">
+        <label for="lirCmpFactorLabel">Left column header</label>
+        <input type="text" id="lirCmpFactorLabel">
+        <span class="hint">The label above the left-hand column, e.g. "Rule".</span>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Column headers</h3>
+        <div class="field"><label for="lirCmpCol0">Column 1 header</label><input type="text" id="lirCmpCol0"></div>
+        <div class="field"><label for="lirCmpCol1">Column 2 header</label><input type="text" id="lirCmpCol1"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="lirCmpRow0Factor">Rule label</label><input type="text" id="lirCmpRow0Factor"></div>
+        <div class="field"><label for="lirCmpRow0Val0">Value for column 1</label><input type="text" id="lirCmpRow0Val0"></div>
+        <div class="field"><label for="lirCmpRow0Val1">Value for column 2</label><input type="text" id="lirCmpRow0Val1"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="lirCmpRow1Factor">Rule label</label><input type="text" id="lirCmpRow1Factor"></div>
+        <div class="field"><label for="lirCmpRow1Val0">Value for column 1</label><input type="text" id="lirCmpRow1Val0"></div>
+        <div class="field"><label for="lirCmpRow1Val1">Value for column 2</label><input type="text" id="lirCmpRow1Val1"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 3</h3>
+        <div class="field"><label for="lirCmpRow2Factor">Rule label</label><input type="text" id="lirCmpRow2Factor"></div>
+        <div class="field"><label for="lirCmpRow2Val0">Value for column 1</label><input type="text" id="lirCmpRow2Val0"></div>
+        <div class="field"><label for="lirCmpRow2Val1">Value for column 2</label><input type="text" id="lirCmpRow2Val1"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 4</h3>
+        <div class="field"><label for="lirCmpRow3Factor">Rule label</label><input type="text" id="lirCmpRow3Factor"></div>
+        <div class="field"><label for="lirCmpRow3Val0">Value for column 1</label><input type="text" id="lirCmpRow3Val0"></div>
+        <div class="field"><label for="lirCmpRow3Val1">Value for column 2</label><input type="text" id="lirCmpRow3Val1"></div>
+      </div>
+    </div>
+
+    <div id="lirReassuranceFields" style="display:none;">
+      <div class="field"><label for="lirReEyebrow">Eyebrow</label><input type="text" id="lirReEyebrow"></div>
+      <div class="field"><label for="lirReHeading">Heading</label><input type="text" id="lirReHeading"></div>
+      <div class="field">
+        <label for="lirReParagraph">Paragraph</label>
+        <textarea id="lirReParagraph"></textarea>
+      </div>
+    </div>
+
+    <div id="lirFaqFields" style="display:none;">
+      <div class="field"><label for="lirFaqEyebrow">Eyebrow</label><input type="text" id="lirFaqEyebrow"></div>
+      <div class="field"><label for="lirFaqHeading">Heading</label><input type="text" id="lirFaqHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 1</h3>
+        <div class="field"><label for="lirFaq0Question">Question</label><input type="text" id="lirFaq0Question"></div>
+        <div class="field"><label for="lirFaq0Answer">Answer</label><textarea id="lirFaq0Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 2</h3>
+        <div class="field"><label for="lirFaq1Question">Question</label><input type="text" id="lirFaq1Question"></div>
+        <div class="field"><label for="lirFaq1Answer">Answer</label><textarea id="lirFaq1Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 3</h3>
+        <div class="field"><label for="lirFaq2Question">Question</label><input type="text" id="lirFaq2Question"></div>
+        <div class="field"><label for="lirFaq2Answer">Answer</label><textarea id="lirFaq2Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 4</h3>
+        <div class="field"><label for="lirFaq3Question">Question</label><input type="text" id="lirFaq3Question"></div>
+        <div class="field"><label for="lirFaq3Answer">Answer</label><textarea id="lirFaq3Answer"></textarea></div>
+      </div>
+    </div>
+
+    <div id="lirCtaFields" style="display:none;">
+      <div class="field"><label for="lirCtaEyebrow">Eyebrow</label><input type="text" id="lirCtaEyebrow"></div>
+      <div class="field"><label for="lirCtaHeading">Heading</label><input type="text" id="lirCtaHeading"></div>
+      <div class="field">
+        <label for="lirCtaSubtext">Subtext</label>
+        <textarea id="lirCtaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
+      </div>
+    </div>
+
+    <div id="abBannerFields" style="display:none;">
+      <div class="field"><label for="abHeadline">Headline</label><input type="text" id="abHeadline"></div>
+      <div class="field">
+        <label for="abSubtext">Subtext</label>
+        <textarea id="abSubtext"></textarea>
+      </div>
+      <div class="field">
+        <label>Background photo</label>
+        <div class="photo-row-main">
+          <label class="photo-choose-btn" id="abImageChooseLabel">
+            Choose photo
+            <input type="file" accept="image/*" id="abImageFileInput" hidden>
+          </label>
+          <input type="text" id="abImagePath" class="photo-path-input" readonly placeholder="No photo uploaded yet">
+        </div>
+        <p class="photo-row-status" id="abImageStatus"></p>
+      </div>
+    </div>
+
+    <div id="abStoryFields" style="display:none;">
+      <div class="field"><label for="abStEyebrow">Eyebrow</label><input type="text" id="abStEyebrow"></div>
+      <div class="field"><label for="abStHeading">Heading</label><input type="text" id="abStHeading"></div>
+      <div class="field"><label for="abStPara1">Paragraph 1</label><textarea id="abStPara1"></textarea></div>
+      <div class="field"><label for="abStPara2">Paragraph 2</label><textarea id="abStPara2"></textarea></div>
+      <div class="field"><label for="abStPullquote">Pull-quote</label><textarea id="abStPullquote"></textarea></div>
+    </div>
+
+    <div id="abValuesFields" style="display:none;">
+      <div class="field"><label for="abValEyebrow">Eyebrow</label><input type="text" id="abValEyebrow"></div>
+      <div class="field"><label for="abValHeading">Heading</label><input type="text" id="abValHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="abVal0Icon">Icon (single emoji)</label><input type="text" id="abVal0Icon"></div>
+        <div class="field"><label for="abVal0Title">Title</label><input type="text" id="abVal0Title"></div>
+        <div class="field"><label for="abVal0Text">Text</label><textarea id="abVal0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="abVal1Icon">Icon (single emoji)</label><input type="text" id="abVal1Icon"></div>
+        <div class="field"><label for="abVal1Title">Title</label><input type="text" id="abVal1Title"></div>
+        <div class="field"><label for="abVal1Text">Text</label><textarea id="abVal1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="abVal2Icon">Icon (single emoji)</label><input type="text" id="abVal2Icon"></div>
+        <div class="field"><label for="abVal2Title">Title</label><input type="text" id="abVal2Title"></div>
+        <div class="field"><label for="abVal2Text">Text</label><textarea id="abVal2Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 4</h3>
+        <div class="field"><label for="abVal3Icon">Icon (single emoji)</label><input type="text" id="abVal3Icon"></div>
+        <div class="field"><label for="abVal3Title">Title</label><input type="text" id="abVal3Title"></div>
+        <div class="field"><label for="abVal3Text">Text</label><textarea id="abVal3Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="abPromiseFields" style="display:none;">
+      <div class="field"><label for="abProEyebrow">Eyebrow</label><input type="text" id="abProEyebrow"></div>
+      <div class="field"><label for="abProHeading">Heading</label><input type="text" id="abProHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="abPro0Title">Title</label><input type="text" id="abPro0Title"></div>
+        <div class="field"><label for="abPro0Text">Text</label><textarea id="abPro0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="abPro1Title">Title</label><input type="text" id="abPro1Title"></div>
+        <div class="field"><label for="abPro1Text">Text</label><textarea id="abPro1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="abPro2Title">Title</label><input type="text" id="abPro2Title"></div>
+        <div class="field"><label for="abPro2Text">Text</label><textarea id="abPro2Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="abTrustFields" style="display:none;">
+      <span class="hint" style="display:block; margin-bottom:10px;">This band has no heading of its own — just the 4 stat items below.</span>
+      <div class="item-group">
+        <h3 class="item-group-title">Item 1</h3>
+        <div class="field"><label for="abTr0Stat">Stat line</label><input type="text" id="abTr0Stat"></div>
+        <div class="field"><label for="abTr0Caption">Caption</label><input type="text" id="abTr0Caption"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Item 2</h3>
+        <div class="field"><label for="abTr1Stat">Stat line</label><input type="text" id="abTr1Stat"></div>
+        <div class="field"><label for="abTr1Caption">Caption</label><input type="text" id="abTr1Caption"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Item 3</h3>
+        <div class="field"><label for="abTr2Stat">Stat line</label><input type="text" id="abTr2Stat"></div>
+        <div class="field"><label for="abTr2Caption">Caption</label><input type="text" id="abTr2Caption"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Item 4</h3>
+        <div class="field"><label for="abTr3Stat">Stat line</label><input type="text" id="abTr3Stat"></div>
+        <div class="field"><label for="abTr3Caption">Caption</label><input type="text" id="abTr3Caption"></div>
+      </div>
+    </div>
+
+    <div id="abCtaFields" style="display:none;">
+      <div class="field"><label for="abCtaEyebrow">Eyebrow</label><input type="text" id="abCtaEyebrow"></div>
+      <div class="field"><label for="abCtaHeading">Heading</label><input type="text" id="abCtaHeading"></div>
+      <div class="field">
+        <label for="abCtaSubtext">Subtext</label>
+        <textarea id="abCtaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
+      </div>
+    </div>
+
     <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
   </form>
 
@@ -1552,6 +2115,31 @@
     'combo-combinations': 'Combo — Popular Combinations',
     'combo-faq': 'Combo — FAQ',
     'combo-cta': 'Combo — CTA Band',
+    'transfer-guide': 'Transfer Guide — Banner',
+    'transfer-guide-comparison': 'Transfer Guide — Comparison Table',
+    'transfer-guide-flow': 'Transfer Guide — Quick Logic',
+    'transfer-guide-mistakes': 'Transfer Guide — Common Mistakes',
+    'transfer-guide-faq': 'Transfer Guide — FAQ',
+    'transfer-guide-cta': 'Transfer Guide — CTA Band',
+    'cost-guide': 'Cost Guide — Banner',
+    'cost-guide-example': 'Cost Guide — Worked Example',
+    'cost-guide-line-by-line': 'Cost Guide — Line By Line',
+    'cost-guide-meal-plans': 'Cost Guide — Meal Plans Table',
+    'cost-guide-watch-for': 'Cost Guide — Watch For These',
+    'cost-guide-faq': 'Cost Guide — FAQ',
+    'cost-guide-cta': 'Cost Guide — CTA Band',
+    'local-island-rules': 'Local Island Rules — Banner',
+    'local-island-rules-essentials': 'Local Island Rules — Essentials',
+    'local-island-rules-comparison': 'Local Island Rules — Comparison Table',
+    'local-island-rules-reassurance': 'Local Island Rules — Reassurance',
+    'local-island-rules-faq': 'Local Island Rules — FAQ',
+    'local-island-rules-cta': 'Local Island Rules — CTA Band',
+    about: 'About — Banner',
+    'about-story': 'About — Story',
+    'about-values': 'About — Values',
+    'about-promise': 'About — Promise',
+    'about-trust': 'About — Trust Band',
+    'about-cta': 'About — CTA Band',
     properties: 'Properties',
   };
   var CATEGORY_LABELS = {
@@ -1562,10 +2150,17 @@
     'fishing-charter': 'Fishing Charter',
   };
   var BANNER_PAGES = { homepage: 1, resorts: 1, guesthouses: 1, combo: 1, honeymoon: 1, family: 1, diving: 1, fishing: 1, camping: 1 };
+  // Transfer Guide, Cost Guide, and Local Island Rules all share the same
+  // simpler text-only banner shape (no background photo), so — like the
+  // BANNER_PAGES map above — they share one form (textBanner) instead of
+  // each getting their own set of fields.
+  var TEXT_BANNER_PAGES = { 'transfer-guide': 1, 'cost-guide': 1, 'local-island-rules': 1 };
 
   function groupKeyFor(page) {
     if (page === 'properties') return 'properties';
     if (BANNER_PAGES[page]) return 'banner';
+    if (TEXT_BANNER_PAGES[page]) return 'textBanner';
+    if (page === 'about') return 'abBanner';
     if (page === 'resorts-pricing') return 'pricing';
     if (page === 'resorts-comparison') return 'comparison';
     if (page === 'resorts-why-us') return 'whyUs';
@@ -1611,6 +2206,27 @@
     if (page === 'combo-combinations') return 'cbCombinations';
     if (page === 'combo-faq') return 'cbFaq';
     if (page === 'combo-cta') return 'cbCta';
+    if (page === 'transfer-guide-comparison') return 'tgComparison';
+    if (page === 'transfer-guide-flow') return 'tgFlow';
+    if (page === 'transfer-guide-mistakes') return 'tgMistakes';
+    if (page === 'transfer-guide-faq') return 'tgFaq';
+    if (page === 'transfer-guide-cta') return 'tgCta';
+    if (page === 'cost-guide-example') return 'cgExample';
+    if (page === 'cost-guide-line-by-line') return 'cgLineByLine';
+    if (page === 'cost-guide-meal-plans') return 'cgMealPlans';
+    if (page === 'cost-guide-watch-for') return 'cgWatchFor';
+    if (page === 'cost-guide-faq') return 'cgFaq';
+    if (page === 'cost-guide-cta') return 'cgCta';
+    if (page === 'local-island-rules-essentials') return 'lirEssentials';
+    if (page === 'local-island-rules-comparison') return 'lirComparison';
+    if (page === 'local-island-rules-reassurance') return 'lirReassurance';
+    if (page === 'local-island-rules-faq') return 'lirFaq';
+    if (page === 'local-island-rules-cta') return 'lirCta';
+    if (page === 'about-story') return 'abStory';
+    if (page === 'about-values') return 'abValues';
+    if (page === 'about-promise') return 'abPromise';
+    if (page === 'about-trust') return 'abTrust';
+    if (page === 'about-cta') return 'abCta';
     return 'banner';
   }
 
@@ -2094,6 +2710,223 @@
   var cbCtaEyebrowInput = document.getElementById('cbCtaEyebrow');
   var cbCtaHeadingInput = document.getElementById('cbCtaHeading');
   var cbCtaSubtextInput = document.getElementById('cbCtaSubtext');
+
+  // ---- shared text-only banner group (Transfer Guide, Cost Guide, Local Island Rules) ----
+  var tbHeadlineInput = document.getElementById('tbHeadline');
+  var tbSubtextInput = document.getElementById('tbSubtext');
+
+  // ---- transfer guide: comparison table group ----
+  var tgCmpEyebrowInput = document.getElementById('tgCmpEyebrow');
+  var tgCmpHeadingInput = document.getElementById('tgCmpHeading');
+  var tgCmpColInputs = [];
+  for (var tgc = 0; tgc < 5; tgc++) tgCmpColInputs.push(document.getElementById('tgCmpCol' + tgc));
+  var tgCmpRowInputs = [];
+  for (var tgr = 0; tgr < 4; tgr++) {
+    var tgRowVals = [];
+    for (var tgv = 0; tgv < 5; tgv++) tgRowVals.push(document.getElementById('tgCmpRow' + tgr + 'Val' + tgv));
+    tgCmpRowInputs.push({ values: tgRowVals });
+  }
+
+  // ---- transfer guide: quick logic flow group ----
+  var tgFlowEyebrowInput = document.getElementById('tgFlowEyebrow');
+  var tgFlowHeadingInput = document.getElementById('tgFlowHeading');
+  var tgFlowStepInputs = [];
+  for (var tgf = 0; tgf < 4; tgf++) {
+    tgFlowStepInputs.push({
+      condition: document.getElementById('tgFlow' + tgf + 'Condition'),
+      then: document.getElementById('tgFlow' + tgf + 'Then'),
+    });
+  }
+
+  // ---- transfer guide: mistakes group ----
+  var tgMisEyebrowInput = document.getElementById('tgMisEyebrow');
+  var tgMisHeadingInput = document.getElementById('tgMisHeading');
+  var tgMisCardInputs = [];
+  for (var tgm = 0; tgm < 3; tgm++) {
+    tgMisCardInputs.push({
+      title: document.getElementById('tgMis' + tgm + 'Title'),
+      text: document.getElementById('tgMis' + tgm + 'Text'),
+    });
+  }
+
+  // ---- transfer guide: faq group ----
+  var tgFaqEyebrowInput = document.getElementById('tgFaqEyebrow');
+  var tgFaqHeadingInput = document.getElementById('tgFaqHeading');
+  var tgFaqItemInputs = [];
+  for (var tgq = 0; tgq < 4; tgq++) {
+    tgFaqItemInputs.push({
+      question: document.getElementById('tgFaq' + tgq + 'Question'),
+      answer: document.getElementById('tgFaq' + tgq + 'Answer'),
+    });
+  }
+
+  // ---- transfer guide: cta band group ----
+  var tgCtaEyebrowInput = document.getElementById('tgCtaEyebrow');
+  var tgCtaHeadingInput = document.getElementById('tgCtaHeading');
+  var tgCtaSubtextInput = document.getElementById('tgCtaSubtext');
+
+  // ---- cost guide: worked example group ----
+  var cgExEyebrowInput = document.getElementById('cgExEyebrow');
+  var cgExHeadingInput = document.getElementById('cgExHeading');
+  var cgExIntroInput = document.getElementById('cgExIntro');
+  var cgExTitleInput = document.getElementById('cgExTitle');
+  var cgExRowInputs = [];
+  for (var cgx = 0; cgx < 6; cgx++) {
+    cgExRowInputs.push({
+      label: document.getElementById('cgExRow' + cgx + 'Label'),
+      value: document.getElementById('cgExRow' + cgx + 'Value'),
+    });
+  }
+  var cgExTotalLabelInput = document.getElementById('cgExTotalLabel');
+  var cgExTotalValueInput = document.getElementById('cgExTotalValue');
+
+  // ---- cost guide: line by line group ----
+  var cgLblEyebrowInput = document.getElementById('cgLblEyebrow');
+  var cgLblHeadingInput = document.getElementById('cgLblHeading');
+  var cgLblCardInputs = [];
+  for (var cgl = 0; cgl < 4; cgl++) {
+    cgLblCardInputs.push({
+      title: document.getElementById('cgLbl' + cgl + 'Title'),
+      text: document.getElementById('cgLbl' + cgl + 'Text'),
+    });
+  }
+
+  // ---- cost guide: meal plans table group ----
+  var cgMpEyebrowInput = document.getElementById('cgMpEyebrow');
+  var cgMpHeadingInput = document.getElementById('cgMpHeading');
+  var cgMpColInputs = [document.getElementById('cgMpCol0'), document.getElementById('cgMpCol1'), document.getElementById('cgMpCol2')];
+  var cgMpRowInputs = [];
+  for (var cgm = 0; cgm < 5; cgm++) {
+    cgMpRowInputs.push({
+      values: [document.getElementById('cgMpRow' + cgm + 'Val0'), document.getElementById('cgMpRow' + cgm + 'Val1'), document.getElementById('cgMpRow' + cgm + 'Val2')],
+    });
+  }
+
+  // ---- cost guide: watch for group ----
+  var cgWfEyebrowInput = document.getElementById('cgWfEyebrow');
+  var cgWfHeadingInput = document.getElementById('cgWfHeading');
+  var cgWfCardInputs = [];
+  for (var cgw = 0; cgw < 4; cgw++) {
+    cgWfCardInputs.push({
+      title: document.getElementById('cgWf' + cgw + 'Title'),
+      text: document.getElementById('cgWf' + cgw + 'Text'),
+    });
+  }
+
+  // ---- cost guide: faq group ----
+  var cgFaqEyebrowInput = document.getElementById('cgFaqEyebrow');
+  var cgFaqHeadingInput = document.getElementById('cgFaqHeading');
+  var cgFaqItemInputs = [];
+  for (var cgq = 0; cgq < 4; cgq++) {
+    cgFaqItemInputs.push({
+      question: document.getElementById('cgFaq' + cgq + 'Question'),
+      answer: document.getElementById('cgFaq' + cgq + 'Answer'),
+    });
+  }
+
+  // ---- cost guide: cta band group ----
+  var cgCtaEyebrowInput = document.getElementById('cgCtaEyebrow');
+  var cgCtaHeadingInput = document.getElementById('cgCtaHeading');
+  var cgCtaSubtextInput = document.getElementById('cgCtaSubtext');
+
+  // ---- local island rules: essentials group ----
+  var lirEsEyebrowInput = document.getElementById('lirEsEyebrow');
+  var lirEsHeadingInput = document.getElementById('lirEsHeading');
+  var lirEsCardInputs = [];
+  for (var lie = 0; lie < 6; lie++) {
+    lirEsCardInputs.push({
+      icon: document.getElementById('lirEs' + lie + 'Icon'),
+      title: document.getElementById('lirEs' + lie + 'Title'),
+      text: document.getElementById('lirEs' + lie + 'Text'),
+    });
+  }
+
+  // ---- local island rules: comparison table group ----
+  var lirCmpEyebrowInput = document.getElementById('lirCmpEyebrow');
+  var lirCmpHeadingInput = document.getElementById('lirCmpHeading');
+  var lirCmpFactorLabelInput = document.getElementById('lirCmpFactorLabel');
+  var lirCmpColInputs = [document.getElementById('lirCmpCol0'), document.getElementById('lirCmpCol1')];
+  var lirCmpRowInputs = [];
+  for (var lir = 0; lir < 4; lir++) {
+    lirCmpRowInputs.push({
+      factor: document.getElementById('lirCmpRow' + lir + 'Factor'),
+      values: [document.getElementById('lirCmpRow' + lir + 'Val0'), document.getElementById('lirCmpRow' + lir + 'Val1')],
+    });
+  }
+
+  // ---- local island rules: reassurance group ----
+  var lirReEyebrowInput = document.getElementById('lirReEyebrow');
+  var lirReHeadingInput = document.getElementById('lirReHeading');
+  var lirReParagraphInput = document.getElementById('lirReParagraph');
+
+  // ---- local island rules: faq group ----
+  var lirFaqEyebrowInput = document.getElementById('lirFaqEyebrow');
+  var lirFaqHeadingInput = document.getElementById('lirFaqHeading');
+  var lirFaqItemInputs = [];
+  for (var liq = 0; liq < 4; liq++) {
+    lirFaqItemInputs.push({
+      question: document.getElementById('lirFaq' + liq + 'Question'),
+      answer: document.getElementById('lirFaq' + liq + 'Answer'),
+    });
+  }
+
+  // ---- local island rules: cta band group ----
+  var lirCtaEyebrowInput = document.getElementById('lirCtaEyebrow');
+  var lirCtaHeadingInput = document.getElementById('lirCtaHeading');
+  var lirCtaSubtextInput = document.getElementById('lirCtaSubtext');
+
+  // ---- about: banner group (shares the compress/upload code with property photos) ----
+  var abHeadlineInput = document.getElementById('abHeadline');
+  var abSubtextInput = document.getElementById('abSubtext');
+  var abImageChooseLabel = document.getElementById('abImageChooseLabel');
+  var abImageFileInput = document.getElementById('abImageFileInput');
+  var abImagePathInput = document.getElementById('abImagePath');
+  var abImageStatusEl = document.getElementById('abImageStatus');
+  wirePhotoUploadEl(abImageChooseLabel, abImageFileInput, abImagePathInput, abImageStatusEl, 'about-hero-image');
+
+  // ---- about: story group ----
+  var abStEyebrowInput = document.getElementById('abStEyebrow');
+  var abStHeadingInput = document.getElementById('abStHeading');
+  var abStPara1Input = document.getElementById('abStPara1');
+  var abStPara2Input = document.getElementById('abStPara2');
+  var abStPullquoteInput = document.getElementById('abStPullquote');
+
+  // ---- about: values group ----
+  var abValEyebrowInput = document.getElementById('abValEyebrow');
+  var abValHeadingInput = document.getElementById('abValHeading');
+  var abValCardInputs = [];
+  for (var abv = 0; abv < 4; abv++) {
+    abValCardInputs.push({
+      icon: document.getElementById('abVal' + abv + 'Icon'),
+      title: document.getElementById('abVal' + abv + 'Title'),
+      text: document.getElementById('abVal' + abv + 'Text'),
+    });
+  }
+
+  // ---- about: promise group ----
+  var abProEyebrowInput = document.getElementById('abProEyebrow');
+  var abProHeadingInput = document.getElementById('abProHeading');
+  var abProCardInputs = [];
+  for (var abp = 0; abp < 3; abp++) {
+    abProCardInputs.push({
+      title: document.getElementById('abPro' + abp + 'Title'),
+      text: document.getElementById('abPro' + abp + 'Text'),
+    });
+  }
+
+  // ---- about: trust band group ----
+  var abTrItemInputs = [];
+  for (var abt = 0; abt < 4; abt++) {
+    abTrItemInputs.push({
+      stat: document.getElementById('abTr' + abt + 'Stat'),
+      caption: document.getElementById('abTr' + abt + 'Caption'),
+    });
+  }
+
+  // ---- about: cta band group ----
+  var abCtaEyebrowInput = document.getElementById('abCtaEyebrow');
+  var abCtaHeadingInput = document.getElementById('abCtaHeading');
+  var abCtaSubtextInput = document.getElementById('abCtaSubtext');
 
   // ---- properties manager ----
   var propertiesManager = document.getElementById('propertiesManager');
@@ -3121,6 +3954,461 @@
         return { eyebrow: cbCtaEyebrowInput.value, heading: cbCtaHeadingInput.value, subtext: cbCtaSubtextInput.value };
       },
     },
+    textBanner: {
+      el: document.getElementById('textBannerFields'),
+      inputs: [tbHeadlineInput, tbSubtextInput],
+      apply: function (data) {
+        tbHeadlineInput.value = data.bannerHeadline || '';
+        tbSubtextInput.value = data.bannerSubtext || '';
+      },
+      build: function () {
+        return { bannerHeadline: tbHeadlineInput.value, bannerSubtext: tbSubtextInput.value };
+      },
+    },
+    tgComparison: {
+      el: document.getElementById('tgComparisonFields'),
+      inputs: [tgCmpEyebrowInput, tgCmpHeadingInput].concat(tgCmpColInputs).concat(
+        tgCmpRowInputs.reduce(function (acc, row) { return acc.concat(row.values); }, [])
+      ),
+      apply: function (data) {
+        tgCmpEyebrowInput.value = data.eyebrow || '';
+        tgCmpHeadingInput.value = data.heading || '';
+        var cols = data.columns || [];
+        tgCmpColInputs.forEach(function (input, idx) { input.value = cols[idx] || ''; });
+        tgCmpRowInputs.forEach(function (row, idx) {
+          var rowData = (data.rows || [])[idx] || {};
+          var vals = rowData.values || [];
+          row.values.forEach(function (input, j) { input.value = vals[j] || ''; });
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: tgCmpEyebrowInput.value,
+          heading: tgCmpHeadingInput.value,
+          columns: tgCmpColInputs.map(function (input) { return input.value; }),
+          rows: tgCmpRowInputs.map(function (row) {
+            return { values: row.values.map(function (input) { return input.value; }) };
+          }),
+        };
+      },
+    },
+    tgFlow: {
+      el: document.getElementById('tgFlowFields'),
+      inputs: [tgFlowEyebrowInput, tgFlowHeadingInput].concat(
+        tgFlowStepInputs.reduce(function (acc, s) { return acc.concat([s.condition, s.then]); }, [])
+      ),
+      apply: function (data) {
+        tgFlowEyebrowInput.value = data.eyebrow || '';
+        tgFlowHeadingInput.value = data.heading || '';
+        tgFlowStepInputs.forEach(function (s, idx) {
+          var stepData = (data.steps || [])[idx] || {};
+          s.condition.value = stepData.condition || '';
+          s.then.value = stepData.then || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: tgFlowEyebrowInput.value,
+          heading: tgFlowHeadingInput.value,
+          steps: tgFlowStepInputs.map(function (s) { return { condition: s.condition.value, then: s.then.value }; }),
+        };
+      },
+    },
+    tgMistakes: {
+      el: document.getElementById('tgMistakesFields'),
+      inputs: [tgMisEyebrowInput, tgMisHeadingInput].concat(
+        tgMisCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        tgMisEyebrowInput.value = data.eyebrow || '';
+        tgMisHeadingInput.value = data.heading || '';
+        tgMisCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: tgMisEyebrowInput.value,
+          heading: tgMisHeadingInput.value,
+          cards: tgMisCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    tgFaq: {
+      el: document.getElementById('tgFaqFields'),
+      inputs: [tgFaqEyebrowInput, tgFaqHeadingInput].concat(
+        tgFaqItemInputs.reduce(function (acc, it) { return acc.concat([it.question, it.answer]); }, [])
+      ),
+      apply: function (data) {
+        tgFaqEyebrowInput.value = data.eyebrow || '';
+        tgFaqHeadingInput.value = data.heading || '';
+        tgFaqItemInputs.forEach(function (it, idx) {
+          var itemData = (data.items || [])[idx] || {};
+          it.question.value = itemData.question || '';
+          it.answer.value = itemData.answer || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: tgFaqEyebrowInput.value,
+          heading: tgFaqHeadingInput.value,
+          items: tgFaqItemInputs.map(function (it) { return { question: it.question.value, answer: it.answer.value }; }),
+        };
+      },
+    },
+    tgCta: {
+      el: document.getElementById('tgCtaFields'),
+      inputs: [tgCtaEyebrowInput, tgCtaHeadingInput, tgCtaSubtextInput],
+      apply: function (data) {
+        tgCtaEyebrowInput.value = data.eyebrow || '';
+        tgCtaHeadingInput.value = data.heading || '';
+        tgCtaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: tgCtaEyebrowInput.value, heading: tgCtaHeadingInput.value, subtext: tgCtaSubtextInput.value };
+      },
+    },
+    cgExample: {
+      el: document.getElementById('cgExampleFields'),
+      inputs: [cgExEyebrowInput, cgExHeadingInput, cgExIntroInput, cgExTitleInput].concat(
+        cgExRowInputs.reduce(function (acc, row) { return acc.concat([row.label, row.value]); }, [])
+      ).concat([cgExTotalLabelInput, cgExTotalValueInput]),
+      apply: function (data) {
+        cgExEyebrowInput.value = data.eyebrow || '';
+        cgExHeadingInput.value = data.heading || '';
+        cgExIntroInput.value = data.intro || '';
+        cgExTitleInput.value = data.exampleTitle || '';
+        cgExRowInputs.forEach(function (row, idx) {
+          var rowData = (data.rows || [])[idx] || {};
+          row.label.value = rowData.label || '';
+          row.value.value = rowData.value || '';
+        });
+        var total = data.total || {};
+        cgExTotalLabelInput.value = total.label || '';
+        cgExTotalValueInput.value = total.value || '';
+      },
+      build: function () {
+        return {
+          eyebrow: cgExEyebrowInput.value,
+          heading: cgExHeadingInput.value,
+          intro: cgExIntroInput.value,
+          exampleTitle: cgExTitleInput.value,
+          rows: cgExRowInputs.map(function (row) { return { label: row.label.value, value: row.value.value }; }),
+          total: { label: cgExTotalLabelInput.value, value: cgExTotalValueInput.value },
+        };
+      },
+    },
+    cgLineByLine: {
+      el: document.getElementById('cgLineByLineFields'),
+      inputs: [cgLblEyebrowInput, cgLblHeadingInput].concat(
+        cgLblCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        cgLblEyebrowInput.value = data.eyebrow || '';
+        cgLblHeadingInput.value = data.heading || '';
+        cgLblCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: cgLblEyebrowInput.value,
+          heading: cgLblHeadingInput.value,
+          cards: cgLblCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    cgMealPlans: {
+      el: document.getElementById('cgMealPlansFields'),
+      inputs: [cgMpEyebrowInput, cgMpHeadingInput].concat(cgMpColInputs).concat(
+        cgMpRowInputs.reduce(function (acc, row) { return acc.concat(row.values); }, [])
+      ),
+      apply: function (data) {
+        cgMpEyebrowInput.value = data.eyebrow || '';
+        cgMpHeadingInput.value = data.heading || '';
+        var cols = data.columns || [];
+        cgMpColInputs.forEach(function (input, idx) { input.value = cols[idx] || ''; });
+        cgMpRowInputs.forEach(function (row, idx) {
+          var rowData = (data.rows || [])[idx] || {};
+          var vals = rowData.values || [];
+          row.values.forEach(function (input, j) { input.value = vals[j] || ''; });
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: cgMpEyebrowInput.value,
+          heading: cgMpHeadingInput.value,
+          columns: cgMpColInputs.map(function (input) { return input.value; }),
+          rows: cgMpRowInputs.map(function (row) {
+            return { values: row.values.map(function (input) { return input.value; }) };
+          }),
+        };
+      },
+    },
+    cgWatchFor: {
+      el: document.getElementById('cgWatchForFields'),
+      inputs: [cgWfEyebrowInput, cgWfHeadingInput].concat(
+        cgWfCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        cgWfEyebrowInput.value = data.eyebrow || '';
+        cgWfHeadingInput.value = data.heading || '';
+        cgWfCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: cgWfEyebrowInput.value,
+          heading: cgWfHeadingInput.value,
+          cards: cgWfCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    cgFaq: {
+      el: document.getElementById('cgFaqFields'),
+      inputs: [cgFaqEyebrowInput, cgFaqHeadingInput].concat(
+        cgFaqItemInputs.reduce(function (acc, it) { return acc.concat([it.question, it.answer]); }, [])
+      ),
+      apply: function (data) {
+        cgFaqEyebrowInput.value = data.eyebrow || '';
+        cgFaqHeadingInput.value = data.heading || '';
+        cgFaqItemInputs.forEach(function (it, idx) {
+          var itemData = (data.items || [])[idx] || {};
+          it.question.value = itemData.question || '';
+          it.answer.value = itemData.answer || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: cgFaqEyebrowInput.value,
+          heading: cgFaqHeadingInput.value,
+          items: cgFaqItemInputs.map(function (it) { return { question: it.question.value, answer: it.answer.value }; }),
+        };
+      },
+    },
+    cgCta: {
+      el: document.getElementById('cgCtaFields'),
+      inputs: [cgCtaEyebrowInput, cgCtaHeadingInput, cgCtaSubtextInput],
+      apply: function (data) {
+        cgCtaEyebrowInput.value = data.eyebrow || '';
+        cgCtaHeadingInput.value = data.heading || '';
+        cgCtaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: cgCtaEyebrowInput.value, heading: cgCtaHeadingInput.value, subtext: cgCtaSubtextInput.value };
+      },
+    },
+    lirEssentials: {
+      el: document.getElementById('lirEssentialsFields'),
+      inputs: [lirEsEyebrowInput, lirEsHeadingInput].concat(
+        lirEsCardInputs.reduce(function (acc, c) { return acc.concat([c.icon, c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        lirEsEyebrowInput.value = data.eyebrow || '';
+        lirEsHeadingInput.value = data.heading || '';
+        lirEsCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.icon.value = cardData.icon || '';
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: lirEsEyebrowInput.value,
+          heading: lirEsHeadingInput.value,
+          cards: lirEsCardInputs.map(function (c) { return { icon: c.icon.value, title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    lirComparison: {
+      el: document.getElementById('lirComparisonFields'),
+      inputs: [lirCmpEyebrowInput, lirCmpHeadingInput, lirCmpFactorLabelInput].concat(lirCmpColInputs).concat(
+        lirCmpRowInputs.reduce(function (acc, row) { return acc.concat([row.factor]).concat(row.values); }, [])
+      ),
+      apply: function (data) {
+        lirCmpEyebrowInput.value = data.eyebrow || '';
+        lirCmpHeadingInput.value = data.heading || '';
+        lirCmpFactorLabelInput.value = data.factorLabel || '';
+        var cols = data.columns || [];
+        lirCmpColInputs.forEach(function (input, idx) { input.value = cols[idx] || ''; });
+        lirCmpRowInputs.forEach(function (row, idx) {
+          var rowData = (data.rows || [])[idx] || {};
+          row.factor.value = rowData.factor || '';
+          var vals = rowData.values || [];
+          row.values.forEach(function (input, j) { input.value = vals[j] || ''; });
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: lirCmpEyebrowInput.value,
+          heading: lirCmpHeadingInput.value,
+          factorLabel: lirCmpFactorLabelInput.value,
+          columns: lirCmpColInputs.map(function (input) { return input.value; }),
+          rows: lirCmpRowInputs.map(function (row) {
+            return { factor: row.factor.value, values: row.values.map(function (input) { return input.value; }) };
+          }),
+        };
+      },
+    },
+    lirReassurance: {
+      el: document.getElementById('lirReassuranceFields'),
+      inputs: [lirReEyebrowInput, lirReHeadingInput, lirReParagraphInput],
+      apply: function (data) {
+        lirReEyebrowInput.value = data.eyebrow || '';
+        lirReHeadingInput.value = data.heading || '';
+        lirReParagraphInput.value = data.paragraph || '';
+      },
+      build: function () {
+        return { eyebrow: lirReEyebrowInput.value, heading: lirReHeadingInput.value, paragraph: lirReParagraphInput.value };
+      },
+    },
+    lirFaq: {
+      el: document.getElementById('lirFaqFields'),
+      inputs: [lirFaqEyebrowInput, lirFaqHeadingInput].concat(
+        lirFaqItemInputs.reduce(function (acc, it) { return acc.concat([it.question, it.answer]); }, [])
+      ),
+      apply: function (data) {
+        lirFaqEyebrowInput.value = data.eyebrow || '';
+        lirFaqHeadingInput.value = data.heading || '';
+        lirFaqItemInputs.forEach(function (it, idx) {
+          var itemData = (data.items || [])[idx] || {};
+          it.question.value = itemData.question || '';
+          it.answer.value = itemData.answer || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: lirFaqEyebrowInput.value,
+          heading: lirFaqHeadingInput.value,
+          items: lirFaqItemInputs.map(function (it) { return { question: it.question.value, answer: it.answer.value }; }),
+        };
+      },
+    },
+    lirCta: {
+      el: document.getElementById('lirCtaFields'),
+      inputs: [lirCtaEyebrowInput, lirCtaHeadingInput, lirCtaSubtextInput],
+      apply: function (data) {
+        lirCtaEyebrowInput.value = data.eyebrow || '';
+        lirCtaHeadingInput.value = data.heading || '';
+        lirCtaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: lirCtaEyebrowInput.value, heading: lirCtaHeadingInput.value, subtext: lirCtaSubtextInput.value };
+      },
+    },
+    abBanner: {
+      el: document.getElementById('abBannerFields'),
+      inputs: [abHeadlineInput, abSubtextInput, abImageFileInput, abImagePathInput],
+      apply: function (data) {
+        abHeadlineInput.value = data.bannerHeadline || '';
+        abSubtextInput.value = data.bannerSubtext || '';
+        abImagePathInput.value = data.bannerImage || '';
+        abImageStatusEl.textContent = '';
+        abImageStatusEl.className = 'photo-row-status';
+      },
+      build: function () {
+        return { bannerHeadline: abHeadlineInput.value, bannerSubtext: abSubtextInput.value, bannerImage: abImagePathInput.value };
+      },
+    },
+    abStory: {
+      el: document.getElementById('abStoryFields'),
+      inputs: [abStEyebrowInput, abStHeadingInput, abStPara1Input, abStPara2Input, abStPullquoteInput],
+      apply: function (data) {
+        abStEyebrowInput.value = data.eyebrow || '';
+        abStHeadingInput.value = data.heading || '';
+        abStPara1Input.value = data.paragraph1 || '';
+        abStPara2Input.value = data.paragraph2 || '';
+        abStPullquoteInput.value = data.pullquote || '';
+      },
+      build: function () {
+        return {
+          eyebrow: abStEyebrowInput.value,
+          heading: abStHeadingInput.value,
+          paragraph1: abStPara1Input.value,
+          paragraph2: abStPara2Input.value,
+          pullquote: abStPullquoteInput.value,
+        };
+      },
+    },
+    abValues: {
+      el: document.getElementById('abValuesFields'),
+      inputs: [abValEyebrowInput, abValHeadingInput].concat(
+        abValCardInputs.reduce(function (acc, c) { return acc.concat([c.icon, c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        abValEyebrowInput.value = data.eyebrow || '';
+        abValHeadingInput.value = data.heading || '';
+        abValCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.icon.value = cardData.icon || '';
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: abValEyebrowInput.value,
+          heading: abValHeadingInput.value,
+          cards: abValCardInputs.map(function (c) { return { icon: c.icon.value, title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    abPromise: {
+      el: document.getElementById('abPromiseFields'),
+      inputs: [abProEyebrowInput, abProHeadingInput].concat(
+        abProCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        abProEyebrowInput.value = data.eyebrow || '';
+        abProHeadingInput.value = data.heading || '';
+        abProCardInputs.forEach(function (c, idx) {
+          var cardData = (data.cards || [])[idx] || {};
+          c.title.value = cardData.title || '';
+          c.text.value = cardData.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: abProEyebrowInput.value,
+          heading: abProHeadingInput.value,
+          cards: abProCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    abTrust: {
+      el: document.getElementById('abTrustFields'),
+      inputs: abTrItemInputs.reduce(function (acc, it) { return acc.concat([it.stat, it.caption]); }, []),
+      apply: function (data) {
+        abTrItemInputs.forEach(function (it, idx) {
+          var itemData = (data.items || [])[idx] || {};
+          it.stat.value = itemData.stat || '';
+          it.caption.value = itemData.caption || '';
+        });
+      },
+      build: function () {
+        return { items: abTrItemInputs.map(function (it) { return { stat: it.stat.value, caption: it.caption.value }; }) };
+      },
+    },
+    abCta: {
+      el: document.getElementById('abCtaFields'),
+      inputs: [abCtaEyebrowInput, abCtaHeadingInput, abCtaSubtextInput],
+      apply: function (data) {
+        abCtaEyebrowInput.value = data.eyebrow || '';
+        abCtaHeadingInput.value = data.heading || '';
+        abCtaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: abCtaEyebrowInput.value, heading: abCtaHeadingInput.value, subtext: abCtaSubtextInput.value };
+      },
+    },
   };
 
   function setStatus(message, kind) {
@@ -3315,7 +4603,14 @@
     });
   }
 
-  function handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput) {
+  // Shared by every photo upload slot in the dashboard — the repeatable
+  // property photo rows below, and the About page's single hero image
+  // field — so there's exactly one compress/upload/error-handling code
+  // path for all photo uploads. `nameHint` is a plain string (not computed
+  // here) so each call site can supply whatever's appropriate for its own
+  // context (the property name being edited, or a fixed label for a
+  // single-purpose field like the hero image).
+  function handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput, nameHint) {
     statusEl.className = 'photo-row-status';
     statusEl.textContent = 'Compressing photo…';
     chooseLabel.classList.add('is-uploading');
@@ -3330,7 +4625,6 @@
         return blobToBase64(blob);
       })
       .then(function (base64) {
-        var nameHint = propNameInput.value.trim() || 'property-photo';
         return uploadCompressedPhoto(base64, nameHint);
       })
       .then(function (result) {
@@ -3391,7 +4685,7 @@
     fileInput.addEventListener('change', function () {
       var file = fileInput.files && fileInput.files[0];
       if (!file) return;
-      handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput);
+      handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput, propNameInput.value.trim() || 'property-photo');
     });
 
     container.appendChild(row);
@@ -3409,6 +4703,20 @@
       if (v) values.push(v);
     });
     return values;
+  }
+
+  // Wires up a single fixed photo-upload slot already present in the
+  // static HTML (choose-button label + hidden file input + read-only path
+  // field + status line) — used for the About page's hero image, which is
+  // one field rather than a repeatable list, so it reuses the same
+  // choose/compress/upload code as the property photo rows without needing
+  // its own remove button or list container.
+  function wirePhotoUploadEl(chooseLabel, fileInput, pathInput, statusEl, nameHint) {
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput, nameHint);
+    });
   }
 
   function showPropertiesListView() {

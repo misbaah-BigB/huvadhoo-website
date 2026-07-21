@@ -1,0 +1,9 @@
+{
+  "eyebrow": "Avoid these",
+  "heading": "Common transfer mistakes",
+  "cards": [
+    { "title": "Booking a resort without checking transfer cost", "text": "A cheap-looking resort rate can be offset entirely by a $500+ per-person seaplane transfer. Always ask for the all-in total, not just the room rate." },
+    { "title": "Forgetting seaplanes don't fly at night", "text": "If your international flight lands late, a seaplane-only resort may mean an unplanned night in Male first." },
+    { "title": "Underestimating the wait", "text": "Seaplane transfers often involve waiting at a lounge for your flight group to fill — build padding into your day-one plans rather than expecting to arrive immediately." }
+  ]
+}

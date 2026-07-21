@@ -89,10 +89,10 @@
         <h2>How to think about which one you need</h2>
       </div>
       <div class="flow">
-        <div class="flow-step"><span class="q">IF</span><span class="a">your resort or guesthouse is close to Male (roughly under 1 hour by boat) <strong>→</strong> speedboat is almost always used, and it's the cheapest option relative to distance.</span></div>
-        <div class="flow-step"><span class="q">IF</span><span class="a">your flight lands after sunset <strong>→</strong> seaplane isn't an option that night. You'll need a speedboat-accessible property, or an overnight in Male before flying out the next morning.</span></div>
-        <div class="flow-step"><span class="q">IF</span><span class="a">your resort is in a remote atoll (like Addu or Fuvahmulah) <strong>→</strong> it's usually a domestic flight plus a short boat ride, not a seaplane.</span></div>
-        <div class="flow-step"><span class="q">IF</span><span class="a">you're staying on an inhabited local island for your guesthouse trip <strong>→</strong> it's public ferry (cheapest, limited schedule) or a shared speedboat (faster, a bit more).</span></div>
+        <div class="flow-step"><span class="q">IF</span><span class="a"><span class="cond">your resort or guesthouse is close to Male (roughly under 1 hour by boat)</span> <strong>→</strong> <span class="then">speedboat is almost always used, and it's the cheapest option relative to distance.</span></span></div>
+        <div class="flow-step"><span class="q">IF</span><span class="a"><span class="cond">your flight lands after sunset</span> <strong>→</strong> <span class="then">seaplane isn't an option that night. You'll need a speedboat-accessible property, or an overnight in Male before flying out the next morning.</span></span></div>
+        <div class="flow-step"><span class="q">IF</span><span class="a"><span class="cond">your resort is in a remote atoll (like Addu or Fuvahmulah)</span> <strong>→</strong> <span class="then">it's usually a domestic flight plus a short boat ride, not a seaplane.</span></span></div>
+        <div class="flow-step"><span class="q">IF</span><span class="a"><span class="cond">you're staying on an inhabited local island for your guesthouse trip</span> <strong>→</strong> <span class="then">it's public ferry (cheapest, limited schedule) or a shared speedboat (faster, a bit more).</span></span></div>
       </div>
     </div>
   </section>
@@ -218,6 +218,197 @@
 </div>
 
 <script src="assets/motion.js"></script>
+
+<script>
+  // Page banner content lives in content/transfer-guide.json so it can be
+  // edited without touching this file. This banner has no background image
+  // (unlike most other pages), so only the headline and subtext are pulled
+  // from the fetched data. The current values are also present in the HTML
+  // below as a fallback, so the banner still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/transfer-guide.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var heroHeadline = document.querySelector('.pagehero h1');
+      var heroSubtext = document.querySelector('.pagehero p.lede');
+      if (heroHeadline && data.bannerHeadline) heroHeadline.textContent = data.bannerHeadline;
+      if (heroSubtext && data.bannerSubtext) heroSubtext.textContent = data.bannerSubtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load page banner content:', err);
+    });
+</script>
+
+<script>
+  // "The four transfer types" comparison table is stored in
+  // content/transfer-guide-comparison.json. Like the Diving/Fishing/Family
+  // tables, this one has no separate row-label column — all 5 columns sit
+  // on equal footing — so columns and row values line up index-for-index
+  // with no offset. The current values are also present in the HTML below
+  // as a fallback, so the section still looks correct even if this fetch
+  // fails or JavaScript is unavailable.
+  fetch('content/transfer-guide-comparison.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var table = document.querySelector('.compare table');
+      if (!table) return;
+
+      var sectionHead = table.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var rows = table.querySelectorAll('tr');
+      var headerCells = rows[0] ? rows[0].querySelectorAll('th') : [];
+      (data.columns || []).forEach(function (col, i) {
+        if (headerCells[i] && col) headerCells[i].textContent = col;
+      });
+
+      (data.rows || []).forEach(function (rowData, i) {
+        var tr = rows[i + 1];
+        if (!tr) return;
+        var cells = tr.querySelectorAll('td');
+        (rowData.values || []).forEach(function (val, j) {
+          if (cells[j] && val) cells[j].textContent = val;
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load transfer comparison content:', err);
+    });
+</script>
+
+<script>
+  // "How to think about which one you need" flow steps are stored in
+  // content/transfer-guide-flow.json. Each step is written as a plain
+  // sentence split into a "condition" and a "then" half, joined visually by
+  // a fixed arrow (the "IF" label and the arrow glyph itself are part of
+  // the page's fixed design, not editable content) — so only the .cond and
+  // .then spans inside each step are ever touched here. The current values
+  // are also present in the HTML below as a fallback, so the section still
+  // looks correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/transfer-guide-flow.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var flow = document.querySelector('.flow');
+      if (!flow) return;
+
+      var sectionHead = flow.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var stepEls = flow.querySelectorAll('.flow-step');
+      (data.steps || []).forEach(function (stepData, i) {
+        var el = stepEls[i];
+        if (!el) return;
+        var condEl = el.querySelector('.cond');
+        var thenEl = el.querySelector('.then');
+        if (condEl && stepData.condition) condEl.textContent = stepData.condition;
+        if (thenEl && stepData.then) thenEl.textContent = stepData.then;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load transfer flow content:', err);
+    });
+</script>
+
+<script>
+  // "Common transfer mistakes" cards are stored in
+  // content/transfer-guide-mistakes.json. The current values are also
+  // present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/transfer-guide-mistakes.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.mistake-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cardEls = grid.querySelectorAll('.mistake-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var el = cardEls[i];
+        if (!el) return;
+        var titleEl = el.querySelector('h3');
+        var textEl = el.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load transfer mistakes content:', err);
+    });
+</script>
+
+<script>
+  // FAQ content lives in content/transfer-guide-faq.json — plain text only,
+  // no embedded links in any answer. The current values are also present in
+  // the HTML below as a fallback, so the section still looks correct even
+  // if this fetch fails or JavaScript is unavailable.
+  fetch('content/transfer-guide-faq.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var list = document.getElementById('faqList');
+      if (!list) return;
+
+      var section = list.closest('section');
+      var sectionHead = section ? section.querySelector('.section-head') : null;
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var itemEls = list.querySelectorAll('.faq-item');
+      (data.items || []).forEach(function (itemData, i) {
+        var el = itemEls[i];
+        if (!el) return;
+        var questionEl = el.querySelector('.faq-q span');
+        var answerEl = el.querySelector('.faq-a p');
+        if (questionEl && itemData.question) questionEl.textContent = itemData.question;
+        if (answerEl && itemData.answer) answerEl.textContent = itemData.answer;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load transfer FAQ content:', err);
+    });
+</script>
+
+<script>
+  // CTA band content lives in content/transfer-guide-cta.json. The current
+  // values are also present in the HTML below as a fallback, so the section
+  // still looks correct even if this fetch fails or JavaScript is
+  // unavailable.
+  fetch('content/transfer-guide-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
 
 </body>
 </html>

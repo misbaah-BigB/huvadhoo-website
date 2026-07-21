@@ -1,0 +1,10 @@
+{
+  "eyebrow": "How we work",
+  "heading": "What we actually check before we recommend anything",
+  "cards": [
+    { "icon": "📍", "title": "Local, not remote", "text": "We're based in the Maldives, not running this from another country off a spreadsheet of resort brochures." },
+    { "icon": "💰", "title": "One total price", "text": "Room, transfer, tax, and meal plan, shown together — before you pay, every time." },
+    { "icon": "✅", "title": "Certified partners only", "text": "Dive centers, fishing charters, and camping operators are checked for licensing ourselves, not taken on trust." },
+    { "icon": "⚡", "title": "Fast, honest replies", "text": "Real answers on WhatsApp, usually within 15 minutes, not a script or a sales pitch." }
+  ]
+}

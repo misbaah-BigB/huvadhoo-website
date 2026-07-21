@@ -1,0 +1,12 @@
+{
+  "eyebrow": "Side by side",
+  "heading": "Local island vs. resort island",
+  "factorLabel": "Rule",
+  "columns": ["Local (guesthouse) island", "Resort island"],
+  "rows": [
+    { "factor": "Alcohol", "values": ["Not available", "Available"] },
+    { "factor": "Swimwear", "values": ["Bikini beach only", "Anywhere on the resort"] },
+    { "factor": "Dress elsewhere", "values": ["Modest (shoulders/knees covered)", "No restriction"] },
+    { "factor": "Pork", "values": ["Not available", "Often available"] }
+  ]
+}

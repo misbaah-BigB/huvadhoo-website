@@ -1,0 +1,9 @@
+{
+  "eyebrow": "Our promise",
+  "heading": "Three things we won't compromise on",
+  "cards": [
+    { "title": "Total Price Promise", "text": "Every quote includes room, transfer, taxes, service charge, and meal plan on one line — no line items added later." },
+    { "title": "No unlicensed operators", "text": "Diving, fishing, and island camping only ever go through licensed, safety-checked partners — no exceptions, regardless of price." },
+    { "title": "Honest matching over upselling", "text": "We recommend what actually fits your budget and priorities, even when that's not the most expensive option on our list." }
+  ]
+}

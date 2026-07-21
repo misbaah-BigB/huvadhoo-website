@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Quick logic",
+  "heading": "How to think about which one you need",
+  "steps": [
+    { "condition": "your resort or guesthouse is close to Male (roughly under 1 hour by boat)", "then": "speedboat is almost always used, and it's the cheapest option relative to distance." },
+    { "condition": "your flight lands after sunset", "then": "seaplane isn't an option that night. You'll need a speedboat-accessible property, or an overnight in Male before flying out the next morning." },
+    { "condition": "your resort is in a remote atoll (like Addu or Fuvahmulah)", "then": "it's usually a domestic flight plus a short boat ride, not a seaplane." },
+    { "condition": "you're staying on an inhabited local island for your guesthouse trip", "then": "it's public ferry (cheapest, limited schedule) or a shared speedboat (faster, a bit more)." }
+  ]
+}

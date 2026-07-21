@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Common questions",
+  "heading": "Before you book",
+  "items": [
+    { "question": "Do seaplanes really not fly at night?", "answer": "Correct — seaplanes operate on visual flight rules and only fly during daylight hours. If your flight lands late, we'll route you through a speedboat-accessible property or arrange an overnight stay near the airport." },
+    { "question": "How much luggage can I bring on each transfer type?", "answer": "Seaplanes and domestic flights have stricter weight limits than boats — typically in the 20–30kg range per person. We'll confirm exact limits for your specific transfer before you pack." },
+    { "question": "What happens if my international flight is delayed?", "answer": "We monitor your flight and rebook your transfer where possible. This is exactly the kind of thing that's easier with a booked-through agent than a self-arranged transfer." },
+    { "question": "Is the transfer really included in your total price?", "answer": "Yes — whichever type your trip needs, it's shown as one line in your all-in quote, pre-arranged and pre-paid so you're not negotiating with anyone on arrival." }
+  ]
+}
