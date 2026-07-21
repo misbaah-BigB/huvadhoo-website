@@ -1,0 +1,35 @@
+{
+  "eyebrow": "By age group",
+  "heading": "What to prioritize at each age",
+  "columns": ["Age group", "Priority", "Watch out for"],
+  "rows": [
+    {
+      "values": [
+        "Infants (0–2)",
+        "Shallow, calm lagoon; crib availability; short transfer",
+        "Long seaplane transfers with a baby; strong currents near the villa"
+      ]
+    },
+    {
+      "values": [
+        "Toddlers (3–5)",
+        "Kids' club minimum age; pool with shallow end; family villa layout",
+        "Clubs that only start at age 4+ or 5+"
+      ]
+    },
+    {
+      "values": [
+        "Kids (6–12)",
+        "Kids' club activities; snorkeling lessons; teen-free pool times if needed",
+        "All-inclusive drink packages that don't suit children's schedules"
+      ]
+    },
+    {
+      "values": [
+        "Teens (13+)",
+        "Watersports, teen club or lounge, WiFi quality",
+        "Resorts that are adults-only or honeymoon-focused"
+      ]
+    }
+  ]
+}

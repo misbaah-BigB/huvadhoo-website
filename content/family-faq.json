@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Common questions",
+  "heading": "Before you book",
+  "items": [
+    {
+      "question": "What's the minimum age for kids' clubs?",
+      "answer": "It varies by resort — commonly starting around age 2–4. We confirm the exact age range against your children's ages before shortlisting a resort."
+    },
+    {
+      "question": "Can we get a family villa with two bedrooms?",
+      "answer": "Some resorts offer two-bedroom family villas or connecting rooms; others only offer extra beds in a standard villa. We'll flag which type of room each option actually is."
+    },
+    {
+      "question": "Is baby food or formula available on-island?",
+      "answer": "Availability is inconsistent across resorts — we recommend bringing your own supply and will confirm what the kitchen can accommodate ahead of your stay."
+    },
+    {
+      "question": "Should we do the Resort + Local Island Combo with kids?",
+      "answer": "Yes, plenty of families do — the guesthouse portion tends to be lower-key and social, then the resort half adds the kids' club and pool. See our <a href=\"combo.html\">Combo page</a> for how it's structured."
+    }
+  ]
+}
