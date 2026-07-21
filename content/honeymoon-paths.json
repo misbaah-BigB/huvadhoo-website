@@ -1,0 +1,25 @@
+{
+  "eyebrow": "Where to start",
+  "heading": "Three honeymoon paths",
+  "intro": "Ranges, not fixed prices — your quote depends on dates, villa type, and availability.",
+  "categories": [
+    {
+      "tier": "Adults-only resort",
+      "name": "Quiet, Couples-Focused Resort",
+      "description": "No kids' club, no family pool crowds — a resort culture built entirely around couples and quiet.",
+      "price": "$450 – $900 / night"
+    },
+    {
+      "tier": "Overwater villa",
+      "name": "Water Villa Resort",
+      "description": "Direct lagoon access, often a private deck and plunge pool — the classic honeymoon image, for good reason.",
+      "price": "$600 – $1,400 / night"
+    },
+    {
+      "tier": "Ultra-luxury",
+      "name": "Private-Island Ultra-Luxury",
+      "description": "Full villa privacy, butler service, private dining anywhere on the resort — for a once-in-a-lifetime budget.",
+      "price": "$1,200 – $6,000+ / night"
+    }
+  ]
+}

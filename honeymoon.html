@@ -259,6 +259,175 @@
       console.error('Could not load page banner content:', err);
     });
 </script>
+<script>
+  // "Three honeymoon paths" cards are stored in content/honeymoon-paths.json
+  // so they can be edited without touching this file. The current values are
+  // also present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/honeymoon-paths.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.cat-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var cards = grid.querySelectorAll('.cat-card');
+      (data.categories || []).forEach(function (cat, i) {
+        var card = cards[i];
+        if (!card) return;
+        var tierEl = card.querySelector('.tier');
+        var nameEl = card.querySelector('h3');
+        var descEl = card.querySelector('p');
+        var priceEl = card.querySelector('.price');
+        if (tierEl && cat.tier) tierEl.textContent = cat.tier;
+        if (nameEl && cat.name) nameEl.textContent = cat.name;
+        if (descEl && cat.description) descEl.textContent = cat.description;
+        if (priceEl && cat.price) priceEl.textContent = cat.price;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load honeymoon paths content:', err);
+    });
+</script>
+<script>
+  // "What actually makes a resort 'honeymoon-ready'" info cards are stored
+  // in content/honeymoon-included.json so they can be edited without
+  // touching this file. The current values are also present in the HTML
+  // below as a fallback, so the section still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/honeymoon-included.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.inc-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.info-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "what we check" content:', err);
+    });
+</script>
+<script>
+  // "Why book your honeymoon through us" cards are stored in
+  // content/honeymoon-why-us.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/honeymoon-why-us.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.why-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.why-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "why us" content:', err);
+    });
+</script>
+<script>
+  // FAQ questions/answers ("Before you book") are stored in
+  // content/honeymoon-faq.json so they can be edited without touching this
+  // file. Unlike the plain-text FAQ answers on other pages, two of these
+  // answers include an inline link (to the Combo page and the Best Time to
+  // Visit guide), so the answer is written with innerHTML rather than
+  // textContent — the same "small bit of HTML allowed" convention already
+  // used for the page banner's headline field. The current values are also
+  // present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/honeymoon-faq.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var list = document.getElementById('faqList');
+      if (!list) return;
+
+      var section = list.closest('section');
+      var sectionHead = section ? section.querySelector('.section-head') : null;
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var items = list.querySelectorAll('.faq-item');
+      (data.items || []).forEach(function (itemData, i) {
+        var item = items[i];
+        if (!item) return;
+        var qSpans = item.querySelectorAll('.faq-q span');
+        var answerEl = item.querySelector('.faq-a p');
+        if (qSpans[0] && itemData.question) qSpans[0].textContent = itemData.question;
+        if (answerEl && itemData.answer) answerEl.innerHTML = itemData.answer;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load FAQ content:', err);
+    });
+</script>
+<script>
+  // Bottom CTA band text (eyebrow/heading/subtext) is stored in
+  // content/honeymoon-cta.json so it can be edited without touching this
+  // file. The contact buttons themselves are shared site-wide and stay
+  // hardcoded. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/honeymoon-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
 
 </body>
 </html>
