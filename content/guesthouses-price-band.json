@@ -1,0 +1,19 @@
+{
+  "stats": [
+    {
+      "label": "Typical price",
+      "value": "$60–$180",
+      "sublabel": "per night"
+    },
+    {
+      "label": "vs. budget resort",
+      "value": "$180–$350",
+      "sublabel": "per night"
+    },
+    {
+      "label": "Transfer",
+      "value": "$5–$40",
+      "sublabel": "public ferry / shared speedboat"
+    }
+  ]
+}

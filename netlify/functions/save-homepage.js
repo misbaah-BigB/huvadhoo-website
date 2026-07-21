@@ -35,6 +35,12 @@ const PAGES = {
   "resorts-why-us": { file: "content/resorts-why-us.json", prepare: prepareResortsWhyUsContent, commitMessage: "Update Resorts Why Us section via admin dashboard" },
   "resorts-cta": { file: "content/resorts-cta.json", prepare: prepareResortsCtaContent, commitMessage: "Update Resorts CTA band via admin dashboard" },
   properties: { file: "content/properties.json", prepare: preparePropertiesContent, commitMessage: "Update Properties via admin dashboard" },
+  "guesthouses-price-band": { file: "content/guesthouses-price-band.json", prepare: prepareGuesthousesPriceBandContent, commitMessage: "Update Guesthouses Price Band via admin dashboard" },
+  "guesthouses-included": { file: "content/guesthouses-included.json", prepare: prepareGuesthousesIncludedContent, commitMessage: "Update Guesthouses \"What's included\" section via admin dashboard" },
+  "guesthouses-islands": { file: "content/guesthouses-islands.json", prepare: prepareGuesthousesIslandsContent, commitMessage: "Update Guesthouses Popular Islands grid via admin dashboard" },
+  "guesthouses-rules": { file: "content/guesthouses-rules.json", prepare: prepareGuesthousesRulesContent, commitMessage: "Update Guesthouses Local Island Rules callout via admin dashboard" },
+  "guesthouses-why-us": { file: "content/guesthouses-why-us.json", prepare: prepareGuesthousesWhyUsContent, commitMessage: "Update Guesthouses Why Us section via admin dashboard" },
+  "guesthouses-cta": { file: "content/guesthouses-cta.json", prepare: prepareGuesthousesCtaContent, commitMessage: "Update Guesthouses CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -214,6 +220,137 @@ function preparePropertiesContent(payload) {
   }
 
   return { content: properties };
+}
+
+function prepareGuesthousesPriceBandContent(payload) {
+  if (!Array.isArray(payload.stats) || payload.stats.length === 0) {
+    return { error: "At least one stat is required." };
+  }
+
+  const stats = [];
+  for (const raw of payload.stats) {
+    const stat = raw && typeof raw === "object" ? raw : {};
+    const label = str(stat.label);
+    const value = str(stat.value);
+    if (!label.trim() || !value.trim()) {
+      return { error: "Each stat needs at least a label and a value." };
+    }
+    stats.push({ label, value, sublabel: str(stat.sublabel) });
+  }
+
+  return { content: { stats } };
+}
+
+function prepareGuesthousesIncludedContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareGuesthousesIslandsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.islands) || payload.islands.length === 0) {
+    return { error: "At least one island is required." };
+  }
+
+  const islands = [];
+  for (const raw of payload.islands) {
+    const island = raw && typeof raw === "object" ? raw : {};
+    const name = str(island.name);
+    if (!name.trim()) {
+      return { error: "Each island needs a name." };
+    }
+    islands.push({ atoll: str(island.atoll), name, description: str(island.description) });
+  }
+
+  return { content: { eyebrow, heading, intro, islands } };
+}
+
+function prepareGuesthousesRulesContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+  const linkText = str(payload.linkText);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.rules) || payload.rules.length === 0) {
+    return { error: "At least one rule is required." };
+  }
+
+  const rules = [];
+  for (const raw of payload.rules) {
+    const rule = raw && typeof raw === "object" ? raw : {};
+    const label = str(rule.label);
+    const value = str(rule.value);
+    if (!label.trim() || !value.trim()) {
+      return { error: "Each rule needs both a label and a value." };
+    }
+    rules.push({ label, value });
+  }
+
+  return { content: { eyebrow, heading, intro, linkText, rules } };
+}
+
+function prepareGuesthousesWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareGuesthousesCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
 }
 
 function signSession(expiry, secret) {

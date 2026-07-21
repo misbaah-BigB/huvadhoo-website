@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Read this before you book",
+  "heading": "Local island rules — in plain language",
+  "intro": "Inhabited islands follow Maldivian and Islamic customs. None of this should be a surprise on arrival — we tell you upfront, and it's simple to plan around.",
+  "linkText": "Read the full local island rules guide →",
+  "rules": [
+    {
+      "label": "Alcohol",
+      "value": "Not available — resorts only"
+    },
+    {
+      "label": "Swimwear",
+      "value": "Bikini beach only, elsewhere modest dress"
+    },
+    {
+      "label": "Ramadan",
+      "value": "No eating/drinking in public during daylight"
+    },
+    {
+      "label": "Pets/pork",
+      "value": "Not permitted, in line with local custom"
+    }
+  ]
+}
