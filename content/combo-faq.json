@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Common questions",
+  "heading": "Before you book a Combo",
+  "items": [
+    {
+      "question": "Do I have to change transfer type between the two stops?",
+      "answer": "Sometimes — it depends which islands you pick. We always confirm the inter-island transfer and its cost as part of your one total price, so there's no separate booking for you to arrange."
+    },
+    {
+      "question": "Is luggage handled between the guesthouse and the resort?",
+      "answer": "Yes — the inter-island transfer we arrange includes your luggage. You won't need to manage separate pickups."
+    },
+    {
+      "question": "Can families or kids do a Combo trip?",
+      "answer": "Yes — many families like starting on a local island (lower cost, easy activities) before finishing at a family-friendly resort with a kids' club."
+    },
+    {
+      "question": "Which order should we do it in — guesthouse first or resort first?",
+      "answer": "Most people prefer ending on the resort so the trip finishes on the most relaxing note, but it works either way — tell us your preference and we'll build the itinerary around it."
+    }
+  ]
+}
