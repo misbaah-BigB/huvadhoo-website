@@ -54,6 +54,12 @@ const PAGES = {
   "fishing-why-us": { file: "content/fishing-why-us.json", prepare: prepareFishingWhyUsContent, commitMessage: "Update Fishing Why Us section via admin dashboard" },
   "fishing-faq": { file: "content/fishing-faq.json", prepare: prepareFishingFaqContent, commitMessage: "Update Fishing FAQ via admin dashboard" },
   "fishing-cta": { file: "content/fishing-cta.json", prepare: prepareFishingCtaContent, commitMessage: "Update Fishing CTA band via admin dashboard" },
+  "camping-cert-banner": { file: "content/camping-cert-banner.json", prepare: prepareCampingCertBannerContent, commitMessage: "Update Camping Permitted Trips banner via admin dashboard" },
+  "camping-trip-types": { file: "content/camping-trip-types.json", prepare: prepareCampingTripTypesContent, commitMessage: "Update Camping Trip Types via admin dashboard" },
+  "camping-included": { file: "content/camping-included.json", prepare: prepareCampingIncludedContent, commitMessage: "Update Camping \"What's included\" section via admin dashboard" },
+  "camping-why-us": { file: "content/camping-why-us.json", prepare: prepareCampingWhyUsContent, commitMessage: "Update Camping Why Us section via admin dashboard" },
+  "camping-faq": { file: "content/camping-faq.json", prepare: prepareCampingFaqContent, commitMessage: "Update Camping FAQ via admin dashboard" },
+  "camping-cta": { file: "content/camping-cta.json", prepare: prepareCampingCtaContent, commitMessage: "Update Camping CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -640,6 +646,126 @@ function prepareFishingFaqContent(payload) {
 }
 
 function prepareFishingCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareCampingCertBannerContent(payload) {
+  const badge = str(payload.badge);
+  const text = str(payload.text);
+
+  if (!badge.trim() || !text.trim()) {
+    return { error: "Badge and text can't be empty." };
+  }
+
+  return { content: { badge, text } };
+}
+
+function prepareCampingTripTypesContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    const price = str(cat.price);
+    if (!name.trim() || !price.trim()) {
+      return { error: "Each category needs at least a name and a price." };
+    }
+    categories.push({ tier: str(cat.tier), name, description: str(cat.description), price });
+  }
+
+  return { content: { eyebrow, heading, categories } };
+}
+
+function prepareCampingIncludedContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareCampingWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareCampingFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareCampingCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);

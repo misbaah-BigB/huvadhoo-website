@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Trip types",
+  "heading": "Three ways to do it",
+  "categories": [
+    {
+      "tier": "Day trip",
+      "name": "Uninhabited Island Picnic",
+      "description": "A few hours on a private, empty island — snorkeling, a beach picnic, no overnight stay required. The easiest way to try it.",
+      "price": "$60–$120 / person"
+    },
+    {
+      "tier": "Overnight",
+      "name": "One-Night Camping Trip",
+      "description": "Tents, a campfire dinner, and a night under genuinely dark skies — guided, with all permits and safety equipment arranged.",
+      "price": "$150–$300 / person"
+    },
+    {
+      "tier": "Expedition",
+      "name": "Multi-Day Island Hopping",
+      "description": "Several uninhabited islands over multiple nights — for a genuinely small group wanting a proper adventure trip.",
+      "price": "$300–$600 / person / night"
+    }
+  ]
+}
