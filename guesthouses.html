@@ -262,6 +262,198 @@
     });
 </script>
 <script>
+  // Price band stats (typical price / vs. budget resort / transfer) are
+  // stored in content/guesthouses-price-band.json so they can be edited
+  // without touching this file. The current values are also present in the
+  // HTML below as a fallback, so the section still looks correct even if
+  // this fetch fails or JavaScript is unavailable.
+  fetch('content/guesthouses-price-band.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.price-band');
+      if (!band) return;
+
+      var items = band.children;
+      (data.stats || []).forEach(function (stat, i) {
+        var item = items[i];
+        if (!item) return;
+        var labels = item.querySelectorAll('.label');
+        var bigEl = item.querySelector('.big');
+        if (labels[0] && stat.label) labels[0].textContent = stat.label;
+        if (bigEl && stat.value) bigEl.textContent = stat.value;
+        if (labels[1] && stat.sublabel) labels[1].textContent = stat.sublabel;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load price band content:', err);
+    });
+</script>
+<script>
+  // "What a guesthouse stay looks like" info cards are stored in
+  // content/guesthouses-included.json so they can be edited without
+  // touching this file. The current values are also present in the HTML
+  // below as a fallback, so the section still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/guesthouses-included.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.inc-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.info-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "what\'s included" content:', err);
+    });
+</script>
+<script>
+  // "Popular local islands" cards are stored in content/guesthouses-islands.json
+  // so they can be edited without touching this file. The current values are
+  // also present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/guesthouses-islands.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.island-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var cards = grid.querySelectorAll('.island-card');
+      (data.islands || []).forEach(function (islandData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var atollEl = card.querySelector('.atoll');
+        var nameEl = card.querySelector('h3');
+        var descEl = card.querySelector('p');
+        if (atollEl && islandData.atoll) atollEl.textContent = islandData.atoll;
+        if (nameEl && islandData.name) nameEl.textContent = islandData.name;
+        if (descEl && islandData.description) descEl.textContent = islandData.description;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load local islands content:', err);
+    });
+</script>
+<script>
+  // The local island rules callout text and its label/value rule list are
+  // stored in content/guesthouses-rules.json so they can be edited without
+  // touching this file. The current values are also present in the HTML
+  // below as a fallback, so the section still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/guesthouses-rules.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var callout = document.querySelector('.rules-callout');
+      if (!callout) return;
+
+      var textCol = callout.querySelector('div');
+      if (textCol) {
+        var eyebrowEl = textCol.querySelector('.eyebrow');
+        var headingEl = textCol.querySelector('h2');
+        var introEl = textCol.querySelector('p:not(.eyebrow)');
+        var linkEl = textCol.querySelector('a');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+        if (linkEl && data.linkText) linkEl.textContent = data.linkText;
+      }
+
+      var rows = callout.querySelectorAll('.rules-list .row');
+      (data.rules || []).forEach(function (ruleData, i) {
+        var row = rows[i];
+        if (!row) return;
+        var spans = row.querySelectorAll('span');
+        if (spans[0] && ruleData.label) spans[0].textContent = ruleData.label;
+        if (spans[1] && ruleData.value) spans[1].textContent = ruleData.value;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load local island rules content:', err);
+    });
+</script>
+<script>
+  // "Why book your guesthouse through us" cards are stored in
+  // content/guesthouses-why-us.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/guesthouses-why-us.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.why-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.why-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load "why us" content:', err);
+    });
+</script>
+<script>
+  // Bottom CTA band text (eyebrow/heading/subtext) is stored in
+  // content/guesthouses-cta.json so it can be edited without touching this
+  // file. The contact buttons themselves are shared site-wide and stay
+  // hardcoded. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/guesthouses-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
+<script>
   // "Guesthouse Listings" grid shows only category === 'guesthouse' entries
   // from content/properties.json (the same file the admin Properties manager
   // and the Resorts page's listings read from). No guesthouse listings exist

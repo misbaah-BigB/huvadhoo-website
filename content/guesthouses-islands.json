@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Popular local islands",
+  "heading": "Where guesthouse travelers usually stay",
+  "intro": "Each island has a different feel — we'll match you based on what you're after, not just availability.",
+  "islands": [
+    {
+      "atoll": "South Male Atoll",
+      "name": "Maafushi",
+      "description": "The most established guesthouse island — the widest choice of excursions and restaurants, good for first-timers."
+    },
+    {
+      "atoll": "South Male Atoll",
+      "name": "Guraidhoo",
+      "description": "Quieter than Maafushi with a similar bikini beach setup and easy access to good snorkeling sites."
+    },
+    {
+      "atoll": "Alif Dhaal Atoll",
+      "name": "Dhigurah",
+      "description": "One of the longest natural beaches in the Maldives, known for regular whale shark sightings nearby."
+    },
+    {
+      "atoll": "Vaavu Atoll",
+      "name": "Fulidhoo",
+      "description": "Small, quiet, and known for cultural evenings (Bodu Beru drumming) — a slower-paced choice."
+    },
+    {
+      "atoll": "Baa Atoll",
+      "name": "Dharavandhoo",
+      "description": "Close to Hanifaru Bay's manta ray season — a strong pick if snorkeling with mantas is the priority."
+    },
+    {
+      "atoll": "Laamu Atoll",
+      "name": "Gan (Laamu)",
+      "description": "Further from Male but connected by causeway to several other islands — good for a quieter, less touristy stay."
+    }
+  ]
+}
