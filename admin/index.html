@@ -211,6 +211,30 @@
     margin-top:2px;
   }
   .add-row-btn:hover{background:rgba(31,122,108,.08);}
+  .photo-row{margin:0 0 10px;}
+  .photo-row-main{display:flex; gap:8px; align-items:center;}
+  .photo-row-main input[type="text"]{flex-grow:1; background:#fff;}
+  .photo-choose-btn{
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    height:40px;
+    padding:0 14px;
+    font-family:'Inter', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--teal);
+    background:#fff;
+    border:1px solid var(--teal);
+    border-radius:8px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .photo-choose-btn:hover{background:rgba(31,122,108,.08);}
+  .photo-choose-btn.is-uploading{opacity:.6; pointer-events:none;}
+  .photo-row-status{font-size:11.5px; margin:5px 0 0; color:var(--ink); opacity:.65;}
+  .photo-row-status.error{color:#b23b3b; opacity:1;}
+  .photo-row-status.success{color:var(--teal); opacity:1;}
   .add-property-btn{
     background:transparent;
     color:var(--teal);
@@ -1455,7 +1479,7 @@
 
       <div class="field">
         <label>Photos</label>
-        <span class="hint" style="margin-top:0; margin-bottom:8px; display:block;">File paths, same as banner images — not an upload, e.g. assets/properties/placeholder-1.jpg</span>
+        <span class="hint" style="margin-top:0; margin-bottom:8px; display:block;">Choose a photo from your phone or computer — it's resized and uploaded automatically, and the file path below fills in for you.</span>
         <div id="propPhotosList"></div>
         <button type="button" class="add-row-btn" id="addPhotoBtn">+ Add photo</button>
       </div>
@@ -3218,6 +3242,175 @@
     return values;
   }
 
+  // ---- property photo upload ----
+  // Photo rows behave like the "dynamic rows" above (add/remove, one value
+  // each) but each row is backed by a real file upload instead of free text:
+  // choosing a photo resizes/compresses it in the browser, uploads it, and
+  // fills the read-only path field with the result. collectPhotoValues()
+  // still returns a plain array of path strings, so this fits the same
+  // photos[] shape the save endpoint already expects.
+  var MAX_IMAGE_DIMENSION = 1600;
+  var JPEG_QUALITY = 0.8;
+  var MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+
+  function formatKb(bytes) {
+    return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  function compressImage(file) {
+    return new Promise(function (resolve, reject) {
+      var objectUrl = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var width = img.naturalWidth;
+        var height = img.naturalHeight;
+        var scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(width, height));
+        var targetW = Math.max(1, Math.round(width * scale));
+        var targetH = Math.max(1, Math.round(height * scale));
+
+        var canvas = document.createElement('canvas');
+        canvas.width = targetW;
+        canvas.height = targetH;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, targetW, targetH);
+        URL.revokeObjectURL(objectUrl);
+
+        canvas.toBlob(function (blob) {
+          if (!blob) { reject(new Error('Could not process that image.')); return; }
+          resolve(blob);
+        }, 'image/jpeg', JPEG_QUALITY);
+      };
+      img.onerror = function () {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error('Could not read that image file.'));
+      };
+      img.src = objectUrl;
+    });
+  }
+
+  function blobToBase64(blob) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var result = reader.result;
+        var comma = typeof result === 'string' ? result.indexOf(',') : -1;
+        resolve(comma !== -1 ? result.slice(comma + 1) : result);
+      };
+      reader.onerror = function () { reject(new Error('Could not read the compressed photo.')); };
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  function uploadCompressedPhoto(base64, nameHint) {
+    return fetch('/.netlify/functions/upload-photo', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imageBase64: base64, nameHint: nameHint }),
+    }).then(function (res) {
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || ('Upload failed (status ' + res.status + ').'));
+        return data;
+      });
+    });
+  }
+
+  function handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput) {
+    statusEl.className = 'photo-row-status';
+    statusEl.textContent = 'Compressing photo…';
+    chooseLabel.classList.add('is-uploading');
+    fileInput.disabled = true;
+
+    compressImage(file)
+      .then(function (blob) {
+        if (blob.size > MAX_UPLOAD_BYTES) {
+          throw new Error('That photo is still too large after compression (~' + formatKb(blob.size) + '). Please choose a smaller photo.');
+        }
+        statusEl.textContent = 'Uploading… (~' + formatKb(blob.size) + ')';
+        return blobToBase64(blob);
+      })
+      .then(function (base64) {
+        var nameHint = propNameInput.value.trim() || 'property-photo';
+        return uploadCompressedPhoto(base64, nameHint);
+      })
+      .then(function (result) {
+        pathInput.value = result.path;
+        statusEl.textContent = 'Uploaded ✓ (~' + formatKb(result.size || 0) + ')';
+        statusEl.className = 'photo-row-status success';
+      })
+      .catch(function (err) {
+        statusEl.textContent = err.message || 'Could not upload that photo.';
+        statusEl.className = 'photo-row-status error';
+      })
+      .finally(function () {
+        chooseLabel.classList.remove('is-uploading');
+        fileInput.disabled = false;
+        fileInput.value = '';
+      });
+  }
+
+  function addPhotoRow(container, value) {
+    var row = document.createElement('div');
+    row.className = 'photo-row';
+
+    var main = document.createElement('div');
+    main.className = 'photo-row-main';
+
+    var chooseLabel = document.createElement('label');
+    chooseLabel.className = 'photo-choose-btn';
+    chooseLabel.textContent = 'Choose photo';
+
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.hidden = true;
+    chooseLabel.appendChild(fileInput);
+
+    var pathInput = document.createElement('input');
+    pathInput.type = 'text';
+    pathInput.className = 'photo-path-input';
+    pathInput.readOnly = true;
+    pathInput.value = value || '';
+    pathInput.placeholder = 'No photo uploaded yet';
+
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'dynamic-row-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.addEventListener('click', function () { row.remove(); });
+
+    main.appendChild(chooseLabel);
+    main.appendChild(pathInput);
+    main.appendChild(removeBtn);
+    row.appendChild(main);
+
+    var statusEl = document.createElement('p');
+    statusEl.className = 'photo-row-status';
+    row.appendChild(statusEl);
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      handlePhotoFileChosen(file, pathInput, statusEl, chooseLabel, fileInput);
+    });
+
+    container.appendChild(row);
+  }
+
+  function renderPhotoList(container, values) {
+    container.innerHTML = '';
+    (values || []).forEach(function (value) { addPhotoRow(container, value); });
+  }
+
+  function collectPhotoValues(container) {
+    var values = [];
+    container.querySelectorAll('.photo-path-input').forEach(function (input) {
+      var v = input.value.trim();
+      if (v) values.push(v);
+    });
+    return values;
+  }
+
   function showPropertiesListView() {
     propertiesListView.style.display = '';
     propertyFormView.style.display = 'none';
@@ -3289,7 +3482,7 @@
     propLocationInput.value = prop ? prop.location || '' : '';
     propIntroInput.value = prop ? prop.shortIntro || '' : '';
     renderDynamicList(propHighlightsList, prop ? prop.highlights : [], 'e.g. Overwater villas');
-    renderDynamicList(propPhotosList, prop ? prop.photos : [], 'e.g. assets/properties/placeholder-1.jpg');
+    renderPhotoList(propPhotosList, prop ? prop.photos : []);
     deletePropertyBtn.style.display = prop ? '' : 'none';
 
     setStatus('', '');
@@ -3387,7 +3580,7 @@
   });
 
   addPhotoBtn.addEventListener('click', function () {
-    addDynamicRow(propPhotosList, '', 'e.g. assets/properties/placeholder-1.jpg');
+    addPhotoRow(propPhotosList, '');
   });
 
   savePropertyBtn.addEventListener('click', function () {
@@ -3404,7 +3597,7 @@
       location: propLocationInput.value.trim(),
       shortIntro: propIntroInput.value.trim(),
       highlights: collectDynamicListValues(propHighlightsList),
-      photos: collectDynamicListValues(propPhotosList),
+      photos: collectPhotoValues(propPhotosList),
     };
 
     var newArray = propertiesData.slice();
