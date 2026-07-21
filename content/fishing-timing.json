@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Timing",
+  "heading": "Roughly when conditions are best",
+  "intro": "General patterns, not guarantees — fishing depends on conditions on the day as much as the season.",
+  "columns": ["Season", "Conditions", "Typically good for"],
+  "rows": [
+    {
+      "values": [
+        "Jan – Apr (dry, NE monsoon)",
+        "Calmer seas, easier offshore trips",
+        "Big game trolling further from shore"
+      ]
+    },
+    {
+      "values": [
+        "May – Nov (wet, SW monsoon)",
+        "Choppier at times, but still fishable most days",
+        "Reef and night fishing closer to shore"
+      ]
+    }
+  ]
+}

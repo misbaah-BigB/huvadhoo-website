@@ -285,6 +285,13 @@
         <option value="diving-why-us">Diving — Why Book With Us</option>
         <option value="diving-faq">Diving — FAQ</option>
         <option value="diving-cta">Diving — CTA Band</option>
+        <option value="fishing-cert-banner">Fishing — Licensed Boats Banner</option>
+        <option value="fishing-trip-types">Fishing — Trip Types</option>
+        <option value="fishing-included">Fishing — What's Included</option>
+        <option value="fishing-timing">Fishing — Timing Table</option>
+        <option value="fishing-why-us">Fishing — Why Book With Us</option>
+        <option value="fishing-faq">Fishing — FAQ</option>
+        <option value="fishing-cta">Fishing — CTA Band</option>
         <option value="properties">Properties</option>
       </select>
     </div>
@@ -715,6 +722,143 @@
       </div>
     </div>
 
+    <div id="fsCertBannerFields" style="display:none;">
+      <div class="field"><label for="fsBadge">Badge label</label><input type="text" id="fsBadge"></div>
+      <div class="field"><label for="fsBannerText">Text</label><textarea id="fsBannerText"></textarea></div>
+    </div>
+
+    <div id="fsTripTypesFields" style="display:none;">
+      <div class="field"><label for="fsTripEyebrow">Eyebrow</label><input type="text" id="fsTripEyebrow"></div>
+      <div class="field"><label for="fsTripHeading">Heading</label><input type="text" id="fsTripHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Category 1</h3>
+        <div class="field"><label for="fsTrip0Tier">Tier label</label><input type="text" id="fsTrip0Tier"></div>
+        <div class="field"><label for="fsTrip0Name">Name</label><input type="text" id="fsTrip0Name"></div>
+        <div class="field"><label for="fsTrip0Description">Description</label><textarea id="fsTrip0Description"></textarea></div>
+        <div class="field"><label for="fsTrip0Price">Price</label><input type="text" id="fsTrip0Price"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Category 2</h3>
+        <div class="field"><label for="fsTrip1Tier">Tier label</label><input type="text" id="fsTrip1Tier"></div>
+        <div class="field"><label for="fsTrip1Name">Name</label><input type="text" id="fsTrip1Name"></div>
+        <div class="field"><label for="fsTrip1Description">Description</label><textarea id="fsTrip1Description"></textarea></div>
+        <div class="field"><label for="fsTrip1Price">Price</label><input type="text" id="fsTrip1Price"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Category 3</h3>
+        <div class="field"><label for="fsTrip2Tier">Tier label</label><input type="text" id="fsTrip2Tier"></div>
+        <div class="field"><label for="fsTrip2Name">Name</label><input type="text" id="fsTrip2Name"></div>
+        <div class="field"><label for="fsTrip2Description">Description</label><textarea id="fsTrip2Description"></textarea></div>
+        <div class="field"><label for="fsTrip2Price">Price</label><input type="text" id="fsTrip2Price"></div>
+      </div>
+    </div>
+
+    <div id="fsIncludedFields" style="display:none;">
+      <div class="field"><label for="fsIncEyebrow">Eyebrow</label><input type="text" id="fsIncEyebrow"></div>
+      <div class="field"><label for="fsIncHeading">Heading</label><input type="text" id="fsIncHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="fsInc0Title">Title</label><input type="text" id="fsInc0Title"></div>
+        <div class="field"><label for="fsInc0Text">Text</label><textarea id="fsInc0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="fsInc1Title">Title</label><input type="text" id="fsInc1Title"></div>
+        <div class="field"><label for="fsInc1Text">Text</label><textarea id="fsInc1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="fsInc2Title">Title</label><input type="text" id="fsInc2Title"></div>
+        <div class="field"><label for="fsInc2Text">Text</label><textarea id="fsInc2Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 4</h3>
+        <div class="field"><label for="fsInc3Title">Title</label><input type="text" id="fsInc3Title"></div>
+        <div class="field"><label for="fsInc3Text">Text</label><textarea id="fsInc3Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="fsTimingFields" style="display:none;">
+      <div class="field"><label for="fsTimEyebrow">Eyebrow</label><input type="text" id="fsTimEyebrow"></div>
+      <div class="field"><label for="fsTimHeading">Heading</label><input type="text" id="fsTimHeading"></div>
+      <div class="field"><label for="fsTimIntro">Intro sentence</label><textarea id="fsTimIntro"></textarea></div>
+
+      <div class="item-group">
+        <h3 class="item-group-title">Column headers</h3>
+        <div class="field"><label for="fsTimCol0">Column 1 header</label><input type="text" id="fsTimCol0"></div>
+        <div class="field"><label for="fsTimCol1">Column 2 header</label><input type="text" id="fsTimCol1"></div>
+        <div class="field"><label for="fsTimCol2">Column 3 header</label><input type="text" id="fsTimCol2"></div>
+      </div>
+
+      <div class="item-group">
+        <h3 class="item-group-title">Row 1</h3>
+        <div class="field"><label for="fsTimRow0Val0">Value for column 1</label><input type="text" id="fsTimRow0Val0"></div>
+        <div class="field"><label for="fsTimRow0Val1">Value for column 2</label><input type="text" id="fsTimRow0Val1"></div>
+        <div class="field"><label for="fsTimRow0Val2">Value for column 3</label><input type="text" id="fsTimRow0Val2"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Row 2</h3>
+        <div class="field"><label for="fsTimRow1Val0">Value for column 1</label><input type="text" id="fsTimRow1Val0"></div>
+        <div class="field"><label for="fsTimRow1Val1">Value for column 2</label><input type="text" id="fsTimRow1Val1"></div>
+        <div class="field"><label for="fsTimRow1Val2">Value for column 3</label><input type="text" id="fsTimRow1Val2"></div>
+      </div>
+    </div>
+
+    <div id="fsWhyUsFields" style="display:none;">
+      <div class="field"><label for="fsWhyEyebrow">Eyebrow</label><input type="text" id="fsWhyEyebrow"></div>
+      <div class="field"><label for="fsWhyHeading">Heading</label><input type="text" id="fsWhyHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 1</h3>
+        <div class="field"><label for="fsWhy0Title">Title</label><input type="text" id="fsWhy0Title"></div>
+        <div class="field"><label for="fsWhy0Text">Text</label><textarea id="fsWhy0Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 2</h3>
+        <div class="field"><label for="fsWhy1Title">Title</label><input type="text" id="fsWhy1Title"></div>
+        <div class="field"><label for="fsWhy1Text">Text</label><textarea id="fsWhy1Text"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Card 3</h3>
+        <div class="field"><label for="fsWhy2Title">Title</label><input type="text" id="fsWhy2Title"></div>
+        <div class="field"><label for="fsWhy2Text">Text</label><textarea id="fsWhy2Text"></textarea></div>
+      </div>
+    </div>
+
+    <div id="fsFaqFields" style="display:none;">
+      <div class="field"><label for="fsFaqEyebrow">Eyebrow</label><input type="text" id="fsFaqEyebrow"></div>
+      <div class="field"><label for="fsFaqHeading">Heading</label><input type="text" id="fsFaqHeading"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 1</h3>
+        <div class="field"><label for="fsFaq0Question">Question</label><input type="text" id="fsFaq0Question"></div>
+        <div class="field"><label for="fsFaq0Answer">Answer</label><textarea id="fsFaq0Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 2</h3>
+        <div class="field"><label for="fsFaq1Question">Question</label><input type="text" id="fsFaq1Question"></div>
+        <div class="field"><label for="fsFaq1Answer">Answer</label><textarea id="fsFaq1Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 3</h3>
+        <div class="field"><label for="fsFaq2Question">Question</label><input type="text" id="fsFaq2Question"></div>
+        <div class="field"><label for="fsFaq2Answer">Answer</label><textarea id="fsFaq2Answer"></textarea></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Question 4</h3>
+        <div class="field"><label for="fsFaq3Question">Question</label><input type="text" id="fsFaq3Question"></div>
+        <div class="field"><label for="fsFaq3Answer">Answer</label><textarea id="fsFaq3Answer"></textarea></div>
+      </div>
+    </div>
+
+    <div id="fsCtaFields" style="display:none;">
+      <div class="field"><label for="fsCtaEyebrow">Eyebrow</label><input type="text" id="fsCtaEyebrow"></div>
+      <div class="field"><label for="fsCtaHeading">Heading</label><input type="text" id="fsCtaHeading"></div>
+      <div class="field">
+        <label for="fsCtaSubtext">Subtext</label>
+        <textarea id="fsCtaSubtext"></textarea>
+        <span class="hint">The WhatsApp/Telegram/WeChat/quote buttons below this text are shared site-wide and aren't editable here.</span>
+      </div>
+    </div>
+
     <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
   </form>
 
@@ -794,6 +938,13 @@
     'diving-why-us': 'Diving — Why Book With Us',
     'diving-faq': 'Diving — FAQ',
     'diving-cta': 'Diving — CTA Band',
+    'fishing-cert-banner': 'Fishing — Licensed Boats Banner',
+    'fishing-trip-types': 'Fishing — Trip Types',
+    'fishing-included': "Fishing — What's Included",
+    'fishing-timing': 'Fishing — Timing Table',
+    'fishing-why-us': 'Fishing — Why Book With Us',
+    'fishing-faq': 'Fishing — FAQ',
+    'fishing-cta': 'Fishing — CTA Band',
     properties: 'Properties',
   };
   var CATEGORY_LABELS = {
@@ -824,6 +975,13 @@
     if (page === 'diving-why-us') return 'dvWhyUs';
     if (page === 'diving-faq') return 'dvFaq';
     if (page === 'diving-cta') return 'dvCta';
+    if (page === 'fishing-cert-banner') return 'fsCertBanner';
+    if (page === 'fishing-trip-types') return 'fsTripTypes';
+    if (page === 'fishing-included') return 'fsIncluded';
+    if (page === 'fishing-timing') return 'fsTiming';
+    if (page === 'fishing-why-us') return 'fsWhyUs';
+    if (page === 'fishing-faq') return 'fsFaq';
+    if (page === 'fishing-cta') return 'fsCta';
     return 'banner';
   }
 
@@ -1006,6 +1164,75 @@
   var dvCtaEyebrowInput = document.getElementById('dvCtaEyebrow');
   var dvCtaHeadingInput = document.getElementById('dvCtaHeading');
   var dvCtaSubtextInput = document.getElementById('dvCtaSubtext');
+
+  // ---- fishing: cert banner group ----
+  var fsBadgeInput = document.getElementById('fsBadge');
+  var fsBannerTextInput = document.getElementById('fsBannerText');
+
+  // ---- fishing: trip types group ----
+  var fsTripEyebrowInput = document.getElementById('fsTripEyebrow');
+  var fsTripHeadingInput = document.getElementById('fsTripHeading');
+  var fsTripInputs = [];
+  for (var ft = 0; ft < 3; ft++) {
+    fsTripInputs.push({
+      tier: document.getElementById('fsTrip' + ft + 'Tier'),
+      name: document.getElementById('fsTrip' + ft + 'Name'),
+      description: document.getElementById('fsTrip' + ft + 'Description'),
+      price: document.getElementById('fsTrip' + ft + 'Price'),
+    });
+  }
+
+  // ---- fishing: what's included group ----
+  var fsIncEyebrowInput = document.getElementById('fsIncEyebrow');
+  var fsIncHeadingInput = document.getElementById('fsIncHeading');
+  var fsIncCardInputs = [];
+  for (var fi = 0; fi < 4; fi++) {
+    fsIncCardInputs.push({
+      title: document.getElementById('fsInc' + fi + 'Title'),
+      text: document.getElementById('fsInc' + fi + 'Text'),
+    });
+  }
+
+  // ---- fishing: timing table group ----
+  var fsTimEyebrowInput = document.getElementById('fsTimEyebrow');
+  var fsTimHeadingInput = document.getElementById('fsTimHeading');
+  var fsTimIntroInput = document.getElementById('fsTimIntro');
+  var fsTimColInputs = [document.getElementById('fsTimCol0'), document.getElementById('fsTimCol1'), document.getElementById('fsTimCol2')];
+  var fsTimRowInputs = [];
+  for (var fr = 0; fr < 2; fr++) {
+    fsTimRowInputs.push([
+      document.getElementById('fsTimRow' + fr + 'Val0'),
+      document.getElementById('fsTimRow' + fr + 'Val1'),
+      document.getElementById('fsTimRow' + fr + 'Val2'),
+    ]);
+  }
+
+  // ---- fishing: why-us group ----
+  var fsWhyEyebrowInput = document.getElementById('fsWhyEyebrow');
+  var fsWhyHeadingInput = document.getElementById('fsWhyHeading');
+  var fsWhyCardInputs = [];
+  for (var fw = 0; fw < 3; fw++) {
+    fsWhyCardInputs.push({
+      title: document.getElementById('fsWhy' + fw + 'Title'),
+      text: document.getElementById('fsWhy' + fw + 'Text'),
+    });
+  }
+
+  // ---- fishing: faq group ----
+  var fsFaqEyebrowInput = document.getElementById('fsFaqEyebrow');
+  var fsFaqHeadingInput = document.getElementById('fsFaqHeading');
+  var fsFaqItemInputs = [];
+  for (var ff = 0; ff < 4; ff++) {
+    fsFaqItemInputs.push({
+      question: document.getElementById('fsFaq' + ff + 'Question'),
+      answer: document.getElementById('fsFaq' + ff + 'Answer'),
+    });
+  }
+
+  // ---- fishing: cta band group ----
+  var fsCtaEyebrowInput = document.getElementById('fsCtaEyebrow');
+  var fsCtaHeadingInput = document.getElementById('fsCtaHeading');
+  var fsCtaSubtextInput = document.getElementById('fsCtaSubtext');
 
   // ---- properties manager ----
   var propertiesManager = document.getElementById('propertiesManager');
@@ -1395,6 +1622,154 @@
       },
       build: function () {
         return { eyebrow: dvCtaEyebrowInput.value, heading: dvCtaHeadingInput.value, subtext: dvCtaSubtextInput.value };
+      },
+    },
+    fsCertBanner: {
+      el: document.getElementById('fsCertBannerFields'),
+      inputs: [fsBadgeInput, fsBannerTextInput],
+      apply: function (data) {
+        fsBadgeInput.value = data.badge || '';
+        fsBannerTextInput.value = data.text || '';
+      },
+      build: function () {
+        return { badge: fsBadgeInput.value, text: fsBannerTextInput.value };
+      },
+    },
+    fsTripTypes: {
+      el: document.getElementById('fsTripTypesFields'),
+      inputs: [fsTripEyebrowInput, fsTripHeadingInput].concat(
+        fsTripInputs.reduce(function (acc, c) { return acc.concat([c.tier, c.name, c.description, c.price]); }, [])
+      ),
+      apply: function (data) {
+        fsTripEyebrowInput.value = data.eyebrow || '';
+        fsTripHeadingInput.value = data.heading || '';
+        var cats = data.categories || [];
+        fsTripInputs.forEach(function (c, idx) {
+          var cat = cats[idx] || {};
+          c.tier.value = cat.tier || '';
+          c.name.value = cat.name || '';
+          c.description.value = cat.description || '';
+          c.price.value = cat.price || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: fsTripEyebrowInput.value,
+          heading: fsTripHeadingInput.value,
+          categories: fsTripInputs.map(function (c) {
+            return { tier: c.tier.value, name: c.name.value, description: c.description.value, price: c.price.value };
+          }),
+        };
+      },
+    },
+    fsIncluded: {
+      el: document.getElementById('fsIncludedFields'),
+      inputs: [fsIncEyebrowInput, fsIncHeadingInput].concat(
+        fsIncCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        fsIncEyebrowInput.value = data.eyebrow || '';
+        fsIncHeadingInput.value = data.heading || '';
+        var cards = data.cards || [];
+        fsIncCardInputs.forEach(function (c, idx) {
+          var card = cards[idx] || {};
+          c.title.value = card.title || '';
+          c.text.value = card.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: fsIncEyebrowInput.value,
+          heading: fsIncHeadingInput.value,
+          cards: fsIncCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    fsTiming: {
+      el: document.getElementById('fsTimingFields'),
+      inputs: [fsTimEyebrowInput, fsTimHeadingInput, fsTimIntroInput].concat(fsTimColInputs).concat(
+        fsTimRowInputs.reduce(function (acc, row) { return acc.concat(row); }, [])
+      ),
+      apply: function (data) {
+        fsTimEyebrowInput.value = data.eyebrow || '';
+        fsTimHeadingInput.value = data.heading || '';
+        fsTimIntroInput.value = data.intro || '';
+        var cols = data.columns || [];
+        fsTimColInputs.forEach(function (input, idx) { input.value = cols[idx] || ''; });
+        var rows = data.rows || [];
+        fsTimRowInputs.forEach(function (rowInputs, idx) {
+          var vals = (rows[idx] && rows[idx].values) || [];
+          rowInputs.forEach(function (input, j) { input.value = vals[j] || ''; });
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: fsTimEyebrowInput.value,
+          heading: fsTimHeadingInput.value,
+          intro: fsTimIntroInput.value,
+          columns: fsTimColInputs.map(function (input) { return input.value; }),
+          rows: fsTimRowInputs.map(function (rowInputs) {
+            return { values: rowInputs.map(function (input) { return input.value; }) };
+          }),
+        };
+      },
+    },
+    fsWhyUs: {
+      el: document.getElementById('fsWhyUsFields'),
+      inputs: [fsWhyEyebrowInput, fsWhyHeadingInput].concat(
+        fsWhyCardInputs.reduce(function (acc, c) { return acc.concat([c.title, c.text]); }, [])
+      ),
+      apply: function (data) {
+        fsWhyEyebrowInput.value = data.eyebrow || '';
+        fsWhyHeadingInput.value = data.heading || '';
+        var cards = data.cards || [];
+        fsWhyCardInputs.forEach(function (c, idx) {
+          var card = cards[idx] || {};
+          c.title.value = card.title || '';
+          c.text.value = card.text || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: fsWhyEyebrowInput.value,
+          heading: fsWhyHeadingInput.value,
+          cards: fsWhyCardInputs.map(function (c) { return { title: c.title.value, text: c.text.value }; }),
+        };
+      },
+    },
+    fsFaq: {
+      el: document.getElementById('fsFaqFields'),
+      inputs: [fsFaqEyebrowInput, fsFaqHeadingInput].concat(
+        fsFaqItemInputs.reduce(function (acc, it) { return acc.concat([it.question, it.answer]); }, [])
+      ),
+      apply: function (data) {
+        fsFaqEyebrowInput.value = data.eyebrow || '';
+        fsFaqHeadingInput.value = data.heading || '';
+        var items = data.items || [];
+        fsFaqItemInputs.forEach(function (it, idx) {
+          var item = items[idx] || {};
+          it.question.value = item.question || '';
+          it.answer.value = item.answer || '';
+        });
+      },
+      build: function () {
+        return {
+          eyebrow: fsFaqEyebrowInput.value,
+          heading: fsFaqHeadingInput.value,
+          items: fsFaqItemInputs.map(function (it) { return { question: it.question.value, answer: it.answer.value }; }),
+        };
+      },
+    },
+    fsCta: {
+      el: document.getElementById('fsCtaFields'),
+      inputs: [fsCtaEyebrowInput, fsCtaHeadingInput, fsCtaSubtextInput],
+      apply: function (data) {
+        fsCtaEyebrowInput.value = data.eyebrow || '';
+        fsCtaHeadingInput.value = data.heading || '';
+        fsCtaSubtextInput.value = data.subtext || '';
+      },
+      build: function () {
+        return { eyebrow: fsCtaEyebrowInput.value, heading: fsCtaHeadingInput.value, subtext: fsCtaSubtextInput.value };
       },
     },
   };

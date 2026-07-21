@@ -1,0 +1,22 @@
+{
+  "eyebrow": "What's included",
+  "heading": "What to expect on board",
+  "cards": [
+    {
+      "title": "Gear",
+      "text": "Rods, tackle, and bait are typically included in the charter price — we confirm this upfront so you're not caught out on the day."
+    },
+    {
+      "title": "Crew",
+      "text": "An experienced local skipper and crew who know the current fishing grounds — this matters more than the boat itself for a good catch rate."
+    },
+    {
+      "title": "Your catch",
+      "text": "Most resorts and guesthouses will cook your catch for dinner on request — ask us to confirm this with your specific property before the trip."
+    },
+    {
+      "title": "Group size",
+      "text": "Charters are typically priced per boat for big game trips and per person for reef/night trips — we'll clarify which applies to your quote."
+    }
+  ]
+}
