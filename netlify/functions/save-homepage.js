@@ -60,6 +60,11 @@ const PAGES = {
   "camping-why-us": { file: "content/camping-why-us.json", prepare: prepareCampingWhyUsContent, commitMessage: "Update Camping Why Us section via admin dashboard" },
   "camping-faq": { file: "content/camping-faq.json", prepare: prepareCampingFaqContent, commitMessage: "Update Camping FAQ via admin dashboard" },
   "camping-cta": { file: "content/camping-cta.json", prepare: prepareCampingCtaContent, commitMessage: "Update Camping CTA band via admin dashboard" },
+  "honeymoon-paths": { file: "content/honeymoon-paths.json", prepare: prepareHoneymoonPathsContent, commitMessage: "Update Honeymoon Paths via admin dashboard" },
+  "honeymoon-included": { file: "content/honeymoon-included.json", prepare: prepareHoneymoonIncludedContent, commitMessage: "Update Honeymoon \"What we check\" section via admin dashboard" },
+  "honeymoon-why-us": { file: "content/honeymoon-why-us.json", prepare: prepareHoneymoonWhyUsContent, commitMessage: "Update Honeymoon Why Us section via admin dashboard" },
+  "honeymoon-faq": { file: "content/honeymoon-faq.json", prepare: prepareHoneymoonFaqContent, commitMessage: "Update Honeymoon FAQ via admin dashboard" },
+  "honeymoon-cta": { file: "content/honeymoon-cta.json", prepare: prepareHoneymoonCtaContent, commitMessage: "Update Honeymoon CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -766,6 +771,121 @@ function prepareCampingFaqContent(payload) {
 }
 
 function prepareCampingCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareHoneymoonPathsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    const price = str(cat.price);
+    if (!name.trim() || !price.trim()) {
+      return { error: "Each category needs at least a name and a price." };
+    }
+    categories.push({ tier: str(cat.tier), name, description: str(cat.description), price });
+  }
+
+  return { content: { eyebrow, heading, intro, categories } };
+}
+
+function prepareHoneymoonIncludedContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareHoneymoonWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Unlike the plain-text FAQ answers on other pages, honeymoon.html's FAQ
+// allows a small bit of inline HTML in the answer field (a link to another
+// page) — the same "trusted admin input" convention already used for the
+// page banner's headline field, so it's stored and rendered as-is via
+// innerHTML rather than escaped as plain text.
+function prepareHoneymoonFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareHoneymoonCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);

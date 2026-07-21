@@ -1,0 +1,22 @@
+{
+  "eyebrow": "What we check",
+  "heading": "What actually makes a resort \"honeymoon-ready\"",
+  "cards": [
+    {
+      "title": "Adults-only or family-heavy?",
+      "text": "Some \"romantic\" resorts are still full of families in peak season. We flag which are genuinely adults-only versus just marketed that way."
+    },
+    {
+      "title": "Private dining options",
+      "text": "Not every resort offers an actual private dinner on the beach or over water — we confirm what's really available, and at what cost."
+    },
+    {
+      "title": "Villa privacy",
+      "text": "Some water villas sit close together with limited visual privacy. We check spacing and layout, not just the category name."
+    },
+    {
+      "title": "Honeymoon perks, verified",
+      "text": "Decorations, welcome drinks, or a spa credit are common but not universal — we confirm exactly what's included in your specific booking, not assumed as standard."
+    }
+  ]
+}
