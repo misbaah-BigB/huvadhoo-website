@@ -47,6 +47,13 @@ const PAGES = {
   "diving-why-us": { file: "content/diving-why-us.json", prepare: prepareDivingWhyUsContent, commitMessage: "Update Diving Why Us section via admin dashboard" },
   "diving-faq": { file: "content/diving-faq.json", prepare: prepareDivingFaqContent, commitMessage: "Update Diving FAQ via admin dashboard" },
   "diving-cta": { file: "content/diving-cta.json", prepare: prepareDivingCtaContent, commitMessage: "Update Diving CTA band via admin dashboard" },
+  "fishing-cert-banner": { file: "content/fishing-cert-banner.json", prepare: prepareFishingCertBannerContent, commitMessage: "Update Fishing Licensed Boats banner via admin dashboard" },
+  "fishing-trip-types": { file: "content/fishing-trip-types.json", prepare: prepareFishingTripTypesContent, commitMessage: "Update Fishing Trip Types via admin dashboard" },
+  "fishing-included": { file: "content/fishing-included.json", prepare: prepareFishingIncludedContent, commitMessage: "Update Fishing \"What's included\" section via admin dashboard" },
+  "fishing-timing": { file: "content/fishing-timing.json", prepare: prepareFishingTimingContent, commitMessage: "Update Fishing Timing table via admin dashboard" },
+  "fishing-why-us": { file: "content/fishing-why-us.json", prepare: prepareFishingWhyUsContent, commitMessage: "Update Fishing Why Us section via admin dashboard" },
+  "fishing-faq": { file: "content/fishing-faq.json", prepare: prepareFishingFaqContent, commitMessage: "Update Fishing FAQ via admin dashboard" },
+  "fishing-cta": { file: "content/fishing-cta.json", prepare: prepareFishingCtaContent, commitMessage: "Update Fishing CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -478,6 +485,161 @@ function prepareDivingFaqContent(payload) {
 }
 
 function prepareDivingCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareFishingCertBannerContent(payload) {
+  const badge = str(payload.badge);
+  const text = str(payload.text);
+
+  if (!badge.trim() || !text.trim()) {
+    return { error: "Badge and text can't be empty." };
+  }
+
+  return { content: { badge, text } };
+}
+
+function prepareFishingTripTypesContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    const price = str(cat.price);
+    if (!name.trim() || !price.trim()) {
+      return { error: "Each category needs at least a name and a price." };
+    }
+    categories.push({ tier: str(cat.tier), name, description: str(cat.description), price });
+  }
+
+  return { content: { eyebrow, heading, categories } };
+}
+
+function prepareFishingIncludedContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Like the Diving seasons table, this one has no separate row-label column —
+// all columns sit on equal footing — so each row is just a list of values,
+// one per column, with no "factor" field.
+function prepareFishingTimingContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ values });
+  }
+
+  return { content: { eyebrow, heading, intro, columns, rows } };
+}
+
+function prepareFishingWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareFishingFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareFishingCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);

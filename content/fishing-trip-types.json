@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Trip types",
+  "heading": "Three ways to fish here",
+  "categories": [
+    {
+      "tier": "Half-day",
+      "name": "Reef & Bottom Fishing",
+      "description": "Close to shore, relaxed pace — good for beginners, families, or anyone short on time. Snapper, grouper, and reef fish are typical catches.",
+      "price": "$70–$150 / person"
+    },
+    {
+      "tier": "Full-day",
+      "name": "Big Game Trolling",
+      "description": "Further offshore chasing tuna, wahoo, and sometimes sailfish or marlin — more physically demanding, best for those with some experience.",
+      "price": "$300–$700 / boat"
+    },
+    {
+      "tier": "Evening",
+      "name": "Night Fishing",
+      "description": "A calmer, social trip close to the reef after dark — popular with groups and often includes a simple onboard meal.",
+      "price": "$60–$120 / person"
+    }
+  ]
+}
