@@ -1,0 +1,45 @@
+{
+  "eyebrow": "Example itinerary",
+  "heading": "What a 6-night Combo actually looks like",
+  "intro": "This is one common split — we adjust the ratio (3+3, 4+2, 2+4) to your budget and priorities.",
+  "guestLabel": "Local island guesthouse",
+  "resortLabel": "Resort",
+  "days": [
+    {
+      "type": "guest",
+      "day": "Day 1",
+      "title": "Arrive, transfer to guesthouse",
+      "text": "Public ferry or shared speedboat from the airport"
+    },
+    {
+      "type": "guest",
+      "day": "Day 2",
+      "title": "Local island, snorkeling trip",
+      "text": "Bikini beach, local restaurants, sandbank excursion"
+    },
+    {
+      "type": "guest",
+      "day": "Day 3",
+      "title": "Free day / dolphin cruise",
+      "text": "Optional add-on excursion, then pack up"
+    },
+    {
+      "type": "resort",
+      "day": "Day 4",
+      "title": "Transfer to resort",
+      "text": "Speedboat or seaplane, arranged and pre-paid"
+    },
+    {
+      "type": "resort",
+      "day": "Day 5",
+      "title": "Resort day, house reef",
+      "text": "Water villa or beach villa, spa, restaurants"
+    },
+    {
+      "type": "resort",
+      "day": "Day 6",
+      "title": "Resort, departure transfer",
+      "text": "Direct to airport, timed to your flight"
+    }
+  ]
+}

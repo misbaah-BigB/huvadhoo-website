@@ -276,6 +276,235 @@
       console.error('Could not load page banner content:', err);
     });
 </script>
+<script>
+  // "What a 6-night Combo actually looks like" itinerary timeline is stored
+  // in content/combo-itinerary.json so it can be edited without touching
+  // this file. Each day has a "type" of either "guest" or "resort", which
+  // controls its color via the tl-day element's class — the day's class
+  // attribute is rebuilt from this type each time. The legend swatches
+  // (the small colored squares) are left untouched; only the label text
+  // after each swatch is updated, by writing to that span's last child text
+  // node directly. The current values are also present in the HTML below as
+  // a fallback, so the section still looks correct even if this fetch fails
+  // or JavaScript is unavailable.
+  fetch('content/combo-itinerary.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var timeline = document.querySelector('.timeline');
+      if (!timeline) return;
+
+      var sectionHead = timeline.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var dayEls = timeline.querySelectorAll('.tl-day');
+      (data.days || []).forEach(function (dayData, i) {
+        var el = dayEls[i];
+        if (!el) return;
+        el.className = 'tl-day ' + (dayData.type === 'resort' ? 'resort' : 'guest');
+        var dEl = el.querySelector('.d');
+        var titleEl = el.querySelector('h3');
+        var textEl = el.querySelector('p');
+        if (dEl && dayData.day) dEl.textContent = dayData.day;
+        if (titleEl && dayData.title) titleEl.textContent = dayData.title;
+        if (textEl && dayData.text) textEl.textContent = dayData.text;
+      });
+
+      var legendSpans = document.querySelectorAll('.tl-legend > span');
+      if (legendSpans[0] && data.guestLabel) legendSpans[0].lastChild.textContent = data.guestLabel;
+      if (legendSpans[1] && data.resortLabel) legendSpans[1].lastChild.textContent = data.resortLabel;
+    })
+    .catch(function (err) {
+      console.error('Could not load itinerary content:', err);
+    });
+</script>
+<script>
+  // "What you actually get from splitting the trip" benefit cards are stored
+  // in content/combo-benefits.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/combo-benefits.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.benefit-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.benefit-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var card = cards[i];
+        if (!card) return;
+        var titleEl = card.querySelector('h3');
+        var textEl = card.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load benefits content:', err);
+    });
+</script>
+<script>
+  // "Combo vs. resort-only vs. guesthouse-only" comparison table is stored
+  // in content/combo-comparison.json so it can be edited without touching
+  // this file. Unlike the factor-less tables on Diving/Fishing/Family, this
+  // one has a real left-hand "Factor" column, the same shape as the Resorts
+  // comparison table. The middle "Combo" column is visually highlighted in
+  // most (not all) rows via a "highlight" CSS class already baked into the
+  // static HTML — this script only ever rewrites cell text, never class
+  // attributes, so that existing highlight pattern is preserved automatically.
+  // The current values are also present in the HTML below as a fallback, so
+  // the section still looks correct even if this fetch fails or JavaScript
+  // is unavailable.
+  fetch('content/combo-comparison.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var table = document.querySelector('.compare table');
+      if (!table) return;
+
+      var sectionHead = table.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        var introEl = sectionHead.querySelector('p:not(.eyebrow)');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+        if (introEl && data.intro) introEl.textContent = data.intro;
+      }
+
+      var rows = table.querySelectorAll('tr');
+      var headerCells = rows[0] ? rows[0].querySelectorAll('th') : [];
+      if (headerCells[0] && data.factorLabel) headerCells[0].textContent = data.factorLabel;
+      (data.columns || []).forEach(function (col, i) {
+        if (headerCells[i + 1] && col) headerCells[i + 1].textContent = col;
+      });
+
+      (data.rows || []).forEach(function (rowData, i) {
+        var tr = rows[i + 1];
+        if (!tr) return;
+        var cells = tr.querySelectorAll('td');
+        if (cells[0] && rowData.factor) cells[0].textContent = rowData.factor;
+        (rowData.values || []).forEach(function (val, j) {
+          if (cells[j + 1] && val) cells[j + 1].textContent = val;
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load comparison table content:', err);
+    });
+</script>
+<script>
+  // "A few starting points" popular combination cards are stored in
+  // content/combo-combinations.json so they can be edited without touching
+  // this file. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/combo-combinations.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.combo-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cards = grid.querySelectorAll('.combo-card');
+      (data.categories || []).forEach(function (cat, i) {
+        var card = cards[i];
+        if (!card) return;
+        var tagEl = card.querySelector('.tag');
+        var nameEl = card.querySelector('h3');
+        var descEl = card.querySelector('p');
+        var priceEl = card.querySelector('.price');
+        if (tagEl && cat.tag) tagEl.textContent = cat.tag;
+        if (nameEl && cat.name) nameEl.textContent = cat.name;
+        if (descEl && cat.description) descEl.textContent = cat.description;
+        if (priceEl && cat.price) priceEl.textContent = cat.price;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load combinations content:', err);
+    });
+</script>
+<script>
+  // FAQ questions/answers ("Before you book a Combo") are stored in
+  // content/combo-faq.json so they can be edited without touching this
+  // file. None of these answers contain embedded links, so plain text
+  // content is used (matching Diving/Fishing/Camping's FAQ, not the
+  // HTML-link handling used for Honeymoon/Family). The current values are
+  // also present in the HTML below as a fallback, so the section still
+  // looks correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/combo-faq.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var list = document.getElementById('faqList');
+      if (!list) return;
+
+      var section = list.closest('section');
+      var sectionHead = section ? section.querySelector('.section-head') : null;
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var items = list.querySelectorAll('.faq-item');
+      (data.items || []).forEach(function (itemData, i) {
+        var item = items[i];
+        if (!item) return;
+        var qSpans = item.querySelectorAll('.faq-q span');
+        var answerEl = item.querySelector('.faq-a p');
+        if (qSpans[0] && itemData.question) qSpans[0].textContent = itemData.question;
+        if (answerEl && itemData.answer) answerEl.textContent = itemData.answer;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load FAQ content:', err);
+    });
+</script>
+<script>
+  // Bottom CTA band text (eyebrow/heading/subtext) is stored in
+  // content/combo-cta.json so it can be edited without touching this file.
+  // The contact buttons themselves are shared site-wide and stay hardcoded.
+  // The current values are also present in the HTML below as a fallback, so
+  // the section still looks correct even if this fetch fails or JavaScript
+  // is unavailable.
+  fetch('content/combo-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
 
 </body>
 </html>

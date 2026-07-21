@@ -1,0 +1,28 @@
+{
+  "eyebrow": "How it compares",
+  "heading": "Combo vs. resort-only vs. guesthouse-only",
+  "factorLabel": "Factor",
+  "columns": ["Guesthouse only", "Combo", "Resort only"],
+  "rows": [
+    {
+      "factor": "6-night typical cost (2 people)",
+      "values": ["$720–$2,160", "$1,080–$3,000", "$1,800–$5,400+"]
+    },
+    {
+      "factor": "Local culture",
+      "values": ["Full", "Yes, half the trip", "None"]
+    },
+    {
+      "factor": "Private resort reef",
+      "values": ["No", "Yes, half the trip", "Yes, full trip"]
+    },
+    {
+      "factor": "Alcohol availability",
+      "values": ["No", "Resort nights only", "Yes"]
+    },
+    {
+      "factor": "Transfers needed",
+      "values": ["1 (arrival + departure)", "2 (plus one inter-island leg)", "1 (arrival + departure)"]
+    }
+  ]
+}

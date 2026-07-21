@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Popular combinations",
+  "heading": "A few starting points",
+  "categories": [
+    {
+      "tag": "Mid-market",
+      "name": "Maafushi + Budget-Luxury Resort",
+      "description": "3 nights on the Maldives' most established guesthouse island, then 3 nights at a nearby South Male resort.",
+      "price": "6 nights, 2 people: $1,100–$2,200"
+    },
+    {
+      "tag": "For divers",
+      "name": "Dhigurah + Premium Resort",
+      "description": "Time on Dhigurah for whale shark season, then a premium resort in Alifu Dhaalu with strong house reef access.",
+      "price": "6 nights, 2 people: $1,600–$3,400"
+    },
+    {
+      "tag": "Honeymoon",
+      "name": "Fulidhoo + Honeymoon Resort",
+      "description": "Two culture-rich nights on quiet Fulidhoo, then the rest of the trip at an adults-only water-villa resort.",
+      "price": "6 nights, 2 people: $2,000–$4,500"
+    }
+  ]
+}

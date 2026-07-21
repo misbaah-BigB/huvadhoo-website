@@ -70,6 +70,12 @@ const PAGES = {
   "family-why-us": { file: "content/family-why-us.json", prepare: prepareFamilyWhyUsContent, commitMessage: "Update Family Why Us section via admin dashboard" },
   "family-faq": { file: "content/family-faq.json", prepare: prepareFamilyFaqContent, commitMessage: "Update Family FAQ via admin dashboard" },
   "family-cta": { file: "content/family-cta.json", prepare: prepareFamilyCtaContent, commitMessage: "Update Family CTA band via admin dashboard" },
+  "combo-itinerary": { file: "content/combo-itinerary.json", prepare: prepareComboItineraryContent, commitMessage: "Update Combo Itinerary via admin dashboard" },
+  "combo-benefits": { file: "content/combo-benefits.json", prepare: prepareComboBenefitsContent, commitMessage: "Update Combo Benefits section via admin dashboard" },
+  "combo-comparison": { file: "content/combo-comparison.json", prepare: prepareComboComparisonContent, commitMessage: "Update Combo Comparison Table via admin dashboard" },
+  "combo-combinations": { file: "content/combo-combinations.json", prepare: prepareComboCombinationsContent, commitMessage: "Update Combo Combinations via admin dashboard" },
+  "combo-faq": { file: "content/combo-faq.json", prepare: prepareComboFaqContent, commitMessage: "Update Combo FAQ via admin dashboard" },
+  "combo-cta": { file: "content/combo-cta.json", prepare: prepareComboCtaContent, commitMessage: "Update Combo CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -1012,6 +1018,168 @@ function prepareFamilyFaqContent(payload) {
 }
 
 function prepareFamilyCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+const ITINERARY_DAY_TYPES = ["guest", "resort"];
+
+// Each day's "type" (guest or resort) controls which color it renders in on
+// the page (via the tl-day element's class), so it's validated against a
+// fixed whitelist the same way property categories are.
+function prepareComboItineraryContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+  const guestLabel = str(payload.guestLabel);
+  const resortLabel = str(payload.resortLabel);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.days) || payload.days.length === 0) {
+    return { error: "At least one day is required." };
+  }
+
+  const days = [];
+  for (const raw of payload.days) {
+    const dayItem = raw && typeof raw === "object" ? raw : {};
+    const type = str(dayItem.type).trim();
+    const day = str(dayItem.day);
+    const title = str(dayItem.title);
+    if (!ITINERARY_DAY_TYPES.includes(type)) {
+      return { error: `Each day needs a valid type (got "${type || "(empty)"}").` };
+    }
+    if (!day.trim() || !title.trim()) {
+      return { error: "Each day needs at least a day label and a title." };
+    }
+    days.push({ type, day, title, text: str(dayItem.text) });
+  }
+
+  return { content: { eyebrow, heading, intro, guestLabel, resortLabel, days } };
+}
+
+function prepareComboBenefitsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Unlike the factor-less tables on Diving/Fishing/Family, this one has a
+// real left-hand "Factor" column, the same shape as the Resorts comparison
+// table.
+function prepareComboComparisonContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+  const factorLabel = str(payload.factorLabel);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const factor = str(row.factor);
+    if (!factor.trim()) {
+      return { error: "Each row needs a factor label." };
+    }
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ factor, values });
+  }
+
+  return { content: { eyebrow, heading, intro, factorLabel, columns, rows } };
+}
+
+function prepareComboCombinationsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    const price = str(cat.price);
+    if (!name.trim() || !price.trim()) {
+      return { error: "Each category needs at least a name and a price." };
+    }
+    categories.push({ tag: str(cat.tag), name, description: str(cat.description), price });
+  }
+
+  return { content: { eyebrow, heading, categories } };
+}
+
+function prepareComboFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareComboCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);
