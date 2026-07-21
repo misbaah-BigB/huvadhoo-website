@@ -1,0 +1,29 @@
+{
+  "eyebrow": "By season and atoll",
+  "heading": "What to expect, roughly, by time of year",
+  "intro": "These are general seasonal patterns, not guarantees — marine life sightings vary year to year.",
+  "columns": ["Season", "Conditions", "Typically good for"],
+  "rows": [
+    {
+      "values": [
+        "Jan – Apr (dry, NE monsoon)",
+        "Calmer seas, good visibility on the east side of atolls",
+        "Channel dives, easier conditions for newer divers"
+      ]
+    },
+    {
+      "values": [
+        "May – Nov (wet, SW monsoon)",
+        "More plankton in the water, which draws in filter feeders",
+        "Manta ray season in Baa Atoll (Hanifaru Bay), typically peaking mid-year"
+      ]
+    },
+    {
+      "values": [
+        "Year-round",
+        "Varies by atoll and specific site",
+        "Whale shark sightings around Dhigurah, Alifu Dhaalu Atoll"
+      ]
+    }
+  ]
+}

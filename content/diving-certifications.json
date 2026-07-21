@@ -1,0 +1,26 @@
+{
+  "eyebrow": "Certification levels",
+  "heading": "Where you start depends on experience, not age",
+  "categories": [
+    {
+      "tier": "Never dived",
+      "name": "Discover Scuba",
+      "description": "A single supervised introductory dive, no certification needed — good for testing the waters, literally."
+    },
+    {
+      "tier": "Beginner",
+      "name": "Open Water Certification",
+      "description": "A 3–4 day course leading to your first real certification, valid worldwide."
+    },
+    {
+      "tier": "Certified",
+      "name": "Advanced Open Water",
+      "description": "Deeper dives, night dives, and navigation — opens up more of the Maldives' channel and drift sites."
+    },
+    {
+      "tier": "Experienced",
+      "name": "Rescue & Divemaster",
+      "description": "For divers wanting to go further — rescue skills or a path toward working as a dive professional."
+    }
+  ]
+}

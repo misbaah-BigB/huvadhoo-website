@@ -41,6 +41,12 @@ const PAGES = {
   "guesthouses-rules": { file: "content/guesthouses-rules.json", prepare: prepareGuesthousesRulesContent, commitMessage: "Update Guesthouses Local Island Rules callout via admin dashboard" },
   "guesthouses-why-us": { file: "content/guesthouses-why-us.json", prepare: prepareGuesthousesWhyUsContent, commitMessage: "Update Guesthouses Why Us section via admin dashboard" },
   "guesthouses-cta": { file: "content/guesthouses-cta.json", prepare: prepareGuesthousesCtaContent, commitMessage: "Update Guesthouses CTA band via admin dashboard" },
+  "diving-cert-banner": { file: "content/diving-cert-banner.json", prepare: prepareDivingCertBannerContent, commitMessage: "Update Diving Certified Partners banner via admin dashboard" },
+  "diving-certifications": { file: "content/diving-certifications.json", prepare: prepareDivingCertificationsContent, commitMessage: "Update Diving Certification Levels via admin dashboard" },
+  "diving-seasons": { file: "content/diving-seasons.json", prepare: prepareDivingSeasonsContent, commitMessage: "Update Diving Seasons table via admin dashboard" },
+  "diving-why-us": { file: "content/diving-why-us.json", prepare: prepareDivingWhyUsContent, commitMessage: "Update Diving Why Us section via admin dashboard" },
+  "diving-faq": { file: "content/diving-faq.json", prepare: prepareDivingFaqContent, commitMessage: "Update Diving FAQ via admin dashboard" },
+  "diving-cta": { file: "content/diving-cta.json", prepare: prepareDivingCtaContent, commitMessage: "Update Diving CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -342,6 +348,136 @@ function prepareGuesthousesWhyUsContent(payload) {
 }
 
 function prepareGuesthousesCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareDivingCertBannerContent(payload) {
+  const badge = str(payload.badge);
+  const text = str(payload.text);
+
+  if (!badge.trim() || !text.trim()) {
+    return { error: "Badge and text can't be empty." };
+  }
+
+  return { content: { badge, text } };
+}
+
+function prepareDivingCertificationsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.categories) || payload.categories.length === 0) {
+    return { error: "At least one category is required." };
+  }
+
+  const categories = [];
+  for (const raw of payload.categories) {
+    const cat = raw && typeof raw === "object" ? raw : {};
+    const name = str(cat.name);
+    if (!name.trim()) {
+      return { error: "Each category needs a name." };
+    }
+    categories.push({ tier: str(cat.tier), name, description: str(cat.description) });
+  }
+
+  return { content: { eyebrow, heading, categories } };
+}
+
+// Unlike the Resorts comparison table, this one has no separate row-label
+// column — all columns sit on equal footing — so each row is just a list of
+// values, one per column, with no "factor" field.
+function prepareDivingSeasonsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ values });
+  }
+
+  return { content: { eyebrow, heading, intro, columns, rows } };
+}
+
+function prepareDivingWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareDivingFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareDivingCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);
