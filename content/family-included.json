@@ -1,0 +1,22 @@
+{
+  "eyebrow": "What matters most",
+  "heading": "What we actually check before recommending a resort",
+  "cards": [
+    {
+      "title": "Lagoon safety",
+      "text": "Some house reefs drop off sharply just past the shoreline — not ideal with toddlers. We check depth and current before recommending."
+    },
+    {
+      "title": "Kids' club age range",
+      "text": "Clubs typically run 2–12 or 4–12 — the exact range varies a lot by resort. We confirm it covers your children's ages before booking."
+    },
+    {
+      "title": "Room configuration",
+      "text": "Connecting rooms, family beach villas, or a villa with a second bedroom — not every resort offers all of these."
+    },
+    {
+      "title": "Meal plan fit",
+      "text": "All-inclusive is usually easiest with kids — fewer surprise costs on drinks, snacks, and kids' menus."
+    }
+  ]
+}

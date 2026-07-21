@@ -65,6 +65,11 @@ const PAGES = {
   "honeymoon-why-us": { file: "content/honeymoon-why-us.json", prepare: prepareHoneymoonWhyUsContent, commitMessage: "Update Honeymoon Why Us section via admin dashboard" },
   "honeymoon-faq": { file: "content/honeymoon-faq.json", prepare: prepareHoneymoonFaqContent, commitMessage: "Update Honeymoon FAQ via admin dashboard" },
   "honeymoon-cta": { file: "content/honeymoon-cta.json", prepare: prepareHoneymoonCtaContent, commitMessage: "Update Honeymoon CTA band via admin dashboard" },
+  "family-included": { file: "content/family-included.json", prepare: prepareFamilyIncludedContent, commitMessage: "Update Family \"What we check\" section via admin dashboard" },
+  "family-age-groups": { file: "content/family-age-groups.json", prepare: prepareFamilyAgeGroupsContent, commitMessage: "Update Family Age Groups table via admin dashboard" },
+  "family-why-us": { file: "content/family-why-us.json", prepare: prepareFamilyWhyUsContent, commitMessage: "Update Family Why Us section via admin dashboard" },
+  "family-faq": { file: "content/family-faq.json", prepare: prepareFamilyFaqContent, commitMessage: "Update Family FAQ via admin dashboard" },
+  "family-cta": { file: "content/family-cta.json", prepare: prepareFamilyCtaContent, commitMessage: "Update Family CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -886,6 +891,127 @@ function prepareHoneymoonFaqContent(payload) {
 }
 
 function prepareHoneymoonCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareFamilyIncludedContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Like the Diving/Fishing seasons tables, this one has no separate
+// row-label column — all columns sit on equal footing — so each row is just
+// a list of values, one per column, with no "factor" field.
+function prepareFamilyAgeGroupsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ values });
+  }
+
+  return { content: { eyebrow, heading, columns, rows } };
+}
+
+function prepareFamilyWhyUsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// One answer (the Combo question) includes a small bit of trusted inline
+// HTML (a link), same convention as Honeymoon's FAQ — stored and rendered
+// as-is via innerHTML rather than escaped as plain text.
+function prepareFamilyFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareFamilyCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);
