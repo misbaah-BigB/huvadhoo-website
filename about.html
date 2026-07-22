@@ -201,5 +201,180 @@
 
 <script src="assets/motion.js"></script>
 
+<script>
+  // Page banner content lives in content/about.json so it can be edited
+  // without touching this file — same shape as every other page's banner
+  // (bannerImage, bannerHeadline, bannerSubtext). The current values are
+  // also present in the HTML below as a fallback, so the banner still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/about.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var heroImg = document.querySelector('.pagehero .hero-media img');
+      var heroHeadline = document.querySelector('.pagehero h1');
+      var heroSubtext = document.querySelector('.pagehero p.lede');
+      if (heroImg && data.bannerImage) heroImg.src = data.bannerImage;
+      if (heroHeadline && data.bannerHeadline) heroHeadline.innerHTML = data.bannerHeadline;
+      if (heroSubtext && data.bannerSubtext) heroSubtext.textContent = data.bannerSubtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load page banner content:', err);
+    });
+</script>
+
+<script>
+  // "We started this because too many trips get booked on guesswork" story
+  // section is stored in content/about-story.json — two paragraphs of
+  // prose plus a separate pull-quote line. The current values are also
+  // present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/about-story.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var story = document.querySelector('.story');
+      if (!story) return;
+
+      var sectionHead = story.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var paragraphEls = story.querySelectorAll('p');
+      if (paragraphEls[0] && data.paragraph1) paragraphEls[0].textContent = data.paragraph1;
+      if (paragraphEls[1] && data.paragraph2) paragraphEls[1].textContent = data.paragraph2;
+
+      var pullquoteEl = document.querySelector('.pullquote');
+      if (pullquoteEl && data.pullquote) pullquoteEl.textContent = data.pullquote;
+    })
+    .catch(function (err) {
+      console.error('Could not load about story content:', err);
+    });
+</script>
+
+<script>
+  // "What we actually check before we recommend anything" value cards are
+  // stored in content/about-values.json. Each card has an icon (a single
+  // emoji character) in addition to the usual title/text. The current
+  // values are also present in the HTML below as a fallback, so the section
+  // still looks correct even if this fetch fails or JavaScript is
+  // unavailable.
+  fetch('content/about-values.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.values-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cardEls = grid.querySelectorAll('.value-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var el = cardEls[i];
+        if (!el) return;
+        var iconEl = el.querySelector('.icon');
+        var titleEl = el.querySelector('h3');
+        var textEl = el.querySelector('p');
+        if (iconEl && cardData.icon) iconEl.textContent = cardData.icon;
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load about values content:', err);
+    });
+</script>
+
+<script>
+  // "Three things we won't compromise on" promise cards are stored in
+  // content/about-promise.json. Unlike the value cards above, these have no
+  // icon. The current values are also present in the HTML below as a
+  // fallback, so the section still looks correct even if this fetch fails
+  // or JavaScript is unavailable.
+  fetch('content/about-promise.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.promise-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cardEls = grid.querySelectorAll('.promise-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var el = cardEls[i];
+        if (!el) return;
+        var titleEl = el.querySelector('h3');
+        var textEl = el.querySelector('p');
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load about promise content:', err);
+    });
+</script>
+
+<script>
+  // Trust band stats are stored in content/about-trust.json. This section
+  // has no eyebrow/heading of its own (just the 4 stat items), and each
+  // item's bold stat line uses the fixed .item > strong structure, so only
+  // the strong and span text are ever touched here. The current values are
+  // also present in the HTML below as a fallback, so the section still
+  // looks correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/about-trust.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.trust-band');
+      if (!band) return;
+
+      var itemEls = band.querySelectorAll('.item');
+      (data.items || []).forEach(function (itemData, i) {
+        var el = itemEls[i];
+        if (!el) return;
+        var statEl = el.querySelector('strong');
+        var captionEl = el.querySelector('span');
+        if (statEl && itemData.stat) statEl.textContent = itemData.stat;
+        if (captionEl && itemData.caption) captionEl.textContent = itemData.caption;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load about trust band content:', err);
+    });
+</script>
+
+<script>
+  // CTA band content lives in content/about-cta.json. The current values
+  // are also present in the HTML below as a fallback, so the section still
+  // looks correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/about-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
+
 </body>
 </html>

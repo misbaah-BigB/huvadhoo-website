@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Common questions",
+  "heading": "Before you book",
+  "items": [
+    { "question": "What currency are prices usually quoted in?", "answer": "Almost always US dollars, even though the local currency is the Maldivian Rufiyaa. We quote in USD to keep things simple and comparable." },
+    { "question": "Do children pay the green tax too?", "answer": "Policies vary by property and often exempt young children below a certain age — we confirm the exact policy for your specific booking." },
+    { "question": "Is the service charge negotiable?", "answer": "Rarely — it's typically a fixed percentage set by the property itself, not something we or you can adjust." },
+    { "question": "Will my final bill match your quote exactly?", "answer": "Yes, for everything included in the quote. Anything you add on-island — extra excursions, spa treatments, room service — is billed separately, and we tell you that clearly before you book." }
+  ]
+}

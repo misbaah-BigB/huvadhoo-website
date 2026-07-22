@@ -1,0 +1,11 @@
+{
+  "eyebrow": "Side by side",
+  "heading": "The four transfer types",
+  "columns": ["Type", "Typical cost (round trip, per person)", "Duration", "Runs at night?", "Best for"],
+  "rows": [
+    { "values": ["Public ferry", "$5–$20", "30 min – 2+ hrs", "Rarely, limited schedule", "Budget guesthouse islands close to Male"] },
+    { "values": ["Shared/private speedboat", "$40–$150", "15–90 min", "Yes", "Guesthouses and resorts within ~1 hr of Male"] },
+    { "values": ["Domestic flight + boat", "$150–$320", "45 min flight + short boat transfer", "Limited flights after dark", "Resorts in outer atolls (Addu, Fuvahmulah, etc.)"] },
+    { "values": ["Seaplane", "$300–$550", "25–45 min flight", "No — daylight only", "Resorts 45+ min from Male, mid-atoll"] }
+  ]
+}

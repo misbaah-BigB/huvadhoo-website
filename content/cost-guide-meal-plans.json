@@ -1,0 +1,12 @@
+{
+  "eyebrow": "Meal plans",
+  "heading": "How much each tier typically adds",
+  "columns": ["Meal plan", "What's included", "Typical add-on, per person/night"],
+  "rows": [
+    { "values": ["Room only", "No meals", "$0"] },
+    { "values": ["Breakfast (BB)", "Breakfast only", "$15–$30"] },
+    { "values": ["Half board (HB)", "Breakfast + dinner", "$40–$70"] },
+    { "values": ["Full board (FB)", "Breakfast + lunch + dinner", "$65–$100"] },
+    { "values": ["All-inclusive (AI)", "Meals, drinks, sometimes activities", "$90–$160"] }
+  ]
+}

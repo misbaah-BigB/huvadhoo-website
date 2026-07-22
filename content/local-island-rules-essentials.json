@@ -1,0 +1,12 @@
+{
+  "eyebrow": "The essentials",
+  "heading": "What's different from a resort",
+  "cards": [
+    { "icon": "🍻", "title": "Alcohol", "text": "Not sold or permitted on local islands, by law. It's available at resorts and on licensed liveaboards, but not on inhabited islands — no exceptions, including bringing your own." },
+    { "icon": "👙", "title": "Swimwear", "text": "Bikinis and swim trunks are fine on the island's designated \"bikini beach.\" Elsewhere on the island, modest dress (shoulders and knees covered) is expected of both women and men." },
+    { "icon": "🌙", "title": "Ramadan", "text": "During Ramadan, visible eating, drinking, or smoking in public during daylight hours is discouraged out of respect — restaurants may adjust hours, and it's worth planning around this if traveling during the holy month." },
+    { "icon": "🐕", "title": "Pets and pork", "text": "Pork products aren't available on local islands, in line with Islamic dietary law. Dogs are uncommon and not typically kept as pets locally." },
+    { "icon": "🕌", "title": "Friday prayer time", "text": "Some shops and services pause briefly around midday on Fridays for prayer — a minor scheduling quirk worth knowing, not a disruption to your trip." },
+    { "icon": "📸", "title": "Public affection", "text": "Public displays of affection between couples are generally discouraged on local islands, more so than the resort norm." }
+  ]
+}

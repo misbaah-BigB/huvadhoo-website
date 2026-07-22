@@ -76,6 +76,31 @@ const PAGES = {
   "combo-combinations": { file: "content/combo-combinations.json", prepare: prepareComboCombinationsContent, commitMessage: "Update Combo Combinations via admin dashboard" },
   "combo-faq": { file: "content/combo-faq.json", prepare: prepareComboFaqContent, commitMessage: "Update Combo FAQ via admin dashboard" },
   "combo-cta": { file: "content/combo-cta.json", prepare: prepareComboCtaContent, commitMessage: "Update Combo CTA band via admin dashboard" },
+  "transfer-guide": { file: "content/transfer-guide.json", prepare: prepareTextBannerContent, commitMessage: "Update Transfer Guide banner via admin dashboard" },
+  "transfer-guide-comparison": { file: "content/transfer-guide-comparison.json", prepare: prepareTransferGuideComparisonContent, commitMessage: "Update Transfer Guide Comparison Table via admin dashboard" },
+  "transfer-guide-flow": { file: "content/transfer-guide-flow.json", prepare: prepareTransferGuideFlowContent, commitMessage: "Update Transfer Guide Quick Logic steps via admin dashboard" },
+  "transfer-guide-mistakes": { file: "content/transfer-guide-mistakes.json", prepare: prepareTransferGuideMistakesContent, commitMessage: "Update Transfer Guide Mistakes section via admin dashboard" },
+  "transfer-guide-faq": { file: "content/transfer-guide-faq.json", prepare: prepareTransferGuideFaqContent, commitMessage: "Update Transfer Guide FAQ via admin dashboard" },
+  "transfer-guide-cta": { file: "content/transfer-guide-cta.json", prepare: prepareTransferGuideCtaContent, commitMessage: "Update Transfer Guide CTA band via admin dashboard" },
+  "cost-guide": { file: "content/cost-guide.json", prepare: prepareTextBannerContent, commitMessage: "Update Cost Guide banner via admin dashboard" },
+  "cost-guide-example": { file: "content/cost-guide-example.json", prepare: prepareCostGuideExampleContent, commitMessage: "Update Cost Guide Worked Example via admin dashboard" },
+  "cost-guide-line-by-line": { file: "content/cost-guide-line-by-line.json", prepare: prepareCostGuideLineByLineContent, commitMessage: "Update Cost Guide Line By Line section via admin dashboard" },
+  "cost-guide-meal-plans": { file: "content/cost-guide-meal-plans.json", prepare: prepareCostGuideMealPlansContent, commitMessage: "Update Cost Guide Meal Plans table via admin dashboard" },
+  "cost-guide-watch-for": { file: "content/cost-guide-watch-for.json", prepare: prepareCostGuideWatchForContent, commitMessage: "Update Cost Guide Watch For section via admin dashboard" },
+  "cost-guide-faq": { file: "content/cost-guide-faq.json", prepare: prepareCostGuideFaqContent, commitMessage: "Update Cost Guide FAQ via admin dashboard" },
+  "cost-guide-cta": { file: "content/cost-guide-cta.json", prepare: prepareCostGuideCtaContent, commitMessage: "Update Cost Guide CTA band via admin dashboard" },
+  "local-island-rules": { file: "content/local-island-rules.json", prepare: prepareTextBannerContent, commitMessage: "Update Local Island Rules banner via admin dashboard" },
+  "local-island-rules-essentials": { file: "content/local-island-rules-essentials.json", prepare: prepareLocalIslandRulesEssentialsContent, commitMessage: "Update Local Island Rules Essentials section via admin dashboard" },
+  "local-island-rules-comparison": { file: "content/local-island-rules-comparison.json", prepare: prepareLocalIslandRulesComparisonContent, commitMessage: "Update Local Island Rules Comparison Table via admin dashboard" },
+  "local-island-rules-reassurance": { file: "content/local-island-rules-reassurance.json", prepare: prepareLocalIslandRulesReassuranceContent, commitMessage: "Update Local Island Rules Reassurance section via admin dashboard" },
+  "local-island-rules-faq": { file: "content/local-island-rules-faq.json", prepare: prepareLocalIslandRulesFaqContent, commitMessage: "Update Local Island Rules FAQ via admin dashboard" },
+  "local-island-rules-cta": { file: "content/local-island-rules-cta.json", prepare: prepareLocalIslandRulesCtaContent, commitMessage: "Update Local Island Rules CTA band via admin dashboard" },
+  about: { file: "content/about.json", prepare: prepareBannerContent, commitMessage: "Update About banner via admin dashboard" },
+  "about-story": { file: "content/about-story.json", prepare: prepareAboutStoryContent, commitMessage: "Update About Story section via admin dashboard" },
+  "about-values": { file: "content/about-values.json", prepare: prepareAboutValuesContent, commitMessage: "Update About Values section via admin dashboard" },
+  "about-promise": { file: "content/about-promise.json", prepare: prepareAboutPromiseContent, commitMessage: "Update About Promise section via admin dashboard" },
+  "about-trust": { file: "content/about-trust.json", prepare: prepareAboutTrustContent, commitMessage: "Update About Trust Band via admin dashboard" },
+  "about-cta": { file: "content/about-cta.json", prepare: prepareAboutCtaContent, commitMessage: "Update About CTA band via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -1180,6 +1205,499 @@ function prepareComboFaqContent(payload) {
 }
 
 function prepareComboCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+// Shared by the three "guide" pages' banners (Transfer Guide, Cost Guide,
+// Local Island Rules) — unlike every other page's banner, these have no
+// background image, so this is a smaller shape than prepareBannerContent
+// and doesn't require/produce a bannerImage field.
+function prepareTextBannerContent(payload) {
+  const bannerHeadline = str(payload.bannerHeadline);
+  const bannerSubtext = str(payload.bannerSubtext);
+  if (!bannerHeadline.trim()) {
+    return { error: "Headline can't be empty." };
+  }
+  return { content: { bannerHeadline, bannerSubtext } };
+}
+
+// Like the factor-less tables on Diving/Fishing/Family, this one has no
+// separate row-label column — all 5 columns sit on equal footing.
+function prepareTransferGuideComparisonContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ values });
+  }
+
+  return { content: { eyebrow, heading, columns, rows } };
+}
+
+function prepareTransferGuideFlowContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.steps) || payload.steps.length === 0) {
+    return { error: "At least one step is required." };
+  }
+
+  const steps = [];
+  for (const raw of payload.steps) {
+    const step = raw && typeof raw === "object" ? raw : {};
+    const condition = str(step.condition);
+    const then = str(step.then);
+    if (!condition.trim() || !then.trim()) {
+      return { error: "Each step needs both a condition and a 'then' part." };
+    }
+    steps.push({ condition, then });
+  }
+
+  return { content: { eyebrow, heading, steps } };
+}
+
+function prepareTransferGuideMistakesContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareTransferGuideFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareTransferGuideCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareCostGuideExampleContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const intro = str(payload.intro);
+  const exampleTitle = str(payload.exampleTitle);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const label = str(row.label);
+    const value = str(row.value);
+    if (!label.trim() || !value.trim()) {
+      return { error: "Each row needs both a label and a value." };
+    }
+    rows.push({ label, value });
+  }
+
+  const totalRaw = payload.total && typeof payload.total === "object" ? payload.total : {};
+  const totalLabel = str(totalRaw.label);
+  const totalValue = str(totalRaw.value);
+  if (!totalLabel.trim() || !totalValue.trim()) {
+    return { error: "The total row needs both a label and a value." };
+  }
+
+  return { content: { eyebrow, heading, intro, exampleTitle, rows, total: { label: totalLabel, value: totalValue } } };
+}
+
+function prepareCostGuideLineByLineContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Like the factor-less tables on Diving/Fishing/Family, this one has no
+// separate row-label column — all 3 columns sit on equal footing.
+function prepareCostGuideMealPlansContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ values });
+  }
+
+  return { content: { eyebrow, heading, columns, rows } };
+}
+
+function prepareCostGuideWatchForContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareCostGuideFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareCostGuideCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareLocalIslandRulesEssentialsContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ icon: str(card.icon), title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Unlike the factor-less tables on Diving/Fishing/Family, this one has a
+// real left-hand "Rule" column, the same shape as the Resorts/Combo
+// comparison tables.
+function prepareLocalIslandRulesComparisonContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const factorLabel = str(payload.factorLabel);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.columns) || payload.columns.length === 0) {
+    return { error: "At least one column is required." };
+  }
+  const columns = payload.columns.map(str);
+  if (columns.some((c) => !c.trim())) {
+    return { error: "Column headers can't be empty." };
+  }
+  if (!Array.isArray(payload.rows) || payload.rows.length === 0) {
+    return { error: "At least one row is required." };
+  }
+
+  const rows = [];
+  for (const raw of payload.rows) {
+    const row = raw && typeof raw === "object" ? raw : {};
+    const factor = str(row.factor);
+    if (!factor.trim()) {
+      return { error: "Each row needs a factor label." };
+    }
+    const values = Array.isArray(row.values) ? row.values.map(str) : [];
+    if (values.length !== columns.length) {
+      return { error: "Each row must have exactly one value per column." };
+    }
+    rows.push({ factor, values });
+  }
+
+  return { content: { eyebrow, heading, factorLabel, columns, rows } };
+}
+
+function prepareLocalIslandRulesReassuranceContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const paragraph = str(payload.paragraph);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!paragraph.trim()) {
+    return { error: "The paragraph can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, paragraph } };
+}
+
+function prepareLocalIslandRulesFaqContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one FAQ item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const question = str(item.question);
+    if (!question.trim()) {
+      return { error: "Each FAQ item needs a question." };
+    }
+    items.push({ question, answer: str(item.answer) });
+  }
+
+  return { content: { eyebrow, heading, items } };
+}
+
+function prepareLocalIslandRulesCtaContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const subtext = str(payload.subtext);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+
+  return { content: { eyebrow, heading, subtext } };
+}
+
+function prepareAboutStoryContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+  const paragraph1 = str(payload.paragraph1);
+  const paragraph2 = str(payload.paragraph2);
+  const pullquote = str(payload.pullquote);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!paragraph1.trim() || !paragraph2.trim()) {
+    return { error: "Both paragraphs are required." };
+  }
+
+  return { content: { eyebrow, heading, paragraph1, paragraph2, pullquote } };
+}
+
+function prepareAboutValuesContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ icon: str(card.icon), title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+function prepareAboutPromiseContent(payload) {
+  const eyebrow = str(payload.eyebrow);
+  const heading = str(payload.heading);
+
+  if (!heading.trim()) {
+    return { error: "Heading can't be empty." };
+  }
+  if (!Array.isArray(payload.cards) || payload.cards.length === 0) {
+    return { error: "At least one card is required." };
+  }
+
+  const cards = [];
+  for (const raw of payload.cards) {
+    const card = raw && typeof raw === "object" ? raw : {};
+    const title = str(card.title);
+    if (!title.trim()) {
+      return { error: "Each card needs a title." };
+    }
+    cards.push({ title, text: str(card.text) });
+  }
+
+  return { content: { eyebrow, heading, cards } };
+}
+
+// Unlike every other section here, the trust band has no eyebrow/heading of
+// its own — just the 4 stat items.
+function prepareAboutTrustContent(payload) {
+  if (!Array.isArray(payload.items) || payload.items.length === 0) {
+    return { error: "At least one item is required." };
+  }
+
+  const items = [];
+  for (const raw of payload.items) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const stat = str(item.stat);
+    if (!stat.trim()) {
+      return { error: "Each item needs a stat line." };
+    }
+    items.push({ stat, caption: str(item.caption) });
+  }
+
+  return { content: { items } };
+}
+
+function prepareAboutCtaContent(payload) {
   const eyebrow = str(payload.eyebrow);
   const heading = str(payload.heading);
   const subtext = str(payload.subtext);

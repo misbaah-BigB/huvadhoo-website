@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Watch for these",
+  "heading": "What's often not included by default",
+  "cards": [
+    { "title": "Wi-Fi", "text": "Free at most resorts now, but still charged at some budget properties — we confirm this before booking." },
+    { "title": "Excursions", "text": "Diving, sandbank trips, and sunset cruises are almost always priced separately from your room rate." },
+    { "title": "Alcohol at guesthouses", "text": "Not available at all on local islands, by law — not a pricing issue, but a real difference from resort budgeting." },
+    { "title": "Single supplement", "text": "Solo travelers often pay a surcharge on double-occupancy room rates — we'll flag this upfront if it applies to your booking." }
+  ]
+}

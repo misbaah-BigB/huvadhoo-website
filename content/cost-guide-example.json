@@ -1,0 +1,15 @@
+{
+  "eyebrow": "Worked example",
+  "heading": "A real total price, broken down",
+  "intro": "5 nights, 2 adults, budget-luxury resort, half-board, speedboat transfer — illustrative figures.",
+  "exampleTitle": "Sample 5-night quote",
+  "rows": [
+    { "label": "Room rate (5 nights)", "value": "$1,250" },
+    { "label": "Green tax ($6/night × 2 people × 5 nights)", "value": "$60" },
+    { "label": "Service charge (~10%)", "value": "$131" },
+    { "label": "GST/tourism tax (~16%)", "value": "$209" },
+    { "label": "Half-board meal plan upgrade", "value": "$300" },
+    { "label": "Speedboat transfer (round trip, 2 people)", "value": "$140" }
+  ],
+  "total": { "label": "Total price", "value": "$2,090" }
+}

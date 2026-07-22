@@ -217,5 +217,188 @@
 
 <script src="assets/motion.js"></script>
 
+<script>
+  // Page banner content lives in content/local-island-rules.json so it can
+  // be edited without touching this file. This banner has no background
+  // image (unlike most other pages), so only the headline and subtext are
+  // pulled from the fetched data. The current values are also present in
+  // the HTML below as a fallback, so the banner still looks correct even if
+  // this fetch fails or JavaScript is unavailable.
+  fetch('content/local-island-rules.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var heroHeadline = document.querySelector('.pagehero h1');
+      var heroSubtext = document.querySelector('.pagehero p.lede');
+      if (heroHeadline && data.bannerHeadline) heroHeadline.textContent = data.bannerHeadline;
+      if (heroSubtext && data.bannerSubtext) heroSubtext.textContent = data.bannerSubtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load page banner content:', err);
+    });
+</script>
+
+<script>
+  // "What's different from a resort" rule cards are stored in
+  // content/local-island-rules-essentials.json. Each card has an icon
+  // (a single emoji character) in addition to the usual title/text. The
+  // current values are also present in the HTML below as a fallback, so the
+  // section still looks correct even if this fetch fails or JavaScript is
+  // unavailable.
+  fetch('content/local-island-rules-essentials.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.querySelector('.rules-grid');
+      if (!grid) return;
+
+      var sectionHead = grid.parentElement.querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var cardEls = grid.querySelectorAll('.rule-card');
+      (data.cards || []).forEach(function (cardData, i) {
+        var el = cardEls[i];
+        if (!el) return;
+        var iconEl = el.querySelector('.icon');
+        var titleEl = el.querySelector('h3');
+        var textEl = el.querySelector('p');
+        if (iconEl && cardData.icon) iconEl.textContent = cardData.icon;
+        if (titleEl && cardData.title) titleEl.textContent = cardData.title;
+        if (textEl && cardData.text) textEl.textContent = cardData.text;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load local island rules essentials content:', err);
+    });
+</script>
+
+<script>
+  // "Local island vs. resort island" comparison table is stored in
+  // content/local-island-rules-comparison.json. Unlike the factor-less
+  // tables on Diving/Fishing/Family, this one has a real left-hand "Rule"
+  // column, the same shape as the Resorts/Combo comparison tables, so
+  // header/row cells are offset by 1 to skip the factor-label column. The
+  // current values are also present in the HTML below as a fallback, so the
+  // section still looks correct even if this fetch fails or JavaScript is
+  // unavailable.
+  fetch('content/local-island-rules-comparison.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var table = document.querySelector('.compare table');
+      if (!table) return;
+
+      var sectionHead = table.closest('section').querySelector('.section-head');
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var rows = table.querySelectorAll('tr');
+      var headerCells = rows[0] ? rows[0].querySelectorAll('th') : [];
+      if (headerCells[0] && data.factorLabel) headerCells[0].textContent = data.factorLabel;
+      (data.columns || []).forEach(function (col, i) {
+        if (headerCells[i + 1] && col) headerCells[i + 1].textContent = col;
+      });
+
+      (data.rows || []).forEach(function (rowData, i) {
+        var tr = rows[i + 1];
+        if (!tr) return;
+        var cells = tr.querySelectorAll('td');
+        if (cells[0] && rowData.factor) cells[0].textContent = rowData.factor;
+        (rowData.values || []).forEach(function (val, j) {
+          if (cells[j + 1] && val) cells[j + 1].textContent = val;
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load local island rules comparison content:', err);
+    });
+</script>
+
+<script>
+  // "This isn't a restriction on your holiday" reassurance block is stored
+  // in content/local-island-rules-reassurance.json — a single paragraph of
+  // prose, not a card grid. The current values are also present in the HTML
+  // below as a fallback, so the section still looks correct even if this
+  // fetch fails or JavaScript is unavailable.
+  fetch('content/local-island-rules-reassurance.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var block = document.querySelector('.reassure');
+      if (!block) return;
+      var eyebrowEl = block.querySelector('.eyebrow');
+      var headingEl = block.querySelector('h2');
+      var paragraphEl = block.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (paragraphEl && data.paragraph) paragraphEl.textContent = data.paragraph;
+    })
+    .catch(function (err) {
+      console.error('Could not load reassurance content:', err);
+    });
+</script>
+
+<script>
+  // FAQ content lives in content/local-island-rules-faq.json — plain text
+  // only, no embedded links in any answer. The current values are also
+  // present in the HTML below as a fallback, so the section still looks
+  // correct even if this fetch fails or JavaScript is unavailable.
+  fetch('content/local-island-rules-faq.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var list = document.getElementById('faqList');
+      if (!list) return;
+
+      var section = list.closest('section');
+      var sectionHead = section ? section.querySelector('.section-head') : null;
+      if (sectionHead) {
+        var eyebrowEl = sectionHead.querySelector('.eyebrow');
+        var headingEl = sectionHead.querySelector('h2');
+        if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+        if (headingEl && data.heading) headingEl.textContent = data.heading;
+      }
+
+      var itemEls = list.querySelectorAll('.faq-item');
+      (data.items || []).forEach(function (itemData, i) {
+        var el = itemEls[i];
+        if (!el) return;
+        var questionEl = el.querySelector('.faq-q span');
+        var answerEl = el.querySelector('.faq-a p');
+        if (questionEl && itemData.question) questionEl.textContent = itemData.question;
+        if (answerEl && itemData.answer) answerEl.textContent = itemData.answer;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load local island rules FAQ content:', err);
+    });
+</script>
+
+<script>
+  // CTA band content lives in content/local-island-rules-cta.json. The
+  // current values are also present in the HTML below as a fallback, so the
+  // section still looks correct even if this fetch fails or JavaScript is
+  // unavailable.
+  fetch('content/local-island-rules-cta.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var band = document.querySelector('.cta-band-center');
+      if (!band) return;
+      var eyebrowEl = band.querySelector('.eyebrow');
+      var headingEl = band.querySelector('h2');
+      var subtextEl = band.querySelector('p:not(.eyebrow)');
+      if (eyebrowEl && data.eyebrow) eyebrowEl.textContent = data.eyebrow;
+      if (headingEl && data.heading) headingEl.textContent = data.heading;
+      if (subtextEl && data.subtext) subtextEl.textContent = data.subtext;
+    })
+    .catch(function (err) {
+      console.error('Could not load CTA band content:', err);
+    });
+</script>
+
 </body>
 </html>

@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Line by line",
+  "heading": "What each cost actually is",
+  "cards": [
+    { "title": "Green tax", "text": "A flat government environmental fee charged per person, per night — typically higher for resorts than guesthouses. It's mandatory and separate from the room rate." },
+    { "title": "Service charge", "text": "Usually around 10%, added by the resort or guesthouse itself. Not always negotiable, and rarely optional despite the name." },
+    { "title": "GST / tourism tax", "text": "A government tax on tourism goods and services, typically in the mid-teens percentage-wise, applied on top of the room rate." },
+    { "title": "Meal plan", "text": "Ranges from room-only to full all-inclusive. This is often the single biggest cost swing in your total — see the comparison below." }
+  ]
+}
