@@ -232,39 +232,52 @@
 <script src="assets/motion.js"></script>
 
 <script>
-  // The "Resort vs. Guesthouse" card pulls its category/title/excerpt/read
-  // time/card label from content/blog-resort-vs-guesthouse.json — the same
-  // file that post's own page reads from, so there's one source of truth
-  // instead of two separate places to keep in sync. This is a prototype
-  // for one post; the other 8 cards on this page are still plain static
-  // HTML, untouched. The current values are also present in the HTML
-  // below as a fallback, so the card still looks correct even if this
-  // fetch fails or JavaScript is unavailable.
-  fetch('content/blog-resort-vs-guesthouse.json')
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      var card = document.querySelector('.post-card[href="resort-vs-guesthouse.html"]');
-      if (!card) return;
+  // Each converted post's card pulls its category/title/excerpt/read
+  // time/card label from that post's own content/blog-<slug>.json — the
+  // same file the post's own page reads from, so there's one source of
+  // truth instead of two separate places to keep in sync. One shared
+  // function handles every converted post so the update logic can't drift
+  // between cards; posts not yet converted keep their plain static HTML,
+  // untouched. The current values are also present in the HTML below as a
+  // fallback, so each card still looks correct even if a fetch fails or
+  // JavaScript is unavailable.
+  var CONVERTED_BLOG_POSTS = [
+    'resort-vs-guesthouse.html',
+    'maldives-cost-explained.html',
+    'speedboat-vs-seaplane.html',
+    'budget-islands-maldives.html',
+    'alcohol-local-islands.html',
+  ];
 
-      var catEl = card.querySelector('.cat');
-      var titleEl = card.querySelector('h3');
-      var excerptEl = card.querySelector('p');
-      var metaSpans = card.querySelectorAll('.meta span');
+  function updateBlogCard(href) {
+    fetch('content/blog-' + href.replace('.html', '') + '.json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var card = document.querySelector('.post-card[href="' + href + '"]');
+        if (!card) return;
 
-      if (catEl && data.category) {
-        var slug = data.category.toLowerCase();
-        catEl.textContent = data.category;
-        catEl.className = 'cat cat-' + slug;
-        card.setAttribute('data-cat', slug);
-      }
-      if (titleEl && data.title) titleEl.textContent = data.title;
-      if (excerptEl && data.excerpt) excerptEl.textContent = data.excerpt;
-      if (metaSpans[0] && data.readTime) metaSpans[0].textContent = data.readTime;
-      if (metaSpans[1] && data.cardLabel) metaSpans[1].textContent = data.cardLabel;
-    })
-    .catch(function (err) {
-      console.error('Could not load blog post card content:', err);
-    });
+        var catEl = card.querySelector('.cat');
+        var titleEl = card.querySelector('h3');
+        var excerptEl = card.querySelector('p');
+        var metaSpans = card.querySelectorAll('.meta span');
+
+        if (catEl && data.category) {
+          var slug = data.category.toLowerCase();
+          catEl.textContent = data.category;
+          catEl.className = 'cat cat-' + slug;
+          card.setAttribute('data-cat', slug);
+        }
+        if (titleEl && data.title) titleEl.textContent = data.title;
+        if (excerptEl && data.excerpt) excerptEl.textContent = data.excerpt;
+        if (metaSpans[0] && data.readTime) metaSpans[0].textContent = data.readTime;
+        if (metaSpans[1] && data.cardLabel) metaSpans[1].textContent = data.cardLabel;
+      })
+      .catch(function (err) {
+        console.error('Could not load blog post card content for ' + href + ':', err);
+      });
+  }
+
+  CONVERTED_BLOG_POSTS.forEach(updateBlogCard);
 </script>
 
 </body>
