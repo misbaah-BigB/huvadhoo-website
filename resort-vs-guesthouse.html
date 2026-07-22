@@ -66,6 +66,7 @@
 
   <p>This is the first question almost every first-time visitor asks, and it doesn't have a universal answer — it depends what you actually want out of the trip. Here's the honest version, not the marketing version.</p>
 
+  <div id="postBody">
   <h2>The core difference isn't price — it's the island itself</h2>
   <p>A resort occupies its own private island. You won't share it with anyone who isn't also a paying guest, and everything on it — the restaurants, the beach, the staff — exists purely for tourism. A guesthouse sits on an inhabited local island, alongside a real Maldivian community: shops, a mosque, families, school kids walking home. Price follows from that difference, but it isn't the starting point.</p>
 
@@ -109,6 +110,7 @@
 
   <h2>If you're still not sure</h2>
   <p>Tell us what's actually pulling you to the Maldives — privacy, adventure, culture, or just the photos — and we'll recommend a specific island, not just a category. That's genuinely faster than reading five more articles.</p>
+  </div>
 
   <div class="related">
     <h3>Related guides</h3>
@@ -185,6 +187,70 @@
 </div>
 
 <script src="assets/motion.js"></script>
+
+<script>
+  // This post's content lives in content/blog-resort-vs-guesthouse.json —
+  // a prototype of a "hybrid" editing model for blog posts. Metadata
+  // (category, title, read time, excerpt, opening paragraph, pullquote,
+  // inline call-to-action, related links) are structured fields, while the
+  // flowing article body (headings, paragraphs, lists, the comparison
+  // table) is one HTML block, set via innerHTML on #postBody.
+  //
+  // The pullquote and inline-CTA markup is also physically present inside
+  // that HTML block, in its correct visual position, so the article keeps
+  // rendering exactly as it always has even before this script runs. Their
+  // real text lives in the structured fields below, though — this script
+  // re-applies those on top immediately after the body HTML is set, so
+  // editing the friendly Pullquote / Inline CTA fields in the dashboard
+  // (not the raw HTML) is what actually takes effect.
+  //
+  // The current values are also present in the HTML below as a fallback,
+  // so the page still looks correct even if this fetch fails or
+  // JavaScript is unavailable.
+  fetch('content/blog-resort-vs-guesthouse.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var article = document.querySelector('article');
+      if (!article) return;
+
+      var catEl = article.querySelector('.art-head .cat');
+      var titleEl = article.querySelector('.art-head h1');
+      var metaEl = article.querySelector('.art-head .meta');
+      if (catEl && data.category) {
+        catEl.textContent = data.category;
+        catEl.className = 'cat cat-' + data.category.toLowerCase();
+      }
+      if (titleEl && data.title) titleEl.textContent = data.title;
+      if (metaEl && data.readTime) metaEl.textContent = data.readTime + ' · The Maldives Guide';
+
+      var openingEl = article.querySelector('p');
+      if (openingEl && data.openingParagraph) openingEl.textContent = data.openingParagraph;
+
+      var bodyWrap = document.getElementById('postBody');
+      if (bodyWrap && data.body) bodyWrap.innerHTML = data.body;
+
+      var pullquoteEl = article.querySelector('.pullquote');
+      if (pullquoteEl && data.pullquote) pullquoteEl.textContent = data.pullquote;
+
+      var ctaTextEl = article.querySelector('.inline-cta p');
+      var ctaLinkEl = article.querySelector('.inline-cta a');
+      if (ctaTextEl && data.inlineCtaText) ctaTextEl.textContent = data.inlineCtaText;
+      if (ctaLinkEl && data.inlineCtaLabel) ctaLinkEl.textContent = data.inlineCtaLabel;
+      if (ctaLinkEl && data.inlineCtaLink) ctaLinkEl.href = data.inlineCtaLink;
+
+      var relatedEls = article.querySelectorAll('.related-card');
+      (data.relatedLinks || []).forEach(function (linkData, i) {
+        var el = relatedEls[i];
+        if (!el) return;
+        if (linkData.link) el.href = linkData.link;
+        var span = el.querySelector('span');
+        if (span && linkData.label) span.textContent = linkData.label;
+      });
+    })
+    .catch(function (err) {
+      console.error('Could not load post content:', err);
+    });
+</script>
 
 </body>
 </html>
