@@ -1,40 +1,47 @@
 [
   {
-    "id": "sample-resort-one",
+    "id": "the-residence-maldives",
     "category": "resort",
-    "name": "Sample Resort One",
-    "location": "Placeholder Atoll, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort One is a dummy entry used to build and test the Property Listings feature.",
-    "photos": [
-      "assets/properties/placeholder-1.jpg",
-      "assets/properties/placeholder-2.jpg",
-      "assets/properties/placeholder-3.jpg"
-    ],
-    "highlights": ["Overwater villas", "House reef", "Placeholder highlight", "Test tag"]
+    "name": "The Residence Maldives",
+    "location": "Gaafu Alifu, Huvadhoo Atoll",
+    "shortIntro": "Tucked on the island of Falhumaafushi in Huvadhoo Atoll, this resort pairs traditional Maldivian architecture with a quieter, more contemporary style of luxury. The surrounding reef is home to over 1,200 species of fish and coral, and the resort takes part in a Ministry-endorsed seagrass conservation project to help protect it. Beachfront and overwater villas both put you steps from the water, making it an easy pick for couples and families alike.",
+    "photos": ["assets/properties/placeholder-resort.jpg"],
+    "highlights": ["Overwater villas", "House reef diving", "Family-friendly", "Reef conservation partner"]
   },
   {
-    "id": "sample-resort-two",
+    "id": "pullman-maldives-maamutaa",
     "category": "resort",
-    "name": "Sample Resort Two",
-    "location": "Placeholder Lagoon, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort Two exists only to confirm the listings grid handles more than one card correctly.",
-    "photos": [
-      "assets/properties/placeholder-4.jpg",
-      "assets/properties/placeholder-5.jpg"
-    ],
-    "highlights": ["Private pool villas", "All-inclusive", "Placeholder highlight"]
+    "name": "Pullman Maldives Maamutaa",
+    "location": "Gaafu Alifu, Huvadhoo Atoll",
+    "shortIntro": "Set on Maamutaa Island in Huvadhoo Atoll, this all-inclusive resort spans 122 villas built around a natural lake, including two rare Aqua Villas with underwater bedrooms. Diving is a real strength here — the on-site PADI centre is one of only four certified Eco Centres in the whole of the Maldives. With unlimited dining and water sports built into the stay, it suits both couples chasing a splurge and families needing everything sorted in advance.",
+    "photos": ["assets/properties/placeholder-resort.jpg"],
+    "highlights": ["All-inclusive", "Underwater bedroom villa", "PADI dive centre", "Family-friendly"]
   },
   {
-    "id": "sample-resort-three",
+    "id": "maamendhoo-fishing-lodge",
+    "category": "guesthouse",
+    "name": "Maamendhoo Fishing Lodge",
+    "location": "Maamendhoo, Huvadhoo Atoll",
+    "shortIntro": "A privately-run lodge on Maamendhoo island, right in the heart of Huvadhoo Atoll, built specifically around sport fishing. Your stay includes all meals, soft drinks, and laundry, with guided trips out to nearby lagoons and reefs chasing Giant Trevally, Yellowfin Tuna, and more. The dry season from November to April brings the calmest, clearest water for fishing.",
+    "photos": ["assets/properties/placeholder-guesthouse.jpg"],
+    "highlights": ["All-inclusive meals", "Sport fishing base", "Local island stay", "Best Nov–Apr"]
+  },
+  {
+    "id": "huvadhoo-lodge-dive",
+    "category": "dive-centre",
+    "name": "Huvadhoo Lodge & Dive",
+    "location": "Maamendhoo, Huvadhoo Atoll",
+    "shortIntro": "A PADI dive centre and lodge on Maamendhoo island, led by an instructor with over 15 years of experience across the Maldives. Huvadhoo Atoll has the country's largest shark population, highest number of turtles, and some of its healthiest coral reefs, making this a strong base for both first-time divers and experienced ones chasing bigger marine life.",
+    "photos": ["assets/properties/placeholder-dive-centre.jpg"],
+    "highlights": ["PADI certified", "Shark diving", "Turtle sightings", "On-site accommodation"]
+  },
+  {
+    "id": "mercure-maldives-kooddoo-resort",
     "category": "resort",
-    "name": "Sample Resort Three",
-    "location": "Placeholder Reef, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort Three is dummy data, not a real property, and should be swapped out before launch.",
-    "photos": [
-      "assets/properties/placeholder-6.jpg",
-      "assets/properties/placeholder-7.jpg",
-      "assets/properties/placeholder-8.jpg"
-    ],
-    "highlights": ["Adults-only", "Sunset-facing villas", "Free snorkeling gear", "Placeholder highlight"]
+    "name": "Mercure Maldives Kooddoo Resort",
+    "location": "Kooddoo, Huvadhoo Atoll",
+    "shortIntro": "An adults-only resort on Kooddoo island in Huvadhoo Atoll, with 70 villas ranging from beachfront to overwater. The house reef is rich with marine life, and nearby channel dives bring you close to larger pelagic species. Choose from all-inclusive, bed & breakfast, or half-board depending on how you like to eat on holiday.",
+    "photos": ["assets/properties/placeholder-resort.jpg"],
+    "highlights": ["Adults-only", "All-inclusive option", "House reef diving", "Overwater villas"]
   }
 ]
