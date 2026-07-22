@@ -109,6 +109,7 @@
   .item-group .field input[type="text"],
   .item-group .field textarea{background:#fff;}
   .item-group .field textarea{min-height:64px;}
+  .code-textarea{font-family:'IBM Plex Mono', monospace; font-size:12.5px; line-height:1.6;}
   .save-btn{
     display:block;
     width:100%;
@@ -363,6 +364,7 @@
         <option value="about-promise">About — Promise</option>
         <option value="about-trust">About — Trust Band</option>
         <option value="about-cta">About — CTA Band</option>
+        <option value="blog-resort-vs-guesthouse">Blog — Resort vs. Guesthouse (prototype)</option>
         <option value="properties">Properties</option>
       </select>
     </div>
@@ -2007,6 +2009,67 @@
       </div>
     </div>
 
+    <div id="blogRvGFields" style="display:none;">
+      <span class="hint" style="display:block; margin-bottom:14px;">This is a prototype for one post, to try out a "structured fields + one HTML body block" editing pattern before rolling it out to the other 8 blog posts.</span>
+      <div class="field">
+        <label for="blogRvGCategory">Category</label>
+        <select id="blogRvGCategory">
+          <option value="Planning">Planning</option>
+          <option value="Budget">Budget</option>
+          <option value="Transfers">Transfers</option>
+          <option value="Culture">Culture</option>
+          <option value="Islands">Islands</option>
+        </select>
+        <span class="hint">Sets the colored badge on both this post and its blog listing card.</span>
+      </div>
+      <div class="field"><label for="blogRvGTitle">Title</label><input type="text" id="blogRvGTitle"></div>
+      <div class="field">
+        <label for="blogRvGReadTime">Read time</label>
+        <input type="text" id="blogRvGReadTime">
+        <span class="hint">e.g. "7 min read" — shown on both this post and the blog listing card.</span>
+      </div>
+      <div class="field">
+        <label for="blogRvGCardLabel">Blog card label</label>
+        <input type="text" id="blogRvGCardLabel">
+        <span class="hint">The small second label on the blog listing card, e.g. "Start here" or "Read now". Not shown on the post itself.</span>
+      </div>
+      <div class="field">
+        <label for="blogRvGExcerpt">Excerpt</label>
+        <textarea id="blogRvGExcerpt"></textarea>
+        <span class="hint">Shown only on the blog listing card, not on the post itself.</span>
+      </div>
+      <div class="field"><label for="blogRvGOpening">Opening paragraph</label><textarea id="blogRvGOpening"></textarea></div>
+      <div class="field">
+        <label for="blogRvGBody">Body (HTML)</label>
+        <textarea id="blogRvGBody" class="code-textarea" rows="20"></textarea>
+        <span class="hint">Write this the way you'd write a web page: wrap each paragraph in &lt;p&gt;...&lt;/p&gt;, headings in &lt;h2&gt;...&lt;/h2&gt; or &lt;h3&gt;...&lt;/h3&gt;, and lists as &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;. This block also contains the pullquote and call-to-action HTML in their correct position in the article, but you don't need to edit the text there — the Pullquote and Inline call-to-action fields below are what actually control what's shown.</span>
+      </div>
+      <div class="field"><label for="blogRvGPullquote">Pullquote</label><textarea id="blogRvGPullquote"></textarea></div>
+      <div class="field"><label for="blogRvGCtaText">Inline call-to-action text</label><textarea id="blogRvGCtaText"></textarea></div>
+      <div class="field"><label for="blogRvGCtaLabel">Inline call-to-action button label</label><input type="text" id="blogRvGCtaLabel"></div>
+      <div class="field"><label for="blogRvGCtaLink">Inline call-to-action button link</label><input type="text" id="blogRvGCtaLink"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 1</h3>
+        <div class="field"><label for="blogRvGRel0Label">Label</label><input type="text" id="blogRvGRel0Label"></div>
+        <div class="field"><label for="blogRvGRel0Link">Link</label><input type="text" id="blogRvGRel0Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 2</h3>
+        <div class="field"><label for="blogRvGRel1Label">Label</label><input type="text" id="blogRvGRel1Label"></div>
+        <div class="field"><label for="blogRvGRel1Link">Link</label><input type="text" id="blogRvGRel1Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 3</h3>
+        <div class="field"><label for="blogRvGRel2Label">Label</label><input type="text" id="blogRvGRel2Label"></div>
+        <div class="field"><label for="blogRvGRel2Link">Link</label><input type="text" id="blogRvGRel2Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 4</h3>
+        <div class="field"><label for="blogRvGRel3Label">Label</label><input type="text" id="blogRvGRel3Label"></div>
+        <div class="field"><label for="blogRvGRel3Link">Link</label><input type="text" id="blogRvGRel3Link"></div>
+      </div>
+    </div>
+
     <button type="submit" class="save-btn" id="saveBtn">Save changes</button>
   </form>
 
@@ -2140,6 +2203,7 @@
     'about-promise': 'About — Promise',
     'about-trust': 'About — Trust Band',
     'about-cta': 'About — CTA Band',
+    'blog-resort-vs-guesthouse': 'Blog — Resort vs. Guesthouse (prototype)',
     properties: 'Properties',
   };
   var CATEGORY_LABELS = {
@@ -2227,6 +2291,7 @@
     if (page === 'about-promise') return 'abPromise';
     if (page === 'about-trust') return 'abTrust';
     if (page === 'about-cta') return 'abCta';
+    if (page === 'blog-resort-vs-guesthouse') return 'blogRvG';
     return 'banner';
   }
 
@@ -2927,6 +2992,26 @@
   var abCtaEyebrowInput = document.getElementById('abCtaEyebrow');
   var abCtaHeadingInput = document.getElementById('abCtaHeading');
   var abCtaSubtextInput = document.getElementById('abCtaSubtext');
+
+  // ---- blog: "Resort vs. Guesthouse" prototype group ----
+  var blogRvGCategoryInput = document.getElementById('blogRvGCategory');
+  var blogRvGTitleInput = document.getElementById('blogRvGTitle');
+  var blogRvGReadTimeInput = document.getElementById('blogRvGReadTime');
+  var blogRvGCardLabelInput = document.getElementById('blogRvGCardLabel');
+  var blogRvGExcerptInput = document.getElementById('blogRvGExcerpt');
+  var blogRvGOpeningInput = document.getElementById('blogRvGOpening');
+  var blogRvGBodyInput = document.getElementById('blogRvGBody');
+  var blogRvGPullquoteInput = document.getElementById('blogRvGPullquote');
+  var blogRvGCtaTextInput = document.getElementById('blogRvGCtaText');
+  var blogRvGCtaLabelInput = document.getElementById('blogRvGCtaLabel');
+  var blogRvGCtaLinkInput = document.getElementById('blogRvGCtaLink');
+  var blogRvGRelInputs = [];
+  for (var brg = 0; brg < 4; brg++) {
+    blogRvGRelInputs.push({
+      label: document.getElementById('blogRvGRel' + brg + 'Label'),
+      link: document.getElementById('blogRvGRel' + brg + 'Link'),
+    });
+  }
 
   // ---- properties manager ----
   var propertiesManager = document.getElementById('propertiesManager');
@@ -4407,6 +4492,48 @@
       },
       build: function () {
         return { eyebrow: abCtaEyebrowInput.value, heading: abCtaHeadingInput.value, subtext: abCtaSubtextInput.value };
+      },
+    },
+    blogRvG: {
+      el: document.getElementById('blogRvGFields'),
+      inputs: [
+        blogRvGCategoryInput, blogRvGTitleInput, blogRvGReadTimeInput, blogRvGCardLabelInput,
+        blogRvGExcerptInput, blogRvGOpeningInput, blogRvGBodyInput, blogRvGPullquoteInput,
+        blogRvGCtaTextInput, blogRvGCtaLabelInput, blogRvGCtaLinkInput,
+      ].concat(blogRvGRelInputs.reduce(function (acc, r) { return acc.concat([r.label, r.link]); }, [])),
+      apply: function (data) {
+        blogRvGCategoryInput.value = data.category || 'Planning';
+        blogRvGTitleInput.value = data.title || '';
+        blogRvGReadTimeInput.value = data.readTime || '';
+        blogRvGCardLabelInput.value = data.cardLabel || '';
+        blogRvGExcerptInput.value = data.excerpt || '';
+        blogRvGOpeningInput.value = data.openingParagraph || '';
+        blogRvGBodyInput.value = data.body || '';
+        blogRvGPullquoteInput.value = data.pullquote || '';
+        blogRvGCtaTextInput.value = data.inlineCtaText || '';
+        blogRvGCtaLabelInput.value = data.inlineCtaLabel || '';
+        blogRvGCtaLinkInput.value = data.inlineCtaLink || '';
+        blogRvGRelInputs.forEach(function (r, idx) {
+          var linkData = (data.relatedLinks || [])[idx] || {};
+          r.label.value = linkData.label || '';
+          r.link.value = linkData.link || '';
+        });
+      },
+      build: function () {
+        return {
+          category: blogRvGCategoryInput.value,
+          title: blogRvGTitleInput.value,
+          readTime: blogRvGReadTimeInput.value,
+          cardLabel: blogRvGCardLabelInput.value,
+          excerpt: blogRvGExcerptInput.value,
+          openingParagraph: blogRvGOpeningInput.value,
+          body: blogRvGBodyInput.value,
+          pullquote: blogRvGPullquoteInput.value,
+          inlineCtaText: blogRvGCtaTextInput.value,
+          inlineCtaLabel: blogRvGCtaLabelInput.value,
+          inlineCtaLink: blogRvGCtaLinkInput.value,
+          relatedLinks: blogRvGRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
+        };
       },
     },
   };

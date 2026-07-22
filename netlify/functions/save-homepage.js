@@ -101,6 +101,7 @@ const PAGES = {
   "about-promise": { file: "content/about-promise.json", prepare: prepareAboutPromiseContent, commitMessage: "Update About Promise section via admin dashboard" },
   "about-trust": { file: "content/about-trust.json", prepare: prepareAboutTrustContent, commitMessage: "Update About Trust Band via admin dashboard" },
   "about-cta": { file: "content/about-cta.json", prepare: prepareAboutCtaContent, commitMessage: "Update About CTA band via admin dashboard" },
+  "blog-resort-vs-guesthouse": { file: "content/blog-resort-vs-guesthouse.json", prepare: prepareBlogResortVsGuesthouseContent, commitMessage: "Update Blog: Resort vs. Guesthouse post via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -1707,6 +1708,72 @@ function prepareAboutCtaContent(payload) {
   }
 
   return { content: { eyebrow, heading, subtext } };
+}
+
+// Prototype of a "hybrid" editing model for blog posts: most of this is
+// structured fields (so the site owner never has to touch HTML for the
+// category badge, title, pullquote, call-to-action, or related links),
+// but the flowing article body — headings, paragraphs, lists, the
+// comparison table — is accepted as one HTML block rather than being
+// broken into per-paragraph fields, since posts vary too much in shape for
+// that to be worth it. See resort-vs-guesthouse.html's fetch script for
+// how the body's baked-in pullquote/CTA markup gets overridden by the
+// separate structured fields below at render time.
+const BLOG_CATEGORIES = ["Planning", "Budget", "Transfers", "Culture", "Islands"];
+
+function prepareBlogResortVsGuesthouseContent(payload) {
+  const category = str(payload.category).trim();
+  const title = str(payload.title);
+  const readTime = str(payload.readTime);
+  const cardLabel = str(payload.cardLabel);
+  const excerpt = str(payload.excerpt);
+  const openingParagraph = str(payload.openingParagraph);
+  const body = str(payload.body);
+  const pullquote = str(payload.pullquote);
+  const inlineCtaText = str(payload.inlineCtaText);
+  const inlineCtaLabel = str(payload.inlineCtaLabel);
+  const inlineCtaLink = str(payload.inlineCtaLink);
+
+  if (!BLOG_CATEGORIES.includes(category)) {
+    return { error: `Unknown category "${category || "(empty)"}".` };
+  }
+  if (!title.trim()) {
+    return { error: "Title can't be empty." };
+  }
+  if (!body.trim()) {
+    return { error: "Body can't be empty." };
+  }
+  if (!Array.isArray(payload.relatedLinks) || payload.relatedLinks.length === 0) {
+    return { error: "At least one related link is required." };
+  }
+
+  const relatedLinks = [];
+  for (const raw of payload.relatedLinks) {
+    const item = raw && typeof raw === "object" ? raw : {};
+    const label = str(item.label);
+    const link = str(item.link);
+    if (!label.trim() || !link.trim()) {
+      return { error: "Each related link needs both a label and a link." };
+    }
+    relatedLinks.push({ label, link });
+  }
+
+  return {
+    content: {
+      category,
+      title,
+      readTime,
+      cardLabel,
+      excerpt,
+      openingParagraph,
+      body,
+      pullquote,
+      inlineCtaText,
+      inlineCtaLabel,
+      inlineCtaLink,
+      relatedLinks,
+    },
+  };
 }
 
 function signSession(expiry, secret) {
