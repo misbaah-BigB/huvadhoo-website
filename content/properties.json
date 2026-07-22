@@ -1,43 +1,5 @@
 [
   {
-    "id": "sample-resort-one",
-    "category": "resort",
-    "name": "Sample Resort One",
-    "location": "Placeholder Atoll, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort One is a dummy entry used to build and test the Property Listings feature.",
-    "photos": [
-      "assets/properties/placeholder-1.jpg",
-      "assets/properties/placeholder-2.jpg",
-      "assets/properties/placeholder-3.jpg"
-    ],
-    "highlights": ["Overwater villas", "House reef", "Placeholder highlight", "Test tag"]
-  },
-  {
-    "id": "sample-resort-two",
-    "category": "resort",
-    "name": "Sample Resort Two",
-    "location": "Placeholder Lagoon, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort Two exists only to confirm the listings grid handles more than one card correctly.",
-    "photos": [
-      "assets/properties/placeholder-4.jpg",
-      "assets/properties/placeholder-5.jpg"
-    ],
-    "highlights": ["Private pool villas", "All-inclusive", "Placeholder highlight"]
-  },
-  {
-    "id": "sample-resort-three",
-    "category": "resort",
-    "name": "Sample Resort Three",
-    "location": "Placeholder Reef, Maldives",
-    "shortIntro": "This is placeholder text for testing — replace with real content later. Sample Resort Three is dummy data, not a real property, and should be swapped out before launch.",
-    "photos": [
-      "assets/properties/placeholder-6.jpg",
-      "assets/properties/placeholder-7.jpg",
-      "assets/properties/placeholder-8.jpg"
-    ],
-    "highlights": ["Adults-only", "Sunset-facing villas", "Free snorkeling gear", "Placeholder highlight"]
-  },
-  {
     "id": "the-residence-maldives",
     "category": "resort",
     "name": "The Residence Maldives",

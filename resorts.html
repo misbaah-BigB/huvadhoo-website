@@ -126,30 +126,30 @@
         <p>A first look at real listings — photos and details below are placeholders for now.</p>
       </div>
       <div class="card-grid" id="propertyGrid">
-        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-one">
-          <div class="card-media"><img src="assets/properties/placeholder-1.jpg" alt="" onerror="this.style.display='none'"></div>
+        <a class="prod-card" data-tilt href="property-detail.html?id=the-residence-maldives">
+          <div class="card-media"><img src="assets/properties/placeholder-resort.jpg" alt="" onerror="this.style.display='none'"></div>
           <div class="card-body">
             <span class="tag">Resort</span>
-            <h3>Sample Resort One</h3>
-            <p>This is placeholder text for testing — replace with real content later. Sample Resort One is a dummy entry used to build and test the Property Listings feature.</p>
+            <h3>The Residence Maldives</h3>
+            <p>Tucked on the island of Falhumaafushi in Huvadhoo Atoll, this resort pairs traditional Maldivian architecture with a quieter, more contemporary style of luxury. The surrounding reef is home to over 1,200 species of fish and coral, and the resort takes part in a Ministry-endorsed seagrass conservation project to help protect it. Beachfront and overwater villas both put you steps from the water, making it an easy pick for couples and families alike.</p>
             <span class="see">View details →</span>
           </div>
         </a>
-        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-two">
-          <div class="card-media"><img src="assets/properties/placeholder-4.jpg" alt="" onerror="this.style.display='none'"></div>
+        <a class="prod-card" data-tilt href="property-detail.html?id=pullman-maldives-maamutaa">
+          <div class="card-media"><img src="assets/properties/placeholder-resort.jpg" alt="" onerror="this.style.display='none'"></div>
           <div class="card-body">
             <span class="tag">Resort</span>
-            <h3>Sample Resort Two</h3>
-            <p>This is placeholder text for testing — replace with real content later. Sample Resort Two exists only to confirm the listings grid handles more than one card correctly.</p>
+            <h3>Pullman Maldives Maamutaa</h3>
+            <p>Set on Maamutaa Island in Huvadhoo Atoll, this all-inclusive resort spans 122 villas built around a natural lake, including two rare Aqua Villas with underwater bedrooms. Diving is a real strength here — the on-site PADI centre is one of only four certified Eco Centres in the whole of the Maldives. With unlimited dining and water sports built into the stay, it suits both couples chasing a splurge and families needing everything sorted in advance.</p>
             <span class="see">View details →</span>
           </div>
         </a>
-        <a class="prod-card" data-tilt href="property-detail.html?id=sample-resort-three">
-          <div class="card-media"><img src="assets/properties/placeholder-6.jpg" alt="" onerror="this.style.display='none'"></div>
+        <a class="prod-card" data-tilt href="property-detail.html?id=mercure-maldives-kooddoo-resort">
+          <div class="card-media"><img src="assets/properties/placeholder-resort.jpg" alt="" onerror="this.style.display='none'"></div>
           <div class="card-body">
             <span class="tag">Resort</span>
-            <h3>Sample Resort Three</h3>
-            <p>This is placeholder text for testing — replace with real content later. Sample Resort Three is dummy data, not a real property, and should be swapped out before launch.</p>
+            <h3>Mercure Maldives Kooddoo Resort</h3>
+            <p>An adults-only resort on Kooddoo island in Huvadhoo Atoll, with 70 villas ranging from beachfront to overwater. The house reef is rich with marine life, and nearby channel dives bring you close to larger pelagic species. Choose from all-inclusive, bed & breakfast, or half-board depending on how you like to eat on holiday.</p>
             <span class="see">View details →</span>
           </div>
         </a>
@@ -447,14 +447,19 @@
   // fallback (shown as-is if this fetch fails or JavaScript is
   // unavailable); on success this rebuilds the grid entirely from the JSON
   // so it stays correct even if properties are added or removed later.
+  // Only category "resort" entries are shown here — guesthouses.html and
+  // diving.html filter to their own category the same way.
   fetch('content/properties.json')
     .then(function (res) { return res.json(); })
     .then(function (properties) {
       var grid = document.getElementById('propertyGrid');
       if (!grid || !Array.isArray(properties)) return;
 
+      var matches = properties.filter(function (p) { return p.category === 'resort'; });
+      if (!matches.length) return;
+
       grid.innerHTML = '';
-      properties.forEach(function (prop) {
+      matches.forEach(function (prop) {
         var card = document.createElement('a');
         card.className = 'prod-card';
         card.setAttribute('data-tilt', '');
