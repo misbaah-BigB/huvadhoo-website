@@ -101,7 +101,11 @@ const PAGES = {
   "about-promise": { file: "content/about-promise.json", prepare: prepareAboutPromiseContent, commitMessage: "Update About Promise section via admin dashboard" },
   "about-trust": { file: "content/about-trust.json", prepare: prepareAboutTrustContent, commitMessage: "Update About Trust Band via admin dashboard" },
   "about-cta": { file: "content/about-cta.json", prepare: prepareAboutCtaContent, commitMessage: "Update About CTA band via admin dashboard" },
-  "blog-resort-vs-guesthouse": { file: "content/blog-resort-vs-guesthouse.json", prepare: prepareBlogResortVsGuesthouseContent, commitMessage: "Update Blog: Resort vs. Guesthouse post via admin dashboard" },
+  "blog-resort-vs-guesthouse": { file: "content/blog-resort-vs-guesthouse.json", prepare: prepareBlogPostContent, commitMessage: "Update Blog: Resort vs. Guesthouse post via admin dashboard" },
+  "blog-maldives-cost-explained": { file: "content/blog-maldives-cost-explained.json", prepare: prepareBlogPostContent, commitMessage: "Update Blog: Maldives Cost Explained post via admin dashboard" },
+  "blog-speedboat-vs-seaplane": { file: "content/blog-speedboat-vs-seaplane.json", prepare: prepareBlogPostContent, commitMessage: "Update Blog: Speedboat vs. Seaplane post via admin dashboard" },
+  "blog-budget-islands-maldives": { file: "content/blog-budget-islands-maldives.json", prepare: prepareBlogPostContent, commitMessage: "Update Blog: Budget Islands post via admin dashboard" },
+  "blog-alcohol-local-islands": { file: "content/blog-alcohol-local-islands.json", prepare: prepareBlogPostContent, commitMessage: "Update Blog: Alcohol on Local Islands post via admin dashboard" },
 };
 const DEFAULT_PAGE = "homepage";
 
@@ -1710,18 +1714,22 @@ function prepareAboutCtaContent(payload) {
   return { content: { eyebrow, heading, subtext } };
 }
 
-// Prototype of a "hybrid" editing model for blog posts: most of this is
-// structured fields (so the site owner never has to touch HTML for the
-// category badge, title, pullquote, call-to-action, or related links),
-// but the flowing article body — headings, paragraphs, lists, the
-// comparison table — is accepted as one HTML block rather than being
-// broken into per-paragraph fields, since posts vary too much in shape for
-// that to be worth it. See resort-vs-guesthouse.html's fetch script for
-// how the body's baked-in pullquote/CTA markup gets overridden by the
-// separate structured fields below at render time.
+// Shared "hybrid" editing model for blog posts: most of this is structured
+// fields (so the site owner never has to touch HTML for the category
+// badge, title, pullquote, call-to-action, or related links), but the
+// flowing article body — headings, paragraphs, lists, the comparison
+// table — is accepted as one HTML block rather than being broken into
+// per-paragraph fields, since posts vary too much in shape for that to be
+// worth it. See resort-vs-guesthouse.html's fetch script for how the
+// body's baked-in pullquote/CTA markup gets overridden by the separate
+// structured fields below at render time — every converted post's fetch
+// script follows this same pattern. One shared prepare function is reused
+// across every converted post's PAGES entry (same shape and validation
+// for all of them, just a different file/commit message per post), the
+// same way prepareBannerContent is shared across every page's banner.
 const BLOG_CATEGORIES = ["Planning", "Budget", "Transfers", "Culture", "Islands"];
 
-function prepareBlogResortVsGuesthouseContent(payload) {
+function prepareBlogPostContent(payload) {
   const category = str(payload.category).trim();
   const title = str(payload.title);
   const readTime = str(payload.readTime);

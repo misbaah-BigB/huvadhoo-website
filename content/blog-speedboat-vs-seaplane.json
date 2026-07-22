@@ -1,0 +1,19 @@
+{
+  "category": "Transfers",
+  "title": "Speedboat vs. Seaplane: The Simple Explanation",
+  "readTime": "4 min read",
+  "cardLabel": "Read now",
+  "excerpt": "What actually decides which transfer you'll need — and why seaplanes don't fly at night.",
+  "openingParagraph": "This is the question we get asked more than almost any other. The short version: it depends entirely on how far your resort is from Male, not on price or luxury tier.",
+  "body": "<h2>The one-line version</h2>\n<p>Close to Male (roughly under an hour by boat) → speedboat. Farther out → seaplane, or sometimes a domestic flight plus a short boat ride.</p>\n\n<h2>Speedboat</h2>\n<ul>\n<li>Cheaper — typically $40–$150 per person round trip</li>\n<li>Runs day or night</li>\n<li>15–90 minutes depending on distance</li>\n<li>Can get choppy in rough weather, worth knowing if you're prone to seasickness</li>\n</ul>\n\n<h2>Seaplane</h2>\n<ul>\n<li>More expensive — typically $300–$550 per person round trip</li>\n<li>Daylight hours only — no exceptions</li>\n<li>25–45 minute flight, with genuinely stunning aerial views of the atolls</li>\n<li>Often involves a wait at the seaplane lounge for your group's flight to be ready</li>\n</ul>\n\n<div class=\"pullquote\">Seaplanes don't fly after dark. If your international flight lands in the evening, a seaplane-only resort isn't reachable that night — check this before you book.</div>\n\n<h2>What about domestic flights and public ferries?</h2>\n<p>Domestic flight + boat is common for resorts in far-out atolls like Addu or Fuvahmulah, where a seaplane wouldn't be practical. Public ferries are the budget option for reaching inhabited local islands — slower and less frequent, but a fraction of the cost of a speedboat.</p>\n\n<div class=\"compare\">\n<table>\n<tr><th>Type</th><th>Cost (round trip, pp)</th><th>Runs at night?</th></tr>\n<tr><td>Public ferry</td><td>$5–$20</td><td>Rarely</td></tr>\n<tr><td>Speedboat</td><td>$40–$150</td><td>Yes</td></tr>\n<tr><td>Domestic flight + boat</td><td>$150–$320</td><td>Limited</td></tr>\n<tr><td>Seaplane</td><td>$300–$550</td><td>No</td></tr>\n</table>\n</div>\n\n<div class=\"inline-cta\">\n<p>Not sure which one your dates and destination need? We'll check your flight time against transfer cutoffs before you book anything.</p>\n<a href=\"transfer-guide.html\" class=\"btn btn-primary\">See the full Transfer Guide</a>\n</div>",
+  "pullquote": "Seaplanes don't fly after dark. If your international flight lands in the evening, a seaplane-only resort isn't reachable that night — check this before you book.",
+  "inlineCtaText": "Not sure which one your dates and destination need? We'll check your flight time against transfer cutoffs before you book anything.",
+  "inlineCtaLabel": "See the full Transfer Guide",
+  "inlineCtaLink": "transfer-guide.html",
+  "relatedLinks": [
+    { "label": "Full Transfer Guide →", "link": "transfer-guide.html" },
+    { "label": "See resort categories →", "link": "resorts.html" },
+    { "label": "See guesthouse options →", "link": "guesthouses.html" },
+    { "label": "How much does a trip really cost? →", "link": "maldives-cost-explained.html" }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "category": "Budget",
+  "title": "How Much Does a Maldives Trip Really Cost?",
+  "readTime": "6 min read",
+  "cardLabel": "Read now",
+  "excerpt": "A realistic budget breakdown by trip style, from backpacker guesthouse to private-island luxury.",
+  "openingParagraph": "The Maldives has a reputation as one of the most expensive destinations on earth. That's true if you're only looking at 5-star resort brochures — it's not true of the Maldives as a whole. Here's what a real trip costs, by style.",
+  "body": "<h2>Five real trip budgets</h2>\n<div class=\"compare\">\n<table>\n<tr><th>Trip style</th><th>Per night (2 people)</th><th>5-night total, all-in</th></tr>\n<tr><td>Guesthouse, budget</td><td>$60–$120</td><td>$450–$850</td></tr>\n<tr><td>Guesthouse, comfortable</td><td>$120–$180</td><td>$850–$1,300</td></tr>\n<tr><td>Resort + Local Combo</td><td>$180–$500 blended</td><td>$1,100–$2,900</td></tr>\n<tr><td>Mid-range resort</td><td>$300–$700</td><td>$2,000–$4,200</td></tr>\n<tr><td>Luxury / private-island resort</td><td>$800–$3,000+</td><td>$4,500–$18,000+</td></tr>\n</table>\n</div>\n<p>These figures already include the typical taxes, service charge, and transfer for that trip style — not just the room rate, which is the number that misleads most people researching online.</p>\n\n<h2>The three costs everyone forgets to budget for</h2>\n<ul>\n<li><strong>The transfer.</strong> Can range from $10 (public ferry) to over $500 per person (seaplane, round trip). It's rarely included in the headline room price you see advertised.</li>\n<li><strong>Taxes and service charge.</strong> Typically add up to roughly a quarter of your room cost on top — green tax, GST, and service charge combined.</li>\n<li><strong>Meal plan upgrades.</strong> The jump from breakfast-only to half-board or all-inclusive can add $80–$300 per person for a 5-night stay.</li>\n</ul>\n\n<div class=\"pullquote\">A \"cheap\" resort rate with a seaplane transfer often ends up costing more than a slightly pricier resort that's a short speedboat ride away.</div>\n\n<h2>How to actually save money without a worse trip</h2>\n<ol>\n<li>Pick a resort or guesthouse reachable by speedboat, not seaplane, if budget matters more than remoteness.</li>\n<li>Consider the Resort + Local Island Combo — it brings your blended nightly average down while still giving you real resort nights.</li>\n<li>Travel shoulder season (roughly April–May or October–November) for lower resort rates without peak monsoon weather.</li>\n<li>Ask for the full all-in total before comparing prices between two properties — comparing room-only rates is comparing different things.</li>\n</ol>\n\n<div class=\"inline-cta\">\n<p>Want a real number for your actual dates, not a general estimate? We'll break it down exactly like the table above.</p>\n<a href=\"index.html#contact\" class=\"btn btn-primary\">Get my total price</a>\n</div>",
+  "pullquote": "A \"cheap\" resort rate with a seaplane transfer often ends up costing more than a slightly pricier resort that's a short speedboat ride away.",
+  "inlineCtaText": "Want a real number for your actual dates, not a general estimate? We'll break it down exactly like the table above.",
+  "inlineCtaLabel": "Get my total price",
+  "inlineCtaLink": "index.html#contact",
+  "relatedLinks": [
+    { "label": "Full Maldives Cost Guide (itemized) →", "link": "cost-guide.html" },
+    { "label": "Transfer Guide →", "link": "transfer-guide.html" },
+    { "label": "Resort + Local Island Combo →", "link": "combo.html" },
+    { "label": "Guesthouse options →", "link": "guesthouses.html" }
+  ]
+}

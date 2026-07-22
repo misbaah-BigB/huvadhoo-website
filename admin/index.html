@@ -364,7 +364,11 @@
         <option value="about-promise">About — Promise</option>
         <option value="about-trust">About — Trust Band</option>
         <option value="about-cta">About — CTA Band</option>
-        <option value="blog-resort-vs-guesthouse">Blog — Resort vs. Guesthouse (prototype)</option>
+        <option value="blog-resort-vs-guesthouse">Blog — Resort vs. Guesthouse</option>
+        <option value="blog-maldives-cost-explained">Blog — Maldives Cost Explained</option>
+        <option value="blog-speedboat-vs-seaplane">Blog — Speedboat vs. Seaplane</option>
+        <option value="blog-budget-islands-maldives">Blog — Budget Islands</option>
+        <option value="blog-alcohol-local-islands">Blog — Alcohol on Local Islands</option>
         <option value="properties">Properties</option>
       </select>
     </div>
@@ -2010,7 +2014,6 @@
     </div>
 
     <div id="blogRvGFields" style="display:none;">
-      <span class="hint" style="display:block; margin-bottom:14px;">This is a prototype for one post, to try out a "structured fields + one HTML body block" editing pattern before rolling it out to the other 8 blog posts.</span>
       <div class="field">
         <label for="blogRvGCategory">Category</label>
         <select id="blogRvGCategory">
@@ -2067,6 +2070,247 @@
         <h3 class="item-group-title">Related guide 4</h3>
         <div class="field"><label for="blogRvGRel3Label">Label</label><input type="text" id="blogRvGRel3Label"></div>
         <div class="field"><label for="blogRvGRel3Link">Link</label><input type="text" id="blogRvGRel3Link"></div>
+      </div>
+    </div>
+
+    <div id="blogMceFields" style="display:none;">
+      <div class="field">
+        <label for="blogMceCategory">Category</label>
+        <select id="blogMceCategory">
+          <option value="Planning">Planning</option>
+          <option value="Budget">Budget</option>
+          <option value="Transfers">Transfers</option>
+          <option value="Culture">Culture</option>
+          <option value="Islands">Islands</option>
+        </select>
+        <span class="hint">Sets the colored badge on both this post and its blog listing card.</span>
+      </div>
+      <div class="field"><label for="blogMceTitle">Title</label><input type="text" id="blogMceTitle"></div>
+      <div class="field">
+        <label for="blogMceReadTime">Read time</label>
+        <input type="text" id="blogMceReadTime">
+        <span class="hint">e.g. "6 min read" — shown on both this post and the blog listing card.</span>
+      </div>
+      <div class="field">
+        <label for="blogMceCardLabel">Blog card label</label>
+        <input type="text" id="blogMceCardLabel">
+        <span class="hint">The small second label on the blog listing card, e.g. "Start here" or "Read now". Not shown on the post itself.</span>
+      </div>
+      <div class="field">
+        <label for="blogMceExcerpt">Excerpt</label>
+        <textarea id="blogMceExcerpt"></textarea>
+        <span class="hint">Shown only on the blog listing card, not on the post itself.</span>
+      </div>
+      <div class="field"><label for="blogMceOpening">Opening paragraph</label><textarea id="blogMceOpening"></textarea></div>
+      <div class="field">
+        <label for="blogMceBody">Body (HTML)</label>
+        <textarea id="blogMceBody" class="code-textarea" rows="20"></textarea>
+        <span class="hint">Write this the way you'd write a web page: wrap each paragraph in &lt;p&gt;...&lt;/p&gt;, headings in &lt;h2&gt;...&lt;/h2&gt; or &lt;h3&gt;...&lt;/h3&gt;, and lists as &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;. This block also contains the pullquote and call-to-action HTML in their correct position in the article, but you don't need to edit the text there — the Pullquote and Inline call-to-action fields below are what actually control what's shown.</span>
+      </div>
+      <div class="field"><label for="blogMcePullquote">Pullquote</label><textarea id="blogMcePullquote"></textarea></div>
+      <div class="field"><label for="blogMceCtaText">Inline call-to-action text</label><textarea id="blogMceCtaText"></textarea></div>
+      <div class="field"><label for="blogMceCtaLabel">Inline call-to-action button label</label><input type="text" id="blogMceCtaLabel"></div>
+      <div class="field"><label for="blogMceCtaLink">Inline call-to-action button link</label><input type="text" id="blogMceCtaLink"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 1</h3>
+        <div class="field"><label for="blogMceRel0Label">Label</label><input type="text" id="blogMceRel0Label"></div>
+        <div class="field"><label for="blogMceRel0Link">Link</label><input type="text" id="blogMceRel0Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 2</h3>
+        <div class="field"><label for="blogMceRel1Label">Label</label><input type="text" id="blogMceRel1Label"></div>
+        <div class="field"><label for="blogMceRel1Link">Link</label><input type="text" id="blogMceRel1Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 3</h3>
+        <div class="field"><label for="blogMceRel2Label">Label</label><input type="text" id="blogMceRel2Label"></div>
+        <div class="field"><label for="blogMceRel2Link">Link</label><input type="text" id="blogMceRel2Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 4</h3>
+        <div class="field"><label for="blogMceRel3Label">Label</label><input type="text" id="blogMceRel3Label"></div>
+        <div class="field"><label for="blogMceRel3Link">Link</label><input type="text" id="blogMceRel3Link"></div>
+      </div>
+    </div>
+
+    <div id="blogSvsFields" style="display:none;">
+      <div class="field">
+        <label for="blogSvsCategory">Category</label>
+        <select id="blogSvsCategory">
+          <option value="Planning">Planning</option>
+          <option value="Budget">Budget</option>
+          <option value="Transfers">Transfers</option>
+          <option value="Culture">Culture</option>
+          <option value="Islands">Islands</option>
+        </select>
+        <span class="hint">Sets the colored badge on both this post and its blog listing card.</span>
+      </div>
+      <div class="field"><label for="blogSvsTitle">Title</label><input type="text" id="blogSvsTitle"></div>
+      <div class="field">
+        <label for="blogSvsReadTime">Read time</label>
+        <input type="text" id="blogSvsReadTime">
+        <span class="hint">e.g. "4 min read" — shown on both this post and the blog listing card.</span>
+      </div>
+      <div class="field">
+        <label for="blogSvsCardLabel">Blog card label</label>
+        <input type="text" id="blogSvsCardLabel">
+        <span class="hint">The small second label on the blog listing card, e.g. "Start here" or "Read now". Not shown on the post itself.</span>
+      </div>
+      <div class="field">
+        <label for="blogSvsExcerpt">Excerpt</label>
+        <textarea id="blogSvsExcerpt"></textarea>
+        <span class="hint">Shown only on the blog listing card, not on the post itself.</span>
+      </div>
+      <div class="field"><label for="blogSvsOpening">Opening paragraph</label><textarea id="blogSvsOpening"></textarea></div>
+      <div class="field">
+        <label for="blogSvsBody">Body (HTML)</label>
+        <textarea id="blogSvsBody" class="code-textarea" rows="20"></textarea>
+        <span class="hint">Write this the way you'd write a web page: wrap each paragraph in &lt;p&gt;...&lt;/p&gt;, headings in &lt;h2&gt;...&lt;/h2&gt; or &lt;h3&gt;...&lt;/h3&gt;, and lists as &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;. This block also contains the pullquote and call-to-action HTML in their correct position in the article, but you don't need to edit the text there — the Pullquote and Inline call-to-action fields below are what actually control what's shown.</span>
+      </div>
+      <div class="field"><label for="blogSvsPullquote">Pullquote</label><textarea id="blogSvsPullquote"></textarea></div>
+      <div class="field"><label for="blogSvsCtaText">Inline call-to-action text</label><textarea id="blogSvsCtaText"></textarea></div>
+      <div class="field"><label for="blogSvsCtaLabel">Inline call-to-action button label</label><input type="text" id="blogSvsCtaLabel"></div>
+      <div class="field"><label for="blogSvsCtaLink">Inline call-to-action button link</label><input type="text" id="blogSvsCtaLink"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 1</h3>
+        <div class="field"><label for="blogSvsRel0Label">Label</label><input type="text" id="blogSvsRel0Label"></div>
+        <div class="field"><label for="blogSvsRel0Link">Link</label><input type="text" id="blogSvsRel0Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 2</h3>
+        <div class="field"><label for="blogSvsRel1Label">Label</label><input type="text" id="blogSvsRel1Label"></div>
+        <div class="field"><label for="blogSvsRel1Link">Link</label><input type="text" id="blogSvsRel1Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 3</h3>
+        <div class="field"><label for="blogSvsRel2Label">Label</label><input type="text" id="blogSvsRel2Label"></div>
+        <div class="field"><label for="blogSvsRel2Link">Link</label><input type="text" id="blogSvsRel2Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 4</h3>
+        <div class="field"><label for="blogSvsRel3Label">Label</label><input type="text" id="blogSvsRel3Label"></div>
+        <div class="field"><label for="blogSvsRel3Link">Link</label><input type="text" id="blogSvsRel3Link"></div>
+      </div>
+    </div>
+
+    <div id="blogBimFields" style="display:none;">
+      <span class="hint" style="display:block; margin-bottom:14px;">This post has no pullquote in its original design — leave the Pullquote field below empty.</span>
+      <div class="field">
+        <label for="blogBimCategory">Category</label>
+        <select id="blogBimCategory">
+          <option value="Planning">Planning</option>
+          <option value="Budget">Budget</option>
+          <option value="Transfers">Transfers</option>
+          <option value="Culture">Culture</option>
+          <option value="Islands">Islands</option>
+        </select>
+        <span class="hint">Sets the colored badge on both this post and its blog listing card.</span>
+      </div>
+      <div class="field"><label for="blogBimTitle">Title</label><input type="text" id="blogBimTitle"></div>
+      <div class="field">
+        <label for="blogBimReadTime">Read time</label>
+        <input type="text" id="blogBimReadTime">
+        <span class="hint">e.g. "8 min read" — shown on both this post and the blog listing card.</span>
+      </div>
+      <div class="field">
+        <label for="blogBimCardLabel">Blog card label</label>
+        <input type="text" id="blogBimCardLabel">
+        <span class="hint">The small second label on the blog listing card, e.g. "Start here" or "Read now". Not shown on the post itself.</span>
+      </div>
+      <div class="field">
+        <label for="blogBimExcerpt">Excerpt</label>
+        <textarea id="blogBimExcerpt"></textarea>
+        <span class="hint">Shown only on the blog listing card, not on the post itself.</span>
+      </div>
+      <div class="field"><label for="blogBimOpening">Opening paragraph</label><textarea id="blogBimOpening"></textarea></div>
+      <div class="field">
+        <label for="blogBimBody">Body (HTML)</label>
+        <textarea id="blogBimBody" class="code-textarea" rows="20"></textarea>
+        <span class="hint">Write this the way you'd write a web page: wrap each paragraph in &lt;p&gt;...&lt;/p&gt;, headings in &lt;h2&gt;...&lt;/h2&gt; or &lt;h3&gt;...&lt;/h3&gt;, and lists as &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;. This block also contains the call-to-action HTML in its correct position in the article, but you don't need to edit the text there — the Inline call-to-action fields below are what actually control what's shown.</span>
+      </div>
+      <div class="field"><label for="blogBimPullquote">Pullquote</label><textarea id="blogBimPullquote"></textarea></div>
+      <div class="field"><label for="blogBimCtaText">Inline call-to-action text</label><textarea id="blogBimCtaText"></textarea></div>
+      <div class="field"><label for="blogBimCtaLabel">Inline call-to-action button label</label><input type="text" id="blogBimCtaLabel"></div>
+      <div class="field"><label for="blogBimCtaLink">Inline call-to-action button link</label><input type="text" id="blogBimCtaLink"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 1</h3>
+        <div class="field"><label for="blogBimRel0Label">Label</label><input type="text" id="blogBimRel0Label"></div>
+        <div class="field"><label for="blogBimRel0Link">Link</label><input type="text" id="blogBimRel0Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 2</h3>
+        <div class="field"><label for="blogBimRel1Label">Label</label><input type="text" id="blogBimRel1Label"></div>
+        <div class="field"><label for="blogBimRel1Link">Link</label><input type="text" id="blogBimRel1Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 3</h3>
+        <div class="field"><label for="blogBimRel2Label">Label</label><input type="text" id="blogBimRel2Label"></div>
+        <div class="field"><label for="blogBimRel2Link">Link</label><input type="text" id="blogBimRel2Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 4</h3>
+        <div class="field"><label for="blogBimRel3Label">Label</label><input type="text" id="blogBimRel3Label"></div>
+        <div class="field"><label for="blogBimRel3Link">Link</label><input type="text" id="blogBimRel3Link"></div>
+      </div>
+    </div>
+
+    <div id="blogAliFields" style="display:none;">
+      <div class="field">
+        <label for="blogAliCategory">Category</label>
+        <select id="blogAliCategory">
+          <option value="Planning">Planning</option>
+          <option value="Budget">Budget</option>
+          <option value="Transfers">Transfers</option>
+          <option value="Culture">Culture</option>
+          <option value="Islands">Islands</option>
+        </select>
+        <span class="hint">Sets the colored badge on both this post and its blog listing card.</span>
+      </div>
+      <div class="field"><label for="blogAliTitle">Title</label><input type="text" id="blogAliTitle"></div>
+      <div class="field">
+        <label for="blogAliReadTime">Read time</label>
+        <input type="text" id="blogAliReadTime">
+        <span class="hint">e.g. "3 min read" — shown on both this post and the blog listing card.</span>
+      </div>
+      <div class="field">
+        <label for="blogAliCardLabel">Blog card label</label>
+        <input type="text" id="blogAliCardLabel">
+        <span class="hint">The small second label on the blog listing card, e.g. "Start here" or "Read now". Not shown on the post itself.</span>
+      </div>
+      <div class="field">
+        <label for="blogAliExcerpt">Excerpt</label>
+        <textarea id="blogAliExcerpt"></textarea>
+        <span class="hint">Shown only on the blog listing card, not on the post itself.</span>
+      </div>
+      <div class="field"><label for="blogAliOpening">Opening paragraph</label><textarea id="blogAliOpening"></textarea></div>
+      <div class="field">
+        <label for="blogAliBody">Body (HTML)</label>
+        <textarea id="blogAliBody" class="code-textarea" rows="20"></textarea>
+        <span class="hint">Write this the way you'd write a web page: wrap each paragraph in &lt;p&gt;...&lt;/p&gt;, headings in &lt;h2&gt;...&lt;/h2&gt; or &lt;h3&gt;...&lt;/h3&gt;, and lists as &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;. This block also contains the pullquote and call-to-action HTML in their correct position in the article, but you don't need to edit the text there — the Pullquote and Inline call-to-action fields below are what actually control what's shown.</span>
+      </div>
+      <div class="field"><label for="blogAliPullquote">Pullquote</label><textarea id="blogAliPullquote"></textarea></div>
+      <div class="field"><label for="blogAliCtaText">Inline call-to-action text</label><textarea id="blogAliCtaText"></textarea></div>
+      <div class="field"><label for="blogAliCtaLabel">Inline call-to-action button label</label><input type="text" id="blogAliCtaLabel"></div>
+      <div class="field"><label for="blogAliCtaLink">Inline call-to-action button link</label><input type="text" id="blogAliCtaLink"></div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 1</h3>
+        <div class="field"><label for="blogAliRel0Label">Label</label><input type="text" id="blogAliRel0Label"></div>
+        <div class="field"><label for="blogAliRel0Link">Link</label><input type="text" id="blogAliRel0Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 2</h3>
+        <div class="field"><label for="blogAliRel1Label">Label</label><input type="text" id="blogAliRel1Label"></div>
+        <div class="field"><label for="blogAliRel1Link">Link</label><input type="text" id="blogAliRel1Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 3</h3>
+        <div class="field"><label for="blogAliRel2Label">Label</label><input type="text" id="blogAliRel2Label"></div>
+        <div class="field"><label for="blogAliRel2Link">Link</label><input type="text" id="blogAliRel2Link"></div>
+      </div>
+      <div class="item-group">
+        <h3 class="item-group-title">Related guide 4</h3>
+        <div class="field"><label for="blogAliRel3Label">Label</label><input type="text" id="blogAliRel3Label"></div>
+        <div class="field"><label for="blogAliRel3Link">Link</label><input type="text" id="blogAliRel3Link"></div>
       </div>
     </div>
 
@@ -2203,7 +2447,11 @@
     'about-promise': 'About — Promise',
     'about-trust': 'About — Trust Band',
     'about-cta': 'About — CTA Band',
-    'blog-resort-vs-guesthouse': 'Blog — Resort vs. Guesthouse (prototype)',
+    'blog-resort-vs-guesthouse': 'Blog — Resort vs. Guesthouse',
+    'blog-maldives-cost-explained': 'Blog — Maldives Cost Explained',
+    'blog-speedboat-vs-seaplane': 'Blog — Speedboat vs. Seaplane',
+    'blog-budget-islands-maldives': 'Blog — Budget Islands',
+    'blog-alcohol-local-islands': 'Blog — Alcohol on Local Islands',
     properties: 'Properties',
   };
   var CATEGORY_LABELS = {
@@ -2292,6 +2540,10 @@
     if (page === 'about-trust') return 'abTrust';
     if (page === 'about-cta') return 'abCta';
     if (page === 'blog-resort-vs-guesthouse') return 'blogRvG';
+    if (page === 'blog-maldives-cost-explained') return 'blogMce';
+    if (page === 'blog-speedboat-vs-seaplane') return 'blogSvs';
+    if (page === 'blog-budget-islands-maldives') return 'blogBim';
+    if (page === 'blog-alcohol-local-islands') return 'blogAli';
     return 'banner';
   }
 
@@ -2993,7 +3245,7 @@
   var abCtaHeadingInput = document.getElementById('abCtaHeading');
   var abCtaSubtextInput = document.getElementById('abCtaSubtext');
 
-  // ---- blog: "Resort vs. Guesthouse" prototype group ----
+  // ---- blog: "Resort vs. Guesthouse" group ----
   var blogRvGCategoryInput = document.getElementById('blogRvGCategory');
   var blogRvGTitleInput = document.getElementById('blogRvGTitle');
   var blogRvGReadTimeInput = document.getElementById('blogRvGReadTime');
@@ -3010,6 +3262,86 @@
     blogRvGRelInputs.push({
       label: document.getElementById('blogRvGRel' + brg + 'Label'),
       link: document.getElementById('blogRvGRel' + brg + 'Link'),
+    });
+  }
+
+  // ---- blog: "Maldives Cost, Explained" group ----
+  var blogMceCategoryInput = document.getElementById('blogMceCategory');
+  var blogMceTitleInput = document.getElementById('blogMceTitle');
+  var blogMceReadTimeInput = document.getElementById('blogMceReadTime');
+  var blogMceCardLabelInput = document.getElementById('blogMceCardLabel');
+  var blogMceExcerptInput = document.getElementById('blogMceExcerpt');
+  var blogMceOpeningInput = document.getElementById('blogMceOpening');
+  var blogMceBodyInput = document.getElementById('blogMceBody');
+  var blogMcePullquoteInput = document.getElementById('blogMcePullquote');
+  var blogMceCtaTextInput = document.getElementById('blogMceCtaText');
+  var blogMceCtaLabelInput = document.getElementById('blogMceCtaLabel');
+  var blogMceCtaLinkInput = document.getElementById('blogMceCtaLink');
+  var blogMceRelInputs = [];
+  for (var bmce = 0; bmce < 4; bmce++) {
+    blogMceRelInputs.push({
+      label: document.getElementById('blogMceRel' + bmce + 'Label'),
+      link: document.getElementById('blogMceRel' + bmce + 'Link'),
+    });
+  }
+
+  // ---- blog: "Speedboat vs. Seaplane" group ----
+  var blogSvsCategoryInput = document.getElementById('blogSvsCategory');
+  var blogSvsTitleInput = document.getElementById('blogSvsTitle');
+  var blogSvsReadTimeInput = document.getElementById('blogSvsReadTime');
+  var blogSvsCardLabelInput = document.getElementById('blogSvsCardLabel');
+  var blogSvsExcerptInput = document.getElementById('blogSvsExcerpt');
+  var blogSvsOpeningInput = document.getElementById('blogSvsOpening');
+  var blogSvsBodyInput = document.getElementById('blogSvsBody');
+  var blogSvsPullquoteInput = document.getElementById('blogSvsPullquote');
+  var blogSvsCtaTextInput = document.getElementById('blogSvsCtaText');
+  var blogSvsCtaLabelInput = document.getElementById('blogSvsCtaLabel');
+  var blogSvsCtaLinkInput = document.getElementById('blogSvsCtaLink');
+  var blogSvsRelInputs = [];
+  for (var bsvs = 0; bsvs < 4; bsvs++) {
+    blogSvsRelInputs.push({
+      label: document.getElementById('blogSvsRel' + bsvs + 'Label'),
+      link: document.getElementById('blogSvsRel' + bsvs + 'Link'),
+    });
+  }
+
+  // ---- blog: "Budget Islands" group ----
+  var blogBimCategoryInput = document.getElementById('blogBimCategory');
+  var blogBimTitleInput = document.getElementById('blogBimTitle');
+  var blogBimReadTimeInput = document.getElementById('blogBimReadTime');
+  var blogBimCardLabelInput = document.getElementById('blogBimCardLabel');
+  var blogBimExcerptInput = document.getElementById('blogBimExcerpt');
+  var blogBimOpeningInput = document.getElementById('blogBimOpening');
+  var blogBimBodyInput = document.getElementById('blogBimBody');
+  var blogBimPullquoteInput = document.getElementById('blogBimPullquote');
+  var blogBimCtaTextInput = document.getElementById('blogBimCtaText');
+  var blogBimCtaLabelInput = document.getElementById('blogBimCtaLabel');
+  var blogBimCtaLinkInput = document.getElementById('blogBimCtaLink');
+  var blogBimRelInputs = [];
+  for (var bbim = 0; bbim < 4; bbim++) {
+    blogBimRelInputs.push({
+      label: document.getElementById('blogBimRel' + bbim + 'Label'),
+      link: document.getElementById('blogBimRel' + bbim + 'Link'),
+    });
+  }
+
+  // ---- blog: "Alcohol on Local Islands" group ----
+  var blogAliCategoryInput = document.getElementById('blogAliCategory');
+  var blogAliTitleInput = document.getElementById('blogAliTitle');
+  var blogAliReadTimeInput = document.getElementById('blogAliReadTime');
+  var blogAliCardLabelInput = document.getElementById('blogAliCardLabel');
+  var blogAliExcerptInput = document.getElementById('blogAliExcerpt');
+  var blogAliOpeningInput = document.getElementById('blogAliOpening');
+  var blogAliBodyInput = document.getElementById('blogAliBody');
+  var blogAliPullquoteInput = document.getElementById('blogAliPullquote');
+  var blogAliCtaTextInput = document.getElementById('blogAliCtaText');
+  var blogAliCtaLabelInput = document.getElementById('blogAliCtaLabel');
+  var blogAliCtaLinkInput = document.getElementById('blogAliCtaLink');
+  var blogAliRelInputs = [];
+  for (var bali = 0; bali < 4; bali++) {
+    blogAliRelInputs.push({
+      label: document.getElementById('blogAliRel' + bali + 'Label'),
+      link: document.getElementById('blogAliRel' + bali + 'Link'),
     });
   }
 
@@ -4533,6 +4865,174 @@
           inlineCtaLabel: blogRvGCtaLabelInput.value,
           inlineCtaLink: blogRvGCtaLinkInput.value,
           relatedLinks: blogRvGRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
+        };
+      },
+    },
+    blogMce: {
+      el: document.getElementById('blogMceFields'),
+      inputs: [
+        blogMceCategoryInput, blogMceTitleInput, blogMceReadTimeInput, blogMceCardLabelInput,
+        blogMceExcerptInput, blogMceOpeningInput, blogMceBodyInput, blogMcePullquoteInput,
+        blogMceCtaTextInput, blogMceCtaLabelInput, blogMceCtaLinkInput,
+      ].concat(blogMceRelInputs.reduce(function (acc, r) { return acc.concat([r.label, r.link]); }, [])),
+      apply: function (data) {
+        blogMceCategoryInput.value = data.category || 'Planning';
+        blogMceTitleInput.value = data.title || '';
+        blogMceReadTimeInput.value = data.readTime || '';
+        blogMceCardLabelInput.value = data.cardLabel || '';
+        blogMceExcerptInput.value = data.excerpt || '';
+        blogMceOpeningInput.value = data.openingParagraph || '';
+        blogMceBodyInput.value = data.body || '';
+        blogMcePullquoteInput.value = data.pullquote || '';
+        blogMceCtaTextInput.value = data.inlineCtaText || '';
+        blogMceCtaLabelInput.value = data.inlineCtaLabel || '';
+        blogMceCtaLinkInput.value = data.inlineCtaLink || '';
+        blogMceRelInputs.forEach(function (r, idx) {
+          var linkData = (data.relatedLinks || [])[idx] || {};
+          r.label.value = linkData.label || '';
+          r.link.value = linkData.link || '';
+        });
+      },
+      build: function () {
+        return {
+          category: blogMceCategoryInput.value,
+          title: blogMceTitleInput.value,
+          readTime: blogMceReadTimeInput.value,
+          cardLabel: blogMceCardLabelInput.value,
+          excerpt: blogMceExcerptInput.value,
+          openingParagraph: blogMceOpeningInput.value,
+          body: blogMceBodyInput.value,
+          pullquote: blogMcePullquoteInput.value,
+          inlineCtaText: blogMceCtaTextInput.value,
+          inlineCtaLabel: blogMceCtaLabelInput.value,
+          inlineCtaLink: blogMceCtaLinkInput.value,
+          relatedLinks: blogMceRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
+        };
+      },
+    },
+    blogSvs: {
+      el: document.getElementById('blogSvsFields'),
+      inputs: [
+        blogSvsCategoryInput, blogSvsTitleInput, blogSvsReadTimeInput, blogSvsCardLabelInput,
+        blogSvsExcerptInput, blogSvsOpeningInput, blogSvsBodyInput, blogSvsPullquoteInput,
+        blogSvsCtaTextInput, blogSvsCtaLabelInput, blogSvsCtaLinkInput,
+      ].concat(blogSvsRelInputs.reduce(function (acc, r) { return acc.concat([r.label, r.link]); }, [])),
+      apply: function (data) {
+        blogSvsCategoryInput.value = data.category || 'Planning';
+        blogSvsTitleInput.value = data.title || '';
+        blogSvsReadTimeInput.value = data.readTime || '';
+        blogSvsCardLabelInput.value = data.cardLabel || '';
+        blogSvsExcerptInput.value = data.excerpt || '';
+        blogSvsOpeningInput.value = data.openingParagraph || '';
+        blogSvsBodyInput.value = data.body || '';
+        blogSvsPullquoteInput.value = data.pullquote || '';
+        blogSvsCtaTextInput.value = data.inlineCtaText || '';
+        blogSvsCtaLabelInput.value = data.inlineCtaLabel || '';
+        blogSvsCtaLinkInput.value = data.inlineCtaLink || '';
+        blogSvsRelInputs.forEach(function (r, idx) {
+          var linkData = (data.relatedLinks || [])[idx] || {};
+          r.label.value = linkData.label || '';
+          r.link.value = linkData.link || '';
+        });
+      },
+      build: function () {
+        return {
+          category: blogSvsCategoryInput.value,
+          title: blogSvsTitleInput.value,
+          readTime: blogSvsReadTimeInput.value,
+          cardLabel: blogSvsCardLabelInput.value,
+          excerpt: blogSvsExcerptInput.value,
+          openingParagraph: blogSvsOpeningInput.value,
+          body: blogSvsBodyInput.value,
+          pullquote: blogSvsPullquoteInput.value,
+          inlineCtaText: blogSvsCtaTextInput.value,
+          inlineCtaLabel: blogSvsCtaLabelInput.value,
+          inlineCtaLink: blogSvsCtaLinkInput.value,
+          relatedLinks: blogSvsRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
+        };
+      },
+    },
+    blogBim: {
+      el: document.getElementById('blogBimFields'),
+      inputs: [
+        blogBimCategoryInput, blogBimTitleInput, blogBimReadTimeInput, blogBimCardLabelInput,
+        blogBimExcerptInput, blogBimOpeningInput, blogBimBodyInput, blogBimPullquoteInput,
+        blogBimCtaTextInput, blogBimCtaLabelInput, blogBimCtaLinkInput,
+      ].concat(blogBimRelInputs.reduce(function (acc, r) { return acc.concat([r.label, r.link]); }, [])),
+      apply: function (data) {
+        blogBimCategoryInput.value = data.category || 'Planning';
+        blogBimTitleInput.value = data.title || '';
+        blogBimReadTimeInput.value = data.readTime || '';
+        blogBimCardLabelInput.value = data.cardLabel || '';
+        blogBimExcerptInput.value = data.excerpt || '';
+        blogBimOpeningInput.value = data.openingParagraph || '';
+        blogBimBodyInput.value = data.body || '';
+        blogBimPullquoteInput.value = data.pullquote || '';
+        blogBimCtaTextInput.value = data.inlineCtaText || '';
+        blogBimCtaLabelInput.value = data.inlineCtaLabel || '';
+        blogBimCtaLinkInput.value = data.inlineCtaLink || '';
+        blogBimRelInputs.forEach(function (r, idx) {
+          var linkData = (data.relatedLinks || [])[idx] || {};
+          r.label.value = linkData.label || '';
+          r.link.value = linkData.link || '';
+        });
+      },
+      build: function () {
+        return {
+          category: blogBimCategoryInput.value,
+          title: blogBimTitleInput.value,
+          readTime: blogBimReadTimeInput.value,
+          cardLabel: blogBimCardLabelInput.value,
+          excerpt: blogBimExcerptInput.value,
+          openingParagraph: blogBimOpeningInput.value,
+          body: blogBimBodyInput.value,
+          pullquote: blogBimPullquoteInput.value,
+          inlineCtaText: blogBimCtaTextInput.value,
+          inlineCtaLabel: blogBimCtaLabelInput.value,
+          inlineCtaLink: blogBimCtaLinkInput.value,
+          relatedLinks: blogBimRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
+        };
+      },
+    },
+    blogAli: {
+      el: document.getElementById('blogAliFields'),
+      inputs: [
+        blogAliCategoryInput, blogAliTitleInput, blogAliReadTimeInput, blogAliCardLabelInput,
+        blogAliExcerptInput, blogAliOpeningInput, blogAliBodyInput, blogAliPullquoteInput,
+        blogAliCtaTextInput, blogAliCtaLabelInput, blogAliCtaLinkInput,
+      ].concat(blogAliRelInputs.reduce(function (acc, r) { return acc.concat([r.label, r.link]); }, [])),
+      apply: function (data) {
+        blogAliCategoryInput.value = data.category || 'Planning';
+        blogAliTitleInput.value = data.title || '';
+        blogAliReadTimeInput.value = data.readTime || '';
+        blogAliCardLabelInput.value = data.cardLabel || '';
+        blogAliExcerptInput.value = data.excerpt || '';
+        blogAliOpeningInput.value = data.openingParagraph || '';
+        blogAliBodyInput.value = data.body || '';
+        blogAliPullquoteInput.value = data.pullquote || '';
+        blogAliCtaTextInput.value = data.inlineCtaText || '';
+        blogAliCtaLabelInput.value = data.inlineCtaLabel || '';
+        blogAliCtaLinkInput.value = data.inlineCtaLink || '';
+        blogAliRelInputs.forEach(function (r, idx) {
+          var linkData = (data.relatedLinks || [])[idx] || {};
+          r.label.value = linkData.label || '';
+          r.link.value = linkData.link || '';
+        });
+      },
+      build: function () {
+        return {
+          category: blogAliCategoryInput.value,
+          title: blogAliTitleInput.value,
+          readTime: blogAliReadTimeInput.value,
+          cardLabel: blogAliCardLabelInput.value,
+          excerpt: blogAliExcerptInput.value,
+          openingParagraph: blogAliOpeningInput.value,
+          body: blogAliBodyInput.value,
+          pullquote: blogAliPullquoteInput.value,
+          inlineCtaText: blogAliCtaTextInput.value,
+          inlineCtaLabel: blogAliCtaLabelInput.value,
+          inlineCtaLink: blogAliCtaLinkInput.value,
+          relatedLinks: blogAliRelInputs.map(function (r) { return { label: r.label.value, link: r.link.value }; }),
         };
       },
     },
